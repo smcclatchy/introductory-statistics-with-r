@@ -1,3 +1,18 @@
+---
+title: "Knowing your way around RStudio"
+teaching: 0
+exercises: 0
+questions:
+- Organize files and directories for a set of analyses as an R Project.
+- Locate and describe the current working directory as a file path.
+- Search for more information on R functions with RStudio's built-in help.
+- Demonstrate how to provide sufficient information for working on collaborative coding or troubleshooting with the R user community.
+objectives:
+- Describe the panes in the RStudio Integrated Development Environment (IDE).
+keypoints:
+- "First key point. Brief Answer to questions. (FIXME)"
+---
+
 ## Getting set up
 
 It is good practice to keep a set of related data, analyses, and text
