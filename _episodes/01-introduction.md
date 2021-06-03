@@ -7,11 +7,6 @@ questions:
 - "How are R and RStudio related?"
 objectives:
 - Explain how R and RStudio relate to each other and what they are used for.
-- Describe the panes in the RStudio Integrated Development Environment (IDE).
-- Organize files and directories for a set of analyses as an R Project.
-- Locate and describe the current working directory as a file path.
-- Search for more information on R functions with RStudio's built-in help.
-- Demonstrate how to provide sufficient information for working on collaborative coding or troubleshooting with the R user community.
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
