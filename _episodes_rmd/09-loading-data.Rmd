@@ -1,0 +1,420 @@
+---
+source: Rmd
+title: "Loading data into R"
+teaching: 0
+exercises: 0
+questions:
+- "How do I load data into R?"
+objectives:
+- "Install and load packages."
+- "Locate files in a file and directory hierarchy."
+- "Read in data from a .csv file into a data frame."
+keypoints:
+- ""
+- ""
+---
+
+## Loading data into R
+
+Loading data into R is the first step!
+
+First we need to load up a package to make loading data sets easier.
+We will be using the `tidyverse` set of packages for all of our data processing needs in R.
+^[This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.]
+
+```{r, echo=FALSE, fig.cap="\"Tidyverse Celestial\" by Allison Horst. \"tidyverse\" hex sticker in space surrounded by other tidyverse package hex logos."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png")
+```
+
+We first will load up the `tidyverse` packages using the `library` function.
+
+```{r}
+library(tidyverse)
+```
+
+The first time you load up the `tidyverse` library,
+there will be some output that lists the packages `tidyverse` loads,
+along with any functions that share the same name as other functions (i.e., conflicts).
+As long as you are mindful about starting a new RStudio session before you work,
+you can ignore this output for now.
+
+Now we can use all the functions within the Tidyverse to do our data processing.
+If you are following along and you run a piece of code and end up with an `could not find function` error,
+make sure you typed `library(tidyverse)` correctly and executed the line of code.
+
+## Find your files
+
+Let the below figures represent a `ds4biomed` folder on your Desktop on Windows and Mac, respectively.
+
+:::{.row}
+:::{.column}
+```
+C:\
+  |- Users\
+    |- Daniel\
+      |- Desktop\
+        |- ds4biomed\
+         |- data\
+         |    |- medicaldata_tumorgrowth.csv
+         |- output\
+         |- 01-load_data.R
+         |- README.md
+         |- ds4biomed.Rproj
+```
+:::
+
+:::{.column}
+```
+/
+  |- Users/
+    |- Daniel/
+      |- Desktop/
+        |- ds4biomed/
+          |- data/
+          |    |- medicaldata_tumorgrowth.csv
+          |- output/
+          |- 01-load_data.R
+          |- README.md
+          |- ds4biomed.Rproj
+```
+:::
+:::
+
+Suppose we are "in" the `ds4biomed` folder,
+where we can see the `data` and `output` folders
+along with the
+`01-load_data.R`, `README.md`, and `ds4biomed.Rproj` files.
+
+We can reference our `medicaldata_tumorgrowth.csv` file inside the `data` folder as: `data/medicaldata_tumorgrowth.csv`.
+That is, we can use the backslash, `/` to move into folders.
+We can write `data/medicaldata_tumorgrowth.csv` because we are "starting from" the `ds4biomed` folder.
+This is called a **relative path** because the location of the `csv` file is relative to the `ds4biomed` starting point (aka **working directory**).
+If we want to refer to any arbitrary filer or folder on the computer, we can specify the **full path** of the file.
+The full path will start with a drive letter on windows,
+`C:\Users\Daniel\Desktop\ds4biomed\data\medicaldata_tumorgrowth.csv`,
+and a `/` on a Mac,
+`/Users/Daniel/Desktop/ds4biomed/data/medicaldata_tumorgrowth.csv`.
+
+Suppose we create an `analysis` folder for our `01-load_data.R` script so that our folder structure looks like this
+(only the mac version is shown in the example below):
+
+```
+/
+  |- Users/
+    |- Daniel/
+      |- Desktop/
+        |- ds4biomed/
+          |- data/
+          |    |- medicaldata_tumorgrowth.csv
+          |- output/
+          |- analysis
+          |    |- 01-load_data.R
+          |- README.md
+          |- ds4biomed.Rproj
+```
+
+Now, if our **working directory** is now in the `analysis` folder,
+we need a way to reference one folder up to the `ds4biomed` folder *and then* back down to the `data` folder.
+The way we can **relatively** reference the previous folder is with 2 dots, `..`, `../data/medicaldata_tumorgrowth.csv`
+
+
+<button class="accordion" id="question">Exercise 1 Question</button>
+:::{.panel-question}
+Given the following example folder structure where we have a `chart_review` and `rct_m22-0305` folder in our `projects` folder:
+
+```
+/
+  |- Users/
+    |- Daniel/
+      |- projects/
+        |-chart_review/
+        |    |- data/
+        |    |    |- patients.csv
+        |    |- analysis/
+        |         |- demographics.R # you are working here
+        |- rct_m22-0305
+             |- data/
+                  |- patients.csv
+```
+
+Let's say we are currently in the `chart_review/analysis` folder, working on our `demographics.R` as denoted by the `#`.
+
+1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305` folder.
+2. Write the **absolute path** to the `patients.csv` file in the `chart_review` folder.
+:::
+
+
+### Paths in Windows
+
+When you are looking at file paths in the Windows Explorer,
+you will notice that all Windows paths will use the backslash, `\`,
+instead of the forward slash, `/` to refer to files.
+In a lot of programming languages, including R, the `\` is a special character,
+so if you want to use `\` for file paths in Windows, you will have to use 2 backslashes, e.g., `..\\data\\patients.csv\\`.
+However, you can still use the regular `/` in Windows to refer to folders just like other **operating systems**.
+
+## Set your working directory
+
+So far, we have been talking about a "starting point" or "working directory",
+when we have been referring to files around our computer.
+In order to quickly and reliably set your working directory,
+we use **RStudio Projects** (Section \@ref(rstudio-projects)).
+
+
+## Reading text files (CSV)
+
+Now that we know how to find our files, let's load up our first data set.
+When trying to type in a file path,
+you can hit the `<TAB>` key to autocomplete the files.
+This will help you with a lot of potential spelling mistakes.
+
+```{r}
+read_csv("data/medicaldata_tumorgrowth.csv")
+```
+
+**Debug help:**
+- If the above code returns a `could not find function "read_csv"`
+  make sure you have loaded up the proper library with `library(tidyverse)`
+- If the above code returns a `does not exist in current working directory`,
+  make sure the working directory it lists is your expected "starting point" (i.e., working directory),
+  and make sure the file path is spelled correctly.
+
+`read_csv` will show us the columns that were read in,
+as well as the **data type** of that column (e.g., character, double -- a number).
+
+Loading a data set is great, but we need a convenient way to refer to the data set.
+We don't want to re-load the data set every time we want to perform an action on it.
+We can take this loaded data set and **assign** it to a **variable**.
+We can do this with the **assignment** **operator**, `<-`.
+Note the way it is typed, a less than symbol (`<`) followed immediately by the dash (`-`) without any spaces in between.
+The right side of the assignment operator, `<-`, will be executed and then **assigned** to the variable on the left.
+
+```{r}
+tumor <- read_csv("data/medicaldata_tumorgrowth.csv")
+```
+
+Notice this time we no longer see the dataset being printed.
+The "Environment" tab in the RStudio panel will now have an entry for the variable you used.
+Clicking on the right data set icon will open a view of your dataset,
+clicking on the arrow will show you the column-by-column text representation (technically it's called the `structure`).
+
+To look at our dataset we can execute *just* the variable we assigned the dataset to.
+
+```{r}
+tumor
+```
+
+This tabular dataset that has now been loaded into R is called a **data frame** **object** (or simply **dataframe**),
+the `tidyverse` uses a `tibble`.
+For the most part, a `data.frame` object will behave like a `tibble` object.
+
+## What are data frames?
+
+When we loaded the data into R, it got stored as an object of class `tibble`, 
+which is a special kind of data frame (the difference is not important for our 
+purposes, but you can learn more about tibbles 
+[here](https://tibble.tidyverse.org/)). 
+Data frames are the _de facto_ data structure for most tabular data, and what we
+use for statistics and plotting.
+Data frames can be created by hand, but most commonly they are generated by
+functions like `read_csv()`; in other words, when importing
+spreadsheets from your hard drive or the web.
+
+A data frame is the representation of data in the format of a table where the
+columns are vectors that all have the same length. Because columns are
+vectors, each column must contain a single type of data (e.g., characters, integers,
+factors). For example, here is a figure depicting a data frame comprising a
+numeric, a character, and a logical vector.
+
+![](./img/data-frame.svg)
+We can see this also when inspecting the <b>str</b>ucture of a data frame
+with the function `str()`:
+
+```{r, purl=FALSE}
+str(surveys)
+```
+ 
+## Inspecting data frames
+
+We already saw how the functions `head()` and `str()` can be useful to check the
+content and the structure of a data frame. Here is a non-exhaustive list of
+functions to get a sense of the content/structure of the data. Let's try them out!
+
+* Size:
+    * `dim(surveys)` - returns a vector with the number of rows in the first element,
+          and the number of columns as the second element (the **dim**ensions of
+          the object)
+    * `nrow(surveys)` - returns the number of rows
+    * `ncol(surveys)` - returns the number of columns
+
+* Content:
+    * `head(surveys)` - shows the first 6 rows
+    * `tail(surveys)` - shows the last 6 rows
+
+* Names:
+    * `names(surveys)` - returns the column names (synonym of `colnames()` for `data.frame`
+	   objects)
+    * `rownames(surveys)` - returns the row names
+
+* Summary:
+    * `str(surveys)` - structure of the object and information about the class, length and
+	   content of  each column
+    * `summary(surveys)` - summary statistics for each column
+
+Note: most of these functions are "generic", they can be used on other types of
+objects besides `data.frame`.
+
+
+> ### Challenge
+>
+> Based on the output of `str(surveys)`, can you answer the following questions?
+>
+> * What is the class of the object `surveys`?
+> * How many rows and how many columns are in this object?
+>
+> ```{r, answer=TRUE, results="markup", purl=FALSE}
+>
+> str(surveys)
+>
+> ## * class: data frame
+> ## * how many rows: 34786,  how many columns: 13
+>
+> ```
+
+```{r, echo=FALSE, purl=TRUE}
+## Challenge
+## Based on the output of `str(surveys)`, can you answer the following questions?
+##
+## * What is the class of the object `surveys`?
+## * How many rows and how many columns are in this object?
+```
+
+
+
+## Indexing and subsetting data frames
+
+```{r, echo=FALSE, purl=TRUE}
+## Indexing and subsetting data frames
+```
+
+
+Our survey data frame has rows and columns (it has 2 dimensions), if we want to
+extract some specific data from it, we need to specify the "coordinates" we
+want from it. Row numbers come first, followed by column numbers. However, note
+that different ways of specifying these coordinates lead to results with
+different classes.
+
+```{r, purl=FALSE}
+# We can extract specific values by specifying row and column indices
+# in the format: 
+# data_frame[row_index, column_index]
+# For instance, to extract the first row and column from surveys:
+surveys[1, 1]
+# First row, sixth column:
+surveys[1, 6]   
+# We can also use shortcuts to select a number of rows or columns at once
+# To select all columns, leave the column index blank
+# For instance, to select all columns for the first row:
+surveys[1, ]
+# The same shortcut works for rows --
+# To select the first column across all rows:
+surveys[, 1]
+# An even shorter way to select first column across all rows:
+surveys[1] # No comma! 
+# To select multiple rows or columns, use vectors!
+# To select the first three rows of the 5th and 6th column
+surveys[c(1, 2, 3), c(5, 6)] 
+# We can use the : operator to create those vectors for us:
+surveys[1:3, 5:6] 
+# This is equivalent to head_surveys <- head(surveys)
+head_surveys <- surveys[1:6, ]
+# As we've seen, when working with tibbles 
+# subsetting with single square brackets ("[]") always returns a data frame.
+# If you want a vector, use double square brackets ("[[]]")
+# For instance, to get the first column as a vector:
+surveys[[1]]
+# To get the first value in our data frame:
+surveys[[1, 1]]
+```
+
+`:` is a special function that creates numeric vectors of integers in increasing
+or decreasing order, test `1:10` and `10:1` for instance.
+
+You can also exclude certain indices of a data frame using the "`-`" sign:
+
+```{r, purl=FALSE}
+surveys[, -1]                 # The whole data frame, except the first column
+surveys[-(7:nrow(surveys)), ] # Equivalent to head(surveys)
+```
+
+Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:
+
+```{r, eval = FALSE, purl=FALSE}
+# As before, using single brackets returns a data frame:
+surveys["species_id"]
+surveys[, "species_id"]
+# Double brackets returns a vector:
+surveys[["species_id"]]
+# We can also use the $ operator with column names instead of double brackets
+# This returns a vector:
+surveys$species_id
+```
+
+In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.
+
+> ### Challenge
+>
+> 1. Create a `data.frame` (`surveys_200`) containing only the data in
+>    row 200 of the `surveys` dataset.
+>
+> 2. Notice how `nrow()` gave you the number of rows in a `data.frame`?
+>
+>      * Use that number to pull out just that last row in the data frame.
+>      * Compare that with what you see as the last row using `tail()` to make
+>        sure it's meeting expectations.
+>      * Pull out that last row using `nrow()` instead of the row number.
+>      * Create a new data frame (`surveys_last`) from that last row.
+>
+> 3. Use `nrow()` to extract the row that is in the middle of the data
+>    frame. Store the content of this row in an object named `surveys_middle`.
+>
+> 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of
+>    `head(surveys)`, keeping just the first through 6th rows of the surveys
+>    dataset.
+>
+> ```{r, answer=TRUE, purl=FALSE}
+> ## 1.
+> surveys_200 <- surveys[200, ]
+> ## 2.
+> # Saving `n_rows` to improve readability and reduce duplication
+> n_rows <- nrow(surveys)
+> surveys_last <- surveys[n_rows, ]
+> ## 3.
+> surveys_middle <- surveys[n_rows / 2, ]
+> ## 4.
+> surveys_head <- surveys[-(7:n_rows), ]
+> ```
+
+```{r, echo=FALSE, purl=TRUE}
+### Challenges:
+###
+### 1. Create a `data.frame` (`surveys_200`) containing only the
+###    data in row 200 of the `surveys` dataset.
+###
+### 2. Notice how `nrow()` gave you the number of rows in a `data.frame`?
+###
+###      * Use that number to pull out just that last row in the data frame
+###      * Compare that with what you see as the last row using `tail()` to make
+###        sure it's meeting expectations.
+###      * Pull out that last row using `nrow()` instead of the row number
+###      * Create a new data frame object (`surveys_last`) from that last row
+###
+### 3. Use `nrow()` to extract the row that is in the middle of the
+###    data frame. Store the content of this row in an object named
+###    `surveys_middle`.
+###
+### 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of
+###    `head(surveys)`, keeping just the first through 6th rows of the surveys
+###    dataset.
+```
+
