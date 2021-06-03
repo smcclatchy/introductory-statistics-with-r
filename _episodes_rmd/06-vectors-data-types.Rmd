@@ -1,3 +1,17 @@
+---
+source: Rmd
+title: "Vectors and data types"
+teaching: 0
+exercises: 0
+questions:
+- "What are data types in R?"
+objectives:
+- "Describe four data types in R."
+keypoints:
+- ""
+- ""
+---
+ 
 ## Vectors and data types
 
 ```{r, echo = FALSE, purl = TRUE}
