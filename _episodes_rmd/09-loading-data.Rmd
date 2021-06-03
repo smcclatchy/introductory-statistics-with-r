@@ -117,11 +117,6 @@ Now, if our **working directory** is now in the `analysis` folder,
 we need a way to reference one folder up to the `ds4biomed` folder *and then* back down to the `data` folder.
 The way we can **relatively** reference the previous folder is with 2 dots, `..`, `../data/medicaldata_tumorgrowth.csv`
 
-
-<button class="accordion" id="question">Exercise 1 Question</button>
-:::{.panel-question}
-Given the following example folder structure where we have a `chart_review` and `rct_m22-0305` folder in our `projects` folder:
-
 ```
 /
   |- Users/
@@ -137,11 +132,20 @@ Given the following example folder structure where we have a `chart_review` and 
                   |- patients.csv
 ```
 
-Let's say we are currently in the `chart_review/analysis` folder, working on our `demographics.R` as denoted by the `#`.
-
-1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305` folder.
-2. Write the **absolute path** to the `patients.csv` file in the `chart_review` folder.
-:::
+> ## Exercise 1 
+> 
+> Refer to the example folder structure above where we have a `chart_review` and `rct_m22-0305` folder in our `projects` folder.
+> Let's say we are currently in the `chart_review/analysis` folder, working on our `demographics.R` as denoted by the `#`.
+> 1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305` folder.
+> 2. Write the **absolute path** to the `patients.csv` file in the `chart_review` folder.
+> >
+> > ## Solution
+> >
+> > 
+> >
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 
 ### Paths in Windows
@@ -169,7 +173,7 @@ you can hit the `<TAB>` key to autocomplete the files.
 This will help you with a lot of potential spelling mistakes.
 
 ```{r}
-read_csv("data/medicaldata_tumorgrowth.csv")
+read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 **Debug help:**
@@ -190,7 +194,7 @@ Note the way it is typed, a less than symbol (`<`) followed immediately by the d
 The right side of the assignment operator, `<-`, will be executed and then **assigned** to the variable on the left.
 
 ```{r}
-tumor <- read_csv("data/medicaldata_tumorgrowth.csv")
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 Notice this time we no longer see the dataset being printed.
@@ -231,7 +235,7 @@ We can see this also when inspecting the <b>str</b>ucture of a data frame
 with the function `str()`:
 
 ```{r, purl=FALSE}
-str(surveys)
+str(tumor)
 ```
  
 ## Inspecting data frames
