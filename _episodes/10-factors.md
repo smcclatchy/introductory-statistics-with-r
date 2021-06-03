@@ -18,11 +18,19 @@ keypoints:
 
 ## Factors in R
 
-When we did `str(surveys)` we saw that several of the columns consist of
-integers. The columns `genus`, `species`, `sex`, `plot_type`, ... however, are
-of the class `character`.
-Arguably, these columns contain categorical data, that is, they can only take on
-a limited number of values. 
+When we did `str(tumor)` we saw that most of the columns are numeric.
+The column `Grp`, however, isof the class `character`.
+This column contains categorical data, that is, it can only take on
+a limited number of values. To see this, use the `unique()` function.
+
+
+```r
+unique(tumor$Grp)
+```
+
+```
+## Error in unique(tumor$Grp): object 'tumor' not found
+```
 
 R has a special class for working with categorical data, called `factor`. 
 Factors are very useful and actually contribute to making R particularly well 
@@ -33,16 +41,15 @@ Once created, factors can only contain a pre-defined set of values, known as
 *levels*. 
 Factors are stored as integers associated with labels and they can be ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. So you need to be very careful when treating them as strings.
 
-When importing a data frame with `read_csv()`, the columns that contain text are not automatically coerced (=converted) into the `factor` data type, but once we have
-loaded the data we can do the conversion using the `factor()` function: 
+When importing a data frame with `read_csv()`, the columns that contain text are not automatically coerced (=converted) into the `factor` data type, but once we have loaded the data we can do the conversion using the `factor()` function: 
 
 
 ```r
-surveys$sex <- factor(surveys$sex)
+tumor$Grp <- factor(tumor$Grp)
 ```
 
 ```
-## Error in factor(surveys$sex): object 'surveys' not found
+## Error in factor(tumor$Grp): object 'tumor' not found
 ```
 
 We can see that the conversion has worked by using the `summary()` 
@@ -50,11 +57,11 @@ function again. This produces a table with the counts for each factor level:
 
 
 ```r
-summary(surveys$sex)
+summary(tumor$Grp)
 ```
 
 ```
-## Error in summary(surveys$sex): object 'surveys' not found
+## Error in summary(tumor$Grp): object 'tumor' not found
 ```
 
 By default, R always sorts levels in alphabetical order. For
@@ -62,25 +69,25 @@ instance, if you have a factor with 2 levels:
 
 
 ```r
-sex <- factor(c("male", "female", "female", "male"))
+direction <- factor(c("right", "left", "left", "right"))
 ```
 
-R will assign `1` to the level `"female"` and `2` to the level `"male"` (because
-`f` comes before `m`, even though the first element in this vector is
-`"male"`). You can see this by using the function `levels()` and you can find the
+R will assign `1` to the level `"left"` and `2` to the level `"right"` (because
+`l` comes before `r`, even though the first element in this vector is
+`"right"`). You can see this by using the function `levels()` and you can find the
 number of levels using `nlevels()`:
 
 
 ```r
-levels(sex)
+levels(direction)
 ```
 
 ```
-## [1] "female" "male"
+## [1] "left"  "right"
 ```
 
 ```r
-nlevels(sex)
+nlevels(direction)
 ```
 
 ```
@@ -90,85 +97,72 @@ nlevels(sex)
 Sometimes, the order of the factors does not matter, other times you might want
 to specify the order because it is meaningful (e.g., "low", "medium", "high"),
 it improves your visualization, or it is required by a particular type of
-analysis. Here, one way to reorder our levels in the `sex` vector would be:
+analysis. Here, one way to reorder our levels in the `direction` vector would be:
 
 
 ```r
-sex # current order
+direction # current order
 ```
 
 ```
-## [1] male   female female male  
-## Levels: female male
+## [1] right left  left  right
+## Levels: left right
 ```
 
 ```r
-sex <- factor(sex, levels = c("male", "female"))
-sex # after re-ordering
+direction <- factor(direction, levels = c("right", "left"))
+direction # after re-ordering
 ```
 
 ```
-## [1] male   female female male  
-## Levels: male female
+## [1] right left  left  right
+## Levels: right left
 ```
 
-In R's memory, these factors are represented by integers (1, 2, 3), but are more
-informative than integers because factors are self describing: `"female"`,
-`"male"` is more descriptive than `1`, `2`. Which one is "male"?  You wouldn't
+In R's memory, these factors are represented by integers (1, 2), but are more
+informative than integers because factors are self describing: `"left"`,
+`"right"` is more descriptive than `1`, `2`. Which one is "right"?  You wouldn't
 be able to tell just from the integer data. Factors, on the other hand, have
 this information built in. It is particularly helpful when there are many levels
-(like the species names in our example dataset).
+(like the `Grp` names in our example dataset).
 
 
-> ### Challenge
+> ### Exercise
 >
-> 1. Change the columns `taxa` and `genus` in the `surveys` data frame into a 
->    factor.
->
-> 2. Using the functions you learned before, can you find out...
->
->      * How many rabbits were observed?
->      * How many different genera are in the `genus` column?
->
-> 
-> ```r
-> surveys$taxa <- factor(surveys$taxa)
-> ```
-> 
-> ```
-> ## Error in factor(surveys$taxa): object 'surveys' not found
-> ```
-> 
-> ```r
-> surveys$genus <- factor(surveys$genus)
-> ```
-> 
-> ```
-> ## Error in factor(surveys$genus): object 'surveys' not found
-> ```
-> 
-> ```r
-> summary(surveys)
-> ```
-> 
-> ```
-> ## Error in summary(surveys): object 'surveys' not found
-> ```
-> 
-> ```r
-> nlevels(surveys$genus)
-> ```
-> 
-> ```
-> ## Error in levels(x): object 'surveys' not found
-> ```
-> 
-> ```r
-> ## * how many genera: There are 26 unique genera in the `genus` column.
-> ## * how many rabbts: There are 75 rabbits in the `taxa` column.
-> ```
-
-
+> 1. Change the column `Grp` in the `tumor` data frame into a 
+>    factor.  
+> 2. Using the functions you learned before, can you find out:  
+>      * How many were in group D?  
+>      * How many levels there are?  
+> >
+> > ## Solution
+> > 
+> > ```r
+> > tumor$Grp <- factor(tumor$Grp)
+> > ```
+> > 
+> > ```
+> > ## Error in factor(tumor$Grp): object 'tumor' not found
+> > ```
+> > 
+> > ```r
+> > summary(tumor$Grp)
+> > ```
+> > 
+> > ```
+> > ## Error in summary(tumor$Grp): object 'tumor' not found
+> > ```
+> > 
+> > ```r
+> > nlevels(tumor$Grp)
+> > ```
+> > 
+> > ```
+> > ## Error in levels(x): object 'tumor' not found
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 ### Converting factors
 
@@ -177,11 +171,11 @@ If you need to convert a factor to a character vector, you use
 
 
 ```r
-as.character(sex)
+as.character(direction)
 ```
 
 ```
-## [1] "male"   "female" "female" "male"
+## [1] "right" "left"  "left"  "right"
 ```
 
 In some cases, you may have to convert factors where the levels appear as
@@ -234,101 +228,19 @@ Notice that in the `levels()` approach, three important steps occur:
 
 When your data is stored as a factor, you can use the `plot()` function to get a
 quick glance at the number of observations represented by each factor
-level. Let's look at the number of males and females captured over the course of
-the experiment:
+level. Let's look at the number in each group.
 
 
 ```r
-## bar plot of the number of females and males captured during the experiment:
-plot(surveys$sex)
+## bar plot of the numbers in each group:
+plot(tumor$Grp)
 ```
 
 ```
-## Error in plot(surveys$sex): object 'surveys' not found
+## Error in plot(tumor$Grp): object 'tumor' not found
 ```
 
-However, as we saw when we used `summary(surveys$sex)`, there are about 1700 
-individuals for which the sex information hasn't been recorded. To show them in
-the plot, we can turn the missing values into a factor level with the 
-`addNA()` function. We will also have to give the new factor level a label.
-We are going to work with a copy of the `sex` column, so we're not modifying the 
-working copy of the data frame:
-
-
-```r
-sex <- surveys$sex
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
-```
-
-```r
-levels(sex)
-```
-
-```
-## [1] "male"   "female"
-```
-
-```r
-sex <- addNA(sex)
-levels(sex)
-```
-
-```
-## [1] "male"   "female" NA
-```
-
-```r
-head(sex)
-```
-
-```
-## [1] male   female female male  
-## Levels: male female <NA>
-```
-
-```r
-levels(sex)[3] <- "undetermined"
-levels(sex)
-```
-
-```
-## [1] "male"         "female"       "undetermined"
-```
-
-```r
-head(sex)
-```
-
-```
-## [1] male   female female male  
-## Levels: male female undetermined
-```
-
-Now we can plot the data again, using `plot(sex)`.
-
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)
-
-> ### Challenge
->
-> * Rename "F" and "M" to "female" and "male" respectively.
-> * Now that we have renamed the factor level to "undetermined", can you recreate the barplot such that "undetermined" is first (before "female")?
->
-> 
-> ```r
-> levels(sex)[1:2] <- c("female", "male")
-> sex <- factor(sex, levels = c("undetermined", "female", "male"))
-> plot(sex)
-> ```
-> 
-> ![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png)
-
-
-
-
-> ### Challenge
+> ### Exercise
 >
 > 1. We have seen how data frames are created when using `read_csv()`, but
 >   they can also be created by hand with the `data.frame()` function.  There are
@@ -343,8 +255,6 @@ Now we can plot the data again, using `plot(sex)`.
 >               weight = c(45, 8 1.1, 0.8)
 >               )
 >     ```
->
->     
 >
 > 2. Can you predict the class for each of the columns in the following example?
 >    Check your guesses using `str(country_climate)`:
@@ -361,8 +271,6 @@ Now we can plot the data again, using `plot(sex)`.
 >            has_kangaroo = c(FALSE, FALSE, FALSE, 1)
 >            )
 >     ```
->
->    
 >
 >    
 >

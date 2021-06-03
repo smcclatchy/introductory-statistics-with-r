@@ -135,11 +135,6 @@ Now, if our **working directory** is now in the `analysis` folder,
 we need a way to reference one folder up to the `ds4biomed` folder *and then* back down to the `data` folder.
 The way we can **relatively** reference the previous folder is with 2 dots, `..`, `../data/medicaldata_tumorgrowth.csv`
 
-
-<button class="accordion" id="question">Exercise 1 Question</button>
-:::{.panel-question}
-Given the following example folder structure where we have a `chart_review` and `rct_m22-0305` folder in our `projects` folder:
-
 ```
 /
   |- Users/
@@ -155,11 +150,20 @@ Given the following example folder structure where we have a `chart_review` and 
                   |- patients.csv
 ```
 
-Let's say we are currently in the `chart_review/analysis` folder, working on our `demographics.R` as denoted by the `#`.
-
-1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305` folder.
-2. Write the **absolute path** to the `patients.csv` file in the `chart_review` folder.
-:::
+> ## Exercise 1 
+> 
+> Refer to the example folder structure above where we have a `chart_review` and `rct_m22-0305` folder in our `projects` folder.
+> Let's say we are currently in the `chart_review/analysis` folder, working on our `demographics.R` as denoted by the `#`.
+> 1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305` folder.
+> 2. Write the **absolute path** to the `patients.csv` file in the `chart_review` folder.
+> >
+> > ## Solution
+> >
+> > 
+> >
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 
 ### Paths in Windows
@@ -188,11 +192,36 @@ This will help you with a lot of potential spelling mistakes.
 
 
 ```r
-read_csv("data/medicaldata_tumorgrowth.csv")
+read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 ```
-## Error: 'data/medicaldata_tumorgrowth.csv' does not exist in current working directory ('/Users/smc/Projects/Lessons/introductory-statistics-with-r/_episodes_rmd').
+## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   Grp = col_character(),
+##   Group = col_double(),
+##   ID = col_double(),
+##   Day = col_double(),
+##   Size = col_double()
+## )
+```
+
+```
+## # A tibble: 574 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 564 more rows
 ```
 
 **Debug help:**
@@ -214,11 +243,19 @@ The right side of the assignment operator, `<-`, will be executed and then **ass
 
 
 ```r
-tumor <- read_csv("data/medicaldata_tumorgrowth.csv")
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 ```
-## Error: 'data/medicaldata_tumorgrowth.csv' does not exist in current working directory ('/Users/smc/Projects/Lessons/introductory-statistics-with-r/_episodes_rmd').
+## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   Grp = col_character(),
+##   Group = col_double(),
+##   ID = col_double(),
+##   Day = col_double(),
+##   Size = col_double()
+## )
 ```
 
 Notice this time we no longer see the dataset being printed.
@@ -234,7 +271,20 @@ tumor
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'tumor' not found
+## # A tibble: 574 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 564 more rows
 ```
 
 This tabular dataset that has now been loaded into R is called a **data frame** **object** (or simply **dataframe**),
@@ -265,11 +315,40 @@ with the function `str()`:
 
 
 ```r
-str(surveys)
+str(tumor)
 ```
 
 ```
-## Error in str(surveys): object 'surveys' not found
+## spec_tbl_df [574 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Grp  : chr [1:574] "1.CTR" "1.CTR" "1.CTR" "1.CTR" ...
+##  $ Group: num [1:574] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ ID   : num [1:574] 101 101 101 101 101 101 101 101 101 101 ...
+##  $ Day  : num [1:574] 0 3 4 5 6 7 10 11 12 13 ...
+##  $ Size : num [1:574] 41.8 85 114 162.3 178.3 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Grp = col_character(),
+##   ..   Group = col_double(),
+##   ..   ID = col_double(),
+##   ..   Day = col_double(),
+##   ..   Size = col_double()
+##   .. )
+```
+
+```r
+head(tumor)
+```
+
+```
+## # A tibble: 6 x 5
+##   Grp   Group    ID   Day  Size
+##   <chr> <dbl> <dbl> <dbl> <dbl>
+## 1 1.CTR     1   101     0  41.8
+## 2 1.CTR     1   101     3  85  
+## 3 1.CTR     1   101     4 114  
+## 4 1.CTR     1   101     5 162. 
+## 5 1.CTR     1   101     6 178. 
+## 6 1.CTR     1   101     7 325
 ```
  
 ## Inspecting data frames
@@ -279,61 +358,64 @@ content and the structure of a data frame. Here is a non-exhaustive list of
 functions to get a sense of the content/structure of the data. Let's try them out!
 
 * Size:
-    * `dim(surveys)` - returns a vector with the number of rows in the first element,
+    * `dim(tumor)` - returns a vector with the number of rows in the first element,
           and the number of columns as the second element (the **dim**ensions of
           the object)
-    * `nrow(surveys)` - returns the number of rows
-    * `ncol(surveys)` - returns the number of columns
+    * `nrow(tumor)` - returns the number of rows
+    * `ncol(tumor)` - returns the number of columns
 
 * Content:
-    * `head(surveys)` - shows the first 6 rows
-    * `tail(surveys)` - shows the last 6 rows
+    * `head(tumor)` - shows the first 6 rows
+    * `tail(tumor)` - shows the last 6 rows
 
 * Names:
-    * `names(surveys)` - returns the column names (synonym of `colnames()` for `data.frame`
+    * `names(tumor)` - returns the column names (synonym of `colnames()` for `data.frame`
 	   objects)
-    * `rownames(surveys)` - returns the row names
+    * `rownames(tumor)` - returns the row names
 
 * Summary:
-    * `str(surveys)` - structure of the object and information about the class, length and
+    * `str(tumor)` - structure of the object and information about the class, length and
 	   content of  each column
-    * `summary(surveys)` - summary statistics for each column
+    * `summary(tumor)` - summary statistics for each column
 
 Note: most of these functions are "generic", they can be used on other types of
 objects besides `data.frame`.
 
 
-> ### Challenge
->
-> Based on the output of `str(surveys)`, can you answer the following questions?
->
-> * What is the class of the object `surveys`?
-> * How many rows and how many columns are in this object?
->
+> ## Exercise
 > 
-> ```r
-> str(surveys)
-> ```
-> 
-> ```
-> ## Error in str(surveys): object 'surveys' not found
-> ```
-> 
-> ```r
-> ## * class: data frame
-> ## * how many rows: 34786,  how many columns: 13
-> ```
-
-
-
-
+> Based on the output of `str(tumor)`, can you answer the following questions?
+>
+> 1. What is the class of the object `tumor`?  
+> 2. How many rows and how many columns are in this object?
+> > ## Solution
+> >
+> > 
+> >
+> >
+> >```r
+> >
+> > str(tumor)
+> >
+> > 1. class: data frame
+> > 2. how many rows: 34786,  how many columns: 13
+> >```
+> >
+> >```
+> >## Error: <text>:4:5: unexpected symbol
+> >## 3: 
+> >## 4:  1. class
+> >##        ^
+> >```
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 ## Indexing and subsetting data frames
 
 
 
-
-Our survey data frame has rows and columns (it has 2 dimensions), if we want to
+Our data frame has rows and columns (it has 2 dimensions), if we want to
 extract some specific data from it, we need to specify the "coordinates" we
 want from it. Row numbers come first, followed by column numbers. However, note
 that different ways of specifying these coordinates lead to results with
@@ -345,99 +427,193 @@ different classes.
 # in the format: 
 # data_frame[row_index, column_index]
 # For instance, to extract the first row and column from surveys:
-surveys[1, 1]
+tumor[1, 1]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## # A tibble: 1 x 1
+##   Grp  
+##   <chr>
+## 1 1.CTR
 ```
 
 ```r
 # First row, sixth column:
-surveys[1, 6]   
+tumor[1, 6]   
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## Error: Can't subset columns that don't exist.
+## ✖ Location 6 doesn't exist.
+## ℹ There are only 5 columns.
 ```
 
 ```r
 # We can also use shortcuts to select a number of rows or columns at once
 # To select all columns, leave the column index blank
 # For instance, to select all columns for the first row:
-surveys[1, ]
+tumor[1, ]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## # A tibble: 1 x 5
+##   Grp   Group    ID   Day  Size
+##   <chr> <dbl> <dbl> <dbl> <dbl>
+## 1 1.CTR     1   101     0  41.8
 ```
 
 ```r
 # The same shortcut works for rows --
 # To select the first column across all rows:
-surveys[, 1]
+tumor[, 1]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## # A tibble: 574 x 1
+##    Grp  
+##    <chr>
+##  1 1.CTR
+##  2 1.CTR
+##  3 1.CTR
+##  4 1.CTR
+##  5 1.CTR
+##  6 1.CTR
+##  7 1.CTR
+##  8 1.CTR
+##  9 1.CTR
+## 10 1.CTR
+## # … with 564 more rows
 ```
 
 ```r
 # An even shorter way to select first column across all rows:
-surveys[1] # No comma! 
+tumor[1] # No comma! 
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## # A tibble: 574 x 1
+##    Grp  
+##    <chr>
+##  1 1.CTR
+##  2 1.CTR
+##  3 1.CTR
+##  4 1.CTR
+##  5 1.CTR
+##  6 1.CTR
+##  7 1.CTR
+##  8 1.CTR
+##  9 1.CTR
+## 10 1.CTR
+## # … with 564 more rows
 ```
 
 ```r
 # To select multiple rows or columns, use vectors!
 # To select the first three rows of the 5th and 6th column
-surveys[c(1, 2, 3), c(5, 6)] 
+tumor[c(1, 2, 3), c(5, 6)] 
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## Error: Can't subset columns that don't exist.
+## ✖ Location 6 doesn't exist.
+## ℹ There are only 5 columns.
 ```
 
 ```r
 # We can use the : operator to create those vectors for us:
-surveys[1:3, 5:6] 
+tumor[1:3, 5:6] 
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## Error: Can't subset columns that don't exist.
+## ✖ Location 6 doesn't exist.
+## ℹ There are only 5 columns.
 ```
 
 ```r
 # This is equivalent to head_surveys <- head(surveys)
-head_surveys <- surveys[1:6, ]
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
-```
-
-```r
+head_tumors <- tumor[1:6, ]
 # As we've seen, when working with tibbles 
 # subsetting with single square brackets ("[]") always returns a data frame.
 # If you want a vector, use double square brackets ("[[]]")
 # For instance, to get the first column as a vector:
-surveys[[1]]
+tumor[[1]]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+##   [1] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [10] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [19] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [28] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [37] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [46] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [55] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [64] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [73] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [82] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+##  [91] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "2.D"   "2.D"  
+## [100] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [109] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [118] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [127] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [136] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [145] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [154] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [163] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [172] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [181] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [190] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [199] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [208] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [217] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [226] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [235] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [244] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [253] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+## [262] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "3.R"   "3.R"  
+## [271] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [280] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [289] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [298] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [307] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [316] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [325] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [334] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [343] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [352] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [361] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [370] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [379] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [388] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [397] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [406] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [415] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+## [424] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "4.D+R" "4.D+R" "4.D+R"
+## [433] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [442] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [451] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [460] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [469] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [478] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [487] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [496] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [505] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [514] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [523] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [532] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [541] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [550] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [559] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+## [568] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
 ```
 
 ```r
 # To get the first value in our data frame:
-surveys[[1, 1]]
+tumor[[1, 1]]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## [1] "1.CTR"
 ```
 
 `:` is a special function that creates numeric vectors of integers in increasing
@@ -447,19 +623,40 @@ You can also exclude certain indices of a data frame using the "`-`" sign:
 
 
 ```r
-surveys[, -1]                 # The whole data frame, except the first column
+tumor[, -1]                 # The whole data frame, except the first column
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## # A tibble: 574 x 4
+##    Group    ID   Day   Size
+##    <dbl> <dbl> <dbl>  <dbl>
+##  1     1   101     0   41.8
+##  2     1   101     3   85  
+##  3     1   101     4  114  
+##  4     1   101     5  162. 
+##  5     1   101     6  178. 
+##  6     1   101     7  325  
+##  7     1   101    10  624. 
+##  8     1   101    11  648. 
+##  9     1   101    12  836. 
+## 10     1   101    13 1030. 
+## # … with 564 more rows
 ```
 
 ```r
-surveys[-(7:nrow(surveys)), ] # Equivalent to head(surveys)
+tumor[-(7:nrow(tumor)), ] # Equivalent to head(tumor)
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'surveys' not found
+## # A tibble: 6 x 5
+##   Grp   Group    ID   Day  Size
+##   <chr> <dbl> <dbl> <dbl> <dbl>
+## 1 1.CTR     1   101     0  41.8
+## 2 1.CTR     1   101     3  85  
+## 3 1.CTR     1   101     4 114  
+## 4 1.CTR     1   101     5 162. 
+## 5 1.CTR     1   101     6 178. 
+## 6 1.CTR     1   101     7 325
 ```
 
 Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:
@@ -467,21 +664,21 @@ Data frames can be subset by calling indices (as shown previously), but also by 
 
 ```r
 # As before, using single brackets returns a data frame:
-surveys["species_id"]
-surveys[, "species_id"]
+tumor["Size"]
+tumor[, "Size"]
 # Double brackets returns a vector:
-surveys[["species_id"]]
+tumor[["Size"]]
 # We can also use the $ operator with column names instead of double brackets
 # This returns a vector:
-surveys$species_id
+tumor$Size
 ```
 
 In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.
 
-> ### Challenge
+> ### Exercise
 >
-> 1. Create a `data.frame` (`surveys_200`) containing only the data in
->    row 200 of the `surveys` dataset.
+> 1. Create a `data.frame` (`tumors_200`) containing only the data in
+>    row 200 of the `tumor` dataset.
 >
 > 2. Notice how `nrow()` gave you the number of rows in a `data.frame`?
 >
@@ -489,60 +686,32 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 >      * Compare that with what you see as the last row using `tail()` to make
 >        sure it's meeting expectations.
 >      * Pull out that last row using `nrow()` instead of the row number.
->      * Create a new data frame (`surveys_last`) from that last row.
+>      * Create a new data frame (`tumors_last`) from that last row.
 >
 > 3. Use `nrow()` to extract the row that is in the middle of the data
->    frame. Store the content of this row in an object named `surveys_middle`.
+>    frame. Store the content of this row in an object named `tumors_middle`.
 >
 > 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of
->    `head(surveys)`, keeping just the first through 6th rows of the surveys
+>    `head(tumor)`, keeping just the first through 6th rows of the surveys
 >    dataset.
->
-> 
-> ```r
-> ## 1.
-> surveys_200 <- surveys[200, ]
-> ```
-> 
-> ```
-> ## Error in eval(expr, envir, enclos): object 'surveys' not found
-> ```
-> 
-> ```r
-> ## 2.
-> # Saving `n_rows` to improve readability and reduce duplication
-> n_rows <- nrow(surveys)
-> ```
-> 
-> ```
-> ## Error in nrow(surveys): object 'surveys' not found
-> ```
-> 
-> ```r
-> surveys_last <- surveys[n_rows, ]
-> ```
-> 
-> ```
-> ## Error in eval(expr, envir, enclos): object 'surveys' not found
-> ```
-> 
-> ```r
-> ## 3.
-> surveys_middle <- surveys[n_rows / 2, ]
-> ```
-> 
-> ```
-> ## Error in eval(expr, envir, enclos): object 'surveys' not found
-> ```
-> 
-> ```r
-> ## 4.
-> surveys_head <- surveys[-(7:n_rows), ]
-> ```
-> 
-> ```
-> ## Error in eval(expr, envir, enclos): object 'surveys' not found
-> ```
-
-
+>    
+> > ## Solution
+> > 
+> > ```r
+> > 1. tumors_200 <- tumor[200, ]
+> > 2. # Saving `n_rows` to improve readability and reduce duplication
+> > n_rows <- nrow(tumor)
+> > tumors_last <- tumor[n_rows, ]
+> > 3. tumors_middle <- tumor[n_rows / 2, ]
+> > 4. tumors_head <- tumor[-(7:n_rows), ]
+> > ```
+> > 
+> > ```
+> > ## Error: <text>:1:4: unexpected symbol
+> > ## 1: 1. tumors_200
+> > ##        ^
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
