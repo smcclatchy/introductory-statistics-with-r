@@ -1,31 +1,18 @@
 ---
-title: "Introduction to R"
-author: "Data Carpentry contributors"
-minutes: 45
+source: Rmd
+title: "Creating objects in R"
+teaching: 0
+exercises: 0
+questions:
+- "How do I create objects in R?"
+objectives:
+- "Define the following terms as they relate to R: object, assign, call, function, arguments, options."
+- "Create objects and assign values to them  in R."
+- "Learn how to _name_ objects."
+keypoints:
+- ""
+- ""
 ---
-
-
-```{r, echo = FALSE, purl = FALSE, message = FALSE}
-source("setup.R")
-```
-
-------------
-
-> ### Learning Objectives
->
-> * Define the following terms as they relate to R: object, assign, call,
->   function, arguments, options.
-> * Create objects and assign values to them  in R.
-> * Learn how to _name_ objects.
-> * Save a script file for later use.
-> * Use comments to inform script.
-> * Solve simple arithmetic operations in R.
-> * Call functions and use arguments to change their default options.
-> * Inspect the content of vectors and manipulate their content.
-> * Subset and extract values from vectors.
-> * Analyze vectors with missing data.
-
-------------
 
 ## Creating objects in R
 
