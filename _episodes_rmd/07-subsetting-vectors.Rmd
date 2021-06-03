@@ -1,3 +1,18 @@
+---
+source: Rmd
+title: "Subsetting vectors"
+teaching: 0
+exercises: 0
+questions:
+- "What are data types in R?"
+objectives:
+- "Inspect the content of vectors and manipulate their content."
+- "Subset and extract values from vectors."
+keypoints:
+- ""
+- ""
+---
+
 ## Subsetting vectors
 
 If we want to extract one or several values from a vector, we must provide one
