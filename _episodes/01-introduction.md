@@ -89,3 +89,31 @@ or on the [RStudio community](https://community.rstudio.com/).
 Anyone can inspect the source code to see how R works. Because of this
 transparency, there is less chance for mistakes, and if you (or someone else)
 find some, you can report and fix bugs.
+
+## The Learning Process
+
+Programming is hard.
+Not only is there a steep technical learning curve,
+but there is a lot of jargon that makes the initial learning curve difficult.
+![Learning to program is a roller coaster ride](../fig/r_rollercoaster.png)
+
+Programming itself involves breaking down your steps into small linear pieces.
+Do not try to do all of your analysis in a single step, and usually when you get stuck for a while,
+a simple walk to clear your head may be all you need to successfully approach the problem.
+
+![Debugging can be both frustrating and elating](../fig/debugging.jpg)
+
+There is a huge community of users, learners, and instructors that all want you to succeed.
+
+![There is a lot of support in the R community](../fig/monster_support.jpg)
+
+The main take away is to learn about formatting your data set,
+and planning how your data sets may be useful in the future.
+When you are starting to learn how to program,
+you do not need to jump into it completely,
+if this book shows you a technique that makes your data pipeline easier,
+there is nothing wrong with writing the few lines of code to read in, manipulate, and save out the dataset for something else.
+Your programming skills will build over time, and there is no need to rush it.
+
+![Learning to program happens over time](../fig/r_first_then.png)
+
