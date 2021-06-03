@@ -1,3 +1,17 @@
+---
+source: Rmd
+title: "Missing data"
+teaching: 0
+exercises: 0
+questions:
+- "What does R do when data are missing?"
+objectives:
+- "Analyze vectors with missing data."
+keypoints:
+- ""
+- ""
+---
+
 ## Missing data
 
 As R was designed to analyze datasets, it includes the concept of missing data
@@ -78,6 +92,3 @@ Recall that you can use the `typeof()` function to find the type of your atomic 
 ## 3. Use R to figure out how many people in the set are taller than 67 inches.
 ```
 
-Now that we have learned how to write scripts, and the basics of R's data
-structures, we are ready to start working with the Portal dataset we have been
-using in the other lessons, and learn about data frames.
