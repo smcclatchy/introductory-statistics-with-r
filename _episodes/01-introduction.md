@@ -89,6 +89,3 @@ or on the [RStudio community](https://community.rstudio.com/).
 Anyone can inspect the source code to see how R works. Because of this
 transparency, there is less chance for mistakes, and if you (or someone else)
 find some, you can report and fix bugs.
-
-```{r, child="_page_built_on.Rmd"}
-```
