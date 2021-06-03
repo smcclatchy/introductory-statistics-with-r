@@ -46,7 +46,7 @@ If we go to `File > New File > R Script`, a 4th empty panel will appear;
 By default the tab's name will be `Untitled1`.
 This is the **source** panel, where we write our **source code** that can be saved.
 
-![RStudio interface screenshot with Source panel](../fig/panels-4.PNG")
+![RStudio interface screenshot with Source panel](../fig/panels-4.PNG)
 
 The top right panel has a few tabs:
 
