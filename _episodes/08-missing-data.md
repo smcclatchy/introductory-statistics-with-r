@@ -14,6 +14,8 @@ keypoints:
 - ""
 ---
 
+
+
 ## Missing data
 
 As R was designed to analyze datasets, it includes the concept of missing data
@@ -27,77 +29,66 @@ You can add the argument `na.rm = TRUE` to calculate the result as if the missin
 values were removed (`rm` stands for ReMoved) first.
 
 
-```r
+~~~
 heights <- c(2, 4, 4, NA, 6)
 mean(heights)
-```
+~~~
+{: .language-r}
 
-```
-## [1] NA
-```
 
-```r
+
+~~~
+[1] NA
+~~~
+{: .output}
+
+
+
+~~~
 max(heights)
-```
+~~~
+{: .language-r}
 
-```
-## [1] NA
-```
 
-```r
+
+~~~
+[1] NA
+~~~
+{: .output}
+
+
+
+~~~
 mean(heights, na.rm = TRUE)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 4
-```
 
-```r
+
+~~~
+[1] 4
+~~~
+{: .output}
+
+
+
+~~~
 max(heights, na.rm = TRUE)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 6
-```
+
+
+~~~
+[1] 6
+~~~
+{: .output}
 
 If your data include missing values, you may want to become familiar with the
 functions `is.na()`, `na.omit()`, and `complete.cases()`. See below for
 examples.
 
 
-
-```r
-## Extract those elements which are not missing values.
-heights[!is.na(heights)]
-```
-
-```
-## [1] 2 4 4 6
-```
-
-```r
-## Returns the object with incomplete cases removed. 
-#The returned object is an atomic vector of type `"numeric"` (or #`"double"`).
-na.omit(heights)
-```
-
-```
-## [1] 2 4 4 6
-## attr(,"na.action")
-## [1] 4
-## attr(,"class")
-## [1] "omit"
-```
-
-```r
-## Extract those elements which are complete cases. 
-#The returned object is an atomic vector of type `"numeric"` (or #`"double"`).
-heights[complete.cases(heights)]
-```
-
-```
-## [1] 2 4 4 6
-```
 Recall that you can use the `typeof()` function to find the type of your atomic vector.
 
 > ### Challenge
@@ -112,7 +103,7 @@ Recall that you can use the `typeof()` function to find the type of your atomic 
 > 3. Use R to figure out how many people in the set are taller than 67 inches.
 >
 > 
-> ```r
+> ~~~
 > heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
 > 
 > # 1.
@@ -124,22 +115,28 @@ Recall that you can use the `typeof()` function to find the type of your atomic 
 > 
 > # 2.
 > median(heights, na.rm = TRUE)
-> ```
+> ~~~
+> {: .language-r}
 > 
-> ```
-> ## [1] 64
-> ```
 > 
-> ```r
+> 
+> ~~~
+> [1] 64
+> ~~~
+> {: .output}
+> 
+> 
+> 
+> ~~~
 > # 3.
 > heights_above_67 <- heights_no_na[heights_no_na > 67]
 > length(heights_above_67)
-> ```
+> ~~~
+> {: .language-r}
 > 
-> ```
-> ## [1] 6
-> ```
-
-
-
-
+> 
+> 
+> ~~~
+> [1] 6
+> ~~~
+> {: .output}

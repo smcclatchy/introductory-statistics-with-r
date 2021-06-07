@@ -17,26 +17,38 @@ keypoints:
 ---
 
 
-```r
+
+
+~~~
 library(tidyverse)
-```
+~~~
+{: .language-r}
 
-```
-## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
 
-```
-## ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-## ✔ tibble  3.1.0     ✔ dplyr   1.0.5
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   1.4.0     ✔ forcats 0.5.1
-```
 
-```
-## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-```
+~~~
+── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+~~~
+{: .output}
+
+
+
+~~~
+✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+✔ tibble  3.1.0     ✔ dplyr   1.0.5
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.4.0     ✔ forcats 0.5.1
+~~~
+{: .output}
+
+
+
+~~~
+── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+~~~
+{: .output}
 
 ### Mutate
 
@@ -47,42 +59,54 @@ columns. For this we'll use `mutate()`.
 To create a new column of tumor size (volume) in cubic centimeters:
 
 
-```r
+~~~
 tumor %>%
   mutate(size_cubic_cm = Size / 1000)
-```
+~~~
+{: .language-r}
 
-```
-## Error in mutate(., size_cubic_cm = Size/1000): object 'tumor' not found
-```
+
+
+~~~
+Error in mutate(., size_cubic_cm = Size/1000): object 'tumor' not found
+~~~
+{: .error}
 
 You can also create a second new column based on the first new column within the same call of `mutate()`:
 
 
-```r
+~~~
 tumor %>%
   mutate(size_cubic_cm = Size / 1000,
          size_cubic_in = size_cubic_cm / 16)
-```
+~~~
+{: .language-r}
 
-```
-## Error in mutate(., size_cubic_cm = Size/1000, size_cubic_in = size_cubic_cm/16): object 'tumor' not found
-```
+
+
+~~~
+Error in mutate(., size_cubic_cm = Size/1000, size_cubic_in = size_cubic_cm/16): object 'tumor' not found
+~~~
+{: .error}
 
 If this runs off your screen and you just want to see the first few rows, you
 can use a pipe to view the `head()` of the data. (Pipes work with non-**`dplyr`**
 functions, too, as long as the **`dplyr`** or `magrittr` package is loaded).
 
 
-```r
+~~~
 tumor %>%
   mutate(size_cubic_cm = Size / 1000) %>%
   head()
-```
+~~~
+{: .language-r}
 
-```
-## Error in mutate(., size_cubic_cm = Size/1000): object 'tumor' not found
-```
+
+
+~~~
+Error in mutate(., size_cubic_cm = Size/1000): object 'tumor' not found
+~~~
+{: .error}
 
 > ### Challenge {.challenge}
 >
@@ -94,13 +118,14 @@ tumor %>%
 >  **Hint**: think about how the commands should be ordered to produce this data frame!
 > 
 > 
-> ```r
+> ~~~
 > tumor_cubic_in <- tumor %>%
 >     mutate(size_cubic_cm = Size / 1000,
 >          size_cubic_in = size_cubic_cm / 16) %>%
 >     filter(size_cubic_in > 0.1) %>%
 >     select(Grp, size_cubic_in)
-> ```
+> ~~~
+> {: .language-r}
 
 ### Split-apply-combine data analysis and the `summarize()` function
 
@@ -118,29 +143,37 @@ the column names that contain the **categorical** variables for which you want
 to calculate the summary statistics. So to compute the mean `Size` by group:
 
 
-```r
+~~~
 tumor %>%
   group_by(Grp) %>%
   summarize(mean_size = mean(Size))
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Grp): object 'tumor' not found
-```
+
+
+~~~
+Error in group_by(., Grp): object 'tumor' not found
+~~~
+{: .error}
 
 You can also group by multiple columns:
 
 
-```r
+~~~
 tumor %>%
   group_by(Grp, Day) %>%
   summarize(mean_size = mean(Size)) %>% 
   tail()
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Grp, Day): object 'tumor' not found
-```
+
+
+~~~
+Error in group_by(., Grp, Day): object 'tumor' not found
+~~~
+{: .error}
 
 Here, we used `tail()` to look at the last six rows of our summary. Before, we had 
 used `head()` to look at the first six rows. 
@@ -150,47 +183,59 @@ at the end of your chain with the argument `n` specifying the number of rows to
 display:
 
 
-```r
+~~~
 tumor %>%
   group_by(Grp, Day) %>%
   summarize(mean_size = mean(Size)) %>% 
   print(n = 15)
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Grp, Day): object 'tumor' not found
-```
+
+
+~~~
+Error in group_by(., Grp, Day): object 'tumor' not found
+~~~
+{: .error}
 
 Once the data are grouped, you can also summarize multiple variables at the same
 time (and not necessarily on the same variable). For instance, we could add a
 column indicating the minimum size for each day for each group:
 
 
-```r
+~~~
 tumor %>%
   group_by(Grp, Day) %>%
   summarize(mean_size = mean(Size),
             min_size = min(Size))
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Grp, Day): object 'tumor' not found
-```
+
+
+~~~
+Error in group_by(., Grp, Day): object 'tumor' not found
+~~~
+{: .error}
 
 To sort in descending order, we need to add the `desc()` function. If we want to sort the results by decreasing order of mean weight:
 
 
-```r
+~~~
 tumor %>%
   group_by(Grp, Day) %>%
   summarize(mean_size = mean(Size),
             min_size = min(Size)) %>%
   arrange(desc(mean_size))
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Grp, Day): object 'tumor' not found
-```
+
+
+~~~
+Error in group_by(., Grp, Day): object 'tumor' not found
+~~~
+{: .error}
 
 
 #### Counting
@@ -201,39 +246,51 @@ for each factor or combination of factors. For this task, **`dplyr`** provides
 each group, we would do:
 
 
-```r
+~~~
 tumor %>%
     count(Grp) 
-```
+~~~
+{: .language-r}
 
-```
-## Error in count(., Grp): object 'tumor' not found
-```
+
+
+~~~
+Error in count(., Grp): object 'tumor' not found
+~~~
+{: .error}
 
 The `count()` function is shorthand for something we've already seen: grouping by a variable, and summarizing it by counting the number of observations in that group. In other words, `tumor %>% count()` is equivalent to:  
 
 
-```r
+~~~
 tumor %>%
     group_by(Grp) %>%
     summarise(count = n())
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Grp): object 'tumor' not found
-```
+
+
+~~~
+Error in group_by(., Grp): object 'tumor' not found
+~~~
+{: .error}
 
 For convenience, `count()` provides the `sort` argument:  
 
 
-```r
+~~~
 tumor %>%
     count(Grp, sort = TRUE) 
-```
+~~~
+{: .language-r}
 
-```
-## Error in count(., Grp, sort = TRUE): object 'tumor' not found
-```
+
+
+~~~
+Error in count(., Grp, sort = TRUE): object 'tumor' not found
+~~~
+{: .error}
 
 Previous example shows the use of `count()` to count the number of rows/observations 
 for *one* factor (i.e., `Grp`). 
@@ -241,14 +298,18 @@ If we wanted to count *combination of factors*, such as `Grp` and `Day`,
 we would specify the first and the second factor as the arguments of `count()`:
 
 
-```r
+~~~
 tumor %>%
   count(Grp, Day) 
-```
+~~~
+{: .language-r}
 
-```
-## Error in count(., Grp, Day): object 'tumor' not found
-```
+
+
+~~~
+Error in count(., Grp, Day): object 'tumor' not found
+~~~
+{: .error}
 
 With the above code, we can proceed with `arrange()` to sort the table 
 according to a number of criteria so that we have a better comparison. 
@@ -256,36 +317,44 @@ For instance, we might want to arrange the table above in (i) an alphabetical or
 the levels of the group and (ii) in descending order of the count:
 
 
-```r
+~~~
 tumor %>%
   count(Grp, Day) %>%
   arrange(Day, desc(n))
-```
+~~~
+{: .language-r}
 
-```
-## Error in count(., Grp, Day): object 'tumor' not found
-```
+
+
+~~~
+Error in count(., Grp, Day): object 'tumor' not found
+~~~
+{: .error}
 
 > ### Challenge {.challenge}
 >
 > 1. How many observations are there for each `ID` number?
 >
 > 
-> ```r
+> ~~~
 > tumor %>%
 >     count(ID) 
-> ```
+> ~~~
+> {: .language-r}
 > 
-> ```
-> ## Error in count(., ID): object 'tumor' not found
-> ```
+> 
+> 
+> ~~~
+> Error in count(., ID): object 'tumor' not found
+> ~~~
+> {: .error}
 >
 > 2. Use `group_by()` and `summarize()` to find the mean, min, and max tumor
 > size for each ID (using `ID`). Also add the number of
 > observations (hint: see `?n`).
 >
 > 
-> ```r
+> ~~~
 > tumor %>%
 >     group_by(ID) %>%
 >     summarize(
@@ -294,24 +363,32 @@ tumor %>%
 >         max_size = max(Size),
 >         n = n()
 >     )
-> ```
+> ~~~
+> {: .language-r}
 > 
-> ```
-> ## Error in group_by(., ID): object 'tumor' not found
-> ```
+> 
+> 
+> ~~~
+> Error in group_by(., ID): object 'tumor' not found
+> ~~~
+> {: .error}
 >
 > 3. What was the largest tumor measured in each day? Return the columns `Day`,
 > `Grp`, `ID`, and `Size`.
 >
 > 
-> ```r
+> ~~~
 > tumor %>%
 >     group_by(Day) %>%
 >     filter(Size == max(Size)) %>%
 >     select(Day, Grp, ID, Size) %>%
 >     arrange(Day)
-> ```
+> ~~~
+> {: .language-r}
 > 
-> ```
-> ## Error in group_by(., Day): object 'tumor' not found
-> ```
+> 
+> 
+> ~~~
+> Error in group_by(., Day): object 'tumor' not found
+> ~~~
+> {: .error}

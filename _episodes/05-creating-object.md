@@ -16,37 +16,48 @@ keypoints:
 - ""
 ---
 
+
+
 ## Creating objects in R
-
-
 
 You can get output from R simply by typing math in the console:
 
 
-```r
+~~~
 3 + 5
-```
+~~~
+{: .language-r}
 
-```
-## [1] 8
-```
 
-```r
+
+~~~
+[1] 8
+~~~
+{: .output}
+
+
+
+~~~
 12 / 7
-```
+~~~
+{: .language-r}
 
-```
-## [1] 1.714286
-```
+
+
+~~~
+[1] 1.714286
+~~~
+{: .output}
 
 However, to do useful and interesting things, we need to assign _values_ to
 _objects_. To create an object, we need to give it a name followed by the
 assignment operator `<-`, and the value we want to give it:
 
 
-```r
+~~~
 weight_kg <- 55
-```
+~~~
+{: .language-r}
 
 `<-` is the assignment operator. It assigns values on the right to objects on
 the left. So, after executing `x <- 3`, the value of `x` is `3`. The arrow also looks like a mouth (with tongue), which makes it easy to pronounce as `x` **eats** 3.  For historical reasons, you can also use `=`
@@ -87,62 +98,82 @@ Fan](https://jef.works/R-style-guide/) and the
 When assigning a value to an object, R does not print anything. You can force R to print the value by using parentheses or by typing the object name:
 
 
-```r
+~~~
 weight_kg <- 55    # doesn't print anything
 (weight_kg <- 55)  # but putting parenthesis around the call prints the value of `weight_kg`
-```
+~~~
+{: .language-r}
 
-```
-## [1] 55
-```
 
-```r
+
+~~~
+[1] 55
+~~~
+{: .output}
+
+
+
+~~~
 weight_kg          # and so does typing the name of the object
-```
+~~~
+{: .language-r}
 
-```
-## [1] 55
-```
+
+
+~~~
+[1] 55
+~~~
+{: .output}
 
 Now that R has `weight_kg` in memory, we can do arithmetic with it. For
 instance, we may want to convert this weight into pounds (weight in pounds is 2.2 times the weight in kg):
 
 
-```r
+~~~
 2.2 * weight_kg
-```
+~~~
+{: .language-r}
 
-```
-## [1] 121
-```
+
+
+~~~
+[1] 121
+~~~
+{: .output}
 
 We can also change an object's value by assigning it a new one:
 
 
-```r
+~~~
 weight_kg <- 57.5
 2.2 * weight_kg
-```
+~~~
+{: .language-r}
 
-```
-## [1] 126.5
-```
+
+
+~~~
+[1] 126.5
+~~~
+{: .output}
 
 This means that assigning a value to one object does not change the values of
 other objects. For example, let's store the animal's weight in pounds in a new
 object, `weight_lb`:
 
 
-```r
+~~~
 weight_lb <- 2.2 * weight_kg
-```
+~~~
+{: .language-r}
 
 and then change `weight_kg` to 100.
 
 
-```r
+~~~
 weight_kg <- 100
-```
+~~~
+{: .language-r}
 
 What do you think is the current content of the object `weight_lb`? 126.5 or 220?
 
@@ -179,13 +210,14 @@ to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
 > What are the values after each statement in the following?
 >
 > 
-> ```r
+> ~~~
 > mass <- 47.5            # mass?
 > age  <- 122             # age?
 > mass <- mass * 2.0      # mass?
 > age  <- age - 20        # age?
 > mass_index <- mass/age  # mass_index?
-> ```
+> ~~~
+> {: .language-r}
 
 
 
@@ -201,9 +233,10 @@ output) is the square root of that number. Executing a function ('running it')
 is called *calling* the function. An example of a function call is:
 
 
-```r
+~~~
 weight_kg <- sqrt(10)
-```
+~~~
+{: .language-r}
 
 Here, the value of 10 is given to the `sqrt()` function, the `sqrt()` function
 calculates the square root, and returns the value which is then assigned to
@@ -225,13 +258,17 @@ of your choice which will be used instead of the default.
 Let's try a function that can take multiple arguments: `round()`.
 
 
-```r
+~~~
 round(3.14159)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 3
-```
+
+
+~~~
+[1] 3
+~~~
+{: .output}
 
 Here, we've called `round()` with just one argument, `3.14159`, and it has
 returned the value `3`.  That's because the default is to round to the nearest
@@ -241,54 +278,71 @@ arguments it takes, or look at the
 help for this function using `?round`.
 
 
-```r
+~~~
 args(round)
-```
-
-```
-## function (x, digits = 0) 
-## NULL
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+function (x, digits = 0) 
+NULL
+~~~
+{: .output}
+
+
+~~~
 ?round
-```
+~~~
+{: .language-r}
 
 We see that if we want a different number of digits, we can
 type `digits = 2` or however many we want.
 
 
-```r
+~~~
 round(3.14159, digits = 2)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 3.14
-```
+
+
+~~~
+[1] 3.14
+~~~
+{: .output}
 
 If you provide the arguments in the exact same order as they are defined you
 don't have to name them:
 
 
-```r
+~~~
 round(3.14159, 2)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 3.14
-```
+
+
+~~~
+[1] 3.14
+~~~
+{: .output}
 
 And if you do name the arguments, you can switch their order:
 
 
-```r
+~~~
 round(digits = 2, x = 3.14159)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 3.14
-```
+
+
+~~~
+[1] 3.14
+~~~
+{: .output}
 
 It's good practice to put the non-optional arguments (like the number you're
 rounding) first in your function call, and to then specify the names of all optional

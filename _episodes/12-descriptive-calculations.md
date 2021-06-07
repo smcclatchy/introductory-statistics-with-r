@@ -15,6 +15,8 @@ keypoints:
 - ""
 ---
 
+
+
 # Descriptive Calculations
 
 ## Building the pipeline
@@ -22,153 +24,207 @@ keypoints:
 New script, clear your environment, re-load your libraries
 
 
-```r
+~~~
 library(tidyverse)
-```
-
-```
-## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
-
-```
-## ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-## ✔ tibble  3.1.0     ✔ dplyr   1.0.5
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   1.4.0     ✔ forcats 0.5.1
-```
-
-```
-## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+~~~
+{: .output}
+
+
+
+~~~
+✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+✔ tibble  3.1.0     ✔ dplyr   1.0.5
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.4.0     ✔ forcats 0.5.1
+~~~
+{: .output}
+
+
+
+~~~
+── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+~~~
+{: .output}
+
+
+~~~
 tumor_subset <- read_csv("../data/tumor_filtered.csv")
-```
-
-```
-## Error: '../data/tumor_filtered.csv' does not exist in current working directory ('/Users/smc/Projects/Lessons/introductory-statistics-with-r/_episodes_rmd').
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error: '../data/tumor_filtered.csv' does not exist in current working directory ('/Users/smc/Projects/Lessons/introductory-statistics-with-r/_episodes_rmd').
+~~~
+{: .error}
+
+
+~~~
 tumor_subset
-```
+~~~
+{: .language-r}
 
-```
-## Error in eval(expr, envir, enclos): object 'tumor_subset' not found
-```
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'tumor_subset' not found
+~~~
+{: .error}
 
 ## Summary statistics
 
 
-```r
+~~~
 tumor_subset %>%
   filter(Day == 0) %>%
   pull(Size)
-```
-
-```
-## Error in filter(., Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   filter(Day == 0) %>%
   pull(Size) %>%
   mean()
-```
-
-```
-## Error in filter(., Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   filter(Group == 1, Day == 0) %>%
   pull(Size) %>%
   mean()
-```
-
-```
-## Error in filter(., Group == 1, Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Group == 1, Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   filter(Group == 2, Day == 0) %>%
   pull(Size) %>%
   mean()
-```
-
-```
-## Error in filter(., Group == 2, Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Group == 2, Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   filter(Group == 3, Day == 0) %>%
   pull(Size) %>%
   mean()
-```
-
-```
-## Error in filter(., Group == 3, Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Group == 3, Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   filter(Group == 4, Day == 0) %>%
   pull(Size) %>%
   mean()
-```
-
-```
-## Error in filter(., Group == 4, Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Group == 4, Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   pull(Group) %>%
   unique()
-```
+~~~
+{: .language-r}
 
-```
-## Error in pull(., Group): object 'tumor_subset' not found
-```
+
+
+~~~
+Error in pull(., Group): object 'tumor_subset' not found
+~~~
+{: .error}
 
 ## Groupby operations
 
 
-```r
+~~~
 tumor_subset %>%
   filter(Day == 0) %>%
   group_by(Group) %>%
   summarize(avg_size = mean(Size))
-```
-
-```
-## Error in filter(., Day == 0): object 'tumor_subset' not found
-```
+~~~
+{: .language-r}
 
 
-```r
+
+~~~
+Error in filter(., Day == 0): object 'tumor_subset' not found
+~~~
+{: .error}
+
+
+~~~
 tumor_subset %>%
   group_by(Group, Day) %>%
   summarize(avg_size = mean(Size),
             sd_size = sd(Size),
             q1 = quantile(Size, probs = .25)
             )
-```
+~~~
+{: .language-r}
 
-```
-## Error in group_by(., Group, Day): object 'tumor_subset' not found
-```
+
+
+~~~
+Error in group_by(., Group, Day): object 'tumor_subset' not found
+~~~
+{: .error}

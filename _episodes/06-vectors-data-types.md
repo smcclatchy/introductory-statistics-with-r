@@ -14,9 +14,8 @@ keypoints:
 - ""
 ---
  
+
 ## Vectors and data types
-
-
 
 A vector is the most common and basic data type in R, and is pretty much
 the workhorse of R. A vector is composed by a series of values, which can be
@@ -25,26 +24,34 @@ the `c()` function. For example we can create a vector of animal weights and ass
 it to a new object `weight_g`:
 
 
-```r
+~~~
 weight_g <- c(50, 60, 65, 82)
 weight_g
-```
+~~~
+{: .language-r}
 
-```
-## [1] 50 60 65 82
-```
+
+
+~~~
+[1] 50 60 65 82
+~~~
+{: .output}
 
 A vector can also contain characters:
 
 
-```r
+~~~
 animals <- c("mouse", "rat", "dog")
 animals
-```
+~~~
+{: .language-r}
 
-```
-## [1] "mouse" "rat"   "dog"
-```
+
+
+~~~
+[1] "mouse" "rat"   "dog"  
+~~~
+{: .output}
 
 The quotes around "mouse", "rat", etc. are essential here. Without the quotes R
 will assume objects have been created called `mouse`, `rat` and `dog`. As these objects
@@ -54,74 +61,108 @@ There are many functions that allow you to inspect the content of a
 vector. `length()` tells you how many elements are in a particular vector:
 
 
-```r
+~~~
 length(weight_g)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 4
-```
 
-```r
+
+~~~
+[1] 4
+~~~
+{: .output}
+
+
+
+~~~
 length(animals)
-```
+~~~
+{: .language-r}
 
-```
-## [1] 3
-```
+
+
+~~~
+[1] 3
+~~~
+{: .output}
 
 An important feature of a vector, is that all of the elements are the same type of data.
 The function `class()` indicates what kind of object you are working with:
 
 
-```r
+~~~
 class(weight_g)
-```
+~~~
+{: .language-r}
 
-```
-## [1] "numeric"
-```
 
-```r
+
+~~~
+[1] "numeric"
+~~~
+{: .output}
+
+
+
+~~~
 class(animals)
-```
+~~~
+{: .language-r}
 
-```
-## [1] "character"
-```
+
+
+~~~
+[1] "character"
+~~~
+{: .output}
 
 The function `str()` provides an overview of the structure of an object and its
 elements. It is a useful function when working with large and complex
 objects:
 
 
-```r
+~~~
 str(weight_g)
-```
+~~~
+{: .language-r}
 
-```
-##  num [1:4] 50 60 65 82
-```
 
-```r
+
+~~~
+ num [1:4] 50 60 65 82
+~~~
+{: .output}
+
+
+
+~~~
 str(animals)
-```
+~~~
+{: .language-r}
 
-```
-##  chr [1:3] "mouse" "rat" "dog"
-```
+
+
+~~~
+ chr [1:3] "mouse" "rat" "dog"
+~~~
+{: .output}
 
 You can use the `c()` function to add other elements to your vector:
 
-```r
+~~~
 weight_g <- c(weight_g, 90) # add to the end of the vector
 weight_g <- c(30, weight_g) # add to the beginning of the vector
 weight_g
-```
+~~~
+{: .language-r}
 
-```
-## [1] 30 50 60 65 82 90
-```
+
+
+~~~
+[1] 30 50 60 65 82 90
+~~~
+{: .output}
 
 In the first line, we take the original vector `weight_g`,
 add the value `90` to the end of it, and save the result back into

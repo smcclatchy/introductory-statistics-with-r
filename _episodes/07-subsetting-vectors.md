@@ -15,41 +15,57 @@ keypoints:
 - ""
 ---
 
+
+
 ## Subsetting vectors
 
 If we want to extract one or several values from a vector, we must provide one
 or several indices in square brackets. For instance:
 
 
-```r
+~~~
 animals <- c("mouse", "rat", "dog", "cat")
 animals[2]
-```
+~~~
+{: .language-r}
 
-```
-## [1] "rat"
-```
 
-```r
+
+~~~
+[1] "rat"
+~~~
+{: .output}
+
+
+
+~~~
 animals[c(3, 2)]
-```
+~~~
+{: .language-r}
 
-```
-## [1] "dog" "rat"
-```
+
+
+~~~
+[1] "dog" "rat"
+~~~
+{: .output}
 
 We can also repeat the indices to create an object with more elements than the
 original one:
 
 
-```r
+~~~
 more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
 more_animals
-```
+~~~
+{: .language-r}
 
-```
-## [1] "mouse" "rat"   "dog"   "rat"   "mouse" "cat"
-```
+
+
+~~~
+[1] "mouse" "rat"   "dog"   "rat"   "mouse" "cat"  
+~~~
+{: .output}
 
 R indices start at 1. Programming languages like Fortran, MATLAB, Julia, and R start
 counting at 1, because that's what human beings typically do. Languages in the C
@@ -62,64 +78,94 @@ Another common way of subsetting is by using a logical vector. `TRUE` will
 select the element with the same index, while `FALSE` will not:
 
 
-```r
+~~~
 weight_g <- c(21, 34, 39, 54, 55)
 weight_g[c(TRUE, FALSE, FALSE, TRUE, TRUE)]
-```
+~~~
+{: .language-r}
 
-```
-## [1] 21 54 55
-```
+
+
+~~~
+[1] 21 54 55
+~~~
+{: .output}
 
 Typically, these logical vectors are not typed by hand, but are the output of
 other functions or logical tests. For instance, if you wanted to select only the
 values above 50:
 
 
-```r
+~~~
 weight_g > 50    # will return logicals with TRUE for the indices that meet the condition
-```
+~~~
+{: .language-r}
 
-```
-## [1] FALSE FALSE FALSE  TRUE  TRUE
-```
 
-```r
+
+~~~
+[1] FALSE FALSE FALSE  TRUE  TRUE
+~~~
+{: .output}
+
+
+
+~~~
 ## so we can use this to select only the values above 50
 weight_g[weight_g > 50]
-```
+~~~
+{: .language-r}
 
-```
-## [1] 54 55
-```
+
+
+~~~
+[1] 54 55
+~~~
+{: .output}
 
 You can combine multiple tests using `&` (both conditions are true, AND) or `|`
 (at least one of the conditions is true, OR):
 
 
-```r
+~~~
 weight_g[weight_g > 30 & weight_g < 50]
-```
+~~~
+{: .language-r}
 
-```
-## [1] 34 39
-```
 
-```r
+
+~~~
+[1] 34 39
+~~~
+{: .output}
+
+
+
+~~~
 weight_g[weight_g <= 30 | weight_g == 55]
-```
+~~~
+{: .language-r}
 
-```
-## [1] 21 55
-```
 
-```r
+
+~~~
+[1] 21 55
+~~~
+{: .output}
+
+
+
+~~~
 weight_g[weight_g >= 30 & weight_g == 21]
-```
+~~~
+{: .language-r}
 
-```
-## numeric(0)
-```
+
+
+~~~
+numeric(0)
+~~~
+{: .output}
 
 Here, `>` for "greater than", `<` stands for "less than", `<=` for "less than
 or equal to", and `==` for "equal to". The double equal sign `==` is a test for
@@ -133,36 +179,52 @@ become tedious. The function `%in%` allows you to test if any of the elements of
 a search vector are found:
 
 
-```r
+~~~
 animals <- c("mouse", "rat", "dog", "cat", "cat")
 
 # return both rat and cat
 animals[animals == "cat" | animals == "rat"] 
-```
+~~~
+{: .language-r}
 
-```
-## [1] "rat" "cat" "cat"
-```
 
-```r
+
+~~~
+[1] "rat" "cat" "cat"
+~~~
+{: .output}
+
+
+
+~~~
 # return a logical vector that is TRUE for the elements within animals
 # that are found in the character vector and FALSE for those that are not
 animals %in% c("rat", "cat", "dog", "duck", "goat") 
-```
+~~~
+{: .language-r}
 
-```
-## [1] FALSE  TRUE  TRUE  TRUE  TRUE
-```
 
-```r
+
+~~~
+[1] FALSE  TRUE  TRUE  TRUE  TRUE
+~~~
+{: .output}
+
+
+
+~~~
 # use the logical vector created by %in% to return elements from animals 
 # that are found in the character vector
 animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
-```
+~~~
+{: .language-r}
 
-```
-## [1] "rat" "dog" "cat" "cat"
-```
+
+
+~~~
+[1] "rat" "dog" "cat" "cat"
+~~~
+{: .output}
 
 > ### Challenge (optional){.challenge}
 >

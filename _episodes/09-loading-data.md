@@ -16,6 +16,8 @@ keypoints:
 - ""
 ---
 
+
+
 ## Loading data into R
 
 Loading data into R is the first step!
@@ -24,31 +26,41 @@ First we need to load up a package to make loading data sets easier.
 We will be using the `tidyverse` set of packages for all of our data processing needs in R.
 ^[This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.]
 
-!["Tidyverse Celestial" by Allison Horst. "tidyverse" hex sticker in space surrounded by other tidyverse package hex logos.](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png)
+<img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png" title="&quot;Tidyverse Celestial&quot; by Allison Horst. &quot;tidyverse&quot; hex sticker in space surrounded by other tidyverse package hex logos." alt="&quot;Tidyverse Celestial&quot; by Allison Horst. &quot;tidyverse&quot; hex sticker in space surrounded by other tidyverse package hex logos." style="display: block; margin: auto;" />
 
 We first will load up the `tidyverse` packages using the `library` function.
 
 
-```r
+~~~
 library(tidyverse)
-```
+~~~
+{: .language-r}
 
-```
-## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
 
-```
-## ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-## ✔ tibble  3.1.0     ✔ dplyr   1.0.5
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   1.4.0     ✔ forcats 0.5.1
-```
 
-```
-## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-```
+~~~
+── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+~~~
+{: .output}
+
+
+
+~~~
+✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+✔ tibble  3.1.0     ✔ dplyr   1.0.5
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.4.0     ✔ forcats 0.5.1
+~~~
+{: .output}
+
+
+
+~~~
+── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+~~~
+{: .output}
 
 The first time you load up the `tidyverse` library,
 there will be some output that lists the packages `tidyverse` loads,
@@ -191,38 +203,45 @@ you can hit the `<TAB>` key to autocomplete the files.
 This will help you with a lot of potential spelling mistakes.
 
 
-```r
+~~~
 read_csv("../data/medicaldata_tumorgrowth.csv")
-```
+~~~
+{: .language-r}
 
-```
-## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-## cols(
-##   Grp = col_character(),
-##   Group = col_double(),
-##   ID = col_double(),
-##   Day = col_double(),
-##   Size = col_double()
-## )
-```
 
-```
-## # A tibble: 574 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 564 more rows
-```
+
+~~~
+
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+cols(
+  Grp = col_character(),
+  Group = col_double(),
+  ID = col_double(),
+  Day = col_double(),
+  Size = col_double()
+)
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 574 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 This dataset comes from the [`medicaldata` R package](https://github.com/higgi13425/medicaldata),
 curated by Dr. Peter Higgins, M.D. in the
@@ -257,21 +276,25 @@ Note the way it is typed, a less than symbol (`<`) followed immediately by the d
 The right side of the assignment operator, `<-`, will be executed and then **assigned** to the variable on the left.
 
 
-```r
+~~~
 tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
-```
+~~~
+{: .language-r}
 
-```
-## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-## cols(
-##   Grp = col_character(),
-##   Group = col_double(),
-##   ID = col_double(),
-##   Day = col_double(),
-##   Size = col_double()
-## )
-```
+
+
+~~~
+
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+cols(
+  Grp = col_character(),
+  Group = col_double(),
+  ID = col_double(),
+  Day = col_double(),
+  Size = col_double()
+)
+~~~
+{: .output}
 
 Notice this time we no longer see the dataset being printed.
 The "Environment" tab in the RStudio panel will now have an entry for the variable you used.
@@ -281,26 +304,30 @@ clicking on the arrow will show you the column-by-column text representation (te
 To look at our dataset we can execute *just* the variable we assigned the dataset to.
 
 
-```r
+~~~
 tumor
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 This tabular dataset that has now been loaded into R is called a **data frame** **object** (or simply **dataframe**),
 the `tidyverse` uses a `tibble`.
@@ -329,42 +356,52 @@ We can see this also when inspecting the <b>str</b>ucture of a data frame
 with the function `str()`:
 
 
-```r
+~~~
 str(tumor)
-```
+~~~
+{: .language-r}
 
-```
-## spec_tbl_df [574 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ Grp  : chr [1:574] "1.CTR" "1.CTR" "1.CTR" "1.CTR" ...
-##  $ Group: num [1:574] 1 1 1 1 1 1 1 1 1 1 ...
-##  $ ID   : num [1:574] 101 101 101 101 101 101 101 101 101 101 ...
-##  $ Day  : num [1:574] 0 3 4 5 6 7 10 11 12 13 ...
-##  $ Size : num [1:574] 41.8 85 114 162.3 178.3 ...
-##  - attr(*, "spec")=
-##   .. cols(
-##   ..   Grp = col_character(),
-##   ..   Group = col_double(),
-##   ..   ID = col_double(),
-##   ..   Day = col_double(),
-##   ..   Size = col_double()
-##   .. )
-```
 
-```r
+
+~~~
+spec_tbl_df [574 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ Grp  : chr [1:574] "1.CTR" "1.CTR" "1.CTR" "1.CTR" ...
+ $ Group: num [1:574] 1 1 1 1 1 1 1 1 1 1 ...
+ $ ID   : num [1:574] 101 101 101 101 101 101 101 101 101 101 ...
+ $ Day  : num [1:574] 0 3 4 5 6 7 10 11 12 13 ...
+ $ Size : num [1:574] 41.8 85 114 162.3 178.3 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   Grp = col_character(),
+  ..   Group = col_double(),
+  ..   ID = col_double(),
+  ..   Day = col_double(),
+  ..   Size = col_double()
+  .. )
+~~~
+{: .output}
+
+
+
+~~~
 head(tumor)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 6 x 5
-##   Grp   Group    ID   Day  Size
-##   <chr> <dbl> <dbl> <dbl> <dbl>
-## 1 1.CTR     1   101     0  41.8
-## 2 1.CTR     1   101     3  85  
-## 3 1.CTR     1   101     4 114  
-## 4 1.CTR     1   101     5 162. 
-## 5 1.CTR     1   101     6 178. 
-## 6 1.CTR     1   101     7 325
-```
+
+
+~~~
+# A tibble: 6 x 5
+  Grp   Group    ID   Day  Size
+  <chr> <dbl> <dbl> <dbl> <dbl>
+1 1.CTR     1   101     0  41.8
+2 1.CTR     1   101     3  85  
+3 1.CTR     1   101     4 114  
+4 1.CTR     1   101     5 162. 
+5 1.CTR     1   101     6 178. 
+6 1.CTR     1   101     7 325  
+~~~
+{: .output}
  
 ## Inspecting data frames
 
@@ -408,20 +445,24 @@ objects besides `data.frame`.
 > > 
 > >
 > >
-> >```r
+> >~~~
 > >
 > > str(tumor)
 > >
 > > 1. class: data frame
 > > 2. how many rows: 34786,  how many columns: 13
-> >```
+> >~~~
+> >{: .language-r}
 > >
-> >```
-> >## Error: <text>:4:5: unexpected symbol
-> >## 3: 
-> >## 4:  1. class
-> >##        ^
-> >```
+> >
+> >
+> >~~~
+> >Error: <text>:4:5: unexpected symbol
+> >3: 
+> >4:  1. class
+> >       ^
+> >~~~
+> >{: .error}
 > > {: .output}
 > {: .solution}
 {: .challenge}
@@ -437,115 +478,157 @@ that different ways of specifying these coordinates lead to results with
 different classes.
 
 
-```r
+~~~
 # We can extract specific values by specifying row and column indices
 # in the format: 
 # data_frame[row_index, column_index]
 # For instance, to extract the first row and column from surveys:
 tumor[1, 1]
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 1 x 1
-##   Grp  
-##   <chr>
-## 1 1.CTR
-```
 
-```r
+
+~~~
+# A tibble: 1 x 1
+  Grp  
+  <chr>
+1 1.CTR
+~~~
+{: .output}
+
+
+
+~~~
 # First row, sixth column:
 tumor[1, 6]   
-```
+~~~
+{: .language-r}
 
-```
-## Error: Can't subset columns that don't exist.
-## ✖ Location 6 doesn't exist.
-## ℹ There are only 5 columns.
-```
 
-```r
+
+~~~
+Error: Can't subset columns that don't exist.
+✖ Location 6 doesn't exist.
+ℹ There are only 5 columns.
+~~~
+{: .error}
+
+
+
+~~~
 # We can also use shortcuts to select a number of rows or columns at once
 # To select all columns, leave the column index blank
 # For instance, to select all columns for the first row:
 tumor[1, ]
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 1 x 5
-##   Grp   Group    ID   Day  Size
-##   <chr> <dbl> <dbl> <dbl> <dbl>
-## 1 1.CTR     1   101     0  41.8
-```
 
-```r
+
+~~~
+# A tibble: 1 x 5
+  Grp   Group    ID   Day  Size
+  <chr> <dbl> <dbl> <dbl> <dbl>
+1 1.CTR     1   101     0  41.8
+~~~
+{: .output}
+
+
+
+~~~
 # The same shortcut works for rows --
 # To select the first column across all rows:
 tumor[, 1]
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 1
-##    Grp  
-##    <chr>
-##  1 1.CTR
-##  2 1.CTR
-##  3 1.CTR
-##  4 1.CTR
-##  5 1.CTR
-##  6 1.CTR
-##  7 1.CTR
-##  8 1.CTR
-##  9 1.CTR
-## 10 1.CTR
-## # … with 564 more rows
-```
 
-```r
+
+~~~
+# A tibble: 574 x 1
+   Grp  
+   <chr>
+ 1 1.CTR
+ 2 1.CTR
+ 3 1.CTR
+ 4 1.CTR
+ 5 1.CTR
+ 6 1.CTR
+ 7 1.CTR
+ 8 1.CTR
+ 9 1.CTR
+10 1.CTR
+# … with 564 more rows
+~~~
+{: .output}
+
+
+
+~~~
 # An even shorter way to select first column across all rows:
 tumor[1] # No comma! 
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 1
-##    Grp  
-##    <chr>
-##  1 1.CTR
-##  2 1.CTR
-##  3 1.CTR
-##  4 1.CTR
-##  5 1.CTR
-##  6 1.CTR
-##  7 1.CTR
-##  8 1.CTR
-##  9 1.CTR
-## 10 1.CTR
-## # … with 564 more rows
-```
 
-```r
+
+~~~
+# A tibble: 574 x 1
+   Grp  
+   <chr>
+ 1 1.CTR
+ 2 1.CTR
+ 3 1.CTR
+ 4 1.CTR
+ 5 1.CTR
+ 6 1.CTR
+ 7 1.CTR
+ 8 1.CTR
+ 9 1.CTR
+10 1.CTR
+# … with 564 more rows
+~~~
+{: .output}
+
+
+
+~~~
 # To select multiple rows or columns, use vectors!
 # To select the first three rows of the 5th and 6th column
 tumor[c(1, 2, 3), c(5, 6)] 
-```
+~~~
+{: .language-r}
 
-```
-## Error: Can't subset columns that don't exist.
-## ✖ Location 6 doesn't exist.
-## ℹ There are only 5 columns.
-```
 
-```r
+
+~~~
+Error: Can't subset columns that don't exist.
+✖ Location 6 doesn't exist.
+ℹ There are only 5 columns.
+~~~
+{: .error}
+
+
+
+~~~
 # We can use the : operator to create those vectors for us:
 tumor[1:3, 5:6] 
-```
+~~~
+{: .language-r}
 
-```
-## Error: Can't subset columns that don't exist.
-## ✖ Location 6 doesn't exist.
-## ℹ There are only 5 columns.
-```
 
-```r
+
+~~~
+Error: Can't subset columns that don't exist.
+✖ Location 6 doesn't exist.
+ℹ There are only 5 columns.
+~~~
+{: .error}
+
+
+
+~~~
 # This is equivalent to head_surveys <- head(surveys)
 head_tumors <- tumor[1:6, ]
 # As we've seen, when working with tibbles 
@@ -553,83 +636,93 @@ head_tumors <- tumor[1:6, ]
 # If you want a vector, use double square brackets ("[[]]")
 # For instance, to get the first column as a vector:
 tumor[[1]]
-```
+~~~
+{: .language-r}
 
-```
-##   [1] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [10] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [19] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [28] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [37] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [46] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [55] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [64] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [73] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [82] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
-##  [91] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "2.D"   "2.D"  
-## [100] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [109] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [118] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [127] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [136] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [145] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [154] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [163] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [172] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [181] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [190] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [199] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [208] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [217] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [226] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [235] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [244] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [253] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-## [262] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "3.R"   "3.R"  
-## [271] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [280] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [289] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [298] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [307] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [316] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [325] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [334] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [343] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [352] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [361] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [370] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [379] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [388] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [397] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [406] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [415] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-## [424] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "4.D+R" "4.D+R" "4.D+R"
-## [433] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [442] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [451] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [460] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [469] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [478] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [487] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [496] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [505] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [514] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [523] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [532] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [541] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [550] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [559] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-## [568] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-```
 
-```r
+
+~~~
+  [1] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [10] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [19] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [28] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [37] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [46] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [55] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [64] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [73] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [82] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
+ [91] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "2.D"   "2.D"  
+[100] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[109] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[118] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[127] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[136] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[145] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[154] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[163] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[172] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[181] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[190] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[199] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[208] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[217] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[226] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[235] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[244] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[253] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
+[262] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "3.R"   "3.R"  
+[271] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[280] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[289] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[298] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[307] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[316] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[325] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[334] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[343] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[352] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[361] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[370] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[379] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[388] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[397] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[406] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[415] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
+[424] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "4.D+R" "4.D+R" "4.D+R"
+[433] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[442] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[451] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[460] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[469] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[478] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[487] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[496] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[505] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[514] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[523] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[532] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[541] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[550] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[559] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+[568] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
+~~~
+{: .output}
+
+
+
+~~~
 # To get the first value in our data frame:
 tumor[[1, 1]]
-```
+~~~
+{: .language-r}
 
-```
-## [1] "1.CTR"
-```
+
+
+~~~
+[1] "1.CTR"
+~~~
+{: .output}
 
 `:` is a special function that creates numeric vectors of integers in increasing
 or decreasing order, test `1:10` and `10:1` for instance.
@@ -637,47 +730,57 @@ or decreasing order, test `1:10` and `10:1` for instance.
 You can also exclude certain indices of a data frame using the "`-`" sign:
 
 
-```r
+~~~
 tumor[, -1]                 # The whole data frame, except the first column
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 4
-##    Group    ID   Day   Size
-##    <dbl> <dbl> <dbl>  <dbl>
-##  1     1   101     0   41.8
-##  2     1   101     3   85  
-##  3     1   101     4  114  
-##  4     1   101     5  162. 
-##  5     1   101     6  178. 
-##  6     1   101     7  325  
-##  7     1   101    10  624. 
-##  8     1   101    11  648. 
-##  9     1   101    12  836. 
-## 10     1   101    13 1030. 
-## # … with 564 more rows
-```
 
-```r
+
+~~~
+# A tibble: 574 x 4
+   Group    ID   Day   Size
+   <dbl> <dbl> <dbl>  <dbl>
+ 1     1   101     0   41.8
+ 2     1   101     3   85  
+ 3     1   101     4  114  
+ 4     1   101     5  162. 
+ 5     1   101     6  178. 
+ 6     1   101     7  325  
+ 7     1   101    10  624. 
+ 8     1   101    11  648. 
+ 9     1   101    12  836. 
+10     1   101    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
+
+
+
+~~~
 tumor[-(7:nrow(tumor)), ] # Equivalent to head(tumor)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 6 x 5
-##   Grp   Group    ID   Day  Size
-##   <chr> <dbl> <dbl> <dbl> <dbl>
-## 1 1.CTR     1   101     0  41.8
-## 2 1.CTR     1   101     3  85  
-## 3 1.CTR     1   101     4 114  
-## 4 1.CTR     1   101     5 162. 
-## 5 1.CTR     1   101     6 178. 
-## 6 1.CTR     1   101     7 325
-```
+
+
+~~~
+# A tibble: 6 x 5
+  Grp   Group    ID   Day  Size
+  <chr> <dbl> <dbl> <dbl> <dbl>
+1 1.CTR     1   101     0  41.8
+2 1.CTR     1   101     3  85  
+3 1.CTR     1   101     4 114  
+4 1.CTR     1   101     5 162. 
+5 1.CTR     1   101     6 178. 
+6 1.CTR     1   101     7 325  
+~~~
+{: .output}
 
 Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:
 
 
-```r
+~~~
 # As before, using single brackets returns a data frame:
 tumor["Size"]
 tumor[, "Size"]
@@ -686,7 +789,8 @@ tumor[["Size"]]
 # We can also use the $ operator with column names instead of double brackets
 # This returns a vector:
 tumor$Size
-```
+~~~
+{: .language-r}
 
 In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.
 
@@ -712,20 +816,24 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 >    
 > > ## Solution
 > > 
-> > ```r
+> > ~~~
 > > 1. tumors_200 <- tumor[200, ]
 > > 2. # Saving `n_rows` to improve readability and reduce duplication
 > > n_rows <- nrow(tumor)
 > > tumors_last <- tumor[n_rows, ]
 > > 3. tumors_middle <- tumor[n_rows / 2, ]
 > > 4. tumors_head <- tumor[-(7:n_rows), ]
-> > ```
+> > ~~~
+> > {: .language-r}
 > > 
-> > ```
-> > ## Error: <text>:1:4: unexpected symbol
-> > ## 1: 1. tumors_200
-> > ##        ^
-> > ```
+> > 
+> > 
+> > ~~~
+> > Error: <text>:1:4: unexpected symbol
+> > 1: 1. tumors_200
+> >        ^
+> > ~~~
+> > {: .error}
 > > {: .output}
 > {: .solution}
 {: .challenge}

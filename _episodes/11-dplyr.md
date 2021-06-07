@@ -18,26 +18,38 @@ keypoints:
 ---
 
 
-```r
+
+
+~~~
 library(tidyverse)
-```
+~~~
+{: .language-r}
 
-```
-## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
 
-```
-## ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-## ✔ tibble  3.1.0     ✔ dplyr   1.0.5
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   1.4.0     ✔ forcats 0.5.1
-```
 
-```
-## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-```
+~~~
+── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+~~~
+{: .output}
+
+
+
+~~~
+✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+✔ tibble  3.1.0     ✔ dplyr   1.0.5
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.4.0     ✔ forcats 0.5.1
+~~~
+{: .output}
+
+
+
+~~~
+── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+~~~
+{: .output}
 
 ## Reading text files (CSV)
 
@@ -47,38 +59,45 @@ you can hit the `<TAB>` key to autocomplete the files.
 This will help you with a lot of potential spelling mistakes.
 
 
-```r
+~~~
 read_csv("../data/medicaldata_tumorgrowth.csv")
-```
+~~~
+{: .language-r}
 
-```
-## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-## cols(
-##   Grp = col_character(),
-##   Group = col_double(),
-##   ID = col_double(),
-##   Day = col_double(),
-##   Size = col_double()
-## )
-```
 
-```
-## # A tibble: 574 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 564 more rows
-```
+
+~~~
+
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+cols(
+  Grp = col_character(),
+  Group = col_double(),
+  ID = col_double(),
+  Day = col_double(),
+  Size = col_double()
+)
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 574 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 **Debug help:**
 - If the above code returns a `could not find function "read_csv"`
@@ -98,21 +117,25 @@ Note the way it is typed, a less than symbol (`<`) followed immediately by the d
 The right side of the assignment operator, `<-`, will be executed and then **assigned** to the variable on the left.
 
 
-```r
+~~~
 tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
-```
+~~~
+{: .language-r}
 
-```
-## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-## cols(
-##   Grp = col_character(),
-##   Group = col_double(),
-##   ID = col_double(),
-##   Day = col_double(),
-##   Size = col_double()
-## )
-```
+
+
+~~~
+
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+cols(
+  Grp = col_character(),
+  Group = col_double(),
+  ID = col_double(),
+  Day = col_double(),
+  Size = col_double()
+)
+~~~
+{: .output}
 
 Notice this time we no longer see the dataset being printed.
 The "Environment" tab in the RStudio panel will now have an entry for the variable you used.
@@ -122,26 +145,30 @@ clicking on the arrow will show you the column-by-column text representation (te
 To look at our dataset we can execute *just* the variable we assigned the dataset to.
 
 
-```r
+~~~
 tumor
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 This tabular dataset that has now been loaded into R is called a **data frame** **object** (or simply **dataframe**),
 the `tidyverse` uses a `tibble`.
@@ -168,26 +195,30 @@ To learn more about dplyr after the workshop, you may want to check out this han
 Here is the tumor dataset we are working with.
 
 
-```r
+~~~
 tumor
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 In order to subset the columns of our dataset, we can use the `select` function.
 The **first** **argument** of the `select` function is the dataset we want to select columns from.
@@ -195,50 +226,58 @@ Then, the other arguments are the columns we want to select.
 
 
 
-```r
+~~~
 select(tumor, Size)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 1
-##      Size
-##     <dbl>
-##  1   41.8
-##  2   85  
-##  3  114  
-##  4  162. 
-##  5  178. 
-##  6  325  
-##  7  624. 
-##  8  648. 
-##  9  836. 
-## 10 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 1
+     Size
+    <dbl>
+ 1   41.8
+ 2   85  
+ 3  114  
+ 4  162. 
+ 5  178. 
+ 6  325  
+ 7  624. 
+ 8  648. 
+ 9  836. 
+10 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 If we want multiple columns (or to re-order columns) we can specify each column we want selected.
 
 
-```r
+~~~
 select(tumor, Group, Day, Size)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 3
-##    Group   Day   Size
-##    <dbl> <dbl>  <dbl>
-##  1     1     0   41.8
-##  2     1     3   85  
-##  3     1     4  114  
-##  4     1     5  162. 
-##  5     1     6  178. 
-##  6     1     7  325  
-##  7     1    10  624. 
-##  8     1    11  648. 
-##  9     1    12  836. 
-## 10     1    13 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 3
+   Group   Day   Size
+   <dbl> <dbl>  <dbl>
+ 1     1     0   41.8
+ 2     1     3   85  
+ 3     1     4  114  
+ 4     1     5  162. 
+ 5     1     6  178. 
+ 6     1     7  325  
+ 7     1    10  624. 
+ 8     1    11  648. 
+ 9     1    12  836. 
+10     1    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 ### The `%>%` pipe operator
 
@@ -248,53 +287,61 @@ We can re-write the above select statements as follows.
 R interprets the code in the exact same way.
 
 
-```r
+~~~
 tumor %>%
   select(Size)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 1
-##      Size
-##     <dbl>
-##  1   41.8
-##  2   85  
-##  3  114  
-##  4  162. 
-##  5  178. 
-##  6  325  
-##  7  624. 
-##  8  648. 
-##  9  836. 
-## 10 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 1
+     Size
+    <dbl>
+ 1   41.8
+ 2   85  
+ 3  114  
+ 4  162. 
+ 5  178. 
+ 6  325  
+ 7  624. 
+ 8  648. 
+ 9  836. 
+10 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 The way we pronounce the pipe, `%>%` is "then".
 So the above statement is read "tumor, then, select size".
 
 
-```r
+~~~
 tumor %>%
   select(Group, Day, Size)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 574 x 3
-##    Group   Day   Size
-##    <dbl> <dbl>  <dbl>
-##  1     1     0   41.8
-##  2     1     3   85  
-##  3     1     4  114  
-##  4     1     5  162. 
-##  5     1     6  178. 
-##  6     1     7  325  
-##  7     1    10  624. 
-##  8     1    11  648. 
-##  9     1    12  836. 
-## 10     1    13 1030. 
-## # … with 564 more rows
-```
+
+
+~~~
+# A tibble: 574 x 3
+   Group   Day   Size
+   <dbl> <dbl>  <dbl>
+ 1     1     0   41.8
+ 2     1     3   85  
+ 3     1     4  114  
+ 4     1     5  162. 
+ 5     1     6  178. 
+ 6     1     7  325  
+ 7     1    10  624. 
+ 8     1    11  648. 
+ 9     1    12  836. 
+10     1    13 1030. 
+# … with 564 more rows
+~~~
+{: .output}
 
 The benefits of the pipe may not be as apparent now,
 but when we start chaining multiple data sets together,
@@ -312,121 +359,141 @@ and the other arguments are statements that return some `TRUE` or `FALSE` value 
 For example if we want to filter the `tumor` dataset such that the `Group` value is `1` we can filter the rows using that condition.
 
 
-```r
+~~~
 filter(tumor, Group == 1)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 97 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 87 more rows
-```
+
+
+~~~
+# A tibble: 97 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 87 more rows
+~~~
+{: .output}
 
 We can write the "pipe" version as such:
 
 
-```r
+~~~
 tumor %>%
   filter(Group == 1)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 97 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101     3   85  
-##  3 1.CTR     1   101     4  114  
-##  4 1.CTR     1   101     5  162. 
-##  5 1.CTR     1   101     6  178. 
-##  6 1.CTR     1   101     7  325  
-##  7 1.CTR     1   101    10  624. 
-##  8 1.CTR     1   101    11  648. 
-##  9 1.CTR     1   101    12  836. 
-## 10 1.CTR     1   101    13 1030. 
-## # … with 87 more rows
-```
+
+
+~~~
+# A tibble: 97 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101     3   85  
+ 3 1.CTR     1   101     4  114  
+ 4 1.CTR     1   101     5  162. 
+ 5 1.CTR     1   101     6  178. 
+ 6 1.CTR     1   101     7  325  
+ 7 1.CTR     1   101    10  624. 
+ 8 1.CTR     1   101    11  648. 
+ 9 1.CTR     1   101    12  836. 
+10 1.CTR     1   101    13 1030. 
+# … with 87 more rows
+~~~
+{: .output}
 
 If we want to combine multiple conditions, where `Group` is `1` **and** `Day` is `0`,
 we can put each statement as a separate parameter into the `filter` function.
 
 
-```r
+~~~
 tumor %>%
   filter(Group == 1, Day == 0)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 8 x 5
-##   Grp   Group    ID   Day  Size
-##   <chr> <dbl> <dbl> <dbl> <dbl>
-## 1 1.CTR     1   101     0  41.8
-## 2 1.CTR     1   102     0  79.4
-## 3 1.CTR     1   103     0  44.8
-## 4 1.CTR     1   104     0  67.7
-## 5 1.CTR     1   105     0  54.7
-## 6 1.CTR     1   106     0  60  
-## 7 1.CTR     1   107     0  46.8
-## 8 1.CTR     1   108     0  49.4
-```
+
+
+~~~
+# A tibble: 8 x 5
+  Grp   Group    ID   Day  Size
+  <chr> <dbl> <dbl> <dbl> <dbl>
+1 1.CTR     1   101     0  41.8
+2 1.CTR     1   102     0  79.4
+3 1.CTR     1   103     0  44.8
+4 1.CTR     1   104     0  67.7
+5 1.CTR     1   105     0  54.7
+6 1.CTR     1   106     0  60  
+7 1.CTR     1   107     0  46.8
+8 1.CTR     1   108     0  49.4
+~~~
+{: .output}
 
 We can also use the `&` for the **and** operator.
 
 
-```r
+~~~
 tumor %>%
   filter(Group == 1 & Day == 0)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 8 x 5
-##   Grp   Group    ID   Day  Size
-##   <chr> <dbl> <dbl> <dbl> <dbl>
-## 1 1.CTR     1   101     0  41.8
-## 2 1.CTR     1   102     0  79.4
-## 3 1.CTR     1   103     0  44.8
-## 4 1.CTR     1   104     0  67.7
-## 5 1.CTR     1   105     0  54.7
-## 6 1.CTR     1   106     0  60  
-## 7 1.CTR     1   107     0  46.8
-## 8 1.CTR     1   108     0  49.4
-```
+
+
+~~~
+# A tibble: 8 x 5
+  Grp   Group    ID   Day  Size
+  <chr> <dbl> <dbl> <dbl> <dbl>
+1 1.CTR     1   101     0  41.8
+2 1.CTR     1   102     0  79.4
+3 1.CTR     1   103     0  44.8
+4 1.CTR     1   104     0  67.7
+5 1.CTR     1   105     0  54.7
+6 1.CTR     1   106     0  60  
+7 1.CTR     1   107     0  46.8
+8 1.CTR     1   108     0  49.4
+~~~
+{: .output}
 
 Or use the `|` for the **or** operator.
 
 
-```r
+~~~
 tumor %>%
   filter(Day == 0 | Day == 13)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 60 x 5
-##    Grp   Group    ID   Day   Size
-##    <chr> <dbl> <dbl> <dbl>  <dbl>
-##  1 1.CTR     1   101     0   41.8
-##  2 1.CTR     1   101    13 1030. 
-##  3 1.CTR     1   102     0   79.4
-##  4 1.CTR     1   102    13  619. 
-##  5 1.CTR     1   103     0   44.8
-##  6 1.CTR     1   104     0   67.7
-##  7 1.CTR     1   105     0   54.7
-##  8 1.CTR     1   105    13 1699. 
-##  9 1.CTR     1   106     0   60  
-## 10 1.CTR     1   107     0   46.8
-## # … with 50 more rows
-```
+
+
+~~~
+# A tibble: 60 x 5
+   Grp   Group    ID   Day   Size
+   <chr> <dbl> <dbl> <dbl>  <dbl>
+ 1 1.CTR     1   101     0   41.8
+ 2 1.CTR     1   101    13 1030. 
+ 3 1.CTR     1   102     0   79.4
+ 4 1.CTR     1   102    13  619. 
+ 5 1.CTR     1   103     0   44.8
+ 6 1.CTR     1   104     0   67.7
+ 7 1.CTR     1   105     0   54.7
+ 8 1.CTR     1   105    13 1699. 
+ 9 1.CTR     1   106     0   60  
+10 1.CTR     1   107     0   46.8
+# … with 50 more rows
+~~~
+{: .output}
 
 
 ## Subsetting columns and rows
@@ -437,59 +504,67 @@ Here we are taking the `tumor` column, then `select`ing the `Group`, `Day` and `
 `filter`ing the rows where the `Size` is greater than `2000`.
 
 
-```r
+~~~
 tumor %>%
   select(Group, Day, Size) %>%
   filter(Size > 2000)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 14 x 3
-##    Group   Day  Size
-##    <dbl> <dbl> <dbl>
-##  1     1    15 2406.
-##  2     1    14 2163.
-##  3     1    16 2125.
-##  4     1    13 2343.
-##  5     1    13 2296.
-##  6     2    22 2047.
-##  7     2    25 2269.
-##  8     2    27 2115.
-##  9     3    13 2059.
-## 10     3    28 2362.
-## 11     3    27 2157.
-## 12     3    20 2160.
-## 13     3    24 2189.
-## 14     4    22 2343
-```
+
+
+~~~
+# A tibble: 14 x 3
+   Group   Day  Size
+   <dbl> <dbl> <dbl>
+ 1     1    15 2406.
+ 2     1    14 2163.
+ 3     1    16 2125.
+ 4     1    13 2343.
+ 5     1    13 2296.
+ 6     2    22 2047.
+ 7     2    25 2269.
+ 8     2    27 2115.
+ 9     3    13 2059.
+10     3    28 2362.
+11     3    27 2157.
+12     3    20 2160.
+13     3    24 2189.
+14     4    22 2343 
+~~~
+{: .output}
 
 This is an example where the pipe, `%>%` makes the code a little easier to **read**.
 We can "un-pipe" our code and  it looks like this:
 
 
-```r
+~~~
 filter(select(tumor, Group, Day, Size), Size > 2000)
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 14 x 3
-##    Group   Day  Size
-##    <dbl> <dbl> <dbl>
-##  1     1    15 2406.
-##  2     1    14 2163.
-##  3     1    16 2125.
-##  4     1    13 2343.
-##  5     1    13 2296.
-##  6     2    22 2047.
-##  7     2    25 2269.
-##  8     2    27 2115.
-##  9     3    13 2059.
-## 10     3    28 2362.
-## 11     3    27 2157.
-## 12     3    20 2160.
-## 13     3    24 2189.
-## 14     4    22 2343
-```
+
+
+~~~
+# A tibble: 14 x 3
+   Group   Day  Size
+   <dbl> <dbl> <dbl>
+ 1     1    15 2406.
+ 2     1    14 2163.
+ 3     1    16 2125.
+ 4     1    13 2343.
+ 5     1    13 2296.
+ 6     2    22 2047.
+ 7     2    25 2269.
+ 8     2    27 2115.
+ 9     3    13 2059.
+10     3    28 2362.
+11     3    27 2157.
+12     3    20 2160.
+13     3    24 2189.
+14     4    22 2343 
+~~~
+{: .output}
 
 
 ## Saving out data
@@ -503,41 +578,47 @@ Let's say we want to work with a filtered version of our `tumor` dataset,
 we can first write the code to subset the data we want.
 
 
-```r
+~~~
 filtered <- tumor %>%
   select(Group, ID, Day, Size) %>%
   filter(Day == 0 | Day == 13)
-```
+~~~
+{: .language-r}
 
 
-```r
+~~~
 filtered
-```
+~~~
+{: .language-r}
 
-```
-## # A tibble: 60 x 4
-##    Group    ID   Day   Size
-##    <dbl> <dbl> <dbl>  <dbl>
-##  1     1   101     0   41.8
-##  2     1   101    13 1030. 
-##  3     1   102     0   79.4
-##  4     1   102    13  619. 
-##  5     1   103     0   44.8
-##  6     1   104     0   67.7
-##  7     1   105     0   54.7
-##  8     1   105    13 1699. 
-##  9     1   106     0   60  
-## 10     1   107     0   46.8
-## # … with 50 more rows
-```
+
+
+~~~
+# A tibble: 60 x 4
+   Group    ID   Day   Size
+   <dbl> <dbl> <dbl>  <dbl>
+ 1     1   101     0   41.8
+ 2     1   101    13 1030. 
+ 3     1   102     0   79.4
+ 4     1   102    13  619. 
+ 5     1   103     0   44.8
+ 6     1   104     0   67.7
+ 7     1   105     0   54.7
+ 8     1   105    13 1699. 
+ 9     1   106     0   60  
+10     1   107     0   46.8
+# … with 50 more rows
+~~~
+{: .output}
 
 We can then write out the datafrme to a file (in this case a CSV text file),
 using the same file pathing string format as we loaded a dataset earlier.
 
 
-```r
+~~~
 write_csv(filtered, "data/tumor_filtered.csv")
-```
+~~~
+{: .language-r}
 
 One thing to be mindful of is most programs and computer languages don't like having spaces in file names.
 In general, you'll end up typing more characters dealing with spaces in file names,
