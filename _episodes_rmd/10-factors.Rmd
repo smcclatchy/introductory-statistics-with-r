@@ -86,7 +86,6 @@ be able to tell just from the integer data. Factors, on the other hand, have
 this information built in. It is particularly helpful when there are many levels
 (like the `Grp` names in our example dataset).
 
-
 > ### Exercise
 >
 > 1. Change the column `Grp` in the `tumor` data frame into a 
