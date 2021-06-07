@@ -1,10 +1,10 @@
 ---
 source: Rmd
-title: "Data Transformations"
+title: "Data Transformation"
 teaching: 0
 exercises: 0
 questions:
-- "How do I obtain transform data?"
+- "How do I transform data?"
 objectives:
 - "Add new columns to a data frame that are functions of existing columns with `mutate`."
 - "Use the split-apply-combine concept for data analysis."
@@ -75,7 +75,7 @@ then combine the results. **`dplyr`** makes this very easy through the use of th
 `group_by()` is often used together with `summarize()`, which collapses each
 group into a single-row summary of that group.  `group_by()` takes as arguments
 the column names that contain the **categorical** variables for which you want
-to calculate the summary statistics. So to compute the mean `weight` by sex:
+to calculate the summary statistics. So to compute the mean `Size` by group:
 
 ```{r, purl = FALSE}
 tumor %>%
@@ -108,7 +108,7 @@ tumor %>%
 
 Once the data are grouped, you can also summarize multiple variables at the same
 time (and not necessarily on the same variable). For instance, we could add a
-column indicating the minimum weight for each species for each sex:
+column indicating the minimum size for each day for each group:
 
 ```{r, purl = FALSE}
 tumor %>%
@@ -185,40 +185,28 @@ tumor %>%
 >     count(ID) 
 > ```
 >
-> 2. Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
-> length for each species (using `species_id`). Also add the number of
+> 2. Use `group_by()` and `summarize()` to find the mean, min, and max tumor
+> size for each ID (using `ID`). Also add the number of
 > observations (hint: see `?n`).
 >
 > ```{r, answer=TRUE, purl=FALSE}
 > tumor %>%
->     filter(!is.na(hindfoot_length)) %>%
->     group_by(species_id) %>%
+>     group_by(ID) %>%
 >     summarize(
->         mean_hindfoot_length = mean(hindfoot_length),
->         min_hindfoot_length = min(hindfoot_length),
->         max_hindfoot_length = max(hindfoot_length),
+>         mean_size = mean(Size),
+>         min_size = min(Size),
+>         max_size = max(Size),
 >         n = n()
 >     )
 > ```
 >
-> 3. What was the heaviest animal measured in each year? Return the columns `year`,
-> `genus`, `species_id`, and `weight`.
+> 3. What was the largest tumor measured in each day? Return the columns `Day`,
+> `Grp`, `ID`, and `Size`.
 >
 > ```{r, answer=TRUE, purl=FALSE}
 > tumor %>%
->     filter(!is.na(weight)) %>%
->     group_by(year) %>%
->     filter(weight == max(weight)) %>%
->     select(year, genus, species, weight) %>%
->     arrange(year)
+>     group_by(Day) %>%
+>     filter(Size == max(Size)) %>%
+>     select(Day, Grp, ID, Size) %>%
+>     arrange(Day)
 > ```
-
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-## Count Challenges:
-##  1. How many animals were caught in each `plot_type` surveyed?
-##  2. Use `group_by()` and `summarize()` to find the mean, min, and max
-## hindfoot length for each species (using `species_id`). Also add the number of
-## observations (hint: see `?n`).
-##  3. What was the heaviest animal measured in each year? Return the
-##  columns `year`, `genus`, `species_id`, and `weight`.
-```
