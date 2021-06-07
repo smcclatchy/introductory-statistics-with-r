@@ -14,6 +14,10 @@ keypoints:
 - ""
 ---
 
+```{r, echo=FALSE}
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
+```
+
 ## Factors in R
 
 When we did `str(tumor)` we saw that most of the columns are numeric.
