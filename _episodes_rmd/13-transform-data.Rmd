@@ -6,9 +6,9 @@ exercises: 0
 questions:
 - "How do I obtain transform data?"
 objectives:
-- "Add new columns to a data frame that are functions of existing columns with `mutate`.
-- "Use the split-apply-combine concept for data analysis.
-- "Use `summarize`, `group_by`, and `count` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
+- "Add new columns to a data frame that are functions of existing columns with `mutate`."
+- "Use the split-apply-combine concept for data analysis."
+- "Use `summarize`, `group_by`, and `count` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results."
 keypoints:
 - ""
 - ""
