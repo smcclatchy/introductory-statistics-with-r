@@ -15,6 +15,10 @@ keypoints:
 - ""
 ---
 
+```{r, results='hide'}
+library(tidyverse)
+```
+
 ## Reading text files (CSV)
 
 Now that we know how to find our files, let's load up our first data set.
