@@ -17,6 +17,28 @@ keypoints:
 - ""
 ---
 
+
+```r
+library(tidyverse)
+```
+
+```
+## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+```
+
+```
+## ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+## ✔ tibble  3.1.0     ✔ dplyr   1.0.5
+## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
+## ✔ readr   1.4.0     ✔ forcats 0.5.1
+```
+
+```
+## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+```
+
 ## Reading text files (CSV)
 
 Now that we know how to find our files, let's load up our first data set.
@@ -30,7 +52,32 @@ read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 ```
-## Error in read_csv("../data/medicaldata_tumorgrowth.csv"): could not find function "read_csv"
+## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   Grp = col_character(),
+##   Group = col_double(),
+##   ID = col_double(),
+##   Day = col_double(),
+##   Size = col_double()
+## )
+```
+
+```
+## # A tibble: 574 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 564 more rows
 ```
 
 **Debug help:**
@@ -56,7 +103,15 @@ tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 ```
-## Error in read_csv("../data/medicaldata_tumorgrowth.csv"): could not find function "read_csv"
+## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   Grp = col_character(),
+##   Group = col_double(),
+##   ID = col_double(),
+##   Day = col_double(),
+##   Size = col_double()
+## )
 ```
 
 Notice this time we no longer see the dataset being printed.
@@ -72,7 +127,20 @@ tumor
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'tumor' not found
+## # A tibble: 574 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 564 more rows
 ```
 
 This tabular dataset that has now been loaded into R is called a **data frame** **object** (or simply **dataframe**),
@@ -105,7 +173,20 @@ tumor
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'tumor' not found
+## # A tibble: 574 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 564 more rows
 ```
 
 In order to subset the columns of our dataset, we can use the `select` function.
@@ -119,7 +200,20 @@ select(tumor, Size)
 ```
 
 ```
-## Error in select(tumor, Size): could not find function "select"
+## # A tibble: 574 x 1
+##      Size
+##     <dbl>
+##  1   41.8
+##  2   85  
+##  3  114  
+##  4  162. 
+##  5  178. 
+##  6  325  
+##  7  624. 
+##  8  648. 
+##  9  836. 
+## 10 1030. 
+## # … with 564 more rows
 ```
 
 If we want multiple columns (or to re-order columns) we can specify each column we want selected.
@@ -130,7 +224,20 @@ select(tumor, Group, Day, Size)
 ```
 
 ```
-## Error in select(tumor, Group, Day, Size): could not find function "select"
+## # A tibble: 574 x 3
+##    Group   Day   Size
+##    <dbl> <dbl>  <dbl>
+##  1     1     0   41.8
+##  2     1     3   85  
+##  3     1     4  114  
+##  4     1     5  162. 
+##  5     1     6  178. 
+##  6     1     7  325  
+##  7     1    10  624. 
+##  8     1    11  648. 
+##  9     1    12  836. 
+## 10     1    13 1030. 
+## # … with 564 more rows
 ```
 
 ### The `%>%` pipe operator
@@ -147,7 +254,20 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% select(Size): could not find function "%>%"
+## # A tibble: 574 x 1
+##      Size
+##     <dbl>
+##  1   41.8
+##  2   85  
+##  3  114  
+##  4  162. 
+##  5  178. 
+##  6  325  
+##  7  624. 
+##  8  648. 
+##  9  836. 
+## 10 1030. 
+## # … with 564 more rows
 ```
 
 The way we pronounce the pipe, `%>%` is "then".
@@ -160,7 +280,20 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% select(Group, Day, Size): could not find function "%>%"
+## # A tibble: 574 x 3
+##    Group   Day   Size
+##    <dbl> <dbl>  <dbl>
+##  1     1     0   41.8
+##  2     1     3   85  
+##  3     1     4  114  
+##  4     1     5  162. 
+##  5     1     6  178. 
+##  6     1     7  325  
+##  7     1    10  624. 
+##  8     1    11  648. 
+##  9     1    12  836. 
+## 10     1    13 1030. 
+## # … with 564 more rows
 ```
 
 The benefits of the pipe may not be as apparent now,
@@ -184,7 +317,20 @@ filter(tumor, Group == 1)
 ```
 
 ```
-## Error in as.ts(x): object 'tumor' not found
+## # A tibble: 97 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 87 more rows
 ```
 
 We can write the "pipe" version as such:
@@ -196,7 +342,20 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% filter(Group == 1): could not find function "%>%"
+## # A tibble: 97 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101     3   85  
+##  3 1.CTR     1   101     4  114  
+##  4 1.CTR     1   101     5  162. 
+##  5 1.CTR     1   101     6  178. 
+##  6 1.CTR     1   101     7  325  
+##  7 1.CTR     1   101    10  624. 
+##  8 1.CTR     1   101    11  648. 
+##  9 1.CTR     1   101    12  836. 
+## 10 1.CTR     1   101    13 1030. 
+## # … with 87 more rows
 ```
 
 If we want to combine multiple conditions, where `Group` is `1` **and** `Day` is `0`,
@@ -209,7 +368,17 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% filter(Group == 1, Day == 0): could not find function "%>%"
+## # A tibble: 8 x 5
+##   Grp   Group    ID   Day  Size
+##   <chr> <dbl> <dbl> <dbl> <dbl>
+## 1 1.CTR     1   101     0  41.8
+## 2 1.CTR     1   102     0  79.4
+## 3 1.CTR     1   103     0  44.8
+## 4 1.CTR     1   104     0  67.7
+## 5 1.CTR     1   105     0  54.7
+## 6 1.CTR     1   106     0  60  
+## 7 1.CTR     1   107     0  46.8
+## 8 1.CTR     1   108     0  49.4
 ```
 
 We can also use the `&` for the **and** operator.
@@ -221,7 +390,17 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% filter(Group == 1 & Day == 0): could not find function "%>%"
+## # A tibble: 8 x 5
+##   Grp   Group    ID   Day  Size
+##   <chr> <dbl> <dbl> <dbl> <dbl>
+## 1 1.CTR     1   101     0  41.8
+## 2 1.CTR     1   102     0  79.4
+## 3 1.CTR     1   103     0  44.8
+## 4 1.CTR     1   104     0  67.7
+## 5 1.CTR     1   105     0  54.7
+## 6 1.CTR     1   106     0  60  
+## 7 1.CTR     1   107     0  46.8
+## 8 1.CTR     1   108     0  49.4
 ```
 
 Or use the `|` for the **or** operator.
@@ -233,7 +412,20 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% filter(Day == 0 | Day == 13): could not find function "%>%"
+## # A tibble: 60 x 5
+##    Grp   Group    ID   Day   Size
+##    <chr> <dbl> <dbl> <dbl>  <dbl>
+##  1 1.CTR     1   101     0   41.8
+##  2 1.CTR     1   101    13 1030. 
+##  3 1.CTR     1   102     0   79.4
+##  4 1.CTR     1   102    13  619. 
+##  5 1.CTR     1   103     0   44.8
+##  6 1.CTR     1   104     0   67.7
+##  7 1.CTR     1   105     0   54.7
+##  8 1.CTR     1   105    13 1699. 
+##  9 1.CTR     1   106     0   60  
+## 10 1.CTR     1   107     0   46.8
+## # … with 50 more rows
 ```
 
 
@@ -252,7 +444,23 @@ tumor %>%
 ```
 
 ```
-## Error in tumor %>% select(Group, Day, Size) %>% filter(Size > 2000): could not find function "%>%"
+## # A tibble: 14 x 3
+##    Group   Day  Size
+##    <dbl> <dbl> <dbl>
+##  1     1    15 2406.
+##  2     1    14 2163.
+##  3     1    16 2125.
+##  4     1    13 2343.
+##  5     1    13 2296.
+##  6     2    22 2047.
+##  7     2    25 2269.
+##  8     2    27 2115.
+##  9     3    13 2059.
+## 10     3    28 2362.
+## 11     3    27 2157.
+## 12     3    20 2160.
+## 13     3    24 2189.
+## 14     4    22 2343
 ```
 
 This is an example where the pipe, `%>%` makes the code a little easier to **read**.
@@ -264,7 +472,23 @@ filter(select(tumor, Group, Day, Size), Size > 2000)
 ```
 
 ```
-## Error in select(tumor, Group, Day, Size): could not find function "select"
+## # A tibble: 14 x 3
+##    Group   Day  Size
+##    <dbl> <dbl> <dbl>
+##  1     1    15 2406.
+##  2     1    14 2163.
+##  3     1    16 2125.
+##  4     1    13 2343.
+##  5     1    13 2296.
+##  6     2    22 2047.
+##  7     2    25 2269.
+##  8     2    27 2115.
+##  9     3    13 2059.
+## 10     3    28 2362.
+## 11     3    27 2157.
+## 12     3    20 2160.
+## 13     3    24 2189.
+## 14     4    22 2343
 ```
 
 
@@ -285,17 +509,26 @@ filtered <- tumor %>%
   filter(Day == 0 | Day == 13)
 ```
 
-```
-## Error in tumor %>% select(Group, ID, Day, Size) %>% filter(Day == 0 | : could not find function "%>%"
-```
-
 
 ```r
 filtered
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'filtered' not found
+## # A tibble: 60 x 4
+##    Group    ID   Day   Size
+##    <dbl> <dbl> <dbl>  <dbl>
+##  1     1   101     0   41.8
+##  2     1   101    13 1030. 
+##  3     1   102     0   79.4
+##  4     1   102    13  619. 
+##  5     1   103     0   44.8
+##  6     1   104     0   67.7
+##  7     1   105     0   54.7
+##  8     1   105    13 1699. 
+##  9     1   106     0   60  
+## 10     1   107     0   46.8
+## # … with 50 more rows
 ```
 
 We can then write out the datafrme to a file (in this case a CSV text file),
@@ -304,10 +537,6 @@ using the same file pathing string format as we loaded a dataset earlier.
 
 ```r
 write_csv(filtered, "data/tumor_filtered.csv")
-```
-
-```
-## Error in write_csv(filtered, "data/tumor_filtered.csv"): could not find function "write_csv"
 ```
 
 One thing to be mindful of is most programs and computer languages don't like having spaces in file names.
