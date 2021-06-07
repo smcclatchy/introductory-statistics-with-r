@@ -6,9 +6,10 @@ exercises: 0
 questions:
 - "How do I select, filter, and subset data in R?"
 objectives:
-- "Install and load packages."
-- "Locate files in a file and directory hierarchy."
-- "Read in data from a .csv file into a data frame."
+- "Select specific observations from data."
+- "Filter out those observations that meet specific criteria."
+- "Subset data."
+- "Save transformed data."
 keypoints:
 - ""
 - ""
