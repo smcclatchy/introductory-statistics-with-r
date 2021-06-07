@@ -14,6 +14,10 @@ keypoints:
 - ""
 ---
 
+```{r, results='hide'}
+library(tidyverse)
+```
+
 ### Mutate
 
 Frequently you'll want to create new columns based on the values in existing
