@@ -109,7 +109,7 @@ A new project can be created by clicking the Project tab on the top right corner
 The main benefit of using projects for your own work is that the project is more portable across multiple computers,
 and across collaborators.
 
-> ## Exercise 1 Question
+> ## Exercise 1
 > 
 > 1. Open the RStudio project for this workshop/book.  
 > 2. Create a new R script and save it to the project folder, name the file `00-rstudio.R`.  
