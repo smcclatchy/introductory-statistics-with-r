@@ -272,7 +272,7 @@ Let's go through this example from the paper ourselves.
 
 ```{r, message=FALSE}
 # read the tb dataset
-tb <- read_csv("./data/tb_long.csv")
+tb <- read_csv("../data/tb_long.csv")
 tb
 ```
 
@@ -331,7 +331,7 @@ knitr::include_graphics("./images/tidy/tidy_paper-table_12-weather_tidy.PNG")
 We can load up the CMS utilization dataset that gives us CMS utilization rates by state, demographics, year, and measurement.
 
 ```{r, message=FALSE}
-cms <- read_csv("./data/cms_utilization.csv")
+cms <- read_csv("../data/cms_utilization.csv")
 cms
 ```
 
