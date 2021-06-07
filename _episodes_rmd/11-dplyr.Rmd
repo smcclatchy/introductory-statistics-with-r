@@ -1,34 +1,18 @@
-# Load Data
-
-## Learning Objectives {#load-data-lo}
-
-## Introduction {#load-data-intro}
-
-Loading data into R is the first step!
-
-First we need to load up a package to make loading data sets easier.
-We will be using the `tidyverse` set of packages for all of our data processing needs in R.
-^[This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.]
-
-```{r, echo=FALSE, fig.cap="\"Tidyverse Celestial\" by Allison Horst. \"tidyverse\" hex sticker in space surrounded by other tidyverse package hex logos."}
-knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png")
-```
-
-We first will load up the `tidyverse` packages using the `library` function.
-
-```{r}
-library(tidyverse)
-```
-
-The first time you load up the `tidyverse` library,
-there will be some output that lists the packages `tidyverse` loads,
-along with any functions that share the same name as other functions (i.e., conflicts).
-As long as you are mindful about starting a new RStudio session before you work,
-you can ignore this output for now.
-
-Now we can use all the functions within the Tidyverse to do our data processing.
-If you are following along and you run a piece of code and end up with an `could not find function` error,
-make sure you typed `library(tidyverse)` correctly and executed the line of code.
+---
+source: Rmd
+title: "Using the dplyr package"
+teaching: 0
+exercises: 0
+questions:
+- "How do I select, filter, and subset data in R?"
+objectives:
+- "Install and load packages."
+- "Locate files in a file and directory hierarchy."
+- "Read in data from a .csv file into a data frame."
+keypoints:
+- ""
+- ""
+---
 
 ## Reading text files (CSV)
 
