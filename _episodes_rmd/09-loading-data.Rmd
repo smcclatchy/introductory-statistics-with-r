@@ -176,6 +176,21 @@ This will help you with a lot of potential spelling mistakes.
 read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
+This dataset comes from the [`medicaldata` R package](https://github.com/higgi13425/medicaldata),
+curated by Dr. Peter Higgins, M.D. in the
+[IBD Research Group at the University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+
+The dataset we loaded is a modified version of the "tumorgrowth" dataset in the `medicaldata` package.
+It shows the treatment group for a particular sample and its size ($mm^3$) over time (days).
+
+> Cells from a human glioma cell line were implanted in the flank of n=37 nude mice and a subcutaneous tumor (xenograft) was allowed to grow.
+> When a tumor grew to around 40-60mm^3, the animal was assigned to one of 4 experimenal groups...
+> The main outcome in xenograft experiments is the size (volume) of the tumor over time.
+
+You can read more about the dataset and study in the codebook for
+["Mixed-Effects Modeling of Tumor Growth in Animal Xenograft Experiments"](https://github.com/higgi13425/medicaldata/blob/master/description_docs/tumorgrowth_desc.pdf)
+
+
 **Debug help:**
 - If the above code returns a `could not find function "read_csv"`
   make sure you have loaded up the proper library with `library(tidyverse)`
