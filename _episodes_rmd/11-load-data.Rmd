@@ -1,0 +1,251 @@
+# Load Data
+
+## Learning Objectives {#load-data-lo}
+
+## Introduction {#load-data-intro}
+
+Loading data into R is the first step!
+
+First we need to load up a package to make loading data sets easier.
+We will be using the `tidyverse` set of packages for all of our data processing needs in R.
+^[This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.]
+
+```{r, echo=FALSE, fig.cap="\"Tidyverse Celestial\" by Allison Horst. \"tidyverse\" hex sticker in space surrounded by other tidyverse package hex logos."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png")
+```
+
+We first will load up the `tidyverse` packages using the `library` function.
+
+```{r}
+library(tidyverse)
+```
+
+The first time you load up the `tidyverse` library,
+there will be some output that lists the packages `tidyverse` loads,
+along with any functions that share the same name as other functions (i.e., conflicts).
+As long as you are mindful about starting a new RStudio session before you work,
+you can ignore this output for now.
+
+Now we can use all the functions within the Tidyverse to do our data processing.
+If you are following along and you run a piece of code and end up with an `could not find function` error,
+make sure you typed `library(tidyverse)` correctly and executed the line of code.
+
+## Reading text files (CSV)
+
+Now that we know how to find our files, let's load up our first data set.
+When trying to type in a file path,
+you can hit the `<TAB>` key to autocomplete the files.
+This will help you with a lot of potential spelling mistakes.
+
+```{r}
+read_csv("../data/medicaldata_tumorgrowth.csv")
+```
+
+**Debug help:**
+- If the above code returns a `could not find function "read_csv"`
+  make sure you have loaded up the proper library with `library(tidyverse)`
+- If the above code returns a `does not exist in current working directory`,
+  make sure the working directory it lists is your expected "starting point" (i.e., working directory),
+  and make sure the file path is spelled correctly.
+
+`read_csv` will show us the columns that were read in,
+as well as the **data type** of that column (e.g., character, double -- a number).
+
+Loading a data set is great, but we need a convenient way to refer to the data set.
+We don't want to re-load the data set every time we want to perform an action on it.
+We can take this loaded data set and **assign** it to a **variable**.
+We can do this with the **assignment** **operator**, `<-`.
+Note the way it is typed, a less than symbol (`<`) followed immediately by the dash (`-`) without any spaces in between.
+The right side of the assignment operator, `<-`, will be executed and then **assigned** to the variable on the left.
+
+```{r}
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
+```
+
+Notice this time we no longer see the dataset being printed.
+The "Environment" tab in the RStudio panel will now have an entry for the variable you used.
+Clicking on the right data set icon will open a view of your dataset,
+clicking on the arrow will show you the column-by-column text representation (technically it's called the `structure`).
+
+To look at our dataset we can execute *just* the variable we assigned the dataset to.
+
+```{r}
+tumor
+```
+
+This tabular dataset that has now been loaded into R is called a **data frame** **object** (or simply **dataframe**),
+the `tidyverse` uses a `tibble`.
+For the most part, a `data.frame` object will behave like a `tibble` object.
+
+
+## What is dplyr?
+The package dplyr provides easy tools for the most common data manipulation tasks. It is built to work directly 
+with data frames, with many common tasks optimized by being written in a compiled language (C++). An additional 
+feature is the ability to work directly with data stored in an external database. The benefits of doing this 
+are that the data can be managed natively in a relational database, queries can be conducted on that database, 
+and only the results of the query are returned.
+
+This addresses a common problem with R in that all operations are conducted in-memory and thus the amount of 
+data you can work with is limited by available memory. The database connections essentially remove that 
+limitation in that you can connect to a database of many hundreds of GB, conduct queries on it directly, 
+and pull back into R only what you need for analysis.
+
+To learn more about dplyr after the workshop, you may want to check out this handy 
+[data transformation with dplyr cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf).
+
+## Selecting columns
+
+Here is the tumor dataset we are working with.
+
+```{r}
+tumor
+```
+
+In order to subset the columns of our dataset, we can use the `select` function.
+The **first** **argument** of the `select` function is the dataset we want to select columns from.
+Then, the other arguments are the columns we want to select.
+
+
+```{r}
+select(tumor, Size)
+```
+
+If we want multiple columns (or to re-order columns) we can specify each column we want selected.
+
+```{r}
+select(tumor, Group, Day, Size)
+```
+
+### The `%>%` pipe operator
+
+A common way `tidyverse` code gets written is using the `%>%` operator.
+The `%>%` takes the object on the left, and passes that into the first argument to the function on the right.
+We can re-write the above select statements as follows.
+R interprets the code in the exact same way.
+
+```{r}
+tumor %>%
+  select(Size)
+```
+
+The way we pronounce the pipe, `%>%` is "then".
+So the above statement is read "tumor, then, select size".
+
+```{r}
+tumor %>%
+  select(Group, Day, Size)
+```
+
+The benefits of the pipe may not be as apparent now,
+but when we start chaining multiple data sets together,
+it'll make the code a little more readable.
+
+## Filtering rows
+
+Now that we know how to select columns on our dataframe,
+we can now learn how to filter the rows.
+
+To filter rows, we can use the `filter` function.
+The first argument of `filter` is the dataframe object (the same pattern as the `select` function),
+and the other arguments are statements that return some `TRUE` or `FALSE` value (this is known as a **boolean** condition).
+
+For example if we want to filter the `tumor` dataset such that the `Group` value is `1` we can filter the rows using that condition.
+
+```{r}
+filter(tumor, Group == 1)
+```
+
+We can write the "pipe" version as such:
+
+```{r}
+tumor %>%
+  filter(Group == 1)
+```
+
+If we want to combine multiple conditions, where `Group` is `1` **and** `Day` is `0`,
+we can put each statement as a separate parameter into the `filter` function.
+
+```{r}
+tumor %>%
+  filter(Group == 1, Day == 0)
+```
+
+We can also use the `&` for the **and** operator.
+
+```{r}
+tumor %>%
+  filter(Group == 1 & Day == 0)
+```
+
+Or use the `|` for the **or** operator.
+
+```{r}
+tumor %>%
+  filter(Day == 0 | Day == 13)
+```
+
+
+## Subsetting columns and rows
+
+To subset on both columns **and** rows,
+we call the corresponding subseting function one after the other.
+Here we are taking the `tumor` column, then `select`ing the `Group`, `Day` and `Size` columns, then
+`filter`ing the rows where the `Size` is greater than `2000`.
+
+```{r}
+tumor %>%
+  select(Group, Day, Size) %>%
+  filter(Size > 2000)
+```
+
+This is an example where the pipe, `%>%` makes the code a little easier to **read**.
+We can "un-pipe" our code and  it looks like this:
+
+```{r}
+filter(select(tumor, Group, Day, Size), Size > 2000)
+```
+
+
+## Saving out data
+
+Saving out your data frame objects is the first step in creating pipelines.
+Even if all you do is read in data, filter it, and write out the subsetted dataset for another use case,
+you have created your first pipeline.
+Now, you have a repeatable way of performing the same action when your input dataset is updated or changed.
+
+Let's say we want to work with a filtered version of our `tumor` dataset,
+we can first write the code to subset the data we want.
+
+```{r}
+filtered <- tumor %>%
+  select(Group, ID, Day, Size) %>%
+  filter(Day == 0 | Day == 13)
+```
+
+```{r}
+filtered
+```
+
+We can then write out the datafrme to a file (in this case a CSV text file),
+using the same file pathing string format as we loaded a dataset earlier.
+
+```{r}
+write_csv(filtered, "data/tumor_filtered.csv")
+```
+
+One thing to be mindful of is most programs and computer languages don't like having spaces in file names.
+In general, you'll end up typing more characters dealing with spaces in file names,
+instead of using an underscore, `_`, or dash, `-`.
+Also as a general rule, keeping files in lower-case will prevent a lot of potential spelling mistakes.
+
+<button class="accordion" id="question">Exercise 3 Question</button>
+:::{.panel-question}
+1. Read in all the patient data from the spreadsheets chapter (chapter \@ref(spreadsheets)) found in `data > spreadsheets > all.csv`
+2. `select` the `first_name`, `last_name`, `day`, `time`, and `temp_f` columns.
+3. `filter` the rows such that the person's name is "Aniya Warner"
+4. Save the filtered dataset into the `output` folder named `aniya_warner.csv`.
+:::
+
+## Summary {#load-data-summary}
+
+## Additional Resources {#load-data-resources}
