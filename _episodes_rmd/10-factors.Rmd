@@ -14,6 +14,12 @@ keypoints:
 - ""
 ---
 
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("10-")
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
+```
+
 ## Factors in R
 
 When we did `str(tumor)` we saw that most of the columns are numeric.
@@ -81,7 +87,6 @@ informative than integers because factors are self describing: `"left"`,
 be able to tell just from the integer data. Factors, on the other hand, have
 this information built in. It is particularly helpful when there are many levels
 (like the `Grp` names in our example dataset).
-
 
 > ### Exercise
 >

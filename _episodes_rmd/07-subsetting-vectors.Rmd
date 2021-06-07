@@ -13,6 +13,11 @@ keypoints:
 - ""
 ---
 
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("07-")
+```
+
 ## Subsetting vectors
 
 If we want to extract one or several values from a vector, we must provide one

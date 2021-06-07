@@ -12,11 +12,11 @@ keypoints:
 - ""
 ---
  
-## Vectors and data types
-
-```{r, echo = FALSE, purl = TRUE}
-### Vectors and data types
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("06-")
 ```
+## Vectors and data types
 
 A vector is the most common and basic data type in R, and is pretty much
 the workhorse of R. A vector is composed by a series of values, which can be
