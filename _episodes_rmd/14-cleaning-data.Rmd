@@ -15,6 +15,10 @@ keypoints:
 - ""
 ---
 
+```{r, results='hide'}
+library(tidyverse)
+```
+
 # Clean Data (Tidy)
 
 ```{r, echo=FALSE, fig.cap="\"Data Cowboy\" by Allison Horst."}
