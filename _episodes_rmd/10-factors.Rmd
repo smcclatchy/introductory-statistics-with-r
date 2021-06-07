@@ -14,7 +14,9 @@ keypoints:
 - ""
 ---
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("10-")
 tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
