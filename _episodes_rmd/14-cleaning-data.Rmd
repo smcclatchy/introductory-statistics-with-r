@@ -60,7 +60,7 @@ Below is a duplicate of "Tidy Data's" Table 1.
 It shows an example dataset where each row represents a person and columns for some imaginary experiment's treatment values.
 
 ```{r, echo=FALSE, fig.cap=""}
-knitr::include_graphics("./images/tidy/tidy_paper-table_1.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_1.PNG")
 ```
 
 This is a space efficient representation of our data.
@@ -69,7 +69,7 @@ It allows the reader to quickly glance the data values and perform comparisons i
 We can also **transpose** the values of our dataset so the rows and columns are interchanged.
 
 ```{r, echo=FALSE, fig.cap=""}
-knitr::include_graphics("./images/tidy/tidy_paper-table_2.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_2.PNG")
 ```
 
 Other than making the dataset "wider", we can still do the same set of quick comparisons in this data representation.
@@ -80,7 +80,7 @@ we are unable to perform those aggregate summary statistics in the way our datas
 If we organize the data into another shape:
 
 ```{r, echo=FALSE, fig.cap=""}
-knitr::include_graphics("./images/tidy/tidy_paper-table_3.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_3.PNG")
 ```
 
 We can see it makes doing treatment comparisons more difficult as a reader.
@@ -146,7 +146,7 @@ This dataset from the Pew Research Center explores the relationship between inco
 It shows the religion and frequency for a particular income bracket.
 
 ```{r, echo=FALSE, fig.cap="Table 4 from the \"Tidy Data\" paper."}
-knitr::include_graphics("./images/tidy/tidy_paper-table_4-pew_wide.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_4-pew_wide.PNG")
 ```
 
 We listed 3 variables the table depicts, but those 3 variables are not the variables (i.e., columns) of the dataset.
@@ -156,7 +156,7 @@ If we wanted to make it tidy, such that we had 3 columns (religion, income, and 
 the data set would look as follows:
 
 ```{r, echo=FALSE, fig.cap="Table 6 from the \"Tidy Data\" paper."}
-knitr::include_graphics("./images/tidy/tidy_paper-table_6-pew_tidy.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_6-pew_tidy.PNG")
 ```
 
 The first table is sometimes called the **wide** format
@@ -259,7 +259,7 @@ The "Tidy Data" paper uses the a Turberculosis (TB) data set from the World Heal
 showing the counts of TB cases by country, year, and demographic group.
 
 ```{r, echo=FALSE, fig.cap="Table 9 from the \"Tidy Data\" paper, showing a subset of TB case counts. The columns are 'country', 'year', and demographic information combining gender and age group, e.g., male aged 0 to 14 as 'm014'"}
-knitr::include_graphics("./images/tidy/tidy_paper-table_9-tb_messy.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_9-tb_messy.PNG")
 ```
 
 Combining multiple bits of information in a column is fairly common in medical data sets.
@@ -270,7 +270,7 @@ From there we can "split" the gender information from the "age" information to s
 (Panel B in Figure TODO).
 
 ```{r, echo=FALSE, fig.cap="Table 10 from the \"Tidy Data\" paper"}
-knitr::include_graphics("./images/tidy/tidy_paper-table_10-tb_tidy_process.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_10-tb_tidy_process.PNG")
 ```
 
 Let's go through this example from the paper ourselves.
@@ -316,7 +316,7 @@ The first thing we'll see is that we have the *same* columns as variables proble
 So we can fix the variables being stored in the columns the same way as we have been doing.
 
 ```{r, echo=FALSE, fig.cap="Table 11 from the \"Tidy Data\" paper"}
-knitr::include_graphics("./images/tidy/tidy_paper-table_11-weather_messy.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_11-weather_messy.PNG")
 ```
 
 Only after we fix the column problem,
@@ -330,7 +330,7 @@ Another symptom of data being stored in rows is a lot of repeated column values 
 The way we fix the "variables stored in row" problem is to perform the "opposite" of the `pivot_longer` function we have been using.
 
 ```{r, echo=FALSE, fig.cap="Table 12 from the \"Tidy Data\" paper"}
-knitr::include_graphics("./images/tidy/tidy_paper-table_12-weather_tidy.PNG")
+knitr::include_graphics("../fig/tidy_paper-table_12-weather_tidy.PNG")
 ```
 
 We can load up the CMS utilization dataset that gives us CMS utilization rates by state, demographics, year, and measurement.
