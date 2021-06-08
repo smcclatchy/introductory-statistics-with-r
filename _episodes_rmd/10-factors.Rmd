@@ -17,6 +17,9 @@ keypoints:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("10-")
+```
+
+```{r, echo=FALSE}
 library(tidyverse)
 tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
