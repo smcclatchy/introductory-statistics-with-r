@@ -187,18 +187,20 @@ plot(tumor$Grp)
 >            )
 >     ```
 >
->    ```{text_answer, echo=FALSE, purl=FALSE}
->    * missing quotations around the names of the animals
->    * missing one entry in the `feel` column (probably for one of the furry animals)
->    * missing one comma in the `weight` column
->    * `country`, `climate`, `temperature`, and `northern_hemisphere` are
->       characters; `has_kangaroo` is numeric
->    * using `factor()` one could replace character columns with factors columns
->    * removing the quotes in `temperature` and `northern_hemisphere` and replacing 1
->      by TRUE in the `has_kangaroo` column would give what was probably 
->      intended
->    ```
->
+> > ## Solution
+> >
+> > 1. * missing quotations around the names of the animals  
+> > * missing one entry in the `feel` column (probably for one of the furry animals)  
+> > * missing one comma in the `weight` column  
+> > 2. `country`, `climate`, `temperature`, and `northern_hemisphere` are
+> >  characters; `has_kangaroo` is numeric  
+> >  * using `factor()` one could replace character columns with factors columns  
+> >  * removing the quotes in `temperature` and `northern_hemisphere` and replacing 1
+> >  by TRUE in the `has_kangaroo` column would give what was probably intended  
+> >  
+> {: .solution}
+{: .challenge}
+
 The automatic conversion of data type is sometimes a blessing, sometimes an
 annoyance. Be aware that it exists, learn the rules, and double check that data
 you import in R are of the correct type within your data frame. If not, use it
