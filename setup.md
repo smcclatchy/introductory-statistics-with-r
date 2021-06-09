@@ -14,7 +14,7 @@ https://github.com/chendaniely/ds4biomed
 
 You can click on the "Code" dropdown and select "Download Zip" to download the data and files for the lesson materials.
 
-![download zip file from Github](../fig/github-download_zip.PNG)
+![download zip file from Github](./fig/github-download_zip.PNG)
 
 Go to your Downloads folder to locate the `ds4biomed-learner` folder. Move this folder onto your Desktop and unzip it if it is still zipped.
 
@@ -33,7 +33,7 @@ please see the
 The links to install R can be found here: https://cloud.r-project.org/.
 Navigate to the correct operating system.
 
-![download R](../fig/website-r_download.PNG)
+![download R](./fig/website-r_download.PNG)
 
 For mac users, download the `.pkg` file under the "Latest release" section
 
@@ -41,7 +41,7 @@ For mac users, download the `.pkg` file under the "Latest release" section
 
 For Windows users, please install both the `base` version as well as `Rtools`.
 
-![download R for Windows](./images/setup/website-r_download-windows.PNG)
+![download R for Windows](./fig/setup/website-r_download-windows.PNG)
 
 #### RStudio {-}
 
