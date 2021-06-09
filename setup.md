@@ -14,7 +14,7 @@ https://github.com/chendaniely/ds4biomed
 
 You can click on the "Code" dropdown and select "Download Zip" to download the data and files for the lesson materials.
 
-![download zip file from Github]("../fig/github-download_zip.PNG")
+![download zip file from Github](../fig/github-download_zip.PNG)
 
 Go to your Downloads folder to locate the `ds4biomed-learner` folder. Move this folder onto your Desktop and unzip it if it is still zipped.
 
@@ -33,15 +33,15 @@ please see the
 The links to install R can be found here: https://cloud.r-project.org/.
 Navigate to the correct operating system.
 
-![download R]("../fig/website-r_download.PNG")
+![download R](../fig/website-r_download.PNG)
 
 For mac users, download the `.pkg` file under the "Latest release" section
 
-![download R for Mac]("./fig/website-r_download-mac.PNG")
+![download R for Mac](./fig/website-r_download-mac.PNG)
 
 For Windows users, please install both the `base` version as well as `Rtools`.
 
-![download R for Windows]("./images/setup/website-r_download-windows.PNG")
+![download R for Windows](./images/setup/website-r_download-windows.PNG)
 
 #### RStudio {-}
 
@@ -55,11 +55,11 @@ Start RStudio by double-clicking the icon.
 Within RStudio, there will be a "Packages" tab in the bottom right panel.
 Click on the "Install" button.
 
-![RStudio packages tab]("./fig/rstudio-packages_tab.PNG")
+![RStudio packages tab](./fig/rstudio-packages_tab.PNG)
 
 In the pop-up window type in "tidyverse" and click "install".
 
-![Install packages]("./fig/rstudio-install_packages.PNG")
+![Install packages](./fig/rstudio-install_packages.PNG)
 
 The Console section of RStudio will begin installing the "tidyverse" package we will be using.
 
@@ -68,4 +68,4 @@ The Console section of RStudio will begin installing the "tidyverse" package we 
 When the installation is finished, you can check if the package was installed properly and will load
 by scrolling down the "Packages" tab and clicking the checkbox next to "tidyverse".
 
-![load tidyverse library]("./fig/rstudio-check_tidyverse.PNG")
+![load tidyverse library](./fig/rstudio-check_tidyverse.PNG)
