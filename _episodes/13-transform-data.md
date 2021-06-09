@@ -21,34 +21,9 @@ keypoints:
 
 ~~~
 library(tidyverse)
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ~~~
 {: .language-r}
-
-
-
-~~~
-── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-✔ tibble  3.1.0     ✔ dplyr   1.0.5
-✔ tidyr   1.1.3     ✔ stringr 1.4.0
-✔ readr   1.4.0     ✔ forcats 0.5.1
-~~~
-{: .output}
-
-
-
-~~~
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-~~~
-{: .output}
 
 ### Mutate
 
@@ -68,9 +43,22 @@ tumor %>%
 
 
 ~~~
-Error in mutate(., size_cubic_cm = Size/1000): object 'tumor' not found
+# A tibble: 574 x 6
+   Grp   Group    ID   Day   Size size_cubic_cm
+   <chr> <dbl> <dbl> <dbl>  <dbl>         <dbl>
+ 1 1.CTR     1   101     0   41.8        0.0418
+ 2 1.CTR     1   101     3   85          0.085 
+ 3 1.CTR     1   101     4  114          0.114 
+ 4 1.CTR     1   101     5  162.         0.162 
+ 5 1.CTR     1   101     6  178.         0.178 
+ 6 1.CTR     1   101     7  325          0.325 
+ 7 1.CTR     1   101    10  624.         0.624 
+ 8 1.CTR     1   101    11  648.         0.648 
+ 9 1.CTR     1   101    12  836.         0.836 
+10 1.CTR     1   101    13 1030.         1.03  
+# … with 564 more rows
 ~~~
-{: .error}
+{: .output}
 
 You can also create a second new column based on the first new column within the same call of `mutate()`:
 
@@ -85,9 +73,22 @@ tumor %>%
 
 
 ~~~
-Error in mutate(., size_cubic_cm = Size/1000, size_cubic_in = size_cubic_cm/16): object 'tumor' not found
+# A tibble: 574 x 7
+   Grp   Group    ID   Day   Size size_cubic_cm size_cubic_in
+   <chr> <dbl> <dbl> <dbl>  <dbl>         <dbl>         <dbl>
+ 1 1.CTR     1   101     0   41.8        0.0418       0.00261
+ 2 1.CTR     1   101     3   85          0.085        0.00531
+ 3 1.CTR     1   101     4  114          0.114        0.00712
+ 4 1.CTR     1   101     5  162.         0.162        0.0101 
+ 5 1.CTR     1   101     6  178.         0.178        0.0111 
+ 6 1.CTR     1   101     7  325          0.325        0.0203 
+ 7 1.CTR     1   101    10  624.         0.624        0.0390 
+ 8 1.CTR     1   101    11  648.         0.648        0.0405 
+ 9 1.CTR     1   101    12  836.         0.836        0.0522 
+10 1.CTR     1   101    13 1030.         1.03         0.0644 
+# … with 564 more rows
 ~~~
-{: .error}
+{: .output}
 
 If this runs off your screen and you just want to see the first few rows, you
 can use a pipe to view the `head()` of the data. (Pipes work with non-**`dplyr`**
@@ -104,9 +105,17 @@ tumor %>%
 
 
 ~~~
-Error in mutate(., size_cubic_cm = Size/1000): object 'tumor' not found
+# A tibble: 6 x 6
+  Grp   Group    ID   Day  Size size_cubic_cm
+  <chr> <dbl> <dbl> <dbl> <dbl>         <dbl>
+1 1.CTR     1   101     0  41.8        0.0418
+2 1.CTR     1   101     3  85          0.085 
+3 1.CTR     1   101     4 114          0.114 
+4 1.CTR     1   101     5 162.         0.162 
+5 1.CTR     1   101     6 178.         0.178 
+6 1.CTR     1   101     7 325          0.325 
 ~~~
-{: .error}
+{: .output}
 
 > ### Challenge {.challenge}
 >
@@ -153,9 +162,15 @@ tumor %>%
 
 
 ~~~
-Error in group_by(., Grp): object 'tumor' not found
+# A tibble: 4 x 2
+  Grp   mean_size
+  <chr>     <dbl>
+1 1.CTR      688.
+2 2.D        577.
+3 3.R        683.
+4 4.D+R      506.
 ~~~
-{: .error}
+{: .output}
 
 You can also group by multiple columns:
 
@@ -171,9 +186,25 @@ tumor %>%
 
 
 ~~~
-Error in group_by(., Grp, Day): object 'tumor' not found
+`summarise()` has grouped output by 'Grp'. You can override using the `.groups` argument.
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+# A tibble: 6 x 3
+# Groups:   Grp [1]
+  Grp     Day mean_size
+  <chr> <dbl>     <dbl>
+1 4.D+R    23      878.
+2 4.D+R    24     1085.
+3 4.D+R    25      823.
+4 4.D+R    26      903.
+5 4.D+R    27      830.
+6 4.D+R    28      821.
+~~~
+{: .output}
 
 Here, we used `tail()` to look at the last six rows of our summary. Before, we had 
 used `head()` to look at the first six rows. 
@@ -194,9 +225,35 @@ tumor %>%
 
 
 ~~~
-Error in group_by(., Grp, Day): object 'tumor' not found
+`summarise()` has grouped output by 'Grp'. You can override using the `.groups` argument.
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+# A tibble: 109 x 3
+# Groups:   Grp [4]
+   Grp     Day mean_size
+   <chr> <dbl>     <dbl>
+ 1 1.CTR     0      55.6
+ 2 1.CTR     1      86.1
+ 3 1.CTR     2      77.5
+ 4 1.CTR     3      87.9
+ 5 1.CTR     4     130. 
+ 6 1.CTR     5     216. 
+ 7 1.CTR     6     277. 
+ 8 1.CTR     7     319. 
+ 9 1.CTR     8     395. 
+10 1.CTR     9     525. 
+11 1.CTR    10     618. 
+12 1.CTR    11     887. 
+13 1.CTR    12    1305. 
+14 1.CTR    13    1597. 
+15 1.CTR    14    1331. 
+# … with 94 more rows
+~~~
+{: .output}
 
 Once the data are grouped, you can also summarize multiple variables at the same
 time (and not necessarily on the same variable). For instance, we could add a
@@ -214,9 +271,30 @@ tumor %>%
 
 
 ~~~
-Error in group_by(., Grp, Day): object 'tumor' not found
+`summarise()` has grouped output by 'Grp'. You can override using the `.groups` argument.
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+# A tibble: 109 x 4
+# Groups:   Grp [4]
+   Grp     Day mean_size min_size
+   <chr> <dbl>     <dbl>    <dbl>
+ 1 1.CTR     0      55.6     41.8
+ 2 1.CTR     1      86.1     67.5
+ 3 1.CTR     2      77.5     55.8
+ 4 1.CTR     3      87.9     61.1
+ 5 1.CTR     4     130.      75.3
+ 6 1.CTR     5     216.     112. 
+ 7 1.CTR     6     277.     118. 
+ 8 1.CTR     7     319.     165. 
+ 9 1.CTR     8     395.     269. 
+10 1.CTR     9     525.     478. 
+# … with 99 more rows
+~~~
+{: .output}
 
 To sort in descending order, we need to add the `desc()` function. If we want to sort the results by decreasing order of mean weight:
 
@@ -233,9 +311,30 @@ tumor %>%
 
 
 ~~~
-Error in group_by(., Grp, Day): object 'tumor' not found
+`summarise()` has grouped output by 'Grp'. You can override using the `.groups` argument.
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+# A tibble: 109 x 4
+# Groups:   Grp [4]
+   Grp     Day mean_size min_size
+   <chr> <dbl>     <dbl>    <dbl>
+ 1 1.CTR    16     2045.    1964.
+ 2 2.D      25     1836.    1525.
+ 3 2.D      26     1738.    1738.
+ 4 3.R      28     1714.    1065 
+ 5 2.D      24     1668.    1624.
+ 6 2.D      22     1650.    1109.
+ 7 1.CTR    13     1597.     619.
+ 8 1.CTR    21     1564.    1564.
+ 9 3.R      24     1546.     902.
+10 1.CTR    15     1535.     810.
+# … with 99 more rows
+~~~
+{: .output}
 
 
 #### Counting
@@ -255,9 +354,15 @@ tumor %>%
 
 
 ~~~
-Error in count(., Grp): object 'tumor' not found
+# A tibble: 4 x 2
+  Grp       n
+  <chr> <int>
+1 1.CTR    97
+2 2.D     171
+3 3.R     161
+4 4.D+R   145
 ~~~
-{: .error}
+{: .output}
 
 The `count()` function is shorthand for something we've already seen: grouping by a variable, and summarizing it by counting the number of observations in that group. In other words, `tumor %>% count()` is equivalent to:  
 
@@ -272,9 +377,15 @@ tumor %>%
 
 
 ~~~
-Error in group_by(., Grp): object 'tumor' not found
+# A tibble: 4 x 2
+  Grp   count
+  <chr> <int>
+1 1.CTR    97
+2 2.D     171
+3 3.R     161
+4 4.D+R   145
 ~~~
-{: .error}
+{: .output}
 
 For convenience, `count()` provides the `sort` argument:  
 
@@ -288,9 +399,15 @@ tumor %>%
 
 
 ~~~
-Error in count(., Grp, sort = TRUE): object 'tumor' not found
+# A tibble: 4 x 2
+  Grp       n
+  <chr> <int>
+1 2.D     171
+2 3.R     161
+3 4.D+R   145
+4 1.CTR    97
 ~~~
-{: .error}
+{: .output}
 
 Previous example shows the use of `count()` to count the number of rows/observations 
 for *one* factor (i.e., `Grp`). 
@@ -307,9 +424,22 @@ tumor %>%
 
 
 ~~~
-Error in count(., Grp, Day): object 'tumor' not found
+# A tibble: 109 x 3
+   Grp     Day     n
+   <chr> <dbl> <int>
+ 1 1.CTR     0     8
+ 2 1.CTR     1     4
+ 3 1.CTR     2     3
+ 4 1.CTR     3     5
+ 5 1.CTR     4     8
+ 6 1.CTR     5     5
+ 7 1.CTR     6     5
+ 8 1.CTR     7     8
+ 9 1.CTR     8     4
+10 1.CTR     9     3
+# … with 99 more rows
 ~~~
-{: .error}
+{: .output}
 
 With the above code, we can proceed with `arrange()` to sort the table 
 according to a number of criteria so that we have a better comparison. 
@@ -327,9 +457,22 @@ tumor %>%
 
 
 ~~~
-Error in count(., Grp, Day): object 'tumor' not found
+# A tibble: 109 x 3
+   Grp     Day     n
+   <chr> <dbl> <int>
+ 1 2.D       0    10
+ 2 3.R       0    10
+ 3 4.D+R     0     9
+ 4 1.CTR     0     8
+ 5 2.D       1     7
+ 6 4.D+R     1     7
+ 7 1.CTR     1     4
+ 8 3.R       1     3
+ 9 2.D       2     7
+10 4.D+R     2     5
+# … with 99 more rows
 ~~~
-{: .error}
+{: .output}
 
 > ### Challenge {.challenge}
 >
@@ -345,9 +488,22 @@ Error in count(., Grp, Day): object 'tumor' not found
 > 
 > 
 > ~~~
-> Error in count(., ID): object 'tumor' not found
+> # A tibble: 37 x 2
+>       ID     n
+>    <dbl> <int>
+>  1   101    16
+>  2   102    16
+>  3   103    12
+>  4   104    13
+>  5   105    11
+>  6   106    13
+>  7   107     8
+>  8   108     8
+>  9   201    19
+> 10   202    15
+> # … with 27 more rows
 > ~~~
-> {: .error}
+> {: .output}
 >
 > 2. Use `group_by()` and `summarize()` to find the mean, min, and max tumor
 > size for each ID (using `ID`). Also add the number of
@@ -369,9 +525,22 @@ Error in count(., Grp, Day): object 'tumor' not found
 > 
 > 
 > ~~~
-> Error in group_by(., ID): object 'tumor' not found
+> # A tibble: 37 x 5
+>       ID mean_size min_size max_size     n
+>    <dbl>     <dbl>    <dbl>    <dbl> <int>
+>  1   101      810.     41.8    1678.    16
+>  2   102      670.     79.4    1564.    16
+>  3   103      640.     44.8    2406.    12
+>  4   104      595.     67.7    1964.    13
+>  5   105      683.     54.7    2163.    11
+>  6   106      488.     60      2125.    13
+>  7   107      809.     46.8    2343.     8
+>  8   108      917.     49.4    2296.     8
+>  9   201      768.     49.1    1998.    19
+> 10   202      674.     60.6    2047.    15
+> # … with 27 more rows
 > ~~~
-> {: .error}
+> {: .output}
 >
 > 3. What was the largest tumor measured in each day? Return the columns `Day`,
 > `Grp`, `ID`, and `Size`.
@@ -389,6 +558,20 @@ Error in count(., Grp, Day): object 'tumor' not found
 > 
 > 
 > ~~~
-> Error in group_by(., Day): object 'tumor' not found
+> # A tibble: 29 x 4
+> # Groups:   Day [29]
+>      Day Grp      ID  Size
+>    <dbl> <chr> <dbl> <dbl>
+>  1     0 1.CTR   102  79.4
+>  2     1 1.CTR   102 110. 
+>  3     2 3.R     306 129. 
+>  4     3 2.D     210 134  
+>  5     4 1.CTR   102 201. 
+>  6     5 3.R     306 316. 
+>  7     6 3.R     308 612. 
+>  8     7 3.R     301 732. 
+>  9     8 1.CTR   102 670  
+> 10     9 3.R     310 892. 
+> # … with 19 more rows
 > ~~~
-> {: .error}
+> {: .output}
