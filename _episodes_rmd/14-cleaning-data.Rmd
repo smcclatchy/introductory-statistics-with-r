@@ -1,15 +1,15 @@
 ---
 source: Rmd
-title: "Using the dplyr package"
+title: "Cleaning data"
 teaching: 0
 exercises: 0
 questions:
-- "How do I select, filter, and subset data in R?"
+- "How do I re-organize and clean data in R?"
 objectives:
-- "Select specific observations from data."
-- "Filter out those observations that meet specific criteria."
-- "Subset data."
-- "Save transformed data."
+- "Transpose data from wide to long format."
+- "Replace variable values with variable names as column headers."
+- "Split multiple variables stored in the same column."
+- "Re-organize data stored in both rows and columns."
 keypoints:
 - ""
 - ""
