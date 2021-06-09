@@ -38,19 +38,20 @@ library(medicaldata)
 > Study evaluated the association between red blood cells storage duration and biochemical prostate cancer recurrence after radical prostatectomy.
 > Specifically, tested was the hypothesis that perioperative transfution of allogenetic RBCs stored for a prolonged period is associated with earlier biochemical recurrence of prostate cancer after prostatectomy.
 
+Download the blood storage data by [clicking the **Download** button here](https://github.com/higgi13425/medicaldata/blob/master/data/blood_storage.rda). This will load the data directly into RStudio. Check your Environment tab at upper right to see a new data object called `blood_storage`.
+
 ```{r}
-blood <- medicaldata::blood_storage
-head(blood) # use head to look at the first 6 rows
+head(blood_storage) # use head to look at the first 6 rows
 ```
 
 ```{r}
-class(blood)
+class(blood_storage)
 ```
 
 
 ```{r}
 # get just the column names for a dataset
-names(blood)
+names(blood_storage)
 ```
 
 
@@ -83,7 +84,7 @@ A `factor` is R's way of naming a **categorical** variable.
 This is different from a **character string**, e.g., a person's name.
 
 ```{r}
-recurrence_freq <- blood %>%
+recurrence_freq <- blood_storage %>%
   group_by(Recurrence) %>%
   summarize(count = n())
 recurrence_freq
@@ -99,19 +100,19 @@ knitr::include_graphics("./images/ggplot2/ggplot-grammar_layers.png")
 
 ```{r}
 # add a data layer
-ggplot(data = blood)
+ggplot(data = blood_storage)
 ```
 
 ```{r}
 # add a data later with an asthetic mapping
-ggplot(data = blood, mapping = aes(x = Recurrence))
+ggplot(data = blood_storage, mapping = aes(x = Recurrence))
 ```
 
 
 ```{r}
 # add a geometry layer
 # by default the stat layer for geom_bar will count values
-ggplot(data = blood, mapping = aes(x = Recurrence)) + geom_bar()
+ggplot(data =  blood_storage, mapping = aes(x = Recurrence)) + geom_bar()
 ```
 
 If we have a pre-calculated set of values, we want to tell `geom_bar` to use the `"identity"` statistic.
@@ -163,11 +164,11 @@ This means we can add more layers with different data sets if we want to.
 #### Continuous
 
 ```{r}
-ggplot(blood, aes(x = Age)) + geom_histogram()
+ggplot(blood_storage, aes(x = Age)) + geom_histogram()
 ```
 
 ```{r}
-ggplot(blood, aes(x = Age)) + geom_histogram(bins = 10)
+ggplot(blood_storage, aes(x = Age)) + geom_histogram(bins = 10)
 ```
 
 ### Bivariate
@@ -184,12 +185,12 @@ To convert the numeric column (or any column) into a categorical **factor** we c
 
 ```{r}
 # Does not show TVol properly
-ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
+ggplot(blood_storage) + geom_boxplot(aes(x = TVol, y = Age))
 ```
 
 ```{r}
 # please a box plot for each value of TVol as a factor
-ggplot(blood) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
+ggplot(blood_storage) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
 ```
 
 We can also use a violin plot, to better show the distribution of the dataset,
@@ -198,13 +199,13 @@ instead of using a boxplot.
 And we can also overlay a different geometry on top.
 
 ```{r}
-ggplot(blood) + 
+ggplot(blood_storage) + 
   geom_violin(aes(x = as.factor(TVol), y = Age)) +
   geom_point(aes(x = as.factor(TVol), y = Age))
 ```
 
 ```{r}
-ggplot(blood) +
+ggplot(blood_storage) +
   geom_violin(aes(x = as.factor(TVol), y = Age)) +
   geom_jitter(aes(x = as.factor(TVol), y = Age))
 ```
@@ -213,7 +214,7 @@ We can move around our data layers to save some typing,
 and have the geometry layer use the same data and mapping layer.
 
 ```{r}
-ggplot(blood, aes(x = as.factor(TVol), y = Age)) +
+ggplot(blood_storage, aes(x = as.factor(TVol), y = Age)) +
   geom_violin() +
   geom_jitter()
 ```
@@ -231,14 +232,14 @@ We can also set other asthetic mappings, e.g., color
   - 4 = Score 8-10
 
 ```{r}
-ggplot(blood) +
+ggplot(blood_storage) +
   geom_point(aes(x = PVol, y = PreopPSA, color = sGS))
 ```
 
 Again, we have a numeric variable that is really an ordinal categorical variable
 
 ```{r}
-ggplot(blood) +
+ggplot(blood_storage) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS)))
 ```
 
@@ -251,14 +252,14 @@ Think of this as the `group_by` version for plotting.
 
 ```{r}
 # use facet wrap for a single variable
-ggplot(blood) +
+ggplot(blood_storage) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS))) +
   facet_wrap(~ RBC.Age.Group)
 ```
 
 ```{r}
 # use facet grid for 2 variables
-ggplot(blood) +
+ggplot(blood_storage) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
 ```
@@ -266,7 +267,7 @@ ggplot(blood) +
 ## Themes
 
 ```{r}
-g <- ggplot(blood) +
+g <- ggplot(blood_storage) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
 g
@@ -301,7 +302,6 @@ g + theme_excel()
 1. Load the cytomegalovirus dataset, assign it to the variable `cmv`
 
 ```{r, eval=FALSE}
-library(medicaldata)
 ___ <- cytomegalovirus
 ```
 
