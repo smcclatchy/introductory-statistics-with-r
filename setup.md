@@ -8,9 +8,7 @@ the datasets downloaded and a programming language (e.g., R) installed.
 
 ## Datasets {-}
 
-You can find all the datasets needed from the workshop from the book's GitHub Page:
-
-https://github.com/chendaniely/ds4biomed
+You can find all the datasets needed from the workshop [from the book's GitHub Page](https://github.com/chendaniely/ds4biomed).
 
 You can click on the "Code" dropdown and select "Download Zip" to download the data and files for the lesson materials.
 
@@ -41,7 +39,7 @@ For mac users, download the `.pkg` file under the "Latest release" section
 
 For Windows users, please install both the `base` version as well as `Rtools`.
 
-![download R for Windows](./fig/setup/website-r_download-windows.PNG)
+![download R for Windows](./fig/website-r_download-windows.PNG)
 
 #### RStudio {-}
 
