@@ -19,8 +19,9 @@ source("../bin/chunk-options.R")
 knitr_fig_path("13-")
 ```
 
-```{r, results='hide'}
+```{r, message = FALSE}
 library(tidyverse)
+tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
 ### Mutate
