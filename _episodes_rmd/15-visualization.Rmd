@@ -299,11 +299,7 @@ g + theme_excel()
 
 <button class="accordion" id="question">Exercise 1 Question</button>
 :::{.panel-question}
-1. Load the cytomegalovirus dataset, assign it to the variable `cmv`
-
-```{r, eval=FALSE}
-___ <- cytomegalovirus
-```
+1. Load the [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) in the same way that you downloaded the blood storage data and loaded it into RStudio.
 
 2. Bar chart of the `cmv` response variable
 
@@ -331,8 +327,6 @@ ggplot(cmv, aes(as.factor(prior.transplant))) +
 <button class="accordion" id="solution">Exercise 1 Solution</button>
 :::{.panel-solution}
 ```{r}
-cmv <- medicaldata::cytomegalovirus
-
 ggplot(cmv) +
   geom_bar(aes(x = cmv))
 
