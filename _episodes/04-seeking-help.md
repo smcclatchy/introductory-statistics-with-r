@@ -1,3 +1,4 @@
+
 ## Seeking help
 
 ### Searching function documentation with `?` and `??`
@@ -115,10 +116,10 @@ and make it easy to pinpoint where the issue might be. Try to...
     are using. As an example, here you can see the versions of R and all the
     packages that we are using to run the code in this lesson:
 
-~~~
-`sessionInfo()`
-~~~
-{: .source}
+`# temporarily load the tidyverse package so that the version shows in sessionInfo()`  
+`library(tidyverse)`  
+`sessionInfo()`  
+`detach(package:tidyverse, unload=TRUE)`  
 
 ## How to learn more after the workshop?
 
@@ -132,6 +133,8 @@ to use it to address your actual research questions. As a beginner, it can feel
 daunting to have to write a script from scratch, and given that many people make
 their code available online, modifying existing code to suit your purpose might
 make it easier for you to get started.
+
+![Fake O'Reilly book entitled Changing Stuff and Seeing What Happens, with a kitten on the cover.](../fig/kitten-try-things.jpg)
 
 ## More resources
 
