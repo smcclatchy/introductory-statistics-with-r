@@ -168,9 +168,9 @@ The way we can **relatively** reference the previous folder is with 2 dots, `..`
 > Refer to the example folder structure above where we have a `chart_review/` and 
 > `rct_m22-0305/` folder in our `projects/` folder.
 > Let's say we are currently in the `chart_review/analysis/` folder, working on 
-> our `demographics.R` as denoted by the `#`.
-> 1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305/` folder.
-> 2. Write the **absolute path** to the `patients.csv` file in the `chart_review/` folder.
+> our `demographics.R` as denoted by the `#`.  
+> 1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305/` folder.  
+> 2. Write the **absolute path** to the `patients.csv` file in the `chart_review/` folder.  
 > 
 > >
 > > ## Solution
@@ -201,7 +201,7 @@ However, you can still use the regular `/` in Windows to refer to folders just l
 So far, we have been talking about a "starting point" or "working directory",
 when we have been referring to files around our computer.
 In order to quickly and reliably set your working directory,
-we use [ **RStudio Projects** ]({{ page.root }}{% link 02-knowing-your-way.md %}).
+we use [RStudio Projects]({{ page.root }}{% link 02-knowing-your-way.md %}).
 
 ## Reading text files (CSV)
 
@@ -447,16 +447,17 @@ objects besides `data.frame`.
 
 > ## Exercise
 > 
-> Based on the output of `str(tumor)`, can you answer the following questions?
+> Based on the output of `str(tumor)`, can you answer the following questions?  
 >
 > 1. What is the class of the object `tumor`?  
-> 2. How many rows and how many columns are in this object?
+> 2. How many rows and how many columns are in this object?  
+> 
 > > ## Solution
 > >
-> > str(tumor)
+> > str(tumor)  
 > >
-> > 1. class: data frame
-> > 2. how many rows: 574,  how many columns: 5
+> > 1. class: data frame  
+> > 2. how many rows: 574,  how many columns: 5  
 > {: .solution}
 {: .challenge}
 
@@ -797,22 +798,22 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 > ## Exercise
 >
 > 1. Create a `data.frame` (`tumors_200`) containing only the data in
->    row 200 of the `tumor` dataset.
+>    row 200 of the `tumor` dataset.  
 >
-> 2. Notice how `nrow()` gave you the number of rows in a `data.frame`?
+> 2. Notice how `nrow()` gave you the number of rows in a `data.frame`?  
 >
->      * Use that number to pull out just that last row in the data frame.
+>      * Use that number to pull out just that last row in the data frame.  
 >      * Compare that with what you see as the last row using `tail()` to make
->        sure it's meeting expectations.
->      * Pull out that last row using `nrow()` instead of the row number.
->      * Create a new data frame (`tumors_last`) from that last row.
+>        sure it's meeting expectations.  
+>      * Pull out that last row using `nrow()` instead of the row number.  
+>      * Create a new data frame (`tumors_last`) from that last row.  
 >
 > 3. Use `nrow()` to extract the row that is in the middle of the data
->    frame. Store the content of this row in an object named `tumors_middle`.
+>    frame. Store the content of this row in an object named `tumors_middle`.  
 >
 > 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of
 >    `head(tumor)`, keeping just the first through 6th rows of the surveys
->    dataset.
+>    dataset.  
 >    
 > > ## Solution
 > > 
