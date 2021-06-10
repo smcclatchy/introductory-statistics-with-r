@@ -10,11 +10,13 @@ the datasets downloaded and a programming language (e.g., R) installed.
 
 You can find all the datasets needed from the workshop [from the book's GitHub Page](https://github.com/chendaniely/ds4biomed).
 
-You can click on the "Code" dropdown and select "Download Zip" to download the data and files for the lesson materials.
+1. You can click on the "Code" dropdown and select "Download Zip" to download the data and files for the lesson materials.
 
 ![download zip file from Github](./fig/github-download_zip.PNG)
 
-Go to your Downloads folder to locate the `ds4biomed-learner` folder. Move this folder onto your Desktop and unzip it if it is still zipped.
+2. Go to your Downloads folder to locate the `ds4biomed-learner` folder.  
+3. Move this folder onto your Desktop and unzip it if it is still zipped.  
+4. Create a new folder named `scripts` inside of the `ds4biomed-learner` folder.
 
 ## Programming language {-}
 
