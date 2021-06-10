@@ -198,6 +198,8 @@ daunting to have to write a script from scratch, and given that many people make
 their code available online, modifying existing code to suit your purpose might
 make it easier for you to get started.
 
+![Fake O'Reilly book entitled Changing Stuff and Seeing What Happens, with a kitten on the cover.](../fig/kitten-try-things.jpg)
+
 ## More resources
 
 #### More about R
