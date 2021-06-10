@@ -16,7 +16,6 @@ You can find all the datasets needed from the workshop [from the book's GitHub P
 
 2. Go to your Downloads folder to locate the `ds4biomed-learner` folder.  
 3. Move this folder onto your Desktop and unzip it if it is still zipped.  
-4. Create a new folder named `scripts` inside of the `ds4biomed-learner` folder.
 
 ## Programming language {-}
 
