@@ -110,17 +110,18 @@ The main benefit of using projects for your own work is that the project is more
 and across collaborators.
 
 > ## Exercise 1
-> 
+>
 > 1. Open the RStudio project for this workshop/book.  
 > 2. Create a new R script and save it to the project folder, name the file `00-rstudio.R`.  
 > 3. On line 1 type: `3 + 3`   
 > 4. On line 3 type: `print("ds4biomed")`  
 > 5. Run these lines of code one line at a time (e.g., using `Ctrl+Enter`)  
 > 6. Run all the lines at once (e.g., clicking the `Source` button)  
+>
 > >
 > > ## Solution
 > >
-> > 
+> >
 > >
 > > {: .output}
 > {: .solution}
