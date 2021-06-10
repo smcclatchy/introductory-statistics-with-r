@@ -201,7 +201,7 @@ However, you can still use the regular `/` in Windows to refer to folders just l
 So far, we have been talking about a "starting point" or "working directory",
 when we have been referring to files around our computer.
 In order to quickly and reliably set your working directory,
-we use [RStudio Projects]({{ page.root }}{% link 02-knowing-your-way.md %}).
+we use RStudio Projects.
 
 ## Reading text files (CSV)
 
