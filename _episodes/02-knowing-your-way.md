@@ -111,7 +111,7 @@ and across collaborators.
 
 > ## Exercise 1
 >
-> 1. Open the RStudio project for this workshop/book.  
+> 1. Open the RStudio project for this workshop/book located in a file named `ds4biomed.Rproj`. You can find it on your Desktop in the `ds4biomed-learner` folder. Refer to the [Setup instructions]({{ page.root }}{% link setup.md %}) if you do not have this folder on your Desktop yet.  
 > 2. Create a new R script and save it to the project folder, name the file `00-rstudio.R`.  
 > 3. On line 1 type: `3 + 3`   
 > 4. On line 3 type: `print("ds4biomed")`  
