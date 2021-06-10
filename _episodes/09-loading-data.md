@@ -362,7 +362,7 @@ vectors, each column must contain a single type of data (e.g., characters, integ
 factors). For example, here is a figure depicting a data frame comprising a
 numeric, a character, and a logical vector.
 
-![](./img/data-frame.svg)
+![example data frame](../fig/data-frame.svg)
 We can see this also when inspecting the <b>str</b>ucture of a data frame
 with the function `str()`:
 
@@ -453,28 +453,10 @@ objects besides `data.frame`.
 > 2. How many rows and how many columns are in this object?
 > > ## Solution
 > >
-> > 
-> >
-> >
-> >~~~
-> >
 > > str(tumor)
 > >
 > > 1. class: data frame
-> > 2. how many rows: 34786,  how many columns: 13
-> >~~~
-> >{: .language-r}
-> >
-> >
-> >
-> >~~~
-> >Error: <text>:4:5: unexpected symbol
-> >3: 
-> >4:  1. class
-> >       ^
-> >~~~
-> >{: .error}
-> > {: .output}
+> > 2. how many rows: 574,  how many columns: 5
 > {: .solution}
 {: .challenge}
 
@@ -511,19 +493,20 @@ tumor[1, 1]
 
 
 ~~~
-# First row, sixth column:
-tumor[1, 6]   
+# First row, fifth column:
+tumor[1, 5]   
 ~~~
 {: .language-r}
 
 
 
 ~~~
-Error: Can't subset columns that don't exist.
-✖ Location 6 doesn't exist.
-ℹ There are only 5 columns.
+# A tibble: 1 x 1
+   Size
+  <dbl>
+1  41.8
 ~~~
-{: .error}
+{: .output}
 
 
 
@@ -606,36 +589,42 @@ tumor[1] # No comma!
 
 ~~~
 # To select multiple rows or columns, use vectors!
-# To select the first three rows of the 5th and 6th column
-tumor[c(1, 2, 3), c(5, 6)] 
+# To select the first three rows of the 4th and 5th column
+tumor[c(1, 2, 3), c(4, 5)] 
 ~~~
 {: .language-r}
 
 
 
 ~~~
-Error: Can't subset columns that don't exist.
-✖ Location 6 doesn't exist.
-ℹ There are only 5 columns.
+# A tibble: 3 x 2
+    Day  Size
+  <dbl> <dbl>
+1     0  41.8
+2     3  85  
+3     4 114  
 ~~~
-{: .error}
+{: .output}
 
 
 
 ~~~
 # We can use the : operator to create those vectors for us:
-tumor[1:3, 5:6] 
+tumor[1:3, 4:5] 
 ~~~
 {: .language-r}
 
 
 
 ~~~
-Error: Can't subset columns that don't exist.
-✖ Location 6 doesn't exist.
-ℹ There are only 5 columns.
+# A tibble: 3 x 2
+    Day  Size
+  <dbl> <dbl>
+1     0  41.8
+2     3  85  
+3     4 114  
 ~~~
-{: .error}
+{: .output}
 
 
 

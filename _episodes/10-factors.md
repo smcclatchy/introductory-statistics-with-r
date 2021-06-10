@@ -157,7 +157,8 @@ be able to tell just from the integer data. Factors, on the other hand, have
 this information built in. It is particularly helpful when there are many levels
 (like the `Grp` names in our example dataset).
 
-> ### Exercise
+>
+> ## Exercise
 >
 > 1. Change the column `Grp` in the `tumor` data frame into a 
 >    factor.  
@@ -293,7 +294,8 @@ plot(tumor$Grp)
 
 <img src="../fig/rmd-10-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 
-> ### Exercise
+>
+> ## Exercise
 >
 > 1. We have seen how data frames are created when using `read_csv()`, but
 >   they can also be created by hand with the `data.frame()` function.  There are
@@ -336,8 +338,7 @@ plot(tumor$Grp)
 > >  characters; `has_kangaroo` is numeric  
 > >  * using `factor()` one could replace character columns with factors columns  
 > >  * removing the quotes in `temperature` and `northern_hemisphere` and replacing 1
-> >  by TRUE in the `has_kangaroo` column would give what was probably intended  
-> >  
+> >  by TRUE in the `has_kangaroo` column would give what was probably intended   
 > {: .solution}
 {: .challenge}
 
