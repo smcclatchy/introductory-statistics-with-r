@@ -180,10 +180,10 @@ and make it easy to pinpoint where the issue might be. Try to...
     are using. As an example, here you can see the versions of R and all the
     packages that we are using to run the code in this lesson:
 
-`# temporarily load the tidyverse package so that the version shows in sessionInfo()`
-`library(tidyverse)`
-`sessionInfo()`
-`detach(package:tidyverse, unload=TRUE)`
+`# temporarily load the tidyverse package so that the version shows in sessionInfo()`  
+`library(tidyverse)`  
+`sessionInfo()`  
+`detach(package:tidyverse, unload=TRUE)`  
 
 ## How to learn more after the workshop?
 
