@@ -137,18 +137,27 @@ The way we can **relatively** reference the previous folder is with 2 dots, `..`
                   |- patients.csv
 ```
 
+>
 > ## Exercise 1 
+>
+> Refer to the example folder structure above where we have a `chart_review/` and 
+> `rct_m22-0305/` folder in our `projects/` folder.
+> Let's say we are currently in the `chart_review/analysis/` folder, working on 
+> our `demographics.R` as denoted by the `#`.
+> 1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305/` folder.
+> 2. Write the **absolute path** to the `patients.csv` file in the `chart_review/` folder.
 > 
-> Refer to the example folder structure above where we have a `chart_review` and `rct_m22-0305` folder in our `projects` folder.
-> Let's say we are currently in the `chart_review/analysis` folder, working on our `demographics.R` as denoted by the `#`.
-> 1. Write the **relative path** to the `patients.csv` file in the `rct_m22-0305` folder.
-> 2. Write the **absolute path** to the `patients.csv` file in the `chart_review` folder.
 > >
 > > ## Solution
-> >
-> > 
-> >
-> > {: .output}
+> > 1. Assuming that we are located in the `chart_review/analysis/` folder, the relative path to the
+> >  `patients.csv` file located in the `rct_m22-0305` folder is  
+> > `../../rct_m22-0305/data/patients.csv` on a Mac. One set of `../` brings us up a level
+> > to the `chart_review` folder, while the second set of `../` brings us up a level to the 
+> > `projects` folder. Then we can descend into the `rct_m22-0305` folder followed by the `data` folder.  
+> > 2. The absolute path to the `patients.csv` file in the `chart_review/` folder is  
+> > `/Users/Daniel/projects/chart_review/data/patients.csv` on a Mac  
+> > and  
+> > `C:\Users\Daniel\projects\chart_review\data\patients.csv` on Windows. 
 > {: .solution}
 {: .challenge}
 
@@ -167,12 +176,14 @@ However, you can still use the regular `/` in Windows to refer to folders just l
 So far, we have been talking about a "starting point" or "working directory",
 when we have been referring to files around our computer.
 In order to quickly and reliably set your working directory,
-we use **RStudio Projects** (Section \@ref(rstudio-projects)).
-
+we use [ **RStudio Projects** ]({{ page.root }}{% link 02-knowing-your-way.md %}).
 
 ## Reading text files (CSV)
 
 Now that we know how to find our files, let's load up our first data set.
+Make sure you are in your `analysis` folder by typing `getwd()` in the Console.
+If you need to move into the `analysis` folder you can use   
+Session &#8594; Set Working Directory &#8594; Choose Directory. 
 When trying to type in a file path,
 you can hit the `<TAB>` key to autocomplete the files.
 This will help you with a lot of potential spelling mistakes.
@@ -382,7 +393,7 @@ tumor$Size
 
 In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.
 
-> ### Exercise
+> ## Exercise
 >
 > 1. Create a `data.frame` (`tumors_200`) containing only the data in
 >    row 200 of the `tumor` dataset.
