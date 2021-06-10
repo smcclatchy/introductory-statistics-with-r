@@ -191,16 +191,21 @@ ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`),
 factors (`factor`) and arrays (`array`).
 
 
-> ### Challenge
->
+> ## Exercise 1
 >
 > * We’ve seen that atomic vectors can be of type character,
 >   numeric (or double), integer, and logical. But what happens if we try to mix these types in
 >   a single vector?
 > 
-> 
+> > ## Solution
+> >
+> > R implicitly converts them to all be the same type
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 2
 >
-> * What will happen in each of these examples? (hint: use `class()`
+> What will happen in each of these examples? (hint: use `class()`
 >   to check the data type of your objects):
 >
 >     ```r
@@ -210,27 +215,45 @@ factors (`factor`) and arrays (`array`).
 >     tricky <- c(1, 2, 3, "4")
 >     ```
 >
-> * Why do you think it happens?
+> Why do you think it happens?
 >
-> 
+> > ## Solution
+> >
+> > Vectors can be of only one data type. R tries to
+> > convert (coerce) the content of this vector to find a "common
+> > denominator" that doesn't lose any information.
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 3
 >
-> * How many values in `combined_logical` are `"TRUE"` (as a character) in the
+> How many values in `combined_logical` are `"TRUE"` (as a character) in the
 >   following example (reusing the 2 `..._logical`s from above):
 >
 >     ```r
 >     combined_logical <- c(num_logical, char_logical)
 >     ```
 >
-> 
+> > ## Solution
+> >
+> > Only one. There is no memory of past data types, and the coercion happens the
+> > first time the vector is evaluated. Therefore, the `TRUE` in `num_logical`
+> > gets converted into a `1` before it gets converted into `"1"` in
+> > `combined_logical`.
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 4
 >
-> * You've probably noticed that objects of different types get
+> You've probably noticed that objects of different types get
 >   converted into a single, shared type within a vector. In R, we
 >   call converting objects from one class into another class
 >   _coercion_. These conversions happen according to a hierarchy,
 >   whereby some types get preferentially coerced into other
 >   types. Can you draw a diagram that represents the hierarchy of how
 >   these data types are coerced?
->
-> 
-
-
+> > ## Solution
+> >
+> > logical &#8594; numeric &#8594; character &#8592; logical
+> {: .solution}
+{: .challenge}

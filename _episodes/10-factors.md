@@ -19,44 +19,6 @@ keypoints:
 
 
 
-~~~
-── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-✔ tibble  3.1.0     ✔ dplyr   1.0.5
-✔ tidyr   1.1.3     ✔ stringr 1.4.0
-✔ readr   1.4.0     ✔ forcats 0.5.1
-~~~
-{: .output}
-
-
-
-~~~
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-~~~
-{: .output}
-
-
-
-~~~
-
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-cols(
-  Grp = col_character(),
-  Group = col_double(),
-  ID = col_double(),
-  Day = col_double(),
-  Size = col_double()
-)
-~~~
-{: .output}
 
 ## Factors in R
 
