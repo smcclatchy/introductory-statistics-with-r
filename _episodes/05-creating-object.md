@@ -86,13 +86,15 @@ doubt, check the help to see if the name is already in use.
 Fan](https://jef.works/R-style-guide/) and the
 [tidyverse](https://style.tidyverse.org/). The tidyverse style is very comprehensive and may seem overwhelming at first. You can install the [**`lintr`**](https://github.com/jimhester/lintr) package to automatically check for issues in the styling of your code.
 
-> ### Objects vs. variables
+>
+> ## Objects vs. variables
 >
 > What are known as `objects` in `R` are known as `variables` in many other
 > programming languages. Depending on the context, `object` and `variable` can
 > have drastically different meanings. However, in this lesson, the two words
 > are used synonymously. For more information see:
 > https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects
+{: .callout}
 
 
 When assigning a value to an object, R does not print anything. You can force R to print the value by using parentheses or by typing the object name:
@@ -205,7 +207,8 @@ out one line, you can put the cursor at any location of that line (i.e. no need
 to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 
 <kbd>C</kbd>.
 
-> ### Challenge
+>
+> ## Exercise
 >
 > What are the values after each statement in the following?
 >
@@ -218,8 +221,15 @@ to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
 > mass_index <- mass/age  # mass_index?
 > ~~~
 > {: .language-r}
-
-
+> > ## Solution
+> >
+> > 1. mass equals 47.5  
+> > 2. age equals 122  
+> > 3. mass equals 95.0  
+> > 4. age equals 102
+> >
+> {: .solution}
+{: .challenge}
 
 ### Functions and their arguments
 
