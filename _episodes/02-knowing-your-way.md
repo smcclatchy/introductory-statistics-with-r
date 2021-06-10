@@ -111,19 +111,25 @@ and across collaborators.
 
 > ## Exercise 1
 >
-> 1. Open the RStudio project for this workshop/book located in a file named `ds4biomed.Rproj`. You can find it on your Desktop in the `ds4biomed-learner` folder. Refer to the [Setup instructions]({{ page.root }}{% link setup.md %}) if you do not have this folder on your Desktop yet.  
-> 2. Create a new R script and save it to the project folder, name the file `00-rstudio.R`.  
-> 3. On line 1 type: `3 + 3`   
-> 4. On line 3 type: `print("ds4biomed")`  
-> 5. Run these lines of code one line at a time (e.g., using `Ctrl+Enter`)  
-> 6. Run all the lines at once (e.g., clicking the `Source` button)  
+> 1. Open the RStudio project for this workshop/book located in a file named `ds4biomed.Rproj`. 
+> You can find it on your Desktop in the `ds4biomed-learner` folder. Refer to the 
+> [Setup instructions]({{ page.root }}{% link setup.md %}) if you do not have this 
+> folder on your Desktop yet.  
+> 2. Click on the Files tab in the lower right panel.
+> 3. Click on New Folder and create a folder named `scripts`.
+> 4. Move into the `scripts` folder with Session &#8594; Set Working Directory &#8594; Choose Directory.
+> Select the `scripts` folder. 
+> 5. Create a new R script and save it to the `scripts` folder as the file `00-rstudio.R`.    
+> 6. On line 1 type: `3 + 3`   
+> 7. On line 3 type: `print("ds4biomed")`  
+> 8. Run these lines of code one line at a time (e.g., using `Ctrl+Enter`)  
+> 9. Run all the lines at once (e.g., clicking the `Source` button)  
 >
 > >
 > > ## Solution
 > >
 > >
 > >
-> > {: .output}
 > {: .solution}
 {: .challenge}
 
