@@ -55,22 +55,25 @@ tumor %>%
   head()
 ```
 
-> ### Challenge {.challenge}
+> ## Exercise 
 >
->  Create a new data frame from the `surveys` data that meets the following
+>  Create a new data frame from the `tumor` data that meets the following
 >  criteria: contains only the `Grp` column and a new column called
 >  `size_cubic_in` containing the `Size` values converted to cubic inches.
 >  In this `size_cubic_in` column, all values are greater than 0.1.
 >
 >  **Hint**: think about how the commands should be ordered to produce this data frame!
-> 
-> ```{r, answer=TRUE, eval=FALSE, purl=FALSE}
-> tumor_cubic_in <- tumor %>%
->     mutate(size_cubic_cm = Size / 1000,
-         size_cubic_in = size_cubic_cm / 16) %>%
->     filter(size_cubic_in > 0.1) %>%
->     select(Grp, size_cubic_in)
-> ```
+>  
+> > ## Solution
+> > 
+> > ```{r, answer=TRUE, eval=FALSE, purl=FALSE}
+> > tumor_cubic_in <- tumor %>%
+> >   mutate(size_cubic_cm = Size / 1000, size_cubic_in = size_cubic_cm / 16) %>%
+> >   filter(size_cubic_in > 0.1) %>%
+> >   select(Grp, size_cubic_in)
+> > ```
+> {: .solution}
+{: .challenge}
 
 ### Split-apply-combine data analysis and the `summarize()` function
 
@@ -186,37 +189,50 @@ tumor %>%
   arrange(Day, desc(n))
 ```
 
-> ### Challenge {.challenge}
+> ## Exercise 2
 >
-> 1. How many observations are there for each `ID` number?
+> How many observations are there for each `ID` number?
+> 
+> > ## Solution
+> > ```{r, answer=TRUE, purl=FALSE}
+> > tumor %>%
+> >    count(ID) 
+> > ```
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 2
 >
-> ```{r, answer=TRUE, purl=FALSE}
-> tumor %>%
->     count(ID) 
-> ```
->
-> 2. Use `group_by()` and `summarize()` to find the mean, min, and max tumor
+> Use `group_by()` and `summarize()` to find the mean, min, and max tumor
 > size for each ID (using `ID`). Also add the number of
 > observations (hint: see `?n`).
+> 
+> > ## Solution
+> > ```{r, answer=TRUE, purl=FALSE}
+> > tumor %>%
+> >    group_by(ID) %>%
+> >   summarize(
+> >        mean_size = mean(Size),
+> >        min_size = min(Size),
+> >        max_size = max(Size),
+> >        n = n()
+> >    )
+> > ```
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 3
 >
-> ```{r, answer=TRUE, purl=FALSE}
-> tumor %>%
->     group_by(ID) %>%
->     summarize(
->         mean_size = mean(Size),
->         min_size = min(Size),
->         max_size = max(Size),
->         n = n()
->     )
-> ```
->
-> 3. What was the largest tumor measured in each day? Return the columns `Day`,
+> What was the largest tumor measured in each day? Return the columns `Day`,
 > `Grp`, `ID`, and `Size`.
->
-> ```{r, answer=TRUE, purl=FALSE}
-> tumor %>%
->     group_by(Day) %>%
->     filter(Size == max(Size)) %>%
->     select(Day, Grp, ID, Size) %>%
->     arrange(Day)
+> 
+> > ## Solution
+> > ```{r, answer=TRUE, purl=FALSE}
+> > tumor %>%
+> >    group_by(Day) %>%
+> >    filter(Size == max(Size)) %>%
+> >    select(Day, Grp, ID, Size) %>%
+> >    arrange(Day)
 > ```
+> {: .solution}
+{: .challenge}
