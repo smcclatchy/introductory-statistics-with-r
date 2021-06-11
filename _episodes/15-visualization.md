@@ -153,11 +153,7 @@ recurrence_freq
 
 ## Grammar of Graphics
 
-
-~~~
-Error in knitr::include_graphics("./images/ggplot2/ggplot-grammar_layers.png"): Cannot find the file(s): "./images/ggplot2/ggplot-grammar_layers.png"
-~~~
-{: .error}
+<img src="../fig/ggplot-grammar_layers.png" title="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." alt="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." style="display: block; margin: auto;" />
 
 ## Data + geometries
 
@@ -551,86 +547,80 @@ Warning: Removed 11 rows containing missing values (geom_point).
 <img src="../fig/rmd-15-unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" width="612" style="display: block; margin: auto;" />
 
 
-<button class="accordion" id="question">Exercise 1 Question</button>
-:::{.panel-question}
-1. Load the [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) in the same way that you downloaded the blood storage data and loaded it into RStudio.
-
-2. Bar chart of the `cmv` response variable
-
-
-~~~
-ggplot(cmv) +
-  ____(aes(x = ____))
-~~~
-{: .language-r}
-
-3. bar plot of `prior.transplant`, colored by `cmv` values
-
-
-~~~
-ggplot(____, aes(as.factor(____))) +
-  geom_bar(aes(fill = as.factor(____)))
-~~~
-{: .language-r}
-
-4. facet by both `donor.cmv` and `recipient.cmv`
-
-
-~~~
-ggplot(cmv, aes(as.factor(prior.transplant))) +
-  geom_bar(aes(fill = as.factor(cmv))) +
-  ____(____ ~ ____)
-~~~
-{: .language-r}
-:::
-
-<button class="accordion" id="solution">Exercise 1 Solution</button>
-:::{.panel-solution}
-
-~~~
-ggplot(cmv) +
-  geom_bar(aes(x = cmv))
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in ggplot(cmv): object 'cmv' not found
-~~~
-{: .error}
-
-
-
-~~~
-ggplot(cmv, aes(as.factor(prior.transplant))) +
-  geom_bar(aes(fill = as.factor(cmv)))
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in ggplot(cmv, aes(as.factor(prior.transplant))): object 'cmv' not found
-~~~
-{: .error}
-
-
-
-~~~
-ggplot(cmv, aes(as.factor(prior.transplant))) +
-  geom_bar(aes(fill = as.factor(cmv))) +
-  facet_grid(donor.cmv ~ recipient.cmv)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in ggplot(cmv, aes(as.factor(prior.transplant))): object 'cmv' not found
-~~~
-{: .error}
-:::
+> ## Exercise
+> 1. Load the 
+> [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) 
+> in the same way that you downloaded the blood storage data and loaded it into RStudio.
+> 2. Bar chart of the `cmv` response variable
+> 
+> 
+> ~~~
+> ggplot(cmv) +
+> ____(aes(x = ____))
+> ~~~
+> {: .language-r}
+> 
+> 3. bar plot of `prior.transplant`, colored by `cmv` values
+> 
+> ~~~
+> ggplot(____, aes(as.factor(____))) +  
+> geom_bar(aes(fill = as.factor(____)))
+> ~~~
+> {: .language-r}
+> 4. facet by both `donor.cmv` and `recipient.cmv`
+> 
+> ~~~
+> ggplot(cmv, aes(as.factor(prior.transplant))) +  
+> geom_bar(aes(fill = as.factor(cmv))) +  
+> ____(____ ~ ____)
+> ~~~
+> {: .language-r}
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(cmv) +  
+> > geom_bar(aes(x = cmv))
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Error in ggplot(cmv): object 'cmv' not found
+> > ~~~
+> > {: .error}
+> > 
+> > 
+> > 
+> > ~~~
+> > ggplot(cmv, aes(as.factor(prior.transplant))) +  
+> > geom_bar(aes(fill = as.factor(cmv)))
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Error in ggplot(cmv, aes(as.factor(prior.transplant))): object 'cmv' not found
+> > ~~~
+> > {: .error}
+> > 
+> > 
+> > 
+> > ~~~
+> > ggplot(cmv, aes(as.factor(prior.transplant))) +  
+> > geom_bar(aes(fill = as.factor(cmv))) +  
+> > facet_grid(donor.cmv ~ recipient.cmv)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Error in ggplot(cmv, aes(as.factor(prior.transplant))): object 'cmv' not found
+> > ~~~
+> > {: .error}
 
 ## Additional Resources
 
