@@ -362,7 +362,7 @@ vectors, each column must contain a single type of data (e.g., characters, integ
 factors). For example, here is a figure depicting a data frame comprising a
 numeric, a character, and a logical vector.
 
-![example data frame](../fig/data-frame.svg)
+![example data frame](../fig/data-frame.png)
 We can see this also when inspecting the <b>str</b>ucture of a data frame
 with the function `str()`:
 
