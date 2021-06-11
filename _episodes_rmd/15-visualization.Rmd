@@ -93,7 +93,7 @@ recurrence_freq
 ## Grammar of Graphics
 
 ```{r, echo=FALSE, fig.cap="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen."}
-knitr::include_graphics("./images/ggplot2/ggplot-grammar_layers.png")
+knitr::include_graphics("../fig/ggplot-grammar_layers.png")
 ```
 
 ## Data + geometries
@@ -297,47 +297,41 @@ g + theme_excel()
 ```
 
 
-<button class="accordion" id="question">Exercise 1 Question</button>
-:::{.panel-question}
-1. Load the [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) in the same way that you downloaded the blood storage data and loaded it into RStudio.
-
-2. Bar chart of the `cmv` response variable
-
-```{r, eval=FALSE}
-ggplot(cmv) +
-  ____(aes(x = ____))
-```
-
-3. bar plot of `prior.transplant`, colored by `cmv` values
-
-```{r, eval=FALSE}
-ggplot(____, aes(as.factor(____))) +
-  geom_bar(aes(fill = as.factor(____)))
-```
-
-4. facet by both `donor.cmv` and `recipient.cmv`
-
-```{r, eval=FALSE}
-ggplot(cmv, aes(as.factor(prior.transplant))) +
-  geom_bar(aes(fill = as.factor(cmv))) +
-  ____(____ ~ ____)
-```
-:::
-
-<button class="accordion" id="solution">Exercise 1 Solution</button>
-:::{.panel-solution}
-```{r}
-ggplot(cmv) +
-  geom_bar(aes(x = cmv))
-
-ggplot(cmv, aes(as.factor(prior.transplant))) +
-  geom_bar(aes(fill = as.factor(cmv)))
-
-ggplot(cmv, aes(as.factor(prior.transplant))) +
-  geom_bar(aes(fill = as.factor(cmv))) +
-  facet_grid(donor.cmv ~ recipient.cmv)
-```
-:::
+> ## Exercise
+> 1. Load the 
+> [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) 
+> in the same way that you downloaded the blood storage data and loaded it into RStudio.
+> 2. Bar chart of the `cmv` response variable
+> 
+> ```{r, eval=FALSE}
+> ggplot(cmv) +
+> ____(aes(x = ____))
+> ```
+> 
+> 3. bar plot of `prior.transplant`, colored by `cmv` values
+> ```{r, eval=FALSE}
+> ggplot(____, aes(as.factor(____))) +  
+> geom_bar(aes(fill = as.factor(____)))
+> ```
+> 4. facet by both `donor.cmv` and `recipient.cmv`
+> ```{r, eval=FALSE}
+> ggplot(cmv, aes(as.factor(prior.transplant))) +  
+> geom_bar(aes(fill = as.factor(cmv))) +  
+> ____(____ ~ ____)
+> ```
+> 
+> > ## Solution
+> > ```{r}
+> > ggplot(cmv) +  
+> > geom_bar(aes(x = cmv))
+> >   
+> > ggplot(cmv, aes(as.factor(prior.transplant))) +  
+> > geom_bar(aes(fill = as.factor(cmv)))
+> > 
+> > ggplot(cmv, aes(as.factor(prior.transplant))) +  
+> > geom_bar(aes(fill = as.factor(cmv))) +  
+> > facet_grid(donor.cmv ~ recipient.cmv)
+> > ```
 
 ## Additional Resources
 
