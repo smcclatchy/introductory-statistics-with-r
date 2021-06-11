@@ -24,7 +24,7 @@ knitr_fig_path("12-")
 
 New script, clear your environment, re-load your libraries
 
-```{r, results='hide'}
+```{r, message=FALSE}
 library(tidyverse)
 ```
 
