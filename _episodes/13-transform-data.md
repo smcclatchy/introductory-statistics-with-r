@@ -117,24 +117,27 @@ tumor %>%
 ~~~
 {: .output}
 
-> ### Challenge {.challenge}
+> ## Exercise 
 >
->  Create a new data frame from the `surveys` data that meets the following
+>  Create a new data frame from the `tumor` data that meets the following
 >  criteria: contains only the `Grp` column and a new column called
 >  `size_cubic_in` containing the `Size` values converted to cubic inches.
 >  In this `size_cubic_in` column, all values are greater than 0.1.
 >
 >  **Hint**: think about how the commands should be ordered to produce this data frame!
-> 
-> 
-> ~~~
-> tumor_cubic_in <- tumor %>%
->     mutate(size_cubic_cm = Size / 1000,
->          size_cubic_in = size_cubic_cm / 16) %>%
->     filter(size_cubic_in > 0.1) %>%
->     select(Grp, size_cubic_in)
-> ~~~
-> {: .language-r}
+>  
+> > ## Solution
+> > 
+> > 
+> > ~~~
+> > tumor_cubic_in <- tumor %>%
+> >   mutate(size_cubic_cm = Size / 1000, size_cubic_in = size_cubic_cm / 16) %>%
+> >   filter(size_cubic_in > 0.1) %>%
+> >   select(Grp, size_cubic_in)
+> > ~~~
+> > {: .language-r}
+> {: .solution}
+{: .challenge}
 
 ### Split-apply-combine data analysis and the `summarize()` function
 
@@ -474,104 +477,117 @@ tumor %>%
 ~~~
 {: .output}
 
-> ### Challenge {.challenge}
+> ## Exercise 2
 >
-> 1. How many observations are there for each `ID` number?
+> How many observations are there for each `ID` number?
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > tumor %>%
+> >    count(ID) 
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > # A tibble: 37 x 2
+> >       ID     n
+> >    <dbl> <int>
+> >  1   101    16
+> >  2   102    16
+> >  3   103    12
+> >  4   104    13
+> >  5   105    11
+> >  6   106    13
+> >  7   107     8
+> >  8   108     8
+> >  9   201    19
+> > 10   202    15
+> > # … with 27 more rows
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 2
 >
-> 
-> ~~~
-> tumor %>%
->     count(ID) 
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 37 x 2
->       ID     n
->    <dbl> <int>
->  1   101    16
->  2   102    16
->  3   103    12
->  4   104    13
->  5   105    11
->  6   106    13
->  7   107     8
->  8   108     8
->  9   201    19
-> 10   202    15
-> # … with 27 more rows
-> ~~~
-> {: .output}
->
-> 2. Use `group_by()` and `summarize()` to find the mean, min, and max tumor
+> Use `group_by()` and `summarize()` to find the mean, min, and max tumor
 > size for each ID (using `ID`). Also add the number of
 > observations (hint: see `?n`).
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > tumor %>%
+> >    group_by(ID) %>%
+> >   summarize(
+> >        mean_size = mean(Size),
+> >        min_size = min(Size),
+> >        max_size = max(Size),
+> >        n = n()
+> >    )
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > # A tibble: 37 x 5
+> >       ID mean_size min_size max_size     n
+> >    <dbl>     <dbl>    <dbl>    <dbl> <int>
+> >  1   101      810.     41.8    1678.    16
+> >  2   102      670.     79.4    1564.    16
+> >  3   103      640.     44.8    2406.    12
+> >  4   104      595.     67.7    1964.    13
+> >  5   105      683.     54.7    2163.    11
+> >  6   106      488.     60      2125.    13
+> >  7   107      809.     46.8    2343.     8
+> >  8   108      917.     49.4    2296.     8
+> >  9   201      768.     49.1    1998.    19
+> > 10   202      674.     60.6    2047.    15
+> > # … with 27 more rows
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 3
 >
-> 
-> ~~~
-> tumor %>%
->     group_by(ID) %>%
->     summarize(
->         mean_size = mean(Size),
->         min_size = min(Size),
->         max_size = max(Size),
->         n = n()
->     )
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 37 x 5
->       ID mean_size min_size max_size     n
->    <dbl>     <dbl>    <dbl>    <dbl> <int>
->  1   101      810.     41.8    1678.    16
->  2   102      670.     79.4    1564.    16
->  3   103      640.     44.8    2406.    12
->  4   104      595.     67.7    1964.    13
->  5   105      683.     54.7    2163.    11
->  6   106      488.     60      2125.    13
->  7   107      809.     46.8    2343.     8
->  8   108      917.     49.4    2296.     8
->  9   201      768.     49.1    1998.    19
-> 10   202      674.     60.6    2047.    15
-> # … with 27 more rows
-> ~~~
-> {: .output}
->
-> 3. What was the largest tumor measured in each day? Return the columns `Day`,
+> What was the largest tumor measured in each day? Return the columns `Day`,
 > `Grp`, `ID`, and `Size`.
->
 > 
-> ~~~
-> tumor %>%
->     group_by(Day) %>%
->     filter(Size == max(Size)) %>%
->     select(Day, Grp, ID, Size) %>%
->     arrange(Day)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 29 x 4
-> # Groups:   Day [29]
->      Day Grp      ID  Size
->    <dbl> <chr> <dbl> <dbl>
->  1     0 1.CTR   102  79.4
->  2     1 1.CTR   102 110. 
->  3     2 3.R     306 129. 
->  4     3 2.D     210 134  
->  5     4 1.CTR   102 201. 
->  6     5 3.R     306 316. 
->  7     6 3.R     308 612. 
->  8     7 3.R     301 732. 
->  9     8 1.CTR   102 670  
-> 10     9 3.R     310 892. 
-> # … with 19 more rows
-> ~~~
-> {: .output}
+> > ## Solution
+> > 
+> > ~~~
+> > tumor %>%
+> >    group_by(Day) %>%
+> >    filter(Size == max(Size)) %>%
+> >    select(Day, Grp, ID, Size) %>%
+> >    arrange(Day)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > # A tibble: 29 x 4
+> > # Groups:   Day [29]
+> >      Day Grp      ID  Size
+> >    <dbl> <chr> <dbl> <dbl>
+> >  1     0 1.CTR   102  79.4
+> >  2     1 1.CTR   102 110. 
+> >  3     2 3.R     306 129. 
+> >  4     3 2.D     210 134  
+> >  5     4 1.CTR   102 201. 
+> >  6     5 3.R     306 316. 
+> >  7     6 3.R     308 612. 
+> >  8     7 3.R     301 732. 
+> >  9     8 1.CTR   102 670  
+> > 10     9 3.R     310 892. 
+> > # … with 19 more rows
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
