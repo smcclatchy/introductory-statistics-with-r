@@ -20,7 +20,7 @@ source("../bin/chunk-options.R")
 knitr_fig_path("14-")
 ```
 
-```{r, results='hide'}
+```{r, message=FALSE}
 library(tidyverse)
 ```
 
