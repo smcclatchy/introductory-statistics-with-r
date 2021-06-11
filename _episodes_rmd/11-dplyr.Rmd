@@ -224,7 +224,7 @@ We can then write out the datafrme to a file (in this case a CSV text file),
 using the same file pathing string format as we loaded a dataset earlier.
 
 ```{r}
-write_csv(filtered, "data/tumor_filtered.csv")
+write_csv(filtered, "../data/tumor_filtered.csv")
 ```
 
 One thing to be mindful of is most programs and computer languages don't like having spaces in file names.
