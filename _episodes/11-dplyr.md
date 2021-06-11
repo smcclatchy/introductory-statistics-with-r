@@ -616,7 +616,7 @@ using the same file pathing string format as we loaded a dataset earlier.
 
 
 ~~~
-write_csv(filtered, "data/tumor_filtered.csv")
+write_csv(filtered, "../data/tumor_filtered.csv")
 ~~~
 {: .language-r}
 
@@ -625,14 +625,22 @@ In general, you'll end up typing more characters dealing with spaces in file nam
 instead of using an underscore, `_`, or dash, `-`.
 Also as a general rule, keeping files in lower-case will prevent a lot of potential spelling mistakes.
 
-<button class="accordion" id="question">Exercise 3 Question</button>
-:::{.panel-question}
-1. Read in all the patient data from the spreadsheets chapter (chapter \@ref(spreadsheets)) found in `data > spreadsheets > all.csv`
-2. `select` the `first_name`, `last_name`, `day`, `time`, and `temp_f` columns.
-3. `filter` the rows such that the person's name is "Aniya Warner"
-4. Save the filtered dataset into the `output` folder named `aniya_warner.csv`.
-:::
+> ## Exercise
+> 
+> 1. Read in all the patient data from [the spreadsheets chapter](https://ds4biomed.tech/spreadsheets.html)
+> found in `data > spreadsheets > all.csv`
+> 2. `select` the `first_name`, `last_name`, `day`, `time`, and `temp_f` columns.
+> 3. `filter` the rows such that the person's name is "Aniya Warner"
+> 4. Save the filtered dataset into the `output` folder named `aniya_warner.csv`.
+> 
+> > ## Solution
+> > 
+> > 1. `all_patient_data <- read_csv("../data/spreadsheets/all.csv")`  
+> > 2. `aniya_warner <- all_patient_data %>%`  
+> > `select(first_name, last_name, day, time, temp_f) %>%`  
+> > `filter(first_name == "Aniya", last_name == "Warner")`  
+> >  `write_csv(aniya_warner, file = "../output/aniya_warner.csv")`
+> >  
+> {: .solution}
+{: .challenge}
 
-## Summary {#load-data-summary}
-
-## Additional Resources {#load-data-resources}
