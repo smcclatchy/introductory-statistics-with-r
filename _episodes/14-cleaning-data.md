@@ -287,26 +287,26 @@ tumor_tidy %>%
 ~~~
 {: .output}
 
-<button class="accordion" id="question">Exercise 1 Question</button>
-:::{.panel-question}
-1. Load up the cytomeglovirus dataset to the variable, `cmv`
-
-```r
-cmv <- ____(____)
-```
-
-2. Tidy the dataset using the `pivot_longer` function
-```r
-cmv %>%
-  pivot_longer(____, names_to = ____, values_to = ____)
-```
-
-:::
-
-<button class="accordion" id="solution">Exercise 1 Possible Results</button>
-:::{.panel-solution}
-
-:::
+> ## Exercise
+> 1. Load up the cytomegalovirus dataset to the variable, `cmv`
+> 
+> 
+> ~~~
+> cmv <- ____(____)
+> ~~~
+> {: .language-r}
+> 2. Tidy the dataset using the `pivot_longer` function
+> 
+> ~~~
+> cmv %>%
+> pivot_longer(____, names_to = ____, values_to = ____)
+> ~~~
+> {: .language-r}
+> 
+> > ## Solution
+> > 
+> {: .solution}
+{: .challenge}
 
 ## Multiple variables stored in one column
 
