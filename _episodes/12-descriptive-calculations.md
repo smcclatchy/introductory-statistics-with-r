@@ -30,32 +30,6 @@ library(tidyverse)
 {: .language-r}
 
 
-
-~~~
-── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-✔ tibble  3.1.0     ✔ dplyr   1.0.5
-✔ tidyr   1.1.3     ✔ stringr 1.4.0
-✔ readr   1.4.0     ✔ forcats 0.5.1
-~~~
-{: .output}
-
-
-
-~~~
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-~~~
-{: .output}
-
-
 ~~~
 tumor_subset <- read_csv("../data/tumor_filtered.csv")
 ~~~
@@ -64,9 +38,16 @@ tumor_subset <- read_csv("../data/tumor_filtered.csv")
 
 
 ~~~
-Error: '../data/tumor_filtered.csv' does not exist in current working directory ('/Users/smc/Projects/Lessons/introductory-statistics-with-r/_episodes_rmd').
+
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+cols(
+  Group = col_double(),
+  ID = col_double(),
+  Day = col_double(),
+  Size = col_double()
+)
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -77,9 +58,22 @@ tumor_subset
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'tumor_subset' not found
+# A tibble: 60 x 4
+   Group    ID   Day   Size
+   <dbl> <dbl> <dbl>  <dbl>
+ 1     1   101     0   41.8
+ 2     1   101    13 1030. 
+ 3     1   102     0   79.4
+ 4     1   102    13  619. 
+ 5     1   103     0   44.8
+ 6     1   104     0   67.7
+ 7     1   105     0   54.7
+ 8     1   105    13 1699. 
+ 9     1   106     0   60  
+10     1   107     0   46.8
+# … with 50 more rows
 ~~~
-{: .error}
+{: .output}
 
 ## Summary statistics
 
@@ -94,9 +88,11 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Day == 0): object 'tumor_subset' not found
+ [1] 41.8 79.4 44.8 67.7 54.7 60.0 46.8 49.4 49.1 60.6 41.5 46.8 39.5 53.5 43.5
+[16] 64.4 47.5 71.7 44.1 42.1 42.5 56.9 46.7 51.2 44.0 59.8 40.7 58.2 41.3 53.5
+[31] 45.8 48.2 47.7 69.2 43.9 59.3 51.1
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -110,9 +106,9 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Day == 0): object 'tumor_subset' not found
+[1] 51.59189
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -126,9 +122,9 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Group == 1, Day == 0): object 'tumor_subset' not found
+[1] 55.575
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -142,9 +138,9 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Group == 2, Day == 0): object 'tumor_subset' not found
+[1] 51.81
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -158,9 +154,9 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Group == 3, Day == 0): object 'tumor_subset' not found
+[1] 48.62
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -174,9 +170,9 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Group == 4, Day == 0): object 'tumor_subset' not found
+[1] 51.11111
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -189,9 +185,9 @@ tumor_subset %>%
 
 
 ~~~
-Error in pull(., Group): object 'tumor_subset' not found
+[1] 1 2 3 4
 ~~~
-{: .error}
+{: .output}
 
 ## Groupby operations
 
@@ -207,9 +203,15 @@ tumor_subset %>%
 
 
 ~~~
-Error in filter(., Day == 0): object 'tumor_subset' not found
+# A tibble: 4 x 2
+  Group avg_size
+  <dbl>    <dbl>
+1     1     55.6
+2     2     51.8
+3     3     48.6
+4     4     51.1
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -225,6 +227,24 @@ tumor_subset %>%
 
 
 ~~~
-Error in group_by(., Group, Day): object 'tumor_subset' not found
+`summarise()` has grouped output by 'Group'. You can override using the `.groups` argument.
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+# A tibble: 8 x 5
+# Groups:   Group [4]
+  Group   Day avg_size sd_size     q1
+  <dbl> <dbl>    <dbl>   <dbl>  <dbl>
+1     1     0     55.6   12.9    46.3
+2     1    13   1597.   764.   1030. 
+3     2     0     51.8   10.6    44.3
+4     2    13    453.   287.    357. 
+5     3     0     48.6    7.30   42.9
+6     3    13    934.   510.    571. 
+7     4     0     51.1    8.64   45.8
+8     4    13    768.   314.    600. 
+~~~
+{: .output}
