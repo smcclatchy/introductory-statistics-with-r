@@ -27,7 +27,6 @@ knitr_fig_path("15-")
 ```{r, echo=TRUE, message=FALSE}
 library(tidyverse)
 library(ggplot2)
-library(medicaldata)
 ```
 
 [Blood storage dataset description](https://github.com/higgi13425/medicaldata/blob/master/description_docs/blood_storage_desc.pdf)
@@ -219,9 +218,9 @@ ggplot(blood_storage, aes(x = as.factor(TVol), y = Age)) +
   geom_jitter()
 ```
 
-## Other Astetic mappings
+## Other Aesthetic mappings
 
-We can also set other asthetic mappings, e.g., color
+We can also set other aesthetic mappings, e.g., color
 
 - `PVol`: Prostate volume in grams (g)
 - `PreopPSA`: Preoperative prostate specification antigen (PSA) in ng/mL
@@ -311,22 +310,24 @@ readRDS("../data/cytomegalovirus.rda")
 >
 > ```{r, eval=FALSE}
 > ggplot(data = cytomegalovirus) +
-> ____(aes(x = ____))
+> ______(aes(x = ______))
 > ```
 >
 > 3. bar plot of `prior.transplant`, colored by `cmv` values
 > ```{r, eval=FALSE}
-> ggplot(____, aes(as.factor(____))) +  
-> geom_bar(aes(fill = as.factor(____)))
+> ggplot(______, aes(as.factor(______))) +  
+> geom_bar(aes(fill = as.factor(______)))
 > ```
 > 4. facet by both `donor.cmv` and `recipient.cmv`
 > ```{r, eval=FALSE}
 > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
 > geom_bar(aes(fill = as.factor(cmv))) +  
-> ____(____ ~ ____)
+> ______(______ ~ ______)
 > ```
+> 
 > >
 > > ## Solution
+> > 
 > > ```{r}
 > > ggplot(data = cytomegalovirus) +  
 > > geom_bar(aes(x = cmv))
@@ -338,7 +339,7 @@ readRDS("../data/cytomegalovirus.rda")
 > > geom_bar(aes(fill = as.factor(cmv))) +  
 > > facet_grid(donor.cmv ~ recipient.cmv)
 > > ```
-> > 
+> >
 
 ## Additional Resources
 
