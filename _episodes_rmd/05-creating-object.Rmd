@@ -158,6 +158,7 @@ to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
 > > 2. age equals 122  
 > > 3. mass equals 95.0  
 > > 4. age equals 102
+> > mass_index equals 0.9313725
 > >
 > {: .solution}
 {: .challenge}
