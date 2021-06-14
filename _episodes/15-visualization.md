@@ -27,7 +27,6 @@ keypoints:
 ~~~
 library(tidyverse)
 library(ggplot2)
-library(medicaldata)
 ~~~
 {: .language-r}
 
@@ -50,29 +49,9 @@ head(blood_storage) # use head to look at the first 6 rows
 
 
 ~~~
-  RBC.Age.Group Median.RBC.Age  Age AA FamHx  PVol TVol T.Stage bGS BN+
-1             3             25 72.1  0     0  54.0    3       1   3   0
-2             3             25 73.6  0     0  43.2    3       2   2   0
-3             3             25 67.5  0     0 102.7    1       1   3   0
-4             2             15 65.8  0     0  46.0    1       1   1   0
-5             2             15 63.2  0     0  60.0    2       1   2   0
-6             3             25 65.4  0     0  45.9    2       1   1   0
-  OrganConfined PreopPSA PreopTherapy Units sGS AnyAdjTherapy AdjRadTherapy
-1             0    14.08            1     6   1             0             0
-2             1    10.50            0     2   3             0             0
-3             1     6.98            1     1   1             0             0
-4             1     4.40            0     2   3             0             0
-5             1    21.40            0     3   3             0             0
-6             0     5.10            0     1   3             0             0
-  Recurrence Censor TimeToRecurrence
-1          1      0             2.67
-2          1      0            47.63
-3          0      1            14.10
-4          0      1            59.47
-5          0      1             1.23
-6          0      1            74.70
+Error in head(blood_storage): object 'blood_storage' not found
 ~~~
-{: .output}
+{: .error}
 
 
 ~~~
@@ -83,9 +62,9 @@ class(blood_storage)
 
 
 ~~~
-[1] "data.frame"
+Error in eval(expr, envir, enclos): object 'blood_storage' not found
 ~~~
-{: .output}
+{: .error}
 
 
 
@@ -98,13 +77,9 @@ names(blood_storage)
 
 
 ~~~
- [1] "RBC.Age.Group"    "Median.RBC.Age"   "Age"              "AA"              
- [5] "FamHx"            "PVol"             "TVol"             "T.Stage"         
- [9] "bGS"              "BN+"              "OrganConfined"    "PreopPSA"        
-[13] "PreopTherapy"     "Units"            "sGS"              "AnyAdjTherapy"   
-[17] "AdjRadTherapy"    "Recurrence"       "Censor"           "TimeToRecurrence"
+Error in eval(expr, envir, enclos): object 'blood_storage' not found
 ~~~
-{: .output}
+{: .error}
 
 
 ## Data Types
@@ -136,6 +111,19 @@ This is different from a **character string**, e.g., a person's name.
 recurrence_freq <- blood_storage %>%
   group_by(Recurrence) %>%
   summarize(count = n())
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in group_by(., Recurrence): object 'blood_storage' not found
+~~~
+{: .error}
+
+
+
+~~~
 recurrence_freq
 ~~~
 {: .language-r}
@@ -143,13 +131,9 @@ recurrence_freq
 
 
 ~~~
-# A tibble: 2 x 2
-  Recurrence count
-       <dbl> <int>
-1          0   262
-2          1    54
+Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
 ~~~
-{: .output}
+{: .error}
 
 ## Grammar of Graphics
 
@@ -164,7 +148,12 @@ ggplot(data = blood_storage)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = blood_storage): object 'blood_storage' not found
+~~~
+{: .error}
 
 
 ~~~
@@ -173,7 +162,12 @@ ggplot(data = blood_storage, mapping = aes(x = Recurrence))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = blood_storage, mapping = aes(x = Recurrence)): object 'blood_storage' not found
+~~~
+{: .error}
 
 
 
@@ -184,7 +178,12 @@ ggplot(data =  blood_storage, mapping = aes(x = Recurrence)) + geom_bar()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = blood_storage, mapping = aes(x = Recurrence)): object 'blood_storage' not found
+~~~
+{: .error}
 
 If we have a pre-calculated set of values, we want to tell `geom_bar` to use the `"identity"` statistic.
 
@@ -197,13 +196,9 @@ recurrence_freq
 
 
 ~~~
-# A tibble: 2 x 2
-  Recurrence count
-       <dbl> <int>
-1          0   262
-2          1    54
+Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
 ~~~
-{: .output}
+{: .error}
 
 
 ~~~
@@ -212,7 +207,12 @@ ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, y = count)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, : object 'recurrence_freq' not found
+~~~
+{: .error}
 
 Something to think about: we have highly unbalanced classes.
 This might be something to think about when you fit models and only look at blind performance metrics
@@ -233,7 +233,12 @@ ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, y = count)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, : object 'recurrence_freq' not found
+~~~
+{: .error}
 
 
 ~~~
@@ -243,7 +248,12 @@ ggplot(data = recurrence_freq) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = recurrence_freq): object 'recurrence_freq' not found
+~~~
+{: .error}
 
 
 ~~~
@@ -253,7 +263,12 @@ ggplot() +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in fortify(data): object 'recurrence_freq' not found
+~~~
+{: .error}
 
 This means we can add more layers with different data sets if we want to.
 
@@ -272,11 +287,9 @@ ggplot(blood_storage, aes(x = Age)) + geom_histogram()
 
 
 ~~~
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+Error in ggplot(blood_storage, aes(x = Age)): object 'blood_storage' not found
 ~~~
-{: .output}
-
-<img src="../fig/rmd-15-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
+{: .error}
 
 
 ~~~
@@ -284,7 +297,12 @@ ggplot(blood_storage, aes(x = Age)) + geom_histogram(bins = 10)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood_storage, aes(x = Age)): object 'blood_storage' not found
+~~~
+{: .error}
 
 ### Bivariate
 
@@ -308,18 +326,9 @@ ggplot(blood_storage) + geom_boxplot(aes(x = TVol, y = Age))
 
 
 ~~~
-Warning: Continuous x aesthetic -- did you forget aes(group=...)?
+Error in ggplot(blood_storage): object 'blood_storage' not found
 ~~~
 {: .error}
-
-
-
-~~~
-Warning: Removed 6 rows containing missing values (stat_boxplot).
-~~~
-{: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -328,7 +337,12 @@ ggplot(blood_storage) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood_storage): object 'blood_storage' not found
+~~~
+{: .error}
 
 We can also use a violin plot, to better show the distribution of the dataset,
 instead of using a boxplot.
@@ -343,7 +357,12 @@ ggplot(blood_storage) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood_storage): object 'blood_storage' not found
+~~~
+{: .error}
 
 
 ~~~
@@ -353,7 +372,12 @@ ggplot(blood_storage) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood_storage): object 'blood_storage' not found
+~~~
+{: .error}
 
 We can move around our data layers to save some typing,
 and have the geometry layer use the same data and mapping layer.
@@ -366,11 +390,16 @@ ggplot(blood_storage, aes(x = as.factor(TVol), y = Age)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
 
-## Other Astetic mappings
 
-We can also set other asthetic mappings, e.g., color
+~~~
+Error in ggplot(blood_storage, aes(x = as.factor(TVol), y = Age)): object 'blood_storage' not found
+~~~
+{: .error}
+
+## Other Aesthetic mappings
+
+We can also set other aesthetic mappings, e.g., color
 
 - `PVol`: Prostate volume in grams (g)
 - `PreopPSA`: Preoperative prostate specification antigen (PSA) in ng/mL
@@ -390,11 +419,9 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood_storage): object 'blood_storage' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="612" style="display: block; margin: auto;" />
 
 Again, we have a numeric variable that is really an ordinal categorical variable
 
@@ -408,11 +435,9 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood_storage): object 'blood_storage' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
 
 
 ## Facets
@@ -433,11 +458,9 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood_storage): object 'blood_storage' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -451,11 +474,9 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood_storage): object 'blood_storage' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="612" style="display: block; margin: auto;" />
 
 ## Themes
 
@@ -464,6 +485,19 @@ Warning: Removed 11 rows containing missing values (geom_point).
 g <- ggplot(blood_storage) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in ggplot(blood_storage): object 'blood_storage' not found
+~~~
+{: .error}
+
+
+
+~~~
 g
 ~~~
 {: .language-r}
@@ -471,11 +505,9 @@ g
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -486,11 +518,9 @@ g + theme_minimal()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="612" style="display: block; margin: auto;" />
 
 Using ggthemes
 
@@ -509,11 +539,9 @@ g + theme_wsj()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -524,11 +552,9 @@ g + theme_fivethirtyeight()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" width="612" style="display: block; margin: auto;" />
 
 
 
@@ -540,11 +566,9 @@ g + theme_excel()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -823,15 +847,15 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > 
 > ~~~
 > ggplot(data = cytomegalovirus) +
-> ____(aes(x = ____))
+> ______(aes(x = ______))
 > ~~~
 > {: .language-r}
 >
 > 3. bar plot of `prior.transplant`, colored by `cmv` values
 > 
 > ~~~
-> ggplot(____, aes(as.factor(____))) +  
-> geom_bar(aes(fill = as.factor(____)))
+> ggplot(______, aes(as.factor(______))) +  
+> geom_bar(aes(fill = as.factor(______)))
 > ~~~
 > {: .language-r}
 > 4. facet by both `donor.cmv` and `recipient.cmv`
@@ -839,11 +863,13 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > ~~~
 > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
 > geom_bar(aes(fill = as.factor(cmv))) +  
-> ____(____ ~ ____)
+> ______(______ ~ ______)
 > ~~~
 > {: .language-r}
+> 
 > >
 > > ## Solution
+> > 
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus) +  
@@ -851,7 +877,14 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
+> > 
+> > 
+> > ~~~
+> > Error in ggplot(data = cytomegalovirus): object 'cytomegalovirus' not found
+> > ~~~
+> > {: .error}
+> > 
+> > 
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -859,7 +892,14 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-38-2.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
+> > 
+> > 
+> > ~~~
+> > Error in ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))): object 'cytomegalovirus' not found
+> > ~~~
+> > {: .error}
+> > 
+> > 
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -868,8 +908,13 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-38-3.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
 > > 
+> > 
+> > ~~~
+> > Error in ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))): object 'cytomegalovirus' not found
+> > ~~~
+> > {: .error}
+> >
 
 ## Additional Resources
 
