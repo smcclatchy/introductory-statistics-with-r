@@ -1,4 +1,17 @@
 
+---
+title: "Seeking help"
+teaching: 0
+exercises: 0
+questions:
+- How do I get help with R and RStudio?
+- Where can I learn more?
+objectives:
+- Know where to locate help and learning resources.
+keypoints:
+- "First key point. Brief Answer to questions. (FIXME)"
+---
+
 ## Seeking help
 
 ### Searching function documentation with `?` and `??`
