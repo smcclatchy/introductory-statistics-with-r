@@ -18,9 +18,10 @@ keypoints:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("15-")
+```
+```{r readbloodstorage, echo=FALSE, message=FALSE}
 blood_storage <- read_csv("../data/blood_storage.csv")
 ```
-
 # Visualization (Intro)
 
 ## Introduction {#vis-intro-intro}
@@ -296,7 +297,7 @@ g + theme_fivethirtyeight()
 g + theme_excel()
 ```
 
-```{r readRDS, echo=FALSE, message=FALSE}
+```{r readcmvdata, echo=FALSE, message=FALSE}
 cytomegalovirus <- read_csv("../data/cytomegalovirus.csv")
 ```
 
