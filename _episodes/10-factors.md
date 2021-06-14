@@ -164,9 +164,11 @@ this information built in. It is particularly helpful when there are many levels
 >    factor.  
 > 2. Using the functions you learned before, can you find out:  
 >      * How many were in group D?  
->      * How many levels there are?  
+>      * How many levels there are? 
+>       
 > >
 > > ## Solution
+> > 
 > > 
 > > ~~~
 > > tumor$Grp <- factor(tumor$Grp)
@@ -195,6 +197,7 @@ this information built in. It is particularly helpful when there are many levels
 > > [1] 4
 > > ~~~
 > > {: .output}
+> > 
 > > {: .output}
 > {: .solution}
 {: .challenge}
