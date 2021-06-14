@@ -1,4 +1,3 @@
-
 ---
 title: "Seeking help"
 teaching: 0
