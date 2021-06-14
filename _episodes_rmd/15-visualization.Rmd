@@ -19,9 +19,6 @@ keypoints:
 source("../bin/chunk-options.R")
 knitr_fig_path("15-")
 ```
-```{r readbloodstorage, echo=FALSE, message=FALSE}
-blood_storage <- read_csv("../data/blood_storage.csv")
-```
 # Visualization (Intro)
 
 ## Introduction {#vis-intro-intro}
@@ -29,6 +26,10 @@ blood_storage <- read_csv("../data/blood_storage.csv")
 ```{r, echo=TRUE, message=FALSE}
 library(tidyverse)
 library(ggplot2)
+```
+
+```{r readbloodstorage, echo=FALSE, message=FALSE}
+blood_storage <- read_csv("../data/blood_storage.csv")
 ```
 
 [Blood storage dataset description](https://github.com/higgi13425/medicaldata/blob/master/description_docs/blood_storage_desc.pdf)
