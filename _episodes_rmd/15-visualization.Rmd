@@ -297,7 +297,7 @@ g + theme_excel()
 ```
 
 ```{r readRDS, echo=FALSE, message=FALSE}
-readRDS("../data/cytomegalovirus.rda")
+cytomegalovirus <- read_csv("../data/cytomegalovirus.csv")
 ```
 
 >
