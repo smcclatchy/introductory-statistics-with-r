@@ -18,6 +18,7 @@ keypoints:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("15-")
+blood_storage <- read_csv("../data/blood_storage.csv")
 ```
 
 # Visualization (Intro)
