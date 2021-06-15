@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: "Loading data into R"
-teaching: 0
-exercises: 0
+teaching: 40
+exercises: 20
 questions:
 - "How do I load data into R?"
 objectives:
