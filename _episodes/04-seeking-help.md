@@ -1,6 +1,6 @@
 ---
 title: "Seeking help"
-teaching: 0
+teaching: 10
 exercises: 0
 questions:
 - How do I get help with R and RStudio?
