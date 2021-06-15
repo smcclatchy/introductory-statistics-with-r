@@ -2,7 +2,7 @@
 source: Rmd
 title: "Creating objects in R"
 teaching: 30
-exercises: 5
+exercises: 10
 questions:
 - "How do I create objects in R?"
 objectives:
