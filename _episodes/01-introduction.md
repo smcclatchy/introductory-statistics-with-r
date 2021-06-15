@@ -1,6 +1,6 @@
 ---
 title: "Introduction to R and RStudio"
-teaching: 0
+teaching: 10
 exercises: 0
 questions:
 - "Why should I learn R?"
