@@ -1,6 +1,6 @@
 ---
 title: "Interacting with R"
-teaching: 0
+teaching: 5
 exercises: 0
 questions:
 - Interact with R using the console or a script
