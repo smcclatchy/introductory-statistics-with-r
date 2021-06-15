@@ -3,8 +3,8 @@
 # Instead, please edit 09-loading-data.md in _episodes_rmd/
 source: Rmd
 title: "Loading data into R"
-teaching: 0
-exercises: 0
+teaching: 40
+exercises: 20
 questions:
 - "How do I load data into R?"
 objectives:
@@ -39,7 +39,7 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
@@ -56,7 +56,7 @@ library(tidyverse)
 
 
 ~~~
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -223,7 +223,7 @@ read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -296,7 +296,7 @@ tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),

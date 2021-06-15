@@ -3,8 +3,8 @@
 # Instead, please edit 05-creating-object.md in _episodes_rmd/
 source: Rmd
 title: "Creating objects in R"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 10
 questions:
 - "How do I create objects in R?"
 objectives:

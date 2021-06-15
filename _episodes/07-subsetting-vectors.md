@@ -226,13 +226,16 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 ~~~
 {: .output}
 
+>
 > ## Exercise
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
-> 
+>
 > > ## Solution
+> > 
 > > When using ">" or "<" on strings, R compares their alphabetical order. 
 > > Here "four" comes after "five", and therefore is "greater than" it.
+> > 
 > {.solution}
 {.challenge}
 
