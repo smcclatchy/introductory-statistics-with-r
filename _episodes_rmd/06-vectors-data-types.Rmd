@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: "Vectors and data types"
-teaching: 0
-exercises: 0
+teaching: 35
+exercises: 20
 questions:
 - "What are data types in R?"
 objectives:
