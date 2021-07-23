@@ -49,7 +49,6 @@ tumor_subset %>%
   filter(Day == 0) %>%
   pull(Size) %>%
   mean()
-  
 ```
 
 ```{r}
