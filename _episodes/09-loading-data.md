@@ -11,6 +11,8 @@ objectives:
 - "Install and load packages."
 - "Locate files in a file and directory hierarchy."
 - "Read in data from a .csv file into a data frame."
+- "Describe a data frame."
+- "Subset a data frame."
 keypoints:
 - ""
 - ""
@@ -24,7 +26,7 @@ Loading data into R is the first step!
 
 First we need to load up a package to make loading data sets easier.
 We will be using the `tidyverse` set of packages for all of our data processing needs in R.
-^[This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.]
+This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.
 
 <img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png" title="&quot;Tidyverse Celestial&quot; by Allison Horst. &quot;tidyverse&quot; hex sticker in space surrounded by other tidyverse package hex logos." alt="&quot;Tidyverse Celestial&quot; by Allison Horst. &quot;tidyverse&quot; hex sticker in space surrounded by other tidyverse package hex logos." style="display: block; margin: auto;" />
 
@@ -39,7 +41,7 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
@@ -56,7 +58,7 @@ library(tidyverse)
 
 
 ~~~
-── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -223,7 +225,7 @@ read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -296,7 +298,7 @@ tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -454,7 +456,31 @@ objects besides `data.frame`.
 > 
 > > ## Solution
 > >
+> > 
+> > ~~~
 > > str(tumor)  
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > spec_tbl_df [574 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+> >  $ Grp  : chr [1:574] "1.CTR" "1.CTR" "1.CTR" "1.CTR" ...
+> >  $ Group: num [1:574] 1 1 1 1 1 1 1 1 1 1 ...
+> >  $ ID   : num [1:574] 101 101 101 101 101 101 101 101 101 101 ...
+> >  $ Day  : num [1:574] 0 3 4 5 6 7 10 11 12 13 ...
+> >  $ Size : num [1:574] 41.8 85 114 162.3 178.3 ...
+> >  - attr(*, "spec")=
+> >   .. cols(
+> >   ..   Grp = col_character(),
+> >   ..   Group = col_double(),
+> >   ..   ID = col_double(),
+> >   ..   Day = col_double(),
+> >   ..   Size = col_double()
+> >   .. )
+> > ~~~
+> > {: .output}
 > >
 > > 1. class: data frame  
 > > 2. how many rows: 574,  how many columns: 5  
@@ -463,20 +489,19 @@ objects besides `data.frame`.
 
 ## Indexing and subsetting data frames
 
-
-
 Our data frame has rows and columns (it has 2 dimensions), if we want to
 extract some specific data from it, we need to specify the "coordinates" we
 want from it. Row numbers come first, followed by column numbers. However, note
 that different ways of specifying these coordinates lead to results with
 different classes.
 
+We can extract specific values by specifying row and column indices
+in the format: 
+data_frame[row_index, column_index]
+For instance, to extract the first row and column from surveys:
+
 
 ~~~
-# We can extract specific values by specifying row and column indices
-# in the format: 
-# data_frame[row_index, column_index]
-# For instance, to extract the first row and column from surveys:
 tumor[1, 1]
 ~~~
 {: .language-r}
@@ -491,10 +516,9 @@ tumor[1, 1]
 ~~~
 {: .output}
 
-
+First row, fifth column:
 
 ~~~
-# First row, fifth column:
 tumor[1, 5]   
 ~~~
 {: .language-r}
@@ -509,12 +533,12 @@ tumor[1, 5]
 ~~~
 {: .output}
 
+We can also use shortcuts to select a number of rows or columns at once
+To select all columns, leave the column index blank
+For instance, to select all columns for the first row:
 
 
 ~~~
-# We can also use shortcuts to select a number of rows or columns at once
-# To select all columns, leave the column index blank
-# For instance, to select all columns for the first row:
 tumor[1, ]
 ~~~
 {: .language-r}
@@ -529,11 +553,11 @@ tumor[1, ]
 ~~~
 {: .output}
 
+The same shortcut works for rows --
+To select the first column across all rows:
 
 
 ~~~
-# The same shortcut works for rows --
-# To select the first column across all rows:
 tumor[, 1]
 ~~~
 {: .language-r}
@@ -558,10 +582,10 @@ tumor[, 1]
 ~~~
 {: .output}
 
+An even shorter way to select first column across all rows:
 
 
 ~~~
-# An even shorter way to select first column across all rows:
 tumor[1] # No comma! 
 ~~~
 {: .language-r}
@@ -586,11 +610,11 @@ tumor[1] # No comma!
 ~~~
 {: .output}
 
+To select multiple rows or columns, use vectors!
+To select the first three rows of the 4th and 5th column
 
 
 ~~~
-# To select multiple rows or columns, use vectors!
-# To select the first three rows of the 4th and 5th column
 tumor[c(1, 2, 3), c(4, 5)] 
 ~~~
 {: .language-r}
@@ -607,10 +631,10 @@ tumor[c(1, 2, 3), c(4, 5)]
 ~~~
 {: .output}
 
+We can use the : operator to create those vectors for us:
 
 
 ~~~
-# We can use the : operator to create those vectors for us:
 tumor[1:3, 4:5] 
 ~~~
 {: .language-r}
@@ -627,93 +651,29 @@ tumor[1:3, 4:5]
 ~~~
 {: .output}
 
+This is equivalent to head_tumors <- head(tumor)
 
 
 ~~~
-# This is equivalent to head_surveys <- head(surveys)
 head_tumors <- tumor[1:6, ]
-# As we've seen, when working with tibbles 
-# subsetting with single square brackets ("[]") always returns a data frame.
-# If you want a vector, use double square brackets ("[[]]")
-# For instance, to get the first column as a vector:
+~~~
+{: .language-r}
+
+As we've seen, when working with tibbles 
+subsetting with single square brackets ("[]") always returns a data frame.
+If you want a vector, use double square brackets ("[[]]")
+For instance, to get the first column as a vector:
+
+
+~~~
 tumor[[1]]
 ~~~
 {: .language-r}
 
+To get the first value in our data frame:
 
 
 ~~~
-  [1] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [10] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [19] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [28] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [37] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [46] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [55] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [64] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [73] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [82] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR"
- [91] "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "1.CTR" "2.D"   "2.D"  
-[100] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[109] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[118] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[127] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[136] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[145] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[154] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[163] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[172] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[181] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[190] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[199] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[208] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[217] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[226] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[235] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[244] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[253] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"  
-[262] "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "2.D"   "3.R"   "3.R"  
-[271] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[280] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[289] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[298] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[307] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[316] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[325] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[334] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[343] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[352] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[361] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[370] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[379] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[388] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[397] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[406] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[415] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"  
-[424] "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "3.R"   "4.D+R" "4.D+R" "4.D+R"
-[433] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[442] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[451] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[460] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[469] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[478] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[487] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[496] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[505] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[514] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[523] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[532] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[541] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[550] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[559] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-[568] "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R" "4.D+R"
-~~~
-{: .output}
-
-
-
-~~~
-# To get the first value in our data frame:
 tumor[[1, 1]]
 ~~~
 {: .language-r}

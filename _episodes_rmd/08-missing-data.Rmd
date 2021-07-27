@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: "Missing data"
-teaching: 0
-exercises: 0
+teaching: 10
+exercises: 15
 questions:
 - "What does R do when data are missing?"
 objectives:
@@ -41,28 +41,48 @@ If your data include missing values, you may want to become familiar with the
 functions `is.na()`, `na.omit()`, and `complete.cases()`. See below for
 examples.
 
+```{r, purl = FALSE}
+# Extract those elements which are not missing values.
+heights[!is.na(heights)]
+
+# Returns the object with incomplete cases removed. 
+# The returned object is an atomic vector of type 
+# `"numeric"` (or `"double"`).
+na.omit(heights)
+
+# Extract those elements which are complete cases. 
+# The returned object is an atomic vector of type 
+# `"numeric"` (or `"double"`).
+heights[complete.cases(heights)]
+```
 
 Recall that you can use the `typeof()` function to find the type of your atomic vector.
 
 > ## Exercise
 >
 > 1. Using this vector of heights in inches, create a new vector, `heights_no_na`, with the NAs removed.  
->
->     `heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)`  
+> ```{r}
+> heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+> ```
 >    
 > 2. Use the function `median()` to calculate the median of the `heights` vector.  
 >
 > 3. Use R to figure out how many people in the set are taller than 67 inches.  
 >
 > > ## Solution
-> > `heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)`  
-> >  1. `heights_no_na <- heights[!is.na(heights)]`  
-> >  or  
-> >  `heights_no_na <- na.omit(heights)`  
-> >  or  
-> >  `heights_no_na <- heights[complete.cases(heights)]`  
-> >  2. `median(heights, na.rm = TRUE)`  
-> >  3. `heights_above_67 <- heights_no_na[heights_no_na > 67]`  
-> >  `length(heights_above_67)`
+> >  1. ```{r}
+> > heights_no_na <- heights[!is.na(heights)]    
+> > # or  
+> > heights_no_na <- na.omit(heights)  
+> > # or  
+> > heights_no_na <- heights[complete.cases(heights)]
+> > ```
+> >  2. ```{r}
+> > median(heights, na.rm = TRUE)  
+> > ```
+> >  3. ```{r}
+> > heights_above_67 <- heights_no_na[heights_no_na > 67]  
+> > length(heights_above_67)
+> > ```
 > {: .solution}
 {: .challenge}

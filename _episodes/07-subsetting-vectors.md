@@ -3,8 +3,8 @@
 # Instead, please edit 07-subsetting-vectors.md in _episodes_rmd/
 source: Rmd
 title: "Subsetting vectors"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 5
 questions:
 - "What are data types in R?"
 objectives:
@@ -226,7 +226,6 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 ~~~
 {: .output}
 
->
 > ## Exercise
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?

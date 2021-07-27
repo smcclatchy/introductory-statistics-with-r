@@ -29,6 +29,8 @@ library(tidyverse)
 ~~~
 {: .language-r}
 
+Load the filtered data set created previously that contains days 0 or 13 only. 
+
 
 ~~~
 tumor_subset <- read_csv("../data/tumor_filtered.csv")
@@ -39,7 +41,7 @@ tumor_subset <- read_csv("../data/tumor_filtered.csv")
 
 ~~~
 
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────
 cols(
   Group = col_double(),
   ID = col_double(),
@@ -48,6 +50,8 @@ cols(
 )
 ~~~
 {: .output}
+
+Have a look at the data subset.
 
 
 ~~~
@@ -76,6 +80,9 @@ tumor_subset
 {: .output}
 
 ## Summary statistics
+Descriptive statistics summarize and organize characteristics of a data set. The first step of statistical analysis is to describe characteristics of the responses, such as the average of one variable (e.g., age), or the relation between two variables (e.g., age and weight). Inferential statistics, the next step in an analysis, helps to determine whether data confirms or refutes your hypothesis and whether it is generalizable to a larger population. We focus on descriptive statistics here with some statistical summaries of the filtered data. `pull` extracts a single column of data in the same way the the `$` operator specifies a column. `pull` is a verb though, and reads more easily in piped operations like this one.
+
+Filter out observations for day 0 only and look at the Size variable.
 
 
 ~~~
@@ -94,6 +101,12 @@ tumor_subset %>%
 ~~~
 {: .output}
 
+The mean is one statistical summary showing the _central tendency_ of the data. It is the most commonly used measure of central tendency, however, it is sensitive to _outliers_. Extreme values pull the mean toward them and have a disproportional effect on its value. The median value is another measure of central tendency as
+well as a measure of _position_. This value lies directly in the center of the ordered data with half of the values above and half below it. It is not 
+sensitive to extreme values - only its rank in the ordered values is considered. 
+
+Summarize tumor size for day 0 with the mean.
+
 
 ~~~
 tumor_subset %>%
@@ -109,6 +122,8 @@ tumor_subset %>%
 [1] 51.59189
 ~~~
 {: .output}
+
+Find mean tumor size for day 0 for group 1.
 
 
 ~~~
@@ -126,6 +141,8 @@ tumor_subset %>%
 ~~~
 {: .output}
 
+Find mean tumor size for day 0 for group 2.
+
 
 ~~~
 tumor_subset %>%
@@ -141,6 +158,8 @@ tumor_subset %>%
 [1] 51.81
 ~~~
 {: .output}
+
+Find mean tumor size for day 0 for group 3.
 
 
 ~~~
@@ -158,6 +177,8 @@ tumor_subset %>%
 ~~~
 {: .output}
 
+Find mean tumor size for day 0 for group 4.
+
 
 ~~~
 tumor_subset %>%
@@ -173,6 +194,8 @@ tumor_subset %>%
 [1] 51.11111
 ~~~
 {: .output}
+
+What are the unique group numbers?
 
 
 ~~~
@@ -190,6 +213,7 @@ tumor_subset %>%
 {: .output}
 
 ## Groupby operations
+Use `group_by` and `summarize` to view group means for all groups.
 
 
 ~~~
@@ -212,6 +236,63 @@ tumor_subset %>%
 4     4     51.1
 ~~~
 {: .output}
+
+> ## Comparing mean with median.
+>
+> Repeat the previous summary substituting the median for the mean.
+> 1). What do you notice when you compare the mean and median values for each 
+> group?  
+> 2). What would cause the differences in the mean and median values for each 
+> group?  
+> 3). How might you check your answer to number 2 above? 
+> 
+> > ## Solution
+> >
+> > ~~~
+> > tumor_subset %>%
+> >   filter(Day == 0) %>%
+> >   group_by(Group) %>%
+> >   summarize(median_size = median(Size))
+> > ~~~
+> > {: .output}
+> >
+> > 1). The median values are smaller than the mean values for each group.  
+> > 2). Since the median is not sensitive to outliers and is smaller than the 
+> > mean for each group, it appears that there are large sizes in each group
+> > that pull the mean toward them.  
+> > 3) You could list all size values for each group to see if there are very
+> > large values that pull the mean toward them. The mean values are between 48 
+> > and 56, so values much above this will strongly influence the mean. You can
+> > look at all values by group.
+> > ~~~
+> > tumor_subset %>%
+> > filter(Day == 0) %>%
+> > group_by(Group) %>%
+> > pull(Size, Group)
+> > ~~~
+> > {: .output}
+> > If you only want to see the maximum value for each group, you can use `max`.
+> > ~~~
+> > tumor_subset %>%
+> > filter(Day == 0) %>%
+> > group_by(Group) %>%
+> > summarize(max_value = max(Size))
+> > ~~~
+> > {: .output}
+> > Each group has a maximum value well outside of the range of group means.
+> {: .solution}
+{: .challenge}
+
+Mean and median both summarize the center of the data. Median lies directly at 
+center of the ordered data values - it lies at the midpoint of these values and
+is a measure of position. 
+The _quantile_ defines a specific part of a data set above or below some limit. 
+For example, quartiles divide a data set into fourths, and percentiles by 
+100ths. The median is the 50th percentile of the data - half lie above this 
+value and half below.
+_Standard deviation_ measures the spread of the data. This summary statistic
+measures the degree of _dispersion_ or _variability_ of the data.  
+`quantile` takes an argument `probs` that gives the probability of values falling beneath a specific quantile. For example, `probs = .25` means that 25% of the values will be less than this quantile. This is the first quarter, or quartile, of the data.
 
 
 ~~~
@@ -248,3 +329,23 @@ tumor_subset %>%
 8     4    13    768.   314.    600. 
 ~~~
 {: .output}
+
+> ## Measures of variability and position.
+>
+> 1). Which combination of group and day has the largest variability? Which has 
+> the smallest variability?  
+> 2). For these combinations of group and day, what value do 25% of the data
+> values fall under? 
+> 3). For day 0, which group has the greatest variability? The greatest mean
+> tumor size? Which group has the least variability? The smallest mean size?
+> 
+> > ## Solution
+> >
+> > 1). Group 1 on day 13 has the greatest standard deviation. Group 3 on day 0
+> > has the smallest variability.  
+> > 2). For group 1 on day 13, 1/4th of the data values are less than 1030.4.
+> > For group 3 on day 0, 1/4th of the data values are less than 42.875.  
+> > 3). For day 0, group 1 has the greatest variability and mean tumor size. 
+> > Group 3 has the smallest variability and mean size.
+> {: .solution}
+{: .challenge}
