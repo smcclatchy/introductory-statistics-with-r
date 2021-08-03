@@ -6,7 +6,7 @@ title: "Subsetting vectors"
 teaching: 15
 exercises: 5
 questions:
-- "What are data types in R?"
+- "How can I select specific elements of a data vector?"
 objectives:
 - "Inspect the content of vectors and manipulate their content."
 - "Subset and extract values from vectors."

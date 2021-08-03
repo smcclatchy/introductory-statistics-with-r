@@ -32,13 +32,13 @@ library(ggplot2)
 blood_storage <- read_csv("../data/blood_storage.csv")
 ```
 
-[Blood storage dataset description](https://github.com/higgi13425/medicaldata/blob/master/description_docs/blood_storage_desc.pdf)
+[Blood storage dataset description](https://raw.githubusercontent.com/higgi13425/medicaldata/master/man/description_docs/blood_storage_desc.pdf)
 
-> [A retrospective cohort study of] 316 men who had undergone radical prostatectomy and recieved tranfusion during or within 30 days of the surgical prodedure
+> [A retrospective cohort study of] 316 men who had undergone radical prostatectomy and received tranfusion during or within 30 days of the surgical procedure
 > and had available PSA follow-up data.
 > The outcome [of interest] was time to biochemical cancer recurrence.
 > Study evaluated the association between red blood cells storage duration and biochemical prostate cancer recurrence after radical prostatectomy.
-> Specifically, tested was the hypothesis that perioperative transfution of allogenetic RBCs stored for a prolonged period is associated with earlier biochemical recurrence of prostate cancer after prostatectomy.
+> Specifically, tested was the hypothesis that perioperative transfusion of allogeneic RBCs stored for a prolonged period is associated with earlier biochemical recurrence of prostate cancer after prostatectomy.
 
 Download the blood storage data by [clicking the **Download** button here](https://github.com/higgi13425/medicaldata/blob/master/data/blood_storage.rda). This will load the data directly into RStudio. Check your Environment tab at upper right to see a new data object called `blood_storage`.
 
@@ -84,6 +84,22 @@ and the models you can fit.
 Ordinal and discrete variables should be converted into `factor` variables in R.
 A `factor` is R's way of naming a **categorical** variable.
 This is different from a **character string**, e.g., a person's name.
+
+The outcome of interest is the recurrence of cancer (no = 0 or yes = 1).
+
+> ## What kind of variable?
+>
+> What kind of variable is recurrence?
+>
+> > ## Solution
+> >
+> > Recurrence is a binary variable. The cancer either returned or it did not.   
+> > These are mutually exclusive outcomes.  
+> {: .solution}
+{: .challenge}
+
+Summarize the number of cancer recurrences and non-recurrences as a recurrence
+frequency.
 
 ```{r}
 recurrence_freq <- blood_storage %>%

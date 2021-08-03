@@ -37,20 +37,6 @@ tumor_subset <- read_csv("../data/tumor_filtered.csv")
 ~~~
 {: .language-r}
 
-
-
-~~~
-
-── Column specification ────────────────────────────────────────────────────────
-cols(
-  Group = col_double(),
-  ID = col_double(),
-  Day = col_double(),
-  Size = col_double()
-)
-~~~
-{: .output}
-
 Have a look at the data subset.
 
 
@@ -104,6 +90,8 @@ tumor_subset %>%
 The mean is one statistical summary showing the _central tendency_ of the data. It is the most commonly used measure of central tendency, however, it is sensitive to _outliers_. Extreme values pull the mean toward them and have a disproportional effect on its value. The median value is another measure of central tendency as
 well as a measure of _position_. This value lies directly in the center of the ordered data with half of the values above and half below it. It is not 
 sensitive to extreme values - only its rank in the ordered values is considered. 
+
+![tumor size density plot](../fig/density-plot.png)
 
 Summarize tumor size for day 0 with the mean.
 
@@ -239,11 +227,11 @@ tumor_subset %>%
 
 > ## Comparing mean with median.
 >
-> Repeat the previous summary substituting the median for the mean.
+> Repeat the previous summary substituting the median for the mean.  
 > 1). What do you notice when you compare the mean and median values for each 
-> group?  
+> group?   
 > 2). What would cause the differences in the mean and median values for each 
-> group?  
+> group?   
 > 3). How might you check your answer to number 2 above? 
 > 
 > > ## Solution
@@ -256,10 +244,10 @@ tumor_subset %>%
 > > ~~~
 > > {: .output}
 > >
-> > 1). The median values are smaller than the mean values for each group.  
+> > 1). The median values are smaller than the mean values for each group.    
 > > 2). Since the median is not sensitive to outliers and is smaller than the 
 > > mean for each group, it appears that there are large sizes in each group
-> > that pull the mean toward them.  
+> > that pull the mean toward them.   
 > > 3) You could list all size values for each group to see if there are very
 > > large values that pull the mean toward them. The mean values are between 48 
 > > and 56, so values much above this will strongly influence the mean. You can
@@ -333,9 +321,9 @@ tumor_subset %>%
 > ## Measures of variability and position.
 >
 > 1). Which combination of group and day has the largest variability? Which has 
-> the smallest variability?  
+> the smallest variability?   
 > 2). For these combinations of group and day, what value do 25% of the data
-> values fall under? 
+> values fall under?   
 > 3). For day 0, which group has the greatest variability? The greatest mean
 > tumor size? Which group has the least variability? The smallest mean size?
 > 
@@ -346,6 +334,6 @@ tumor_subset %>%
 > > 2). For group 1 on day 13, 1/4th of the data values are less than 1030.4.
 > > For group 3 on day 0, 1/4th of the data values are less than 42.875.  
 > > 3). For day 0, group 1 has the greatest variability and mean tumor size. 
-> > Group 3 has the smallest variability and mean size.
+> > Group 3 has the smallest variability and mean size.  
 > {: .solution}
 {: .challenge}

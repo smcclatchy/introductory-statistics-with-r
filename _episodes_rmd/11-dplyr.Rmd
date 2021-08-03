@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: "Using the dplyr package"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 20
 questions:
 - "How do I select, filter, and subset data in R?"
 objectives:
@@ -31,7 +31,7 @@ When trying to type in a file path,
 you can hit the `<TAB>` key to autocomplete the files.
 This will help you with a lot of potential spelling mistakes.
 
-```{r}
+```{r, message=FALSE}
 read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 
@@ -52,7 +52,7 @@ We can do this with the **assignment** **operator**, `<-`.
 Note the way it is typed, a less than symbol (`<`) followed immediately by the dash (`-`) without any spaces in between.
 The right side of the assignment operator, `<-`, will be executed and then **assigned** to the variable on the left.
 
-```{r}
+```{r, message=FALSE}
 tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ```
 

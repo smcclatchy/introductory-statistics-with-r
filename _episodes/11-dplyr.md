@@ -3,8 +3,8 @@
 # Instead, please edit 11-dplyr.md in _episodes_rmd/
 source: Rmd
 title: "Using the dplyr package"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 20
 questions:
 - "How do I select, filter, and subset data in R?"
 objectives:
@@ -37,21 +37,6 @@ This will help you with a lot of potential spelling mistakes.
 read_csv("../data/medicaldata_tumorgrowth.csv")
 ~~~
 {: .language-r}
-
-
-
-~~~
-
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-cols(
-  Grp = col_character(),
-  Group = col_double(),
-  ID = col_double(),
-  Day = col_double(),
-  Size = col_double()
-)
-~~~
-{: .output}
 
 
 
@@ -95,21 +80,6 @@ The right side of the assignment operator, `<-`, will be executed and then **ass
 tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 ~~~
 {: .language-r}
-
-
-
-~~~
-
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-cols(
-  Grp = col_character(),
-  Group = col_double(),
-  ID = col_double(),
-  Day = col_double(),
-  Size = col_double()
-)
-~~~
-{: .output}
 
 Notice this time we no longer see the dataset being printed.
 The "Environment" tab in the RStudio panel will now have an entry for the variable you used.
