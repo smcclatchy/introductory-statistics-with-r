@@ -3,13 +3,15 @@
 # Instead, please edit 12-descriptive-calculations.md in _episodes_rmd/
 source: Rmd
 title: "Descriptive Calculations"
-teaching: 0
-exercises: 0
+teaching: 20
+exercises: 20
 questions:
 - "How do I obtain summary statistics for data?"
+- "What do the mean, median, and standard deviation of a data set summarize?"
 objectives:
 - "Summarize specific observations from data."
 - "Group observations and summarize."
+- "Differentiate between measures of central tendency and dispersion."
 keypoints:
 - ""
 - ""
@@ -277,10 +279,41 @@ is a measure of position.
 The _quantile_ defines a specific part of a data set above or below some limit. 
 For example, quartiles divide a data set into fourths, and percentiles by 
 100ths. The median is the 50th percentile of the data - half lie above this 
-value and half below.
+value and half below. `quantile` takes an argument `probs` that gives the probability of values falling beneath a specific quantile. For example, `probs = .25` means that 25% of the values will be less than this quantile. This is the first quarter, or quartile, of the data.  
+
+
+~~~
+tumor_subset %>% 
+  filter(Day == 0) %>% 
+  summarize(quartile_1 = quantile(Size, probs = .25))
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 1 x 1
+  quartile_1
+       <dbl>
+1         44
+~~~
+{: .output}
+
+![quartile plot](../fig/quantile-plot.png)
 _Standard deviation_ measures the spread of the data. This summary statistic
-measures the degree of _dispersion_ or _variability_ of the data.  
-`quantile` takes an argument `probs` that gives the probability of values falling beneath a specific quantile. For example, `probs = .25` means that 25% of the values will be less than this quantile. This is the first quarter, or quartile, of the data.
+measures the _dispersion_ or _variability_ of the data. A small standard deviation indicates that data values tend to stay closer to the mean, while a large standard deviation indicates greater spread of data values away from the mean. Measuring standard deviation helps to describe the expected distance between data values. It is also a measure of how representative data values are of the entire distribution. For a normal distribution, 68% of the data values lie within one standard deviation of the mean.  
+
+
+~~~
+# Find the standard deviation for day 0 for all groups.
+sd_size <- tumor_subset %>% 
+  filter(Day == 0) %>% 
+  summarise(sd_size = sd(Size))
+~~~
+{: .language-r}
+
+![standard deviation plot](../fig/sd-plot.png)
+We can further explore mean, standard deviation, and first quartile by calculating each for groups 1 to 4.
 
 
 ~~~
@@ -318,22 +351,22 @@ tumor_subset %>%
 ~~~
 {: .output}
 
-> ## Measures of variability and position.
+> ## Measures of variability and position
 >
-> 1). Which combination of group and day has the largest variability? Which has 
-> the smallest variability?   
-> 2). For these combinations of group and day, what value do 25% of the data
+> 1). For each day, which  group  has the largest mean tumor size? the largest 
+> variability? Which has the smallest mean size? the smallest variability?   
+> 2). For these combinations of group and day, what values do 25% of the data
 > values fall under?   
-> 3). For day 0, which group has the greatest variability? The greatest mean
-> tumor size? Which group has the least variability? The smallest mean size?
 > 
 > > ## Solution
 > >
-> > 1). Group 1 on day 13 has the greatest standard deviation. Group 3 on day 0
-> > has the smallest variability.  
-> > 2). For group 1 on day 13, 1/4th of the data values are less than 1030.4.
-> > For group 3 on day 0, 1/4th of the data values are less than 42.875.  
-> > 3). For day 0, group 1 has the greatest variability and mean tumor size. 
-> > Group 3 has the smallest variability and mean size.  
+> > 1). Group 1 on day 0 has the greatest mean size and standard deviation.  
+> > Group 1 on day 13 also has the greatest mean size and standard deviation.  
+> > Group 3 on day 0 has the smallest mean size and variability. For day 13  
+> > Group 2 has the smallest mean size and variability.  
+> > 2). Group 1, day 0: 25% of data values are less than 46.3.   
+> > Group 1, day 13: 25% < 1030.4   
+> > Group 3, day 0: 25% < 42.875  
+> > Group 2, day 13: 25% < 357.225  
 > {: .solution}
 {: .challenge}
