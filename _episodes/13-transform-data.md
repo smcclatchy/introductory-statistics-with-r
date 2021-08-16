@@ -3,8 +3,8 @@
 # Instead, please edit 13-transform-data.md in _episodes_rmd/
 source: Rmd
 title: "Data Transformation"
-teaching: 0
-exercises: 0
+teaching: 20
+exercises: 20
 questions:
 - "How do I transform data?"
 objectives:
@@ -117,7 +117,7 @@ tumor %>%
 ~~~
 {: .output}
 
-> ## Exercise 
+> ## Exercise 1
 >
 >  Create a new data frame from the `tumor` data that meets the following
 >  criteria: contains only the `Grp` column and a new column called
@@ -511,7 +511,7 @@ tumor %>%
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 2
+> ## Exercise 3
 >
 > Use `group_by()` and `summarize()` to find the mean, min, and max tumor
 > size for each ID (using `ID`). Also add the number of

@@ -227,7 +227,7 @@ tumor_subset %>%
 ~~~
 {: .output}
 
-> ## Comparing mean with median.
+> ## Comparing mean with median
 >
 > Repeat the previous summary substituting the median for the mean.  
 > 1). What do you notice when you compare the mean and median values for each 
@@ -303,14 +303,25 @@ tumor_subset %>%
 _Standard deviation_ measures the spread of the data. This summary statistic
 measures the _dispersion_ or _variability_ of the data. A small standard deviation indicates that data values tend to stay closer to the mean, while a large standard deviation indicates greater spread of data values away from the mean. Measuring standard deviation helps to describe the expected distance between data values. It is also a measure of how representative data values are of the entire distribution. For a normal distribution, 68% of the data values lie within one standard deviation of the mean.  
 
+Find the standard deviation for day 0 for all groups.
+
 
 ~~~
-# Find the standard deviation for day 0 for all groups.
-sd_size <- tumor_subset %>% 
+tumor_subset %>% 
   filter(Day == 0) %>% 
   summarise(sd_size = sd(Size))
 ~~~
 {: .language-r}
+
+
+
+~~~
+# A tibble: 1 x 1
+  sd_size
+    <dbl>
+1    9.81
+~~~
+{: .output}
 
 ![standard deviation plot](../fig/sd-plot.png)
 We can further explore mean, standard deviation, and first quartile by calculating each for groups 1 to 4.
@@ -354,8 +365,10 @@ tumor_subset %>%
 > ## Measures of variability and position
 >
 > 1). For each day, which  group  has the largest mean tumor size? the largest 
-> variability? Which has the smallest mean size? the smallest variability?   
-> 2). For these combinations of group and day, what values do 25% of the data
+> variability? Which has the smallest mean size? the smallest variability?  
+> 2) How confident are you that the mean values represent a "typical" data   
+> value? How could you check whether the means represent typical values?  
+> 3). For these combinations of group and day, what values do 25% of the data
 > values fall under?   
 > 
 > > ## Solution
@@ -364,9 +377,14 @@ tumor_subset %>%
 > > Group 1 on day 13 also has the greatest mean size and standard deviation.  
 > > Group 3 on day 0 has the smallest mean size and variability. For day 13  
 > > Group 2 has the smallest mean size and variability.  
-> > 2). Group 1, day 0: 25% of data values are less than 46.3.   
+> > 2). Greater variability means that data values lie farther from the mean, so
+> > the mean might not represent a typical data value well. You could make a 
+> > histogram and include the mean value. Group 1 means are not the best 
+> > representatives.
+> > 3). Group 1, day 0: 25% of data values are less than 46.3.   
 > > Group 1, day 13: 25% < 1030.4   
 > > Group 3, day 0: 25% < 42.875  
 > > Group 2, day 13: 25% < 357.225  
 > {: .solution}
 {: .challenge}
+

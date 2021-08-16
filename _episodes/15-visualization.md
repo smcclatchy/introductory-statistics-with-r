@@ -3,8 +3,8 @@
 # Instead, please edit 15-visualization.md in _episodes_rmd/
 source: Rmd
 title: "Data visualization"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 20
 questions:
 - "How do I visualize data in R?"
 objectives:
@@ -555,7 +555,6 @@ Warning: Removed 11 rows containing missing values (geom_point).
 
 
 
->
 > ## Exercise
 > 1. Load the 
 > [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) 

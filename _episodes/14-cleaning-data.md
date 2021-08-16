@@ -3,8 +3,8 @@
 # Instead, please edit 14-cleaning-data.md in _episodes_rmd/
 source: Rmd
 title: "Cleaning data"
-teaching: 0
-exercises: 0
+teaching: 20
+exercises: 20
 questions:
 - "How do I re-organize and clean data in R?"
 objectives:
@@ -288,13 +288,13 @@ tumor_tidy %>%
 {: .output}
 
 > ## Exercise
-> > 1. Load the 
+> 1. Load the 
 > [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) 
 > by clicking the **Download** button and loading the data into RStudio. Check the Environment tab in the upper
 > right panel for an object named `cytomegalovirus`. You can 
 > [read more about this data set](https://github.com/higgi13425/medicaldata/blob/master/description_docs/cytomegalovirus_desc.pdf)
 > containing measurements from 64 patients who underwent hematopoietic stem cell transplant.
-> 1.  Tidy the dataset using the `pivot_longer` function
+> 1.  Tidy the dataset using the `pivot_longer` function.
 > 
 > ~~~
 > cytomegalovirus %>%

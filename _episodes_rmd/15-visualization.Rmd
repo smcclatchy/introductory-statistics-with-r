@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: "Data visualization"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 20
 questions:
 - "How do I visualize data in R?"
 objectives:
@@ -318,7 +318,6 @@ g + theme_excel()
 cytomegalovirus <- read_csv("../data/cytomegalovirus.csv")
 ```
 
->
 > ## Exercise
 > 1. Load the 
 > [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) 
