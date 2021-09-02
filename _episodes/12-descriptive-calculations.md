@@ -50,7 +50,7 @@ tumor_subset
 
 
 ~~~
-# A tibble: 60 x 4
+# A tibble: 60 × 4
    Group    ID   Day   Size
    <dbl> <dbl> <dbl>  <dbl>
  1     1   101     0   41.8
@@ -68,7 +68,16 @@ tumor_subset
 {: .output}
 
 ## Summary statistics
-Descriptive statistics summarize and organize characteristics of a data set. The first step of statistical analysis is to describe characteristics of the responses, such as the average of one variable (e.g., age), or the relation between two variables (e.g., age and weight). Inferential statistics, the next step in an analysis, helps to determine whether data confirms or refutes your hypothesis and whether it is generalizable to a larger population. We focus on descriptive statistics here with some statistical summaries of the filtered data. `pull` extracts a single column of data in the same way the the `$` operator specifies a column. `pull` is a verb though, and reads more easily in piped operations like this one.
+Descriptive statistics summarize and organize characteristics of a data set. The 
+first step of statistical analysis is to describe characteristics of the 
+responses, such as the average of one variable (e.g., age), or the relation 
+between two variables (e.g., age and weight). Inferential statistics, the next 
+step in an analysis, helps to determine whether data confirms or refutes your 
+hypothesis and whether it is generalizable to a larger population. We focus on 
+descriptive statistics here with some statistical summaries of the filtered 
+data. `pull` extracts a single column of data in the same way the the `$` 
+operator specifies a column. `pull` is a verb though, and reads more easily in 
+piped operations like this one.
 
 Filter out observations for day 0 only and look at the Size variable.
 
@@ -89,13 +98,27 @@ tumor_subset %>%
 ~~~
 {: .output}
 
-The mean is one statistical summary showing the _central tendency_ of the data. It is the most commonly used measure of central tendency, however, it is sensitive to _outliers_. Extreme values pull the mean toward them and have a disproportional effect on its value. The median value is another measure of central tendency as
-well as a measure of _position_. This value lies directly in the center of the ordered data with half of the values above and half below it. It is not 
-sensitive to extreme values - only its rank in the ordered values is considered. 
+The mean is one statistical summary showing the _central tendency_ of the data. 
+It is the most commonly used measure of central tendency, however, it is 
+sensitive to _outliers_. Extreme values pull the mean toward them and have a 
+disproportional effect on its value. The median value is another measure of 
+central tendency as well as a measure of _position_. This value lies directly in 
+the center of the ordered data with half of the values above and half below it. 
+It is not sensitive to extreme values - only its rank in the ordered values is 
+considered. In the plot below, the median lies directly at the center of the
+60 data values when they are ordered from smallest to 
+largest.
 
 ![tumor size density plot](../fig/density-plot.png)
+The distribution of tumor sizes shows a right skew, in which the mean is pulled
+to the right of the median by a few very large tumors. Values on the x-axis with 
+a greater density on the y-axis (e.g. between 42-45 mm<sup>3</sup>) have a 
+higher probability of occurring, while those with a lower density (e.g. between 
+71-74 mm<sup>3</sup>) have a low probability of occurring. 
 
-Summarize tumor size for day 0 with the mean.
+## The mean
+The mean of the distribution is the average of all the values that make up that 
+distribution. In the case of tumor size, the mean for day 0 is summarized as: 
 
 
 ~~~
@@ -112,6 +135,12 @@ tumor_subset %>%
 [1] 51.59189
 ~~~
 {: .output}
+
+The mean is also known as the expectation or expected value of a variable, <i>E()</i>. The expected value of tumor sizes is expressed as <i>E(y)</i>:
+
+$$E(y) = \frac{1}{n} \left( \sum_{i=1}^n y_{i} \right)$$
+
+where $n = 60$.
 
 Find mean tumor size for day 0 for group 1.
 
@@ -202,6 +231,36 @@ tumor_subset %>%
 ~~~
 {: .output}
 
+## The variance
+The *variance* is the average *squared* difference between values in the 
+distribution and the mean of the distribution. This is a mouthful, so it is 
+useful to look at the equation of variance. The variance is expressed as $V()$:  
+
+$$V(y) = E( (y - E(y))^2 )$$
+
+Breaking this down, we see that the variance is calculated using:
+* $y - E(y)$, i.e. the difference between an observed tumor size and the mean 
+tumor size.  
+* $(y - E(y))^2$, i.e. the squared difference between an observed tumor size and 
+the mean tumor size.  
+* $E( (y - E(y))^2 )$, i.e. the expectation of this squared difference.
+
+Why are we interested in this value? We are mainly interested in the variance
+because it allows us to calculate the standard deviation, which can be 
+interpreted on the original scale. Let's look at this below.
+
+## The standard deviation
+The *standard deviation* of a distribution is the *square root* of the variance.
+The standard deviation is expressed as $\sigma_y$:
+
+$$\sigma_y = \sqrt{V(y)}$$
+
+The standard deviation is interpreted as a measure of the difference between
+values in the distribution and the mean of the distribution. A higher standard 
+deviation indicates that the spread around the mean is greater. There is no 
+"good" or "bad" standard deviation - its purpose is to give us an idea of the 
+spread of observations in the population. 
+
 ## Groupby operations
 Use `group_by` and `summarize` to view group means for all groups.
 
@@ -217,7 +276,7 @@ tumor_subset %>%
 
 
 ~~~
-# A tibble: 4 x 2
+# A tibble: 4 × 2
   Group avg_size
   <dbl>    <dbl>
 1     1     55.6
@@ -292,7 +351,7 @@ tumor_subset %>%
 
 
 ~~~
-# A tibble: 1 x 1
+# A tibble: 1 × 1
   quartile_1
        <dbl>
 1         44
@@ -316,7 +375,7 @@ tumor_subset %>%
 
 
 ~~~
-# A tibble: 1 x 1
+# A tibble: 1 × 1
   sd_size
     <dbl>
 1    9.81
@@ -347,7 +406,7 @@ tumor_subset %>%
 
 
 ~~~
-# A tibble: 8 x 5
+# A tibble: 8 × 5
 # Groups:   Group [4]
   Group   Day avg_size sd_size     q1
   <dbl> <dbl>    <dbl>   <dbl>  <dbl>
