@@ -67,6 +67,37 @@ tumor_subset
 ~~~
 {: .output}
 
+What are the unique group numbers?
+
+
+~~~
+tumor_subset$Group %>%
+  unique()
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 1 2 3 4
+~~~
+{: .output}
+
+What days are represented?
+
+
+~~~
+tumor_subset$Day %>%
+  unique()
+~~~
+{: .language-r}
+
+
+
+~~~
+[1]  0 13
+~~~
+{: .output}
 ## Summary statistics
 Descriptive statistics summarize and organize characteristics of a data set. The 
 first step of statistical analysis is to describe characteristics of the 
@@ -75,7 +106,43 @@ between two variables (e.g., age and weight). Inferential statistics, the next
 step in an analysis, helps to determine whether data confirms or refutes your 
 hypothesis and whether it is generalizable to a larger population. We focus on 
 descriptive statistics here with some statistical summaries of the filtered 
-data. `pull` extracts a single column of data in the same way the the `$` 
+data. 
+
+What is the mean tumor size for all groups and both days?
+
+
+~~~
+tumor_subset$Size %>%
+  mean()
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 401.945
+~~~
+{: .output}
+
+This is not very informative because measurements were taken 13 days apart in
+four different treatment groups, so they will vary widely. We can use the 
+`range` function to view the minimum and maximum tumor sizes.
+
+
+~~~
+tumor_subset$Size %>%
+  range()
+~~~
+{: .language-r}
+
+
+
+~~~
+[1]   39.5 2342.6
+~~~
+{: .output}
+
+`pull` extracts a single column of data in the same way the the `$` 
 operator specifies a column. `pull` is a verb though, and reads more easily in 
 piped operations like this one.
 
@@ -110,6 +177,7 @@ considered. In the plot below, the median lies directly at the center of the
 largest.
 
 ![tumor size density plot](../fig/density-plot.png)
+
 The distribution of tumor sizes shows a right skew, in which the mean is pulled
 to the right of the median by a few very large tumors. Values on the x-axis with 
 a greater density on the y-axis (e.g. between 42-45 mm<sup>3</sup>) have a 
@@ -136,7 +204,9 @@ tumor_subset %>%
 ~~~
 {: .output}
 
-The mean is also known as the expectation or expected value of a variable, <i>E()</i>. The expected value of tumor sizes is expressed as <i>E(y)</i>:
+The mean is also known as the expectation or expected value of a variable, 
+<i>E()</i>. The expected value of tumor sizes on day 0 is expressed as 
+<i>E(y)</i>:
 
 $$E(y) = \frac{1}{n} \left( \sum_{i=1}^n y_{i} \right)$$
 
@@ -214,23 +284,6 @@ tumor_subset %>%
 ~~~
 {: .output}
 
-What are the unique group numbers?
-
-
-~~~
-tumor_subset %>%
-  pull(Group) %>%
-  unique()
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 1 2 3 4
-~~~
-{: .output}
-
 ## The variance
 The *variance* is the average *squared* difference between values in the 
 distribution and the mean of the distribution. This is a mouthful, so it is 
@@ -260,6 +313,27 @@ values in the distribution and the mean of the distribution. A higher standard
 deviation indicates that the spread around the mean is greater. There is no 
 "good" or "bad" standard deviation - its purpose is to give us an idea of the 
 spread of observations in the population. 
+
+![plot showing hypothetical datasets with sd 0.5, 1 and 2](../fig/dnorm-plot.png)
+Find the standard deviation of tumor size for day 0 for all groups.
+
+
+~~~
+tumor_subset %>% 
+  filter(Day == 0) %>% 
+  summarise(sd_size = sd(Size), avg_size = mean(Size))
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 1 × 2
+  sd_size avg_size
+    <dbl>    <dbl>
+1    9.81     51.6
+~~~
+{: .output}
 
 ## Groupby operations
 Use `group_by` and `summarize` to view group means for all groups.
@@ -338,7 +412,10 @@ is a measure of position.
 The _quantile_ defines a specific part of a data set above or below some limit. 
 For example, quartiles divide a data set into fourths, and percentiles by 
 100ths. The median is the 50th percentile of the data - half lie above this 
-value and half below. `quantile` takes an argument `probs` that gives the probability of values falling beneath a specific quantile. For example, `probs = .25` means that 25% of the values will be less than this quantile. This is the first quarter, or quartile, of the data.  
+value and half below. `quantile` takes an argument `probs` that gives the 
+probability of values falling beneath a specific quantile. For example, 
+`probs = .25` means that 25% of the values will be less than this quantile. This 
+is the first quarter, or quartile, of the data.  
 
 
 ~~~
@@ -358,32 +435,10 @@ tumor_subset %>%
 ~~~
 {: .output}
 
-![quartile plot](../fig/quantile-plot.png)
-_Standard deviation_ measures the spread of the data. This summary statistic
-measures the _dispersion_ or _variability_ of the data. A small standard deviation indicates that data values tend to stay closer to the mean, while a large standard deviation indicates greater spread of data values away from the mean. Measuring standard deviation helps to describe the expected distance between data values. It is also a measure of how representative data values are of the entire distribution. For a normal distribution, 68% of the data values lie within one standard deviation of the mean.  
+![quartile plot](../fig/quantile-plot.png)  
 
-Find the standard deviation for day 0 for all groups.
-
-
-~~~
-tumor_subset %>% 
-  filter(Day == 0) %>% 
-  summarise(sd_size = sd(Size))
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 1 × 1
-  sd_size
-    <dbl>
-1    9.81
-~~~
-{: .output}
-
-![standard deviation plot](../fig/sd-plot.png)
-We can further explore mean, standard deviation, and first quartile by calculating each for groups 1 to 4.
+We can further explore mean, standard deviation, and first quartile by 
+calculating each for groups 1 to 4.
 
 
 ~~~
