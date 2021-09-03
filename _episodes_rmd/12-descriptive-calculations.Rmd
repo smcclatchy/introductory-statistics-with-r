@@ -297,7 +297,7 @@ tumor_subset %>%
 >
 > 1). For each day, which  group  has the largest mean tumor size? the largest 
 > variability? Which has the smallest mean size? the smallest variability?  
-> 2) How confident are you that the mean values represent a "typical" data   
+> 2) How confident are you that the mean values represent a "typical" data 
 > value? How could you check whether the means represent typical values?  
 > 3). For these combinations of group and day, what values do 25% of the data
 > values fall under?   
