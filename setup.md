@@ -12,7 +12,7 @@ You can find all the datasets needed from the workshop [from the book's GitHub P
 
 1. You can click on the "Code" dropdown and select "Download Zip" to download the data and files for the lesson materials.
 
-![download zip file from Github](./fig/github-download_zip.PNG)
+    ![download zip file from Github](./fig/github-download_zip.PNG)
 
 2. Go to your Downloads folder to locate the `ds4biomed-learner` folder.  
 3. Move this folder onto your Desktop and unzip it if it is still zipped.  

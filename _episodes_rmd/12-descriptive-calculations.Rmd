@@ -262,16 +262,16 @@ tumor_subset %>%
 > {: .solution}
 {: .challenge}
 
+## Quantiles
 Mean and median both summarize the center of the data. Median lies directly at 
 center of the ordered data values - it lies at the midpoint of these values and
 is a measure of position. 
 The _quantile_ defines a specific part of a data set above or below some limit. 
 For example, quartiles divide a data set into fourths, and percentiles by 
-100ths. The median is the 50th percentile of the data - half lie above this 
+100ths. The median is the 50th percentile of the data - half lies above this 
 value and half below. `quantile` takes an argument `probs` that gives the 
 probability of values falling beneath a specific quantile. For example, 
-`probs = .25` means that 25% of the values will be less than this quantile. This 
-is the first quarter, or quartile, of the data.  
+`probs = .25` means that 25% of the values will be less than this quantile. This is the first quarter, or quartile, of the data.  
 
 ```{r, quantile}
 tumor_subset %>% 
@@ -293,7 +293,7 @@ tumor_subset %>%
             )
 ```
 
-> ## Measures of variability and position
+> ## Measures of variability and location
 >
 > 1). For each day, which  group  has the largest mean tumor size? the largest 
 > variability? Which has the smallest mean size? the smallest variability?  
@@ -318,4 +318,60 @@ tumor_subset %>%
 > > Group 2, day 13: 25% < 357.225  
 > {: .solution}
 {: .challenge}
+
+> ## Outliers and standard deviation
+>
+> 1. Do outliers affect the value of the standard deviation? Why or why not?   
+> 2. Suppose that your data set has a point that is much lower than the rest. 
+> What type of effect (if any) would this have on the value of the standard 
+> deviation?  
+> a.)  It would make it larger.  
+> b.)  It would make is smaller.   
+> c.)  It would stay the same.   
+> d.)  Unable to be determined.   
+> 3. Suppose that your data set has a point that is much higher than the rest.  
+> What type of effect (if any) would this have on the value of the standard 
+> deviation?  
+> a.)  It would make it larger.  
+> b.)  It would make is smaller.   
+> c.)  It would stay the same.   
+> d.)  Unable to be determined.
+> 
+> > ## Solution
+> >
+> > 1. Outliers do affect the standard deviation. The sd is computed from the 
+> > variance, which is computed from the mean. The mean is sensitive to 
+> > outliers, so statistical summaries (e.g. sd) computed from the mean value 
+> > will be affected by outliers as well.  
+> > 2. a.)  It would make it larger. sd is a measure of spread of the data, so a 
+> > low outlier will increase the spread of the data. When a large negative 
+> > difference between an observed and the mean tumor size is squared  
+> > $(y - E(y))^2 )$, the squared difference becomes a large positive value. The 
+> > variance increases as a result and so does standard deviation. 
+> > 3. a.)  It would make it larger. sd is a measure of spread of the data, so a 
+> > high outlier will increase the spread of the data. When a large positive 
+> > difference between an observed and the mean tumor size is squared, the 
+> > squared difference becomes a much larger positive value. The variance 
+> > increases as a result and so does standard deviation.  
+> {: .solution}
+{: .challenge}
+
+![binormal, uniform, and standard normal distributions](../fig/dist-plot.png)
+
+> ## Distributions and standard deviation
+>
+> Which of the distributions above has the smallest standard deviation? How can you know?
+> 
+> > ## Solution
+> >
+> > Plot C has the smallest standard deviation or narrowest spread. 
+> {: .solution}
+{: .challenge}
+
+
+
+
+
+
+
 

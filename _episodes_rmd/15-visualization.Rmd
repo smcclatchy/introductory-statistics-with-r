@@ -32,6 +32,11 @@ library(ggplot2)
 blood_storage <- read_csv("../data/blood_storage.csv")
 ```
 
+This dataset comes from the 
+[`medicaldata` R package](https://higgi13425.github.io/medicaldata/),
+curated by Dr. Peter Higgins, M.D. in the
+[IBD Research Group at the University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+
 [Blood storage dataset description](https://raw.githubusercontent.com/higgi13425/medicaldata/master/man/description_docs/blood_storage_desc.pdf)
 
 > [A retrospective cohort study of] 316 men who had undergone radical prostatectomy and received tranfusion during or within 30 days of the surgical procedure

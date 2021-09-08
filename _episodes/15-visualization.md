@@ -31,6 +31,11 @@ library(ggplot2)
 
 
 
+This dataset comes from the 
+[`medicaldata` R package](https://higgi13425.github.io/medicaldata/),
+curated by Dr. Peter Higgins, M.D. in the
+[IBD Research Group at the University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+
 [Blood storage dataset description](https://raw.githubusercontent.com/higgi13425/medicaldata/master/man/description_docs/blood_storage_desc.pdf)
 
 > [A retrospective cohort study of] 316 men who had undergone radical prostatectomy and received tranfusion during or within 30 days of the surgical procedure
@@ -50,7 +55,7 @@ head(blood_storage) # use head to look at the first 6 rows
 
 
 ~~~
-# A tibble: 6 x 20
+# A tibble: 6 × 20
   RBC.Age.Group Median.RBC.Age   Age    AA FamHx  PVol  TVol T.Stage   bGS `BN+`
           <dbl>          <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl>
 1             3             25  72.1     0     0  54       3       1     3     0
@@ -150,7 +155,7 @@ recurrence_freq
 
 
 ~~~
-# A tibble: 2 x 2
+# A tibble: 2 × 2
   Recurrence count
        <dbl> <int>
 1          0   262
@@ -204,7 +209,7 @@ recurrence_freq
 
 
 ~~~
-# A tibble: 2 x 2
+# A tibble: 2 × 2
   Recurrence count
        <dbl> <int>
 1          0   262

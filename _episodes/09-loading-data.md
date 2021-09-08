@@ -25,8 +25,10 @@ keypoints:
 Loading data into R is the first step!
 
 First we need to load up a package to make loading data sets easier.
-We will be using the `tidyverse` set of packages for all of our data processing needs in R.
-This is not the only way you can process data in R, but from experience, it seems to be the easier way to learn R due to its consistency, community, and learning materials.
+We will be using the `tidyverse` set of packages for all of our data processing 
+needs in R. This is not the only way you can process data in R, but from 
+experience, it seems to be the easier way to learn R due to its consistency, 
+community, and learning materials.
 
 <img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidyverse_celestial.png" title="&quot;Tidyverse Celestial&quot; by Allison Horst. &quot;tidyverse&quot; hex sticker in space surrounded by other tidyverse package hex logos." alt="&quot;Tidyverse Celestial&quot; by Allison Horst. &quot;tidyverse&quot; hex sticker in space surrounded by other tidyverse package hex logos." style="display: block; margin: auto;" />
 
@@ -41,15 +43,15 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
 
 
 ~~~
-✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-✔ tibble  3.1.0     ✔ dplyr   1.0.5
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.4     ✔ dplyr   1.0.7
 ✔ tidyr   1.1.3     ✔ stringr 1.4.0
 ✔ readr   1.4.0     ✔ forcats 0.5.1
 ~~~
@@ -58,7 +60,7 @@ library(tidyverse)
 
 
 ~~~
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -66,17 +68,19 @@ library(tidyverse)
 
 The first time you load up the `tidyverse` library,
 there will be some output that lists the packages `tidyverse` loads,
-along with any functions that share the same name as other functions (i.e., conflicts).
-As long as you are mindful about starting a new RStudio session before you work,
-you can ignore this output for now.
+along with any functions that share the same name as other functions 
+(i.e., conflicts). As long as you are mindful about starting a new RStudio 
+session before you work, you can ignore this output for now.
 
 Now we can use all the functions within the Tidyverse to do our data processing.
-If you are following along and you run a piece of code and end up with an `could not find function` error,
-make sure you typed `library(tidyverse)` correctly and executed the line of code.
+If you are following along and you run a piece of code and end up with an 
+`could not find function` error, make sure you typed `library(tidyverse)` 
+correctly and executed the line of code.
 
 ## Find your files
 
-Let the below figures represent a `ds4biomed` folder on your Desktop on Windows and Mac, respectively.
+Let the below figures represent a `ds4biomed` folder on your Desktop on Windows 
+and Mac, respectively.
 
 :::{.row}
 :::{.column}
@@ -195,8 +199,10 @@ When you are looking at file paths in the Windows Explorer,
 you will notice that all Windows paths will use the backslash, `\`,
 instead of the forward slash, `/` to refer to files.
 In a lot of programming languages, including R, the `\` is a special character,
-so if you want to use `\` for file paths in Windows, you will have to use 2 backslashes, e.g., `..\\data\\patients.csv\\`.
-However, you can still use the regular `/` in Windows to refer to folders just like other **operating systems**.
+so if you want to use `\` for file paths in Windows, you will have to use 2 
+backslashes, e.g., `..\\data\\patients.csv\\`.
+However, you can still use the regular `/` in Windows to refer to folders just 
+like other **operating systems**.
 
 ## Set your working directory
 
@@ -225,7 +231,7 @@ read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -239,7 +245,7 @@ cols(
 
 
 ~~~
-# A tibble: 574 x 5
+# A tibble: 574 × 5
    Grp   Group    ID   Day   Size
    <chr> <dbl> <dbl> <dbl>  <dbl>
  1 1.CTR     1   101     0   41.8
@@ -256,30 +262,64 @@ cols(
 ~~~
 {: .output}
 
-This dataset comes from the [`medicaldata` R package](https://github.com/higgi13425/medicaldata),
-curated by Dr. Peter Higgins, M.D. in the
-[IBD Research Group at the University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
-
-The dataset we loaded is a modified version of the "tumorgrowth" dataset in the `medicaldata` package.
-It shows the treatment group for a particular sample and its size ($mm^3$) over time (days).
-
-> Cells from a human glioma cell line were implanted in the flank of n=37 nude mice and a subcutaneous tumor (xenograft) was allowed to grow.
-> When a tumor grew to around 40-60mm^3, the animal was assigned to one of 4 experimenal groups...
-> The main outcome in xenograft experiments is the size (volume) of the tumor over time.
-
-You can read more about the dataset and study in the codebook for
-["Mixed-Effects Modeling of Tumor Growth in Animal Xenograft Experiments"](https://github.com/higgi13425/medicaldata/blob/master/description_docs/tumorgrowth_desc.pdf)
-
-
 **Debug help:**
 - If the above code returns a `could not find function "read_csv"`
   make sure you have loaded up the proper library with `library(tidyverse)`
 - If the above code returns a `does not exist in current working directory`,
-  make sure the working directory it lists is your expected "starting point" (i.e., working directory),
-  and make sure the file path is spelled correctly.
+  make sure the working directory it lists is your expected "starting point" 
+  (i.e., working directory), and make sure the file path is spelled correctly.
 
-`read_csv` will show us the columns that were read in,
-as well as the **data type** of that column (e.g., character, double -- a number).
+`read_csv` will show us the columns that were read in, as well as the 
+**data type** of that column (e.g., character, double -- a number).
+
+The dataset we loaded is a modified version of the 
+[tumorgrowth dataset](https://www.causeweb.org/tshs/tumor-growth/) contributed 
+by [Dr. Constantine Daskalakis at Thomas Jefferson University](https://www.jefferson.edu/university/jmc/departments/pharmacology/faculty_staff/faculty/daskalakis.html) The data show the treatment group for a particular sample and its tumor size 
+($mm^3$) over time (days).
+
+> Cells from a human glioma cell line were implanted in the flank of n=37 nude 
+> mice and a subcutaneous tumor (xenograft) was allowed to grow. When a tumor 
+> grew to around 40-60 $mm^3$, the animal was assigned to one of 4 experimental 
+> groups (day 0):  
+> 1) Control (CTR, n=8);  
+> 2) Drug only (D, n=10);  
+> 3) Radiation only (R, n=10); and  
+> 4) Drug + Radiation (D+R, n=9).  
+> The main outcome in xenograft experiments is the size (volume) of the tumor 
+> over time.  In this study, tumor size was typically measured every work day 
+> (excluding weekends and holidays, and occasional skipped days) for up to 4 
+> weeks. An animal was euthanized if it appeared distressed or moribund, or when 
+> its tumor grew to about 2 cm3. The study’s two main scientific aims were to 
+> assess whether:  
+> a. The drug has an effect on tumor growth.  
+> b. The administration of the drug before radiation enhances the effect of the 
+> latter on tumor growth.  
+
+You can read more about the dataset and study in 
+["Mixed-Effects Modeling of Tumor Growth in Animal Xenograft Experiments"](https://www.causeweb.org/tshs/datasets/tumorgrowth_introduction.pdf)
+
+> ## What do you predict?
+>
+> 1). What do you predict were the outcomes of this tumor growth study? Did the 
+> drug have an effect? Did the drug enhance the effect of radiation on tumor
+> growth? Which experimental group generated the largest tumor sizes? the 
+> smallest?  
+> 2). How can we determine if there is a significant difference between 
+> experimental groups with the largest and smallest tumor sizes? How can we 
+> determine whether the drug had an effect on radiation?
+> 3). How might you check your answer to number 2 above? 
+> 
+> > ## Solution
+> >
+> > Making predictions about the results of a study motivates the need for 
+> > statistical methods. If all results were predictable, we would not need 
+> > either data or statistics. There are no right or wrong answers here - the 
+> > purpose is to think statistically!
+> > For question 2, t-tests and visualizations can help to determine whether
+> > there is a difference in means or an effect between treatment groups. 
+> > 
+> {: .solution}
+{: .challenge}
 
 Loading a data set is great, but we need a convenient way to refer to the data set.
 We don't want to re-load the data set every time we want to perform an action on it.
@@ -298,7 +338,7 @@ tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -310,11 +350,13 @@ cols(
 {: .output}
 
 Notice this time we no longer see the dataset being printed.
-The "Environment" tab in the RStudio panel will now have an entry for the variable you used.
-Clicking on the right data set icon will open a view of your dataset,
-clicking on the arrow will show you the column-by-column text representation (technically it's called the `structure`).
+The "Environment" tab in the RStudio panel will now have an entry for the 
+variable you used. Clicking on the right data set icon will open a view of your 
+dataset, clicking on the arrow will show you the column-by-column text 
+representation (technically it's called the `structure`).
 
-To look at our dataset we can execute *just* the variable we assigned the dataset to.
+To look at our dataset we can execute *just* the variable we assigned the 
+dataset to.
 
 
 ~~~
@@ -325,7 +367,7 @@ tumor
 
 
 ~~~
-# A tibble: 574 x 5
+# A tibble: 574 × 5
    Grp   Group    ID   Day   Size
    <chr> <dbl> <dbl> <dbl>  <dbl>
  1 1.CTR     1   101     0   41.8
@@ -404,7 +446,7 @@ head(tumor)
 
 
 ~~~
-# A tibble: 6 x 5
+# A tibble: 6 × 5
   Grp   Group    ID   Day  Size
   <chr> <dbl> <dbl> <dbl> <dbl>
 1 1.CTR     1   101     0  41.8
@@ -509,7 +551,7 @@ tumor[1, 1]
 
 
 ~~~
-# A tibble: 1 x 1
+# A tibble: 1 × 1
   Grp  
   <chr>
 1 1.CTR
@@ -526,7 +568,7 @@ tumor[1, 5]
 
 
 ~~~
-# A tibble: 1 x 1
+# A tibble: 1 × 1
    Size
   <dbl>
 1  41.8
@@ -546,7 +588,7 @@ tumor[1, ]
 
 
 ~~~
-# A tibble: 1 x 5
+# A tibble: 1 × 5
   Grp   Group    ID   Day  Size
   <chr> <dbl> <dbl> <dbl> <dbl>
 1 1.CTR     1   101     0  41.8
@@ -565,7 +607,7 @@ tumor[, 1]
 
 
 ~~~
-# A tibble: 574 x 1
+# A tibble: 574 × 1
    Grp  
    <chr>
  1 1.CTR
@@ -593,7 +635,7 @@ tumor[1] # No comma!
 
 
 ~~~
-# A tibble: 574 x 1
+# A tibble: 574 × 1
    Grp  
    <chr>
  1 1.CTR
@@ -622,7 +664,7 @@ tumor[c(1, 2, 3), c(4, 5)]
 
 
 ~~~
-# A tibble: 3 x 2
+# A tibble: 3 × 2
     Day  Size
   <dbl> <dbl>
 1     0  41.8
@@ -642,7 +684,7 @@ tumor[1:3, 4:5]
 
 
 ~~~
-# A tibble: 3 x 2
+# A tibble: 3 × 2
     Day  Size
   <dbl> <dbl>
 1     0  41.8
@@ -699,7 +741,7 @@ tumor[, -1]                 # The whole data frame, except the first column
 
 
 ~~~
-# A tibble: 574 x 4
+# A tibble: 574 × 4
    Group    ID   Day   Size
    <dbl> <dbl> <dbl>  <dbl>
  1     1   101     0   41.8
@@ -726,7 +768,7 @@ tumor[-(7:nrow(tumor)), ] # Equivalent to head(tumor)
 
 
 ~~~
-# A tibble: 6 x 5
+# A tibble: 6 × 5
   Grp   Group    ID   Day  Size
   <chr> <dbl> <dbl> <dbl> <dbl>
 1 1.CTR     1   101     0  41.8
