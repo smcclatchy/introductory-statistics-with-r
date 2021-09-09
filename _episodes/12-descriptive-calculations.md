@@ -462,14 +462,15 @@ tumor_subset %>%
 {: .challenge}
 
 ![bar plot of mean tumor sizes and standard deviations by group](../fig/sd-bar-plot.png)
+> 
 > ## Means and error bars
 >
 > The bar plot above shows the means and standard deviations for each group.
 > Group means are indicated by the height of the bar, and standard deviations
 > for each group shown as an "error bar" extending equally above and below the
-> mean value for each group.
-> 1). What information does this plot give you about the experimental groups?   
-> 2). What does the error bar tell you about each group?   
+> mean value for each group.  
+> 1). What information does this plot give you about the experimental groups?    
+> 2). What does the error bar tell you about each group?     
 > 3). What does the zero at the bottom of each bar mean? Do tumor sizes begin 
 > at zero? 
 > 
@@ -477,7 +478,7 @@ tumor_subset %>%
 > >
 > > 1). The top of each bar tells you what the mean tumor size is for each 
 > > group. The error bar shows the standard deviation for each group, indicating
-> > the spread or variation of the data. 
+> > the spread or variation of the data.  
 > > 2). The error bars show that while the means might be different for each 
 > > group, but the standard deviations overlap for all groups and as such there 
 > > is overlap in the data for all groups. The bars do not indicate error in 
@@ -488,7 +489,12 @@ tumor_subset %>%
 > > beneath the top of the bar (the group mean) is wasted ink. A better way to
 > > visualize group means with error bars is with a mean-and-error plot with 
 > > a single point representing the mean and error bars showing standard 
-> > deviation. For more on this, see Nature Methods [Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837) and [Error bars](https://www.nature.com/articles/nmeth.2659).
+> > deviation. For more on this, see Nature Methods 
+> > [Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837) 
+> > and [Error bars](https://www.nature.com/articles/nmeth.2659).
+> > 
+> {: .solution}
+{: .challenge}
 
 ## Quantiles
 Mean and median both summarize the center of the data. Median lies directly at 
@@ -554,22 +560,22 @@ tumor_subset %>%
 > ## Measures of variability and location
 >
 > 1). For each day, which  group  has the largest mean tumor size? the largest 
-> variability? Which has the smallest mean size? the smallest variability?  
+> variability? Which has the smallest mean size? the smallest variability?    
 > 2) How confident are you that the mean values represent a "typical" data 
-> value? How could you check whether the means represent typical values?  
+> value? How could you check whether the means represent typical values?    
 > 3). For these combinations of group and day, what values do 25% of the data
 > values fall under?   
 > 
 > > ## Solution
 > >
-> > 1). Group 1 on day 0 has the greatest mean size and standard deviation.  
+> > 1). Group 1 on day 0 has the greatest mean size and standard deviation.    
 > > Group 1 on day 13 also has the greatest mean size and standard deviation.  
 > > Group 3 on day 0 has the smallest mean size and variability. For day 13  
-> > Group 2 has the smallest mean size and variability.  
+> > Group 2 has the smallest mean size and variability.   
 > > 2). Greater variability means that data values lie farther from the mean, so
 > > the mean might not represent a typical data value well. You could make a 
 > > histogram and include the mean value. Group 1 means are not the best 
-> > representatives.
+> > representatives.  
 > > 3). Group 1, day 0: 25% of data values are less than 46.3.   
 > > Group 1, day 13: 25% < 1030.4   
 > > Group 3, day 0: 25% < 42.875  
@@ -582,14 +588,14 @@ tumor_subset %>%
 >
 > The box plots above show data for each group.
 > 1). Add the third quartile to the data summary we created earlier (hint: use 
-> `quantile`  with the argument `probs = .75`).   
+> `quantile`  with the argument `probs = .75`).     
 > 2). How do the 1st, 2nd (median), and 3rd quartile values for each group
-> compare to the boxplots above?   
-> 3). Is the mean value for each group shown in the boxplots? 
+> compare to the boxplots above?    
+> 3). Is the mean value for each group shown in the boxplots?  
 > 4). What do you think the lines extending above and below the boxes represent? 
-> 5). For group 4, what does the dot near tumor size 70 represent? 
+> 5). For group 4, what does the dot near tumor size 70 represent?  
 > 6). How do the boxplots compare to the bar plots we saw earlier? What 
-> information do they convey or not convey?
+> information do they convey or not convey?  
 > 
 > > ## Solution
 > >
@@ -619,10 +625,10 @@ tumor_subset %>%
 > > maximum of 7.7 * 1.5 = 11.55, as long as there are data points this far away
 > > from the 1st and 3rd quartiles. If there aren't any, the whisker goes only
 > > as far as there are data points. For group 4, the upper whisker extends 
-> > from the 3rd quartile value plus 1.5 * IQR = 53.5 + 11.55 = 65.05.
+> > from the 3rd quartile value plus 1.5 * IQR = 53.5 + 11.55 = 65.05.  
 > > 5). The dot represents on outlier in group 4. In this case the outlier 
 > > lies more than 1.5 * IQR away from the 3rd quartile of the data (65.05). You
-> > can use the `max` function to find that the value of this outlier is 69.2.  
+> > can use the `max` function to find that the value of this outlier is 69.2.   
 > > 
 > > ~~~
 > > tumor_subset %>%
@@ -639,8 +645,11 @@ tumor_subset %>%
 > > extreme high or low values are not obscured by the visualization. There is 
 > > much more information in a box plot than in a bar chart, and there are ways
 > > to add in a point and error bars representing the mean. For more on this, 
-> > see Nature Methods [Visualizing samples with box plots](https://www.nature.com/articles/nmeth.2813).
-
+> > see Nature Methods 
+> > [Visualizing samples with box plots](https://www.nature.com/articles/nmeth.2813).
+> > 
+> {: .solution}
+{: .challenge}
 
 
 
