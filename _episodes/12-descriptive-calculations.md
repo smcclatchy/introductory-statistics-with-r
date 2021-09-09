@@ -319,188 +319,19 @@ Find the standard deviation of tumor size for day 0 for all groups.
 
 
 ~~~
-tumor_subset %>% 
-  filter(Day == 0) %>% 
-  summarise(sd_size = sd(Size), avg_size = mean(Size))
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 1 × 2
-  sd_size avg_size
-    <dbl>    <dbl>
-1    9.81     51.6
-~~~
-{: .output}
-
-## Groupby operations
-Use `group_by` and `summarize` to view group means for all groups.
-
-
-~~~
 tumor_subset %>%
-  filter(Day == 0) %>%
-  group_by(Group) %>%
-  summarize(avg_size = mean(Size))
+  filter(Group == 2, Day == 0) %>%
+  pull(Size) %>%
+  mean()
 ~~~
 {: .language-r}
 
 
 
 ~~~
-# A tibble: 4 × 2
-  Group avg_size
-  <dbl>    <dbl>
-1     1     55.6
-2     2     51.8
-3     3     48.6
-4     4     51.1
+[1] 51.81
 ~~~
 {: .output}
-
-> ## Comparing mean with median
->
-> Repeat the previous summary substituting the median for the mean.  
-> 1). What do you notice when you compare the mean and median values for each 
-> group?   
-> 2). What would cause the differences in the mean and median values for each 
-> group?   
-> 3). How might you check your answer to number 2 above? 
-> 
-> > ## Solution
-> >
-> > ~~~
-> > tumor_subset %>%
-> >   filter(Day == 0) %>%
-> >   group_by(Group) %>%
-> >   summarize(median_size = median(Size))
-> > ~~~
-> > {: .output}
-> >
-> > 1). The median values are smaller than the mean values for each group.    
-> > 2). Since the median is not sensitive to outliers and is smaller than the 
-> > mean for each group, it appears that there are large sizes in each group
-> > that pull the mean toward them.   
-> > 3) You could list all size values for each group to see if there are very
-> > large values that pull the mean toward them. The mean values are between 48 
-> > and 56, so values much above this will strongly influence the mean. You can
-> > look at all values by group.
-> > ~~~
-> > tumor_subset %>%
-> > filter(Day == 0) %>%
-> > group_by(Group) %>%
-> > pull(Size, Group)
-> > ~~~
-> > {: .output}
-> > If you only want to see the maximum value for each group, you can use `max`.
-> > ~~~
-> > tumor_subset %>%
-> > filter(Day == 0) %>%
-> > group_by(Group) %>%
-> > summarize(max_value = max(Size))
-> > ~~~
-> > {: .output}
-> > Each group has a maximum value well outside of the range of group means.
-> {: .solution}
-{: .challenge}
-
-## Quantiles
-Mean and median both summarize the center of the data. Median lies directly at 
-center of the ordered data values - it lies at the midpoint of these values and
-is a measure of position. 
-The _quantile_ defines a specific part of a data set above or below some limit. 
-For example, quartiles divide a data set into fourths, and percentiles by 
-100ths. The median is the 50th percentile of the data - half lies above this 
-value and half below. `quantile` takes an argument `probs` that gives the 
-probability of values falling beneath a specific quantile. For example, 
-`probs = .25` means that 25% of the values will be less than this quantile. This is the first quarter, or quartile, of the data.  
-
-
-~~~
-tumor_subset %>% 
-  filter(Day == 0) %>% 
-  summarize(quartile_1 = quantile(Size, probs = .25))
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 1 × 1
-  quartile_1
-       <dbl>
-1         44
-~~~
-{: .output}
-
-![quartile plot](../fig/quantile-plot.png)  
-
-We can further explore mean, standard deviation, and first quartile by 
-calculating each for groups 1 to 4.
-
-
-~~~
-tumor_subset %>%
-  group_by(Group, Day) %>%
-  summarize(avg_size = mean(Size),
-            sd_size = sd(Size),
-            q1 = quantile(Size, probs = .25)
-            )
-~~~
-{: .language-r}
-
-
-
-~~~
-`summarise()` has grouped output by 'Group'. You can override using the `.groups` argument.
-~~~
-{: .output}
-
-
-
-~~~
-# A tibble: 8 × 5
-# Groups:   Group [4]
-  Group   Day avg_size sd_size     q1
-  <dbl> <dbl>    <dbl>   <dbl>  <dbl>
-1     1     0     55.6   12.9    46.3
-2     1    13   1597.   764.   1030. 
-3     2     0     51.8   10.6    44.3
-4     2    13    453.   287.    357. 
-5     3     0     48.6    7.30   42.9
-6     3    13    934.   510.    571. 
-7     4     0     51.1    8.64   45.8
-8     4    13    768.   314.    600. 
-~~~
-{: .output}
-
-> ## Measures of variability and location
->
-> 1). For each day, which  group  has the largest mean tumor size? the largest 
-> variability? Which has the smallest mean size? the smallest variability?  
-> 2) How confident are you that the mean values represent a "typical" data 
-> value? How could you check whether the means represent typical values?  
-> 3). For these combinations of group and day, what values do 25% of the data
-> values fall under?   
-> 
-> > ## Solution
-> >
-> > 1). Group 1 on day 0 has the greatest mean size and standard deviation.  
-> > Group 1 on day 13 also has the greatest mean size and standard deviation.  
-> > Group 3 on day 0 has the smallest mean size and variability. For day 13  
-> > Group 2 has the smallest mean size and variability.  
-> > 2). Greater variability means that data values lie farther from the mean, so
-> > the mean might not represent a typical data value well. You could make a 
-> > histogram and include the mean value. Group 1 means are not the best 
-> > representatives.
-> > 3). Group 1, day 0: 25% of data values are less than 46.3.   
-> > Group 1, day 13: 25% < 1030.4   
-> > Group 3, day 0: 25% < 42.875  
-> > Group 2, day 13: 25% < 357.225  
-> {: .solution}
-{: .challenge}
 
 > ## Outliers and standard deviation
 >
@@ -543,14 +374,272 @@ tumor_subset %>%
 
 > ## Distributions and standard deviation
 >
-> Which of the distributions above has the smallest standard deviation? How can you know?
+> Which of the histograms above has the smallest standard deviation? How can you know?
 > 
 > > ## Solution
 > >
-> > Plot C has the smallest standard deviation or narrowest spread. 
+> > Plot C has the smallest standard deviation or narrowest spread. The average 
+> > distance of points from the mean is less than in the other histograms. In 
+> > histograms A and B, more of the points are a further distance from the mean.  
 > {: .solution}
 {: .challenge}
 
+## Groups and statistical summaries
+Use `group_by` and `summarize` to view group means and standard deviations for 
+all groups on day 0.
+
+
+~~~
+tumor_subset %>%
+  filter(Day == 0) %>%
+  group_by(Group) %>%
+  summarize(avg_size = mean(Size), 
+            std_dev = sd(Size))
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 4 × 3
+  Group avg_size std_dev
+  <dbl>    <dbl>   <dbl>
+1     1     55.6   12.9 
+2     2     51.8   10.6 
+3     3     48.6    7.30
+4     4     51.1    8.64
+~~~
+{: .output}
+
+> ## Comparing mean with median
+>
+> Repeat the previous summary, but add the median in addition to the mean and
+> standard deviation.  
+> 1). What do you notice when you compare the mean and median values for each 
+> group?   
+> 2). What would cause the differences in the mean and median values for each 
+> group?   
+> 3). How might you check your answer to number 2 above? 
+> 
+> > ## Solution
+> >
+> > ~~~
+> > tumor_subset %>%
+> >   filter(Day == 0) %>%
+> >   group_by(Group) %>%
+> >   summarize(avg_size = mean(Size),  
+> >            median_size = median(Size),  
+> >            std_dev = sd(Size)  
+> >            )
+> > ~~~
+> > {: .output}
+> >
+> > 1). The median values are smaller than the mean values for each group.    
+> > 2). Since the median is not sensitive to outliers and is smaller than the 
+> > mean for each group, it appears that there are large sizes in each group
+> > that pull the mean toward them.   
+> > 3) You could list all size values for each group to see if there are very
+> > large values that pull the mean toward them. The mean values are between 48 
+> > and 56, so values much above this will strongly influence the mean. You can
+> > look at all values by group.
+> > ~~~
+> > tumor_subset %>%
+> > filter(Day == 0) %>%
+> > group_by(Group) %>%
+> > pull(Size, Group)
+> > ~~~
+> > {: .output}
+> > If you only want to see the maximum value for each group, you can use `max`.
+> > ~~~
+> > tumor_subset %>%
+> > filter(Day == 0) %>%
+> > group_by(Group) %>%
+> > summarize(avg_size = mean(Size), max_value = max(Size))
+> > ~~~
+> > {: .output}
+> > Each group has a maximum value well outside of the range of group means.
+> {: .solution}
+{: .challenge}
+
+![bar plot of mean tumor sizes and standard deviations by group](../fig/sd-bar-plot.png)
+> ## Means and error bars
+>
+> The bar plot above shows the means and standard deviations for each group.
+> Group means are indicated by the height of the bar, and standard deviations
+> for each group shown as an "error bar" extending equally above and below the
+> mean value for each group.
+> 1). What information does this plot give you about the experimental groups?   
+> 2). What does the error bar tell you about each group?   
+> 3). What does the zero at the bottom of each bar mean? Do tumor sizes begin 
+> at zero? 
+> 
+> > ## Solution
+> >
+> > 1). The top of each bar tells you what the mean tumor size is for each 
+> > group. The error bar shows the standard deviation for each group, indicating
+> > the spread or variation of the data. 
+> > 2). The error bars show that while the means might be different for each 
+> > group, but the standard deviations overlap for all groups and as such there 
+> > is overlap in the data for all groups. The bars do not indicate error in 
+> > measurement.   
+> > 3). The zero at the bottom of each bar is meaningless and confusing. Tumor 
+> > sizes don't begin at zero, and the bars don't show the range of the data.
+> > In fact, the only meaningful part of the bar is the top of it. Everything
+> > beneath the top of the bar (the group mean) is wasted ink. A better way to
+> > visualize group means with error bars is with a mean-and-error plot with 
+> > a single point representing the mean and error bars showing standard 
+> > deviation. For more on this, see Nature Methods [Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837) and [Error bars](https://www.nature.com/articles/nmeth.2659).
+
+## Quantiles
+Mean and median both summarize the center of the data. Median lies directly at 
+center of the ordered data values - it lies at the midpoint of these values and
+is a measure of location. 
+The _quantile_ defines a specific part of a data set above or below some limit. 
+For example, quartiles divide a data set into fourths, and percentiles by 
+100ths. The median is the 50th percentile of the data - half lies above this 
+value and half below. `quantile` takes an argument `probs` that gives the 
+probability of values falling beneath a specific quantile. For example, 
+`probs = .25` means that 25% of the values will be less than this quantile. 
+This is the first quarter, or quartile, of the data.  
+
+
+~~~
+tumor_subset %>% 
+  filter(Day == 0) %>% 
+  summarize(quartile_1 = quantile(Size, probs = .25))
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 1 × 1
+  quartile_1
+       <dbl>
+1         44
+~~~
+{: .output}
+
+![quartile plot](../fig/quantile-plot.png)  
+
+We can further explore mean, median, and first quartile by 
+calculating each for groups 1 to 4.
+
+
+~~~
+tumor_subset %>%
+  group_by(Group) %>%
+  filter(Day == 0) %>%
+  summarize(avg_size = mean(Size),
+            sd_size = sd(Size),
+            median_size = median(Size),
+            q1 = quantile(Size, probs = .25)
+            )
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 4 × 5
+  Group avg_size sd_size median_size    q1
+  <dbl>    <dbl>   <dbl>       <dbl> <dbl>
+1     1     55.6   12.9         52.0  46.3
+2     2     51.8   10.6         48.3  44.3
+3     3     48.6    7.30        45.4  42.9
+4     4     51.1    8.64        48.2  45.8
+~~~
+{: .output}
+
+> ## Measures of variability and location
+>
+> 1). For each day, which  group  has the largest mean tumor size? the largest 
+> variability? Which has the smallest mean size? the smallest variability?  
+> 2) How confident are you that the mean values represent a "typical" data 
+> value? How could you check whether the means represent typical values?  
+> 3). For these combinations of group and day, what values do 25% of the data
+> values fall under?   
+> 
+> > ## Solution
+> >
+> > 1). Group 1 on day 0 has the greatest mean size and standard deviation.  
+> > Group 1 on day 13 also has the greatest mean size and standard deviation.  
+> > Group 3 on day 0 has the smallest mean size and variability. For day 13  
+> > Group 2 has the smallest mean size and variability.  
+> > 2). Greater variability means that data values lie farther from the mean, so
+> > the mean might not represent a typical data value well. You could make a 
+> > histogram and include the mean value. Group 1 means are not the best 
+> > representatives.
+> > 3). Group 1, day 0: 25% of data values are less than 46.3.   
+> > Group 1, day 13: 25% < 1030.4   
+> > Group 3, day 0: 25% < 42.875  
+> > Group 2, day 13: 25% < 357.225  
+> {: .solution}
+{: .challenge}
+
+![boxplots by group](../fig/boxplots.png)  
+> ## Box plots to visualize data
+>
+> The box plots above show data for each group.
+> 1). Add the third quartile to the data summary we created earlier (hint: use 
+> `quantile`  with the argument `probs = .75`).   
+> 2). How do the 1st, 2nd (median), and 3rd quartile values for each group
+> compare to the boxplots above?   
+> 3). Is the mean value for each group shown in the boxplots? 
+> 4). What do you think the lines extending above and below the boxes represent? 
+> 5). For group 4, what does the dot near tumor size 70 represent? 
+> 6). How do the boxplots compare to the bar plots we saw earlier? What 
+> information do they convey or not convey?
+> 
+> > ## Solution
+> >
+> > 1). 
+> > ~~~
+> > tumor_subset %>%
+> >   group_by(Group) %>%
+> >   filter(Day == 0) %>%
+> >   summarize(avg_size = mean(Size),
+> >             sd_size = sd(Size),
+> >             median_size = median(Size),
+> >             q1 = quantile(Size, probs = .25),
+> >             q3 = quantile(Size, probs = .75)
+> >             ) 
+> > ~~~
+> > {: .output}
+> > 
+> > 2). The 1st and 3rd quartile values for each group are shown as the bottom 
+> > and top of each box respectively. The 2nd quartile (median) is shown as a 
+> > horizontal bar inside the boxes. The length of the box is called the 
+> > the interquartile range or IQR.  
+> > 3). The mean value for each group isn't shown in the boxplots.   
+> > 4). The lines extending above and below show the data values below the 
+> > 1st quartile or above the 3rd quartile (the interquartile range or IQR). The
+> > length of these "whiskers" is 1.5 times the interquartile range. For example,
+> > the IQR for group 4 is 53.5 - 45.8 = 7.7. The whisker length will be a 
+> > maximum of 7.7 * 1.5 = 11.55, as long as there are data points this far away
+> > from the 1st and 3rd quartiles. If there aren't any, the whisker goes only
+> > as far as there are data points. For group 4, the upper whisker extends 
+> > from the 3rd quartile value plus 1.5 * IQR = 53.5 + 11.55 = 65.05.
+> > 5). The dot represents on outlier in group 4. In this case the outlier 
+> > lies more than 1.5 * IQR away from the 3rd quartile of the data (65.05). You
+> > can use the `max` function to find that the value of this outlier is 69.2.  
+> > 
+> > ~~~
+> > tumor_subset %>%
+> > filter(Day == 0) %>%
+> > group_by(Group) %>%
+> > summarize(max_value = max(Size))
+> > ~~~
+> > {: .output}
+> > 
+> > 6). While box plots don't show the mean or standard deviation, they do 
+> > show the spread of the data with the length of the boxes and whiskers. There 
+> > is no confusion about where the data start (e.g. the values don't start at 
+> > zero). Since they don't rely on the mean value to convey information, 
+> > extreme high or low values are not obscured by the visualization. There is 
+> > much more information in a box plot than in a bar chart, and there are ways
+> > to add in a point and error bars representing the mean. For more on this, 
+> > see Nature Methods [Visualizing samples with box plots](https://www.nature.com/articles/nmeth.2813).
 
 
 
