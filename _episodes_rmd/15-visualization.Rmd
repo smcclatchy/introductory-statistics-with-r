@@ -28,6 +28,9 @@ library(tidyverse)
 library(ggplot2)
 ```
 
+(Example: Use side-by-side boxplots to compare two groups, then use two-
+sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
+course to verify conditions for hypothesis tests.  
 ```{r readbloodstorage, echo=FALSE, message=FALSE}
 blood_storage <- read_csv("../data/blood_storage.csv")
 ```
@@ -363,6 +366,8 @@ cytomegalovirus <- read_csv("../data/cytomegalovirus.csv")
 > > facet_grid(donor.cmv ~ recipient.cmv)
 > > ```
 > >
+> {: .solution}
+{: .challenge}
 
 ## Additional Resources
 

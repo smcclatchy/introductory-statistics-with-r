@@ -221,7 +221,7 @@ tumor %>%
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 3
+> ## Exercise 4
 >
 > What was the largest tumor measured in each day? Return the columns `Day`,
 > `Grp`, `ID`, and `Size`.

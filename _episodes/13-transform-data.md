@@ -43,7 +43,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 574 x 6
+# A tibble: 574 × 6
    Grp   Group    ID   Day   Size size_cubic_cm
    <chr> <dbl> <dbl> <dbl>  <dbl>         <dbl>
  1 1.CTR     1   101     0   41.8        0.0418
@@ -73,7 +73,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 574 x 7
+# A tibble: 574 × 7
    Grp   Group    ID   Day   Size size_cubic_cm size_cubic_in
    <chr> <dbl> <dbl> <dbl>  <dbl>         <dbl>         <dbl>
  1 1.CTR     1   101     0   41.8        0.0418       0.00261
@@ -105,7 +105,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 6 x 6
+# A tibble: 6 × 6
   Grp   Group    ID   Day  Size size_cubic_cm
   <chr> <dbl> <dbl> <dbl> <dbl>         <dbl>
 1 1.CTR     1   101     0  41.8        0.0418
@@ -165,7 +165,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 4 x 2
+# A tibble: 4 × 2
   Grp   mean_size
   <chr>     <dbl>
 1 1.CTR      688.
@@ -196,7 +196,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 6 x 3
+# A tibble: 6 × 3
 # Groups:   Grp [1]
   Grp     Day mean_size
   <chr> <dbl>     <dbl>
@@ -235,7 +235,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 109 x 3
+# A tibble: 109 × 3
 # Groups:   Grp [4]
    Grp     Day mean_size
    <chr> <dbl>     <dbl>
@@ -281,7 +281,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 109 x 4
+# A tibble: 109 × 4
 # Groups:   Grp [4]
    Grp     Day mean_size min_size
    <chr> <dbl>     <dbl>    <dbl>
@@ -321,7 +321,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 109 x 4
+# A tibble: 109 × 4
 # Groups:   Grp [4]
    Grp     Day mean_size min_size
    <chr> <dbl>     <dbl>    <dbl>
@@ -357,7 +357,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 4 x 2
+# A tibble: 4 × 2
   Grp       n
   <chr> <int>
 1 1.CTR    97
@@ -380,7 +380,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 4 x 2
+# A tibble: 4 × 2
   Grp   count
   <chr> <int>
 1 1.CTR    97
@@ -402,7 +402,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 4 x 2
+# A tibble: 4 × 2
   Grp       n
   <chr> <int>
 1 2.D     171
@@ -427,7 +427,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 109 x 3
+# A tibble: 109 × 3
    Grp     Day     n
    <chr> <dbl> <int>
  1 1.CTR     0     8
@@ -460,7 +460,7 @@ tumor %>%
 
 
 ~~~
-# A tibble: 109 x 3
+# A tibble: 109 × 3
    Grp     Day     n
    <chr> <dbl> <int>
  1 2.D       0    10
@@ -492,7 +492,7 @@ tumor %>%
 > > 
 > > 
 > > ~~~
-> > # A tibble: 37 x 2
+> > # A tibble: 37 × 2
 > >       ID     n
 > >    <dbl> <int>
 > >  1   101    16
@@ -534,7 +534,7 @@ tumor %>%
 > > 
 > > 
 > > ~~~
-> > # A tibble: 37 x 5
+> > # A tibble: 37 × 5
 > >       ID mean_size min_size max_size     n
 > >    <dbl>     <dbl>    <dbl>    <dbl> <int>
 > >  1   101      810.     41.8    1678.    16
@@ -553,7 +553,7 @@ tumor %>%
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 3
+> ## Exercise 4
 >
 > What was the largest tumor measured in each day? Return the columns `Day`,
 > `Grp`, `ID`, and `Size`.
@@ -572,7 +572,7 @@ tumor %>%
 > > 
 > > 
 > > ~~~
-> > # A tibble: 29 x 4
+> > # A tibble: 29 × 4
 > > # Groups:   Day [29]
 > >      Day Grp      ID  Size
 > >    <dbl> <chr> <dbl> <dbl>

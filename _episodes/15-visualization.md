@@ -29,6 +29,9 @@ library(ggplot2)
 ~~~
 {: .language-r}
 
+(Example: Use side-by-side boxplots to compare two groups, then use two-
+sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
+course to verify conditions for hypothesis tests.  
 
 
 This dataset comes from the 
@@ -620,6 +623,8 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > 
 > > <img src="../fig/rmd-15-unnamed-chunk-38-3.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
 > >
+> {: .solution}
+{: .challenge}
 
 ## Additional Resources
 
