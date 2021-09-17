@@ -226,6 +226,7 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 ~~~
 {: .output}
 
+> 
 > ## Exercise
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?

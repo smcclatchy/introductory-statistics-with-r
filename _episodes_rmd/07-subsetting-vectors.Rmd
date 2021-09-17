@@ -97,6 +97,7 @@ animals %in% c("rat", "cat", "dog", "duck", "goat")
 animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 ```
 
+> 
 > ## Exercise
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
