@@ -353,7 +353,13 @@ tumor_subset %>%
 
 A better way to visualize group means with error bars is with a mean-and-error 
 plot with a single point representing the mean and error bars showing standard 
-deviation. For more on this, see Nature Methods 
+deviation. 
+
+![mean and error plot](../fig/mean-error-plot.png)
+It isn't as visually striking as a bar plot, which is one of the reasons they
+aren't often seen. Bar plots are also more common because spreadsheet software like Excel make it easy to make bar plots, but not so easy to visualize means 
+and errors in other ways that might be more suitable to the task. For more on
+this, see Nature Methods 
 [Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837) 
 and [Error bars](https://www.nature.com/articles/nmeth.2659).
 
