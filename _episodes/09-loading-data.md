@@ -43,7 +43,7 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
@@ -60,7 +60,7 @@ library(tidyverse)
 
 
 ~~~
-── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -231,7 +231,7 @@ read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -338,7 +338,7 @@ tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -814,29 +814,23 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 >    frame. Store the content of this row in an object named `tumors_middle`.  
 >
 > 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of
->    `head(tumor)`, keeping just the first through 6th rows of the surveys
+>    `head(tumor)`, keeping just the first through 6th rows of the tumor
 >    dataset.  
 >    
 > > ## Solution
 > > 
 > > ~~~
-> > 1. tumors_200 <- tumor[200, ]
-> > 2. # Saving `n_rows` to improve readability and reduce duplication
+> > # Create a new data frame from row 200  
+> > tumors_200 <- tumor[200, ]
+> > # Saving `n_rows` to improve readability and reduce duplication
 > > n_rows <- nrow(tumor)
 > > tumors_last <- tumor[n_rows, ]
-> > 3. tumors_middle <- tumor[n_rows / 2, ]
-> > 4. tumors_head <- tumor[-(7:n_rows), ]
+> > # Divide `n_rows` by 2 to get the middle row  
+> > ntumors_middle <- tumor[n_rows / 2, ]
+> > # Remove all rows from number 7 to `n_rows` to reproduce `head_tumor`    
+> > tumors_head <- tumor[-(7:n_rows), ]
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error: <text>:1:4: unexpected symbol
-> > 1: 1. tumors_200
-> >        ^
-> > ~~~
-> > {: .error}
 > > {: .output}
 > {: .solution}
 {: .challenge}

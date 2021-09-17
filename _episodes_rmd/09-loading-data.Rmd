@@ -482,17 +482,20 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 >    frame. Store the content of this row in an object named `tumors_middle`.  
 >
 > 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of
->    `head(tumor)`, keeping just the first through 6th rows of the surveys
+>    `head(tumor)`, keeping just the first through 6th rows of the tumor
 >    dataset.  
 >    
 > > ## Solution
 > > ```{r, answer=TRUE, purl=FALSE}
-> > 1. tumors_200 <- tumor[200, ]
-> > 2. # Saving `n_rows` to improve readability and reduce duplication
+> > # Create a new data frame from row 200  
+> > tumors_200 <- tumor[200, ]
+> > # Saving `n_rows` to improve readability and reduce duplication
 > > n_rows <- nrow(tumor)
 > > tumors_last <- tumor[n_rows, ]
-> > 3. tumors_middle <- tumor[n_rows / 2, ]
-> > 4. tumors_head <- tumor[-(7:n_rows), ]
+> > # Divide `n_rows` by 2 to get the middle row  
+> > ntumors_middle <- tumor[n_rows / 2, ]
+> > # Remove all rows from number 7 to `n_rows` to reproduce `head_tumor`    
+> > tumors_head <- tumor[-(7:n_rows), ]
 > > ```
 > > {: .output}
 > {: .solution}

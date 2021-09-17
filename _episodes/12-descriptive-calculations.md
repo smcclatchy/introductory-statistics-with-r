@@ -465,7 +465,7 @@ tumor_subset %>%
 > 
 > ## Means and error bars
 >
-> The bar plot above shows the means and standard deviations for each group.
+> The bar plots above show the means and standard deviations for each group.
 > Group means are indicated by the height of the bar, and standard deviations
 > for each group shown as an "error bar" extending equally above and below the
 > mean value for each group.  
@@ -486,15 +486,16 @@ tumor_subset %>%
 > > 3). The zero at the bottom of each bar is meaningless and confusing. Tumor 
 > > sizes don't begin at zero, and the bars don't show the range of the data.
 > > In fact, the only meaningful part of the bar is the top of it. Everything
-> > beneath the top of the bar (the group mean) is wasted ink. A better way to
-> > visualize group means with error bars is with a mean-and-error plot with 
-> > a single point representing the mean and error bars showing standard 
-> > deviation. For more on this, see Nature Methods 
-> > [Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837) 
-> > and [Error bars](https://www.nature.com/articles/nmeth.2659).
+> > beneath the top of the bar (the group mean) is wasted ink. 
 > > 
 > {: .solution}
 {: .challenge}
+
+A better way to visualize group means with error bars is with a mean-and-error 
+plot with a single point representing the mean and error bars showing standard 
+deviation. For more on this, see Nature Methods 
+[Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837) 
+and [Error bars](https://www.nature.com/articles/nmeth.2659).
 
 ## Quantiles
 Mean and median both summarize the center of the data. Median lies directly at 
@@ -586,13 +587,13 @@ tumor_subset %>%
 ![boxplots by group](../fig/boxplots.png)  
 > ## Box plots to visualize data
 >
-> The box plots above show data for each group.
+> The box plots above show data for each group.  
 > 1). Add the third quartile to the data summary we created earlier (hint: use 
 > `quantile`  with the argument `probs = .75`).     
 > 2). How do the 1st, 2nd (median), and 3rd quartile values for each group
 > compare to the boxplots above?    
 > 3). Is the mean value for each group shown in the boxplots?  
-> 4). What do you think the lines extending above and below the boxes represent? 
+> 4). What do you think the lines extending above and below the boxes represent?  
 > 5). For group 4, what does the dot near tumor size 70 represent?  
 > 6). How do the boxplots compare to the bar plots we saw earlier? What 
 > information do they convey or not convey?  
@@ -640,18 +641,18 @@ tumor_subset %>%
 > > 
 > > 6). While box plots don't show the mean or standard deviation, they do 
 > > show the spread of the data with the length of the boxes and whiskers. There 
-> > is no confusion about where the data start (e.g. the values don't start at 
+> > is no confusion about where the data start (e.g. the values don't start at
 > > zero). Since they don't rely on the mean value to convey information, 
-> > extreme high or low values are not obscured by the visualization. There is 
-> > much more information in a box plot than in a bar chart, and there are ways
-> > to add in a point and error bars representing the mean. For more on this, 
-> > see Nature Methods 
-> > [Visualizing samples with box plots](https://www.nature.com/articles/nmeth.2813).
+> > extreme high or low values are not obscured by the visualization. 
 > > 
 > {: .solution}
 {: .challenge}
 
 
+There is much more information in a box plot than in a bar chart, and there are 
+ways to add in a point and error bars representing the mean. For more on this,
+see Nature Methods 
+[Visualizing samples with box plots](https://www.nature.com/articles/nmeth.2813).
 
 
 

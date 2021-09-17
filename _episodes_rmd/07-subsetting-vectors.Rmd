@@ -104,9 +104,8 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 >
 > > ## Solution
 > > 
-> > When using ">" or "<" on strings, R compares their alphabetical order. 
-> > Here "four" comes after "five", and therefore is "greater than" it.
+> > When using `">"` or `"<"` on strings, R compares their alphabetical order. 
+> > Here `"four"` comes after `"five"`, and therefore is greater than it.
 > > 
 > {.solution}
 {.challenge}
-

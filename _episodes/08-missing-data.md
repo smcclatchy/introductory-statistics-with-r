@@ -163,10 +163,10 @@ Recall that you can use the `typeof()` function to find the type of your atomic 
 > > # or  
 > > heights_no_na <- heights[complete.cases(heights)]
 > > ```
-> >  2. ```{r}
+> >     2. ```{r}
 > > median(heights, na.rm = TRUE)  
 > > ```
-> >  3. ```{r}
+> >     3. ```{r}
 > > heights_above_67 <- heights_no_na[heights_no_na > 67]  
 > > length(heights_above_67)
 > > ```
