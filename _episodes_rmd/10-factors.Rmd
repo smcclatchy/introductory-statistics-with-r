@@ -35,6 +35,22 @@ a limited number of values. To see this, use the `unique()` function.
 unique(tumor$Grp)
 ```
 
+As a reminder:
+> Cells from a human glioma cell line were implanted in the flank of n=37 nude 
+> mice and a subcutaneous tumor (xenograft) was allowed to grow. When a tumor 
+> grew to around 40-60 $mm^3$, the animal was assigned to one of 4 experimental 
+> groups (day 0):  
+> 1) Control (CTR, n=8);  
+> 2) Drug only (D, n=10);  
+> 3) Radiation only (R, n=10); and  
+> 4) Drug + Radiation (D+R, n=9).  
+> The main outcome in xenograft experiments is the size (volume) of the tumor 
+> over time. The study’s two main scientific aims were to 
+> assess whether:  
+> a. The drug has an effect on tumor growth.  
+> b. The administration of the drug before radiation enhances the effect of the 
+> latter on tumor growth.  
+
 R has a special class for working with categorical data, called `factor`. 
 Factors are very useful and actually contribute to making R particularly well 
 suited to working with data. So we are going to spend a little time introducing 

@@ -113,8 +113,11 @@ higher probability of occurring, while those with a lower density (e.g. between
 71-74 mm<sup>3</sup>) have a low probability of occurring. 
 
 ## The mean
-The mean of the distribution is the average of all the values that make up that 
-distribution. In the case of tumor size, the mean for day 0 is summarized as: 
+The mean of a sample is the average of all the values in that sample, and 
+estimates the mean of the entire population. Since we can't afford the entire
+population of nude mice, we use a sample of these mice in our data to estimate
+the mean of the entire population. In the case of tumor size, the mean for day 0 
+is summarized as: 
 
 ```{r}
 tumor_subset %>%
@@ -123,11 +126,12 @@ tumor_subset %>%
   mean()
 ```
 
-The mean is also known as the expectation or expected value of a variable, 
-<i>E()</i>. The expected value of tumor sizes on day 0 is expressed as 
-<i>E(y)</i>:
+The sample mean is represented below as x-bar. The sample mean is the average of 
+the values of a variable in a sample, which is the sum of those values divided 
+by the number of values. Using mathematical notation, if a sample of `n` 
+observations on variable `x` is taken from the population, the sample mean is: 
 
-$$E(y) = \frac{1}{n} \left( \sum_{i=1}^n y_{i} \right)$$
+$$\bar{x} = \frac{1}{n} \left( \sum_{i=1}^n x_{i} \right)$$
 
 where $n = 60$.
 
@@ -168,28 +172,29 @@ tumor_subset %>%
 ```
 
 ## The variance
-The *variance* is the average *squared* difference between values in the 
-distribution and the mean of the distribution. This is a mouthful, so it is 
-useful to look at the equation of variance. The variance is expressed as $V()$:  
+The sample *variance* is the average *squared* difference between values in the 
+sample and the mean of the sample. This is a mouthful, so it is 
+useful to look at the equation for sample variance. The sample variance is 
+expressed as $s^2$:  
 
-$$V(y) = E( (y - E(y))^2 )$$
+$$s^2 = \underset{(n - 1)}{\underline{\sum (x_{i} - \bar{x})^2}}$$
 
-Breaking this down, we see that the variance is calculated using:
-* $y - E(y)$, i.e. the difference between an observed tumor size and the mean 
-tumor size.  
-* $(y - E(y))^2$, i.e. the squared difference between an observed tumor size and 
-the mean tumor size.  
-* $E( (y - E(y))^2 )$, i.e. the expectation of this squared difference.
+Breaking this down, we see that the sample variance is calculated using:
+* $\sum (x_{i} - \bar{x})$, i.e. the difference between an observed tumor size 
+and the mean tumor size of the sample.  
+* $\sum (x_{i} - \bar{x})^2$, i.e. the squared difference between an observed 
+tumor size and the sample mean tumor size.  
+* $n - 1$, the number of observations in the sample minus 1.
 
-Why are we interested in this value? We are mainly interested in the variance
-because it allows us to calculate the standard deviation, which can be 
-interpreted on the original scale. Let's look at this below.
+Why are we interested in the sample variance? We are mainly interested in the 
+sample variance because it allows us to calculate the standard deviation, which 
+can be interpreted on the original scale. Let's look at this below.
 
 ## The standard deviation
-The *standard deviation* of a distribution is the *square root* of the variance.
-The standard deviation is expressed as $\sigma_y$:
+The *standard deviation* of a sample is the *square root* of the sample 
+variance. The standard deviation is expressed as $s$:
 
-$$\sigma_y = \sqrt{V(y)}$$
+$$s = \sqrt{s^2}$$
 
 The standard deviation is interpreted as a measure of the difference between
 values in the distribution and the mean of the distribution. A higher standard 
