@@ -43,7 +43,7 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
@@ -60,7 +60,7 @@ library(tidyverse)
 
 
 ~~~
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -231,7 +231,7 @@ read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ────────────────────────────────────────────────────────
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -338,7 +338,7 @@ tumor <- read_csv("../data/medicaldata_tumorgrowth.csv")
 
 ~~~
 
-── Column specification ────────────────────────────────────────────────────────
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 cols(
   Grp = col_character(),
   Group = col_double(),
@@ -540,7 +540,7 @@ different classes.
 We can extract specific values by specifying row and column indices
 in the format: 
 data_frame[row_index, column_index]
-For instance, to extract the first row and column from surveys:
+For instance, to extract the first row and column from tumor:
 
 
 ~~~

@@ -374,7 +374,7 @@ different classes.
 We can extract specific values by specifying row and column indices
 in the format: 
 data_frame[row_index, column_index]
-For instance, to extract the first row and column from surveys:
+For instance, to extract the first row and column from tumor:
 
 ```{r, purl=FALSE}
 tumor[1, 1]

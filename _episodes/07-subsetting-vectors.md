@@ -4,7 +4,7 @@
 source: Rmd
 title: "Subsetting vectors"
 teaching: 15
-exercises: 5
+exercises: 15
 questions:
 - "How can I select specific elements of a data vector?"
 objectives:

@@ -21,17 +21,10 @@ keypoints:
 
 # Descriptive Calculations
 
-## Building the pipeline
+## Getting to know your data
 
-New script, clear your environment, re-load your libraries
-
-
-~~~
-library(tidyverse)
-~~~
-{: .language-r}
-
-Load the filtered data set created previously that contains days 0 or 13 only. 
+We start by exploring and describe the data. Load the filtered data set created 
+previously that contains days 0 and 13 only. 
 
 
 ~~~
@@ -39,7 +32,8 @@ tumor_subset <- read_csv("../data/tumor_filtered.csv")
 ~~~
 {: .language-r}
 
-Have a look at the data subset.
+Have a look at the data subset. Each row is an observation and each column is 
+a variable.
 
 
 ~~~
@@ -83,6 +77,39 @@ tumor_subset$Group %>%
 ~~~
 {: .output}
 
+Recall that when a tumor grew to around 40-60 $mm^3$, the animal was assigned to
+one of 4 experimental groups on day 0:  
+
+1) Control (CTR, n=8);  
+2) Drug only (D, n=10);  
+3) Radiation only (R, n=10); and  
+4) Drug + Radiation (D+R, n=9).  
+
+How many total observations are there for each group?
+
+
+~~~
+tumor_subset %>%
+  count(Group)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 4 × 2
+  Group     n
+  <dbl> <int>
+1     1    13
+2     2    14
+3     3    20
+4     4    13
+~~~
+{: .output}
+
+Notice that group 3 has many more observations than the others. The number of 
+observations for the other groups are well balanced.  
+
 What days are represented?
 
 
@@ -98,6 +125,90 @@ tumor_subset$Day %>%
 [1]  0 13
 ~~~
 {: .output}
+
+How many observations are there for each day?
+
+
+~~~
+tumor_subset %>%
+  count(Day)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 2 × 2
+    Day     n
+  <dbl> <int>
+1     0    37
+2    13    23
+~~~
+{: .output}
+
+There are many more observations for day 1 than for day 13.
+
+How many observations are there for each combination of group and day?  
+
+
+~~~
+tumor_subset %>%
+  count(Group, Day)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 8 × 3
+  Group   Day     n
+  <dbl> <dbl> <int>
+1     1     0     8
+2     1    13     5
+3     2     0    10
+4     2    13     4
+5     3     0    10
+6     3    13    10
+7     4     0     9
+8     4    13     4
+~~~
+{: .output}
+
+> ## Balanced and unbalanced data
+>
+> 1. Which combinations of group and day are well-balanced, with more or less 
+> equal numbers of observations?   
+> 2. Why might there be imbalances in the data?  
+> 3. What kinds of problems might imbalanced data present?  
+> 
+> > ## Solution
+> >
+> > 1. All groups start with approximately the same number of animals on day 0. 
+> > Group 3 has equal numbers of observations (10) for both days. Groups 2 and 4  
+> > have 4 observations each for day 13, and group 1 has 5 observations for day 
+> > 13. 
+> > 2. When data are missing the question to ask is why. In this case  
+> > survival to day 13 is the cause of missing values and imbalances 
+> > in the data. Rarely are missing values completely random in any dataset. In 
+> > this dataset, observations are not missing completely at random, rather,   
+> > they are missing depending on one of the variables in the dataset (Day). 
+> > 3. The main concern with unbalanced data is why there is an imbalance. If 
+> > observations are missing completely at random, then this is not a problem.  
+> > If attrition of study subjects in your data over time is not random, then 
+> > this sample selection may bias your estimates in analysis and modeling. In
+> > this dataset, imagine that those that survived to day 13 were all in the 
+> > same location or were all under the care of the same technicians, for 
+> > example.
+> {: .solution}
+{: .challenge}
+
+Missing data occur in nearly all statistical analyses. There are many ways to 
+handle missing data. The simplest methods is to exclude observations with 
+missing values and analyze only those that are complete. This loses information, 
+though, and can result in biased analyses. To retain all of the data, missing 
+values can be filled in or "imputed". For now we will be aware of missing values 
+in our data.
+
 ## Summary statistics
 Descriptive statistics summarize and organize characteristics of a data set. The 
 first step of statistical analysis is to describe characteristics of the 
@@ -186,10 +297,10 @@ higher probability of occurring, while those with a lower density (e.g. between
 
 ## The mean
 The mean of a sample is the average of all the values in that sample, and 
-estimates the mean of the entire population. Since we can't afford the entire
-population of nude mice, we use a sample of these mice in our data to estimate
-the mean of the entire population. In the case of tumor size, the mean for day 0 
-is summarized as: 
+estimates the mean of the entire population. Since we can't afford to buy or 
+house the entire population of all nude mice in the world, we use a sample of 
+these mice in our data to estimate the mean of the entire population. In the 
+case of tumor size, the mean for day 0 is summarized as: 
 
 
 ~~~
@@ -325,18 +436,64 @@ Find the standard deviation of tumor size for day 0 for all groups.
 
 ~~~
 tumor_subset %>%
-  filter(Group == 2, Day == 0) %>%
+  filter(Day == 0) %>%
   pull(Size) %>%
-  mean()
+  sd()
 ~~~
 {: .language-r}
 
 
 
 ~~~
-[1] 51.81
+[1] 9.807321
 ~~~
 {: .output}
+
+Now do the same for day 13.
+
+
+~~~
+tumor_subset %>%
+  filter(Day == 13) %>%
+  pull(Size) %>%
+  sd()
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 618.9181
+~~~
+{: .output}
+
+We can create simple histograms to visualize the distribution of tumor sizes on 
+days 0 and 13. Notice that the range of x-axis values is much for day 13, 
+illustrating the much greater standard deviation (spread) of values for day 13. 
+Later we will create much nicer plots with the ggplot package. For now, these
+serve to visualize data distribution.
+
+
+~~~
+tumor_subset %>%
+  filter(Day == 0) %>%
+  pull(Size) %>%
+  hist(main = "Histogram of tumor size on day 0")
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-12-base-hist-day0-1.png" title="plot of chunk base-hist-day0" alt="plot of chunk base-hist-day0" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+tumor_subset %>%
+  filter(Day == 13) %>%
+  pull(Size) %>%
+  hist(main = "Histogram of tumor size  on day 13")
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-12-base-hist-day13-1.png" title="plot of chunk base-hist-day13" alt="plot of chunk base-hist-day13" width="612" style="display: block; margin: auto;" />
 
 > ## Outliers and standard deviation
 >
@@ -379,7 +536,8 @@ tumor_subset %>%
 
 > ## Distributions and standard deviation
 >
-> Which of the histograms above has the smallest standard deviation? How can you know?
+> Which of the histograms above has the smallest standard deviation? How can you 
+> know?
 > 
 > > ## Solution
 > >
@@ -551,7 +709,7 @@ tumor_subset %>%
   summarize(avg_size = mean(Size),
             sd_size = sd(Size),
             median_size = median(Size),
-            q1 = quantile(Size, probs = .25)
+            quartile_1 = quantile(Size, probs = .25)
             )
 ~~~
 {: .language-r}
@@ -560,12 +718,12 @@ tumor_subset %>%
 
 ~~~
 # A tibble: 4 × 5
-  Group avg_size sd_size median_size    q1
-  <dbl>    <dbl>   <dbl>       <dbl> <dbl>
-1     1     55.6   12.9         52.0  46.3
-2     2     51.8   10.6         48.3  44.3
-3     3     48.6    7.30        45.4  42.9
-4     4     51.1    8.64        48.2  45.8
+  Group avg_size sd_size median_size quartile_1
+  <dbl>    <dbl>   <dbl>       <dbl>      <dbl>
+1     1     55.6   12.9         52.0       46.3
+2     2     51.8   10.6         48.3       44.3
+3     3     48.6    7.30        45.4       42.9
+4     4     51.1    8.64        48.2       45.8
 ~~~
 {: .output}
 
@@ -629,7 +787,8 @@ tumor_subset %>%
 > > and top of each box respectively. The 2nd quartile (median) is shown as a 
 > > horizontal bar inside the boxes. The length of the box is called the 
 > > the interquartile range or IQR.  
-> > 3). The mean value for each group isn't shown in the boxplots.   
+> > 3). The mean value for each group isn't shown in the boxplots. The 
+> > horizontal line across each box represents the median, not the mean.   
 > > 4). The lines extending above and below show the data values below the 
 > > 1st quartile or above the 3rd quartile (the interquartile range or IQR). The
 > > length of these "whiskers" is 1.5 times the interquartile range. For example,
