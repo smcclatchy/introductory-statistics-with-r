@@ -3,8 +3,8 @@
 # Instead, please edit 10-factors.md in _episodes_rmd/
 source: Rmd
 title: "Factors"
-teaching: 30
-exercises: 15
+teaching: 25
+exercises: 20
 questions:
 - "How do I work with factors in R?"
 objectives:

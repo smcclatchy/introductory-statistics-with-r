@@ -18,56 +18,63 @@ keypoints:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("15-")
+library(tidyverse)
 ```
-# Visualization (Intro)
+# Visualization
 
 ## Introduction {#vis-intro-intro}
-
-```{r, echo=TRUE, message=FALSE}
-library(tidyverse)
-library(ggplot2)
-```
 
 (Example: Use side-by-side boxplots to compare two groups, then use two-
 sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
 course to verify conditions for hypothesis tests.  
-```{r readbloodstorage, echo=FALSE, message=FALSE}
-blood_storage <- read_csv("../data/blood_storage.csv")
-```
 
-This dataset comes from the 
+This next section uses a blood storage dataset from a study of prostate cancer
+recurrence. This dataset was contributed by Dr. Amy Nowacki, Associate 
+Professor, Cleveland Clinic. This dataset is one of many from the 
 [`medicaldata` R package](https://higgi13425.github.io/medicaldata/),
-curated by Dr. Peter Higgins, M.D. in the
-[IBD Research Group at the University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+curated by Dr. Peter Higgins, M.D. at the
+[University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+More information about the blood storage data is available at the 
+[TSHS Resources Portal](https://www.causeweb.org/tshs/blood-storage/). A brief
+description of the study follows.
 
-[Blood storage dataset description](https://raw.githubusercontent.com/higgi13425/medicaldata/master/man/description_docs/blood_storage_desc.pdf)
-
-> [A retrospective cohort study of] 316 men who had undergone radical prostatectomy and received tranfusion during or within 30 days of the surgical procedure
-> and had available PSA follow-up data.
+> [A retrospective cohort study of] 316 men who had undergone radical 
+> prostatectomy and received tranfusion during or within 30 days of the surgical 
+> procedure and had available prostate specific antigen (PSA) follow-up data.
 > The outcome [of interest] was time to biochemical cancer recurrence.
-> Study evaluated the association between red blood cells storage duration and biochemical prostate cancer recurrence after radical prostatectomy.
-> Specifically, tested was the hypothesis that perioperative transfusion of allogeneic RBCs stored for a prolonged period is associated with earlier biochemical recurrence of prostate cancer after prostatectomy.
+> The study evaluated the association between red blood cells (RBC) storage 
+> duration and biochemical prostate cancer recurrence after radical 
+> prostatectomy. Specifically tested was the hypothesis that perioperative 
+> transfusion of allogeneic RBCs stored for a prolonged period is associated 
+> with earlier biochemical recurrence of prostate cancer after prostatectomy.
 
-Download the blood storage data by [clicking the **Download** button here](https://github.com/higgi13425/medicaldata/blob/master/data/blood_storage.rda). This will load the data directly into RStudio. Check your Environment tab at upper right to see a new data object called `blood_storage`.
+To get started, install the `medicaldata` package and load the library. 
 
-```{r}
-head(blood_storage) # use head to look at the first 6 rows
+```{r install-package, echo=FALSE, message=FALSE}
+install.packages("medicaldata")
+library(medicaldata)
+```
+
+Now access the `blood` dataset within this package. 
+
+```{r readbloodstorage, echo=FALSE, message=FALSE}
+blood <- medicaldata::blood
+head(blood) # use head to look at the first 6 rows
 ```
 
 ```{r}
-class(blood_storage)
+class(blood)
 ```
-
 
 ```{r}
 # get just the column names for a dataset
-names(blood_storage)
+names(blood)
 ```
-
 
 ## Data Types
 
-While exploring a dataset, you want to know what each variable's role in the analysis will be.
+While exploring a dataset, you want to know what each variable's role in the 
+analysis will be.
 
 - What is the variable (i.e., column) of interest?
   - response, dependent, y, outcome
@@ -84,10 +91,8 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/nominal_ordinal_binary.png")
 ```
 
-
-The type of information a variable holds will dictate the summary statistics you can make,
-the visualizations you can create,
-and the models you can fit.
+The type of information a variable holds will dictate the summary statistics you 
+can make, the visualizations you can create, and the models you can fit.
 
 Ordinal and discrete variables should be converted into `factor` variables in R.
 A `factor` is R's way of naming a **categorical** variable.
@@ -106,15 +111,26 @@ The outcome of interest is the recurrence of cancer (no = 0 or yes = 1).
 > {: .solution}
 {: .challenge}
 
+In cancer studies and other kinds of studies that measure time to an event such 
+as cancer recurrence, survival analysis is employed. Read more about how to do
+this in Clark TG, Bradburn MJ, Love SB, Altman DG. Survival analysis part I: 
+basic concepts and first analyses. British journal of cancer. 2003 Jul;89(2):232-8. https://www.nature.com/articles/6601118
+
 Summarize the number of cancer recurrences and non-recurrences as a recurrence
 frequency.
 
 ```{r}
-recurrence_freq <- blood_storage %>%
+recurrence_freq <- blood %>%
   group_by(Recurrence) %>%
   summarize(count = n())
 recurrence_freq
 ```
+
+This data dictionary describes each variable in the dataset.
+
+To visualize data we will use a grammar of graphics. We build up a visualization
+from component parts starting with the data. We can then layer other parts on
+top of this data.
 
 ## Grammar of Graphics
 
@@ -126,19 +142,19 @@ knitr::include_graphics("../fig/ggplot-grammar_layers.png")
 
 ```{r}
 # add a data layer
-ggplot(data = blood_storage)
+ggplot(data = blood)
 ```
 
 ```{r}
 # add a data later with an asthetic mapping
-ggplot(data = blood_storage, mapping = aes(x = Recurrence))
+ggplot(data = blood, mapping = aes(x = Recurrence))
 ```
 
 
 ```{r}
 # add a geometry layer
 # by default the stat layer for geom_bar will count values
-ggplot(data =  blood_storage, mapping = aes(x = Recurrence)) + geom_bar()
+ggplot(data =  blood, mapping = aes(x = Recurrence)) + geom_bar()
 ```
 
 If we have a pre-calculated set of values, we want to tell `geom_bar` to use the `"identity"` statistic.
@@ -190,11 +206,11 @@ This means we can add more layers with different data sets if we want to.
 #### Continuous
 
 ```{r}
-ggplot(blood_storage, aes(x = Age)) + geom_histogram()
+ggplot(blood, aes(x = Age)) + geom_histogram()
 ```
 
 ```{r}
-ggplot(blood_storage, aes(x = Age)) + geom_histogram(bins = 10)
+ggplot(blood, aes(x = Age)) + geom_histogram(bins = 10)
 ```
 
 ### Bivariate
@@ -211,12 +227,12 @@ To convert the numeric column (or any column) into a categorical **factor** we c
 
 ```{r}
 # Does not show TVol properly
-ggplot(blood_storage) + geom_boxplot(aes(x = TVol, y = Age))
+ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 ```
 
 ```{r}
 # please a box plot for each value of TVol as a factor
-ggplot(blood_storage) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
+ggplot(blood) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
 ```
 
 We can also use a violin plot, to better show the distribution of the dataset,
@@ -225,13 +241,13 @@ instead of using a boxplot.
 And we can also overlay a different geometry on top.
 
 ```{r}
-ggplot(blood_storage) + 
+ggplot(blood) + 
   geom_violin(aes(x = as.factor(TVol), y = Age)) +
   geom_point(aes(x = as.factor(TVol), y = Age))
 ```
 
 ```{r}
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_violin(aes(x = as.factor(TVol), y = Age)) +
   geom_jitter(aes(x = as.factor(TVol), y = Age))
 ```
@@ -240,7 +256,7 @@ We can move around our data layers to save some typing,
 and have the geometry layer use the same data and mapping layer.
 
 ```{r}
-ggplot(blood_storage, aes(x = as.factor(TVol), y = Age)) +
+ggplot(blood, aes(x = as.factor(TVol), y = Age)) +
   geom_violin() +
   geom_jitter()
 ```
@@ -258,14 +274,14 @@ We can also set other aesthetic mappings, e.g., color
   - 4 = Score 8-10
 
 ```{r}
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = sGS))
 ```
 
 Again, we have a numeric variable that is really an ordinal categorical variable
 
 ```{r}
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS)))
 ```
 
@@ -278,14 +294,14 @@ Think of this as the `group_by` version for plotting.
 
 ```{r}
 # use facet wrap for a single variable
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS))) +
   facet_wrap(~ RBC.Age.Group)
 ```
 
 ```{r}
 # use facet grid for 2 variables
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
 ```
@@ -293,7 +309,7 @@ ggplot(blood_storage) +
 ## Themes
 
 ```{r}
-g <- ggplot(blood_storage) +
+g <- ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
 g

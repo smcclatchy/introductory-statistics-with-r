@@ -18,97 +18,88 @@ keypoints:
 ---
 
 
-# Visualization (Intro)
+# Visualization
 
 ## Introduction {#vis-intro-intro}
-
-
-~~~
-library(tidyverse)
-library(ggplot2)
-~~~
-{: .language-r}
 
 (Example: Use side-by-side boxplots to compare two groups, then use two-
 sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
 course to verify conditions for hypothesis tests.  
 
-
-This dataset comes from the 
+This next section uses a blood storage dataset from a study of prostate cancer
+recurrence. This dataset was contributed by Dr. Amy Nowacki, Associate 
+Professor, Cleveland Clinic. This dataset is one of many from the 
 [`medicaldata` R package](https://higgi13425.github.io/medicaldata/),
-curated by Dr. Peter Higgins, M.D. in the
-[IBD Research Group at the University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+curated by Dr. Peter Higgins, M.D. at the
+[University of Michigan Medical School](http://www.med.umich.edu/higginslab/).
+More information about the blood storage data is available at the 
+[TSHS Resources Portal](https://www.causeweb.org/tshs/blood-storage/). A brief
+description of the study follows.
 
-[Blood storage dataset description](https://raw.githubusercontent.com/higgi13425/medicaldata/master/man/description_docs/blood_storage_desc.pdf)
-
-> [A retrospective cohort study of] 316 men who had undergone radical prostatectomy and received tranfusion during or within 30 days of the surgical procedure
-> and had available PSA follow-up data.
+> [A retrospective cohort study of] 316 men who had undergone radical 
+> prostatectomy and received tranfusion during or within 30 days of the surgical 
+> procedure and had available prostate specific antigen (PSA) follow-up data.
 > The outcome [of interest] was time to biochemical cancer recurrence.
-> Study evaluated the association between red blood cells storage duration and biochemical prostate cancer recurrence after radical prostatectomy.
-> Specifically, tested was the hypothesis that perioperative transfusion of allogeneic RBCs stored for a prolonged period is associated with earlier biochemical recurrence of prostate cancer after prostatectomy.
+> The study evaluated the association between red blood cells (RBC) storage 
+> duration and biochemical prostate cancer recurrence after radical 
+> prostatectomy. Specifically tested was the hypothesis that perioperative 
+> transfusion of allogeneic RBCs stored for a prolonged period is associated 
+> with earlier biochemical recurrence of prostate cancer after prostatectomy.
 
-Download the blood storage data by [clicking the **Download** button here](https://github.com/higgi13425/medicaldata/blob/master/data/blood_storage.rda). This will load the data directly into RStudio. Check your Environment tab at upper right to see a new data object called `blood_storage`.
+To get started, install the `medicaldata` package and load the library. 
 
 
 ~~~
-head(blood_storage) # use head to look at the first 6 rows
+Error in contrib.url(repos, "source"): trying to use CRAN without setting a mirror
+~~~
+{: .error}
+
+Now access the `blood` dataset within this package. 
+
+
+~~~
+Error: 'blood' is not an exported object from 'namespace:medicaldata'
+~~~
+{: .error}
+
+
+
+~~~
+Error in head(blood): object 'blood' not found
+~~~
+{: .error}
+
+
+~~~
+class(blood)
 ~~~
 {: .language-r}
 
 
 
 ~~~
-# A tibble: 6 × 20
-  RBC.Age.Group Median.RBC.Age   Age    AA FamHx  PVol  TVol T.Stage   bGS `BN+`
-          <dbl>          <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl>
-1             3             25  72.1     0     0  54       3       1     3     0
-2             3             25  73.6     0     0  43.2     3       2     2     0
-3             3             25  67.5     0     0 103.      1       1     3     0
-4             2             15  65.8     0     0  46       1       1     1     0
-5             2             15  63.2     0     0  60       2       1     2     0
-6             3             25  65.4     0     0  45.9     2       1     1     0
-# … with 10 more variables: OrganConfined <dbl>, PreopPSA <dbl>,
-#   PreopTherapy <dbl>, Units <dbl>, sGS <dbl>, AnyAdjTherapy <dbl>,
-#   AdjRadTherapy <dbl>, Recurrence <dbl>, Censor <dbl>, TimeToRecurrence <dbl>
+Error in eval(expr, envir, enclos): object 'blood' not found
 ~~~
-{: .output}
-
-
-~~~
-class(blood_storage)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" 
-~~~
-{: .output}
-
+{: .error}
 
 
 ~~~
 # get just the column names for a dataset
-names(blood_storage)
+names(blood)
 ~~~
 {: .language-r}
 
 
 
 ~~~
- [1] "RBC.Age.Group"    "Median.RBC.Age"   "Age"              "AA"              
- [5] "FamHx"            "PVol"             "TVol"             "T.Stage"         
- [9] "bGS"              "BN+"              "OrganConfined"    "PreopPSA"        
-[13] "PreopTherapy"     "Units"            "sGS"              "AnyAdjTherapy"   
-[17] "AdjRadTherapy"    "Recurrence"       "Censor"           "TimeToRecurrence"
+Error in eval(expr, envir, enclos): object 'blood' not found
 ~~~
-{: .output}
-
+{: .error}
 
 ## Data Types
 
-While exploring a dataset, you want to know what each variable's role in the analysis will be.
+While exploring a dataset, you want to know what each variable's role in the 
+analysis will be.
 
 - What is the variable (i.e., column) of interest?
   - response, dependent, y, outcome
@@ -121,10 +112,8 @@ For each variable, you want to know what possible values it can take on.
 
 <img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/nominal_ordinal_binary.png" title="&quot;Nominal Ordinal Binary&quot; by Allison Horst." alt="&quot;Nominal Ordinal Binary&quot; by Allison Horst." style="display: block; margin: auto;" />
 
-
-The type of information a variable holds will dictate the summary statistics you can make,
-the visualizations you can create,
-and the models you can fit.
+The type of information a variable holds will dictate the summary statistics you 
+can make, the visualizations you can create, and the models you can fit.
 
 Ordinal and discrete variables should be converted into `factor` variables in R.
 A `factor` is R's way of naming a **categorical** variable.
@@ -143,14 +132,32 @@ The outcome of interest is the recurrence of cancer (no = 0 or yes = 1).
 > {: .solution}
 {: .challenge}
 
+In cancer studies and other kinds of studies that measure time to an event such 
+as cancer recurrence, survival analysis is employed. Read more about how to do
+this in Clark TG, Bradburn MJ, Love SB, Altman DG. Survival analysis part I: 
+basic concepts and first analyses. British journal of cancer. 2003 Jul;89(2):232-8. https://www.nature.com/articles/6601118
+
 Summarize the number of cancer recurrences and non-recurrences as a recurrence
 frequency.
 
 
 ~~~
-recurrence_freq <- blood_storage %>%
+recurrence_freq <- blood %>%
   group_by(Recurrence) %>%
   summarize(count = n())
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in group_by(., Recurrence): object 'blood' not found
+~~~
+{: .error}
+
+
+
+~~~
 recurrence_freq
 ~~~
 {: .language-r}
@@ -158,13 +165,15 @@ recurrence_freq
 
 
 ~~~
-# A tibble: 2 × 2
-  Recurrence count
-       <dbl> <int>
-1          0   262
-2          1    54
+Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
 ~~~
-{: .output}
+{: .error}
+
+This data dictionary describes each variable in the dataset.
+
+To visualize data we will use a grammar of graphics. We build up a visualization
+from component parts starting with the data. We can then layer other parts on
+top of this data.
 
 ## Grammar of Graphics
 
@@ -175,31 +184,46 @@ recurrence_freq
 
 ~~~
 # add a data layer
-ggplot(data = blood_storage)
+ggplot(data = blood)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = blood): object 'blood' not found
+~~~
+{: .error}
 
 
 ~~~
 # add a data later with an asthetic mapping
-ggplot(data = blood_storage, mapping = aes(x = Recurrence))
+ggplot(data = blood, mapping = aes(x = Recurrence))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = blood, mapping = aes(x = Recurrence)): object 'blood' not found
+~~~
+{: .error}
 
 
 
 ~~~
 # add a geometry layer
 # by default the stat layer for geom_bar will count values
-ggplot(data =  blood_storage, mapping = aes(x = Recurrence)) + geom_bar()
+ggplot(data =  blood, mapping = aes(x = Recurrence)) + geom_bar()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = blood, mapping = aes(x = Recurrence)): object 'blood' not found
+~~~
+{: .error}
 
 If we have a pre-calculated set of values, we want to tell `geom_bar` to use the `"identity"` statistic.
 
@@ -212,13 +236,9 @@ recurrence_freq
 
 
 ~~~
-# A tibble: 2 × 2
-  Recurrence count
-       <dbl> <int>
-1          0   262
-2          1    54
+Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
 ~~~
-{: .output}
+{: .error}
 
 
 ~~~
@@ -227,7 +247,12 @@ ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, y = count)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, : object 'recurrence_freq' not found
+~~~
+{: .error}
 
 Something to think about: we have highly unbalanced classes.
 This might be something to think about when you fit models and only look at blind performance metrics
@@ -248,7 +273,12 @@ ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, y = count)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, : object 'recurrence_freq' not found
+~~~
+{: .error}
 
 
 ~~~
@@ -258,7 +288,12 @@ ggplot(data = recurrence_freq) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(data = recurrence_freq): object 'recurrence_freq' not found
+~~~
+{: .error}
 
 
 ~~~
@@ -268,7 +303,12 @@ ggplot() +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in fortify(data): object 'recurrence_freq' not found
+~~~
+{: .error}
 
 This means we can add more layers with different data sets if we want to.
 
@@ -280,26 +320,29 @@ This means we can add more layers with different data sets if we want to.
 
 
 ~~~
-ggplot(blood_storage, aes(x = Age)) + geom_histogram()
+ggplot(blood, aes(x = Age)) + geom_histogram()
 ~~~
 {: .language-r}
 
 
 
 ~~~
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+Error in ggplot(blood, aes(x = Age)): object 'blood' not found
 ~~~
-{: .output}
-
-<img src="../fig/rmd-15-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
+{: .error}
 
 
 ~~~
-ggplot(blood_storage, aes(x = Age)) + geom_histogram(bins = 10)
+ggplot(blood, aes(x = Age)) + geom_histogram(bins = 10)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood, aes(x = Age)): object 'blood' not found
+~~~
+{: .error}
 
 ### Bivariate
 
@@ -316,34 +359,30 @@ To convert the numeric column (or any column) into a categorical **factor** we c
 
 ~~~
 # Does not show TVol properly
-ggplot(blood_storage) + geom_boxplot(aes(x = TVol, y = Age))
+ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 ~~~
 {: .language-r}
 
 
 
 ~~~
-Warning: Continuous x aesthetic -- did you forget aes(group=...)?
+Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
-
-
-
-~~~
-Warning: Removed 6 rows containing missing values (stat_boxplot).
-~~~
-{: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
 # please a box plot for each value of TVol as a factor
-ggplot(blood_storage) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
+ggplot(blood) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood): object 'blood' not found
+~~~
+{: .error}
 
 We can also use a violin plot, to better show the distribution of the dataset,
 instead of using a boxplot.
@@ -352,36 +391,51 @@ And we can also overlay a different geometry on top.
 
 
 ~~~
-ggplot(blood_storage) + 
+ggplot(blood) + 
   geom_violin(aes(x = as.factor(TVol), y = Age)) +
   geom_point(aes(x = as.factor(TVol), y = Age))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
-ggplot(blood_storage) +
+Error in ggplot(blood): object 'blood' not found
+~~~
+{: .error}
+
+
+~~~
+ggplot(blood) +
   geom_violin(aes(x = as.factor(TVol), y = Age)) +
   geom_jitter(aes(x = as.factor(TVol), y = Age))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood): object 'blood' not found
+~~~
+{: .error}
 
 We can move around our data layers to save some typing,
 and have the geometry layer use the same data and mapping layer.
 
 
 ~~~
-ggplot(blood_storage, aes(x = as.factor(TVol), y = Age)) +
+ggplot(blood, aes(x = as.factor(TVol), y = Age)) +
   geom_violin() +
   geom_jitter()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in ggplot(blood, aes(x = as.factor(TVol), y = Age)): object 'blood' not found
+~~~
+{: .error}
 
 ## Other Aesthetic mappings
 
@@ -397,7 +451,7 @@ We can also set other aesthetic mappings, e.g., color
 
 
 ~~~
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = sGS))
 ~~~
 {: .language-r}
@@ -405,17 +459,15 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="612" style="display: block; margin: auto;" />
 
 Again, we have a numeric variable that is really an ordinal categorical variable
 
 
 ~~~
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS)))
 ~~~
 {: .language-r}
@@ -423,11 +475,9 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
 
 
 ## Facets
@@ -439,7 +489,7 @@ Think of this as the `group_by` version for plotting.
 
 ~~~
 # use facet wrap for a single variable
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS))) +
   facet_wrap(~ RBC.Age.Group)
 ~~~
@@ -448,16 +498,14 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
 # use facet grid for 2 variables
-ggplot(blood_storage) +
+ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
 ~~~
@@ -466,19 +514,30 @@ ggplot(blood_storage) +
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="612" style="display: block; margin: auto;" />
 
 ## Themes
 
 
 ~~~
-g <- ggplot(blood_storage) +
+g <- ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
   facet_grid(RBC.Age.Group ~ Recurrence)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in ggplot(blood): object 'blood' not found
+~~~
+{: .error}
+
+
+
+~~~
 g
 ~~~
 {: .language-r}
@@ -486,11 +545,9 @@ g
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -501,11 +558,9 @@ g + theme_minimal()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="612" style="display: block; margin: auto;" />
 
 Using ggthemes
 
@@ -524,11 +579,9 @@ g + theme_wsj()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -539,11 +592,9 @@ g + theme_fivethirtyeight()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" width="612" style="display: block; margin: auto;" />
 
 
 
@@ -555,11 +606,9 @@ g + theme_excel()
 
 
 ~~~
-Warning: Removed 11 rows containing missing values (geom_point).
+Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
-
-<img src="../fig/rmd-15-unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" width="612" style="display: block; margin: auto;" />
 
 
 
@@ -604,7 +653,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -612,7 +661,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-38-2.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-36-2.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -621,7 +670,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-38-3.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-36-3.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
 > >
 > {: .solution}
 {: .challenge}
