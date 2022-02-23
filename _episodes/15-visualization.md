@@ -46,11 +46,27 @@ description of the study follows.
 > transfusion of allogeneic RBCs stored for a prolonged period is associated 
 > with earlier biochemical recurrence of prostate cancer after prostatectomy.
 
+In cancer studies and other kinds of studies that measure time to an event such 
+as cancer recurrence, survival analysis is employed. Read more about how to do
+this in Clark TG, Bradburn MJ, Love SB, Altman DG. [Survival analysis part I: basic concepts and first analyses](https://www.nature.com/articles/6601118). British journal of cancer. 2003 Jul;89(2):232-8.
+
 To get started, install the `medicaldata` package and load the library. 
 
 
+~~~
+library(medicaldata)
+~~~
+{: .language-r}
 
 Now access the `blood` dataset within this package. 
+
+
+~~~
+blood <- medicaldata::blood_storage
+head(blood) # use head to look at the first 6 rows
+~~~
+{: .language-r}
+
 
 
 ~~~
@@ -109,6 +125,9 @@ names(blood)
 ~~~
 {: .output}
 
+[This data dictionary](../files/Blood Storage Data Dictionary.pdf) describes 
+each variable in the dataset.
+
 ## Data Types
 
 While exploring a dataset, you want to know what each variable's role in the 
@@ -145,37 +164,6 @@ The outcome of interest is the recurrence of cancer (no = 0 or yes = 1).
 > {: .solution}
 {: .challenge}
 
-In cancer studies and other kinds of studies that measure time to an event such 
-as cancer recurrence, survival analysis is employed. Read more about how to do
-this in Clark TG, Bradburn MJ, Love SB, Altman DG. Survival analysis part I: 
-basic concepts and first analyses. British journal of cancer. 2003 Jul;89(2):232-8. https://www.nature.com/articles/6601118
-
-Summarize the number of cancer recurrences and non-recurrences as a recurrence
-frequency.
-
-
-~~~
-recurrence_freq <- blood %>%
-  group_by(Recurrence) %>%
-  summarize(count = n())
-recurrence_freq
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 2 × 2
-  Recurrence count
-       <dbl> <int>
-1          0   262
-2          1    54
-~~~
-{: .output}
-
-[This data dictionary](../files/Blood Storage Data Dictionary.pdf) describes 
-each variable in the dataset.
-
 To visualize data we will use a grammar of graphics. We build up a visualization
 from component parts starting with the data. We can then layer on top of this 
 data until we have built a graphic that precisely communicates what we choose.
@@ -197,7 +185,7 @@ ggplot(data = blood)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-blank-plot-1.png" title="plot of chunk blank-plot" alt="plot of chunk blank-plot" width="612" style="display: block; margin: auto;" />
 
 This creates a blank plot. In order to plot the data, we need to map one or more
 variables using the `aes` mapping function in `ggplot`. Here we map cancer 
@@ -210,7 +198,7 @@ ggplot(data = blood, mapping = aes(x = Recurrence))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-add-mapping-1.png" title="plot of chunk add-mapping" alt="plot of chunk add-mapping" width="612" style="display: block; margin: auto;" />
 
 To display the x-axis as categorical instead of decimal values, re-assign
 Recurrence as a factor variable.
@@ -236,7 +224,7 @@ ggplot(data =  blood, mapping = aes(x = Recurrence)) + geom_bar()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-add-bar-1.png" title="plot of chunk add-bar" alt="plot of chunk add-bar" width="612" style="display: block; margin: auto;" />
 
 Something to think about: we have highly unbalanced classes. This might be
 something to think about when you fit models and only look at blind performance
@@ -269,7 +257,7 @@ ggplot(blood, aes(x = Age)) + geom_histogram()
 ~~~
 {: .output}
 
-<img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-age-histogram-small-bins-1.png" title="plot of chunk age-histogram-small-bins" alt="plot of chunk age-histogram-small-bins" width="612" style="display: block; margin: auto;" />
 
 Try a smaller number of bins to smooth out the histogram.
 
@@ -279,7 +267,7 @@ ggplot(blood, aes(x = Age)) + geom_histogram(bins = 10)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-age-histogram-large-bins-1.png" title="plot of chunk age-histogram-large-bins" alt="plot of chunk age-histogram-large-bins" width="612" style="display: block; margin: auto;" />
 
 ### Bivariate
 
@@ -315,7 +303,7 @@ Warning: Removed 6 rows containing missing values (stat_boxplot).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-boxplot-no-categories-1.png" title="plot of chunk boxplot-no-categories" alt="plot of chunk boxplot-no-categories" width="612" style="display: block; margin: auto;" />
 
 To convert the numeric column (or any column) into a categorical **factor** we can use the `as.factor` function.
 
@@ -327,7 +315,7 @@ ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-boxplot-by-category-1.png" title="plot of chunk boxplot-by-category" alt="plot of chunk boxplot-by-category" width="612" style="display: block; margin: auto;" />
 
 We can also use a violin plot, to better show the distribution of the dataset,
 instead of using a boxplot.
@@ -343,7 +331,7 @@ ggplot(blood) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 
 Jitter the points so that they are easier to distinguish from one another.
 
@@ -355,7 +343,7 @@ ggplot(blood) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-violin-plot-jitter-1.png" title="plot of chunk violin-plot-jitter" alt="plot of chunk violin-plot-jitter" width="612" style="display: block; margin: auto;" />
 
 We can move around our data layers to save some typing,
 and have the geometry layer use the same data and mapping layer. If the mapping
@@ -370,7 +358,7 @@ ggplot(blood, aes(x = TVol, y = Age)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-15-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-violin-plot-jitter-inherit-mapping-1.png" title="plot of chunk violin-plot-jitter-inherit-mapping" alt="plot of chunk violin-plot-jitter-inherit-mapping" width="612" style="display: block; margin: auto;" />
 
 ## Other Aesthetic mappings
 
@@ -398,7 +386,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-scatterplot-no-category-1.png" title="plot of chunk scatterplot-no-category" alt="plot of chunk scatterplot-no-category" width="612" style="display: block; margin: auto;" />
 
 Again, we have a numeric variable that is really an ordinal categorical 
 variable, not a continuous variable. We can convert it to a factor with 
@@ -418,7 +406,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-scatterplot-by-category-1.png" title="plot of chunk scatterplot-by-category" alt="plot of chunk scatterplot-by-category" width="612" style="display: block; margin: auto;" />
 
 Now the surgical Gleason score appears as discrete colored categories.
 
@@ -449,7 +437,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-facet-by-rbc-age-1.png" title="plot of chunk facet-by-rbc-age" alt="plot of chunk facet-by-rbc-age" width="612" style="display: block; margin: auto;" />
 
 We can also create a grid of panels (facets) colored by family history of 
 disease (`FamHx`) and grouped by `RBC.Age.Group` and `Recurrence`. Zeroes 
@@ -472,7 +460,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-facet-by-rbc-age-recurrence-1.png" title="plot of chunk facet-by-rbc-age-recurrence" alt="plot of chunk facet-by-rbc-age-recurrence" width="612" style="display: block; margin: auto;" />
 We can make this a bit easier to interpret by adding axis and legend labels.
 Since this involves a lot of typing, save the plot as an object named `g`.
 
@@ -508,7 +496,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-minimal-1.png" title="plot of chunk minimal" alt="plot of chunk minimal" width="612" style="display: block; margin: auto;" />
 
 The `ggthemes` package extends themes from `ggplot`. Install the `ggthemes`
 package and load the library.
@@ -533,7 +521,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-wsj-1.png" title="plot of chunk wsj" alt="plot of chunk wsj" width="612" style="display: block; margin: auto;" />
 
 Try Nate Silver's FiveThirtyEight style.
 
@@ -550,7 +538,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-538-1.png" title="plot of chunk 538" alt="plot of chunk 538" width="612" style="display: block; margin: auto;" />
 
 This style looks like an Excel spreadsheet.
 
@@ -567,7 +555,7 @@ Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-15-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-15-excel-1.png" title="plot of chunk excel" alt="plot of chunk excel" width="612" style="display: block; margin: auto;" />
 
 
 
@@ -611,7 +599,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -619,7 +607,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-32-2.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-12-2.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -628,7 +616,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-32-3.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-12-3.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 > >
 > {: .solution}
 {: .challenge}

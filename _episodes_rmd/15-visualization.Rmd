@@ -48,15 +48,19 @@ description of the study follows.
 > transfusion of allogeneic RBCs stored for a prolonged period is associated 
 > with earlier biochemical recurrence of prostate cancer after prostatectomy.
 
+In cancer studies and other kinds of studies that measure time to an event such 
+as cancer recurrence, survival analysis is employed. Read more about how to do
+this in Clark TG, Bradburn MJ, Love SB, Altman DG. [Survival analysis part I: basic concepts and first analyses](https://www.nature.com/articles/6601118). British journal of cancer. 2003 Jul;89(2):232-8.
+
 To get started, install the `medicaldata` package and load the library. 
 
-```{r install-package, echo=FALSE, message=FALSE}
+```{r load-library, message=FALSE}
 library(medicaldata)
 ```
 
 Now access the `blood` dataset within this package. 
 
-```{r readbloodstorage, echo=FALSE, message=FALSE}
+```{r readbloodstorage, message=FALSE}
 blood <- medicaldata::blood_storage
 head(blood) # use head to look at the first 6 rows
 ```
@@ -69,6 +73,9 @@ class(blood)
 # get just the column names for a dataset
 names(blood)
 ```
+
+[This data dictionary](../files/Blood Storage Data Dictionary.pdf) describes 
+each variable in the dataset.
 
 ## Data Types
 
@@ -110,24 +117,6 @@ The outcome of interest is the recurrence of cancer (no = 0 or yes = 1).
 > {: .solution}
 {: .challenge}
 
-In cancer studies and other kinds of studies that measure time to an event such 
-as cancer recurrence, survival analysis is employed. Read more about how to do
-this in Clark TG, Bradburn MJ, Love SB, Altman DG. Survival analysis part I: 
-basic concepts and first analyses. British journal of cancer. 2003 Jul;89(2):232-8. https://www.nature.com/articles/6601118
-
-Summarize the number of cancer recurrences and non-recurrences as a recurrence
-frequency.
-
-```{r}
-recurrence_freq <- blood %>%
-  group_by(Recurrence) %>%
-  summarize(count = n())
-recurrence_freq
-```
-
-[This data dictionary](../files/Blood Storage Data Dictionary.pdf) describes 
-each variable in the dataset.
-
 To visualize data we will use a grammar of graphics. We build up a visualization
 from component parts starting with the data. We can then layer on top of this 
 data until we have built a graphic that precisely communicates what we choose.
@@ -144,7 +133,7 @@ knitr::include_graphics("../fig/ggplot-grammar_layers.png")
 
 The base layer for a graphic is the data.
 
-```{r}
+```{r blank-plot}
 # add a data layer
 ggplot(data = blood)
 ```
@@ -153,7 +142,7 @@ This creates a blank plot. In order to plot the data, we need to map one or more
 variables using the `aes` mapping function in `ggplot`. Here we map cancer 
 recurrence (0 or 1) on the x axis. 
 
-```{r}
+```{r add-mapping}
 # add a data layer with an aesthetic mapping
 ggplot(data = blood, mapping = aes(x = Recurrence))
 ```
@@ -172,7 +161,7 @@ in each category. They are *not* good for showing differences in means between
 groups. For more on this, see Nature Methods 
 [Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837).
 
-```{r}
+```{r add-bar}
 # add a geometry layer
 # by default the stat layer for geom_bar will count values
 ggplot(data =  blood, mapping = aes(x = Recurrence)) + geom_bar()
@@ -196,13 +185,13 @@ determines what kind of `geom` or plot type you should use.
 For a single continuous variable, use a histogram to show the distribution of 
 the data. Make a histogram of the age distribution.
 
-```{r}
+```{r age-histogram-small-bins}
 ggplot(blood, aes(x = Age)) + geom_histogram()
 ```
 
 Try a smaller number of bins to smooth out the histogram.
 
-```{r}
+```{r age-histogram-large-bins}
 ggplot(blood, aes(x = Age)) + geom_histogram(bins = 10)
 ```
 
@@ -219,14 +208,14 @@ However, the way it is encoded in the dataset is as a (discrete) numeric variabl
 create a boxplot of tumor volume and age, the categories are not represented
 separately.
 
-```{r}
+```{r boxplot-no-categories}
 # Does not show TVol properly
 ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 ```
 
 To convert the numeric column (or any column) into a categorical **factor** we can use the `as.factor` function.
 
-```{r}
+```{r boxplot-by-category}
 # box plot for each value of TVol as a factor
 blood$TVol <- as.factor(blood$TVol)
 ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
@@ -238,7 +227,7 @@ instead of using a boxplot.
 And we can also overlay a different geometry on top. In this example, layer 
 the data points on top of the violin plots with `geom_point`.
 
-```{r}
+```{r violin-plot}
 ggplot(blood) + 
   geom_violin(aes(x = TVol, y = Age)) +
   geom_point(aes(x = TVol, y = Age))
@@ -246,7 +235,7 @@ ggplot(blood) +
 
 Jitter the points so that they are easier to distinguish from one another.
 
-```{r}
+```{r violin-plot-jitter}
 ggplot(blood) +
   geom_violin(aes(x = TVol, y = Age)) +
   geom_jitter(aes(x = TVol, y = Age))
@@ -257,7 +246,7 @@ and have the geometry layer use the same data and mapping layer. If the mapping
 function `aes` is located within the call to `ggplot`, every succeeding layer
 will inherit this mapping.
 
-```{r}
+```{r violin-plot-jitter-inherit-mapping}
 ggplot(blood, aes(x = TVol, y = Age)) +
   geom_violin() +
   geom_jitter()
@@ -275,7 +264,7 @@ We can also set other aesthetic mappings, e.g., color
   - 3 = Score 7
   - 4 = Score 8-10
 
-```{r}
+```{r scatterplot-no-category}
 ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = sGS))
 ```
@@ -284,7 +273,7 @@ Again, we have a numeric variable that is really an ordinal categorical
 variable, not a continuous variable. We can convert it to a factor with 
 `as.factor`.
 
-```{r}
+```{r scatterplot-by-category}
 ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS)))
 ```
@@ -302,7 +291,7 @@ cell storage duration group.
   - 2 = 13-18 days (middle)
   - 3 = greater than or equal to 18 days (older)
 
-```{r}
+```{r facet-by-rbc-age}
 # use facet wrap for a single variable
 ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(sGS))) +
@@ -314,7 +303,7 @@ disease (`FamHx`) and grouped by `RBC.Age.Group` and `Recurrence`. Zeroes
 represent no family history or no recurrence. The categories 1, 2 and 3 for
 RBC storage duration group are as listed above (younger, middle, older).
 
-```{r}
+```{r facet-by-rbc-age-recurrence}
 # use facet grid for 2 variables
 ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
@@ -323,7 +312,7 @@ ggplot(blood) +
 We can make this a bit easier to interpret by adding axis and legend labels.
 Since this involves a lot of typing, save the plot as an object named `g`.
 
-```{r}
+```{r add-labels}
 # use facet grid for 2 variables
 g <- ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
@@ -340,7 +329,7 @@ Themes customize the non-data parts of your plots and come in many different
 styles. The minimal theme is clean and spare. Add it to the plot we
 saved.
 
-```{r}
+```{r minimal}
 g + theme_minimal()
 ```
 
@@ -352,19 +341,19 @@ library(ggthemes)
 ```
 
 Style the plot after the Wall Street Journal theme.
-```{r}
+```{r wsj}
 g + theme_wsj()
 ```
 
 Try Nate Silver's FiveThirtyEight style.
 
-```{r}
+```{r 538}
 g + theme_fivethirtyeight()
 ```
 
 This style looks like an Excel spreadsheet.
 
-```{r}
+```{r excel}
 g + theme_excel()
 ```
 
