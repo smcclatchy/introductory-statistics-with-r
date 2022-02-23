@@ -49,25 +49,34 @@ description of the study follows.
 To get started, install the `medicaldata` package and load the library. 
 
 
-~~~
-Error in contrib.url(repos, "source"): trying to use CRAN without setting a mirror
-~~~
-{: .error}
 
 Now access the `blood` dataset within this package. 
 
 
 ~~~
-Error: 'blood' is not an exported object from 'namespace:medicaldata'
+  RBC.Age.Group Median.RBC.Age  Age AA FamHx  PVol TVol T.Stage bGS BN+
+1             3             25 72.1  0     0  54.0    3       1   3   0
+2             3             25 73.6  0     0  43.2    3       2   2   0
+3             3             25 67.5  0     0 102.7    1       1   3   0
+4             2             15 65.8  0     0  46.0    1       1   1   0
+5             2             15 63.2  0     0  60.0    2       1   2   0
+6             3             25 65.4  0     0  45.9    2       1   1   0
+  OrganConfined PreopPSA PreopTherapy Units sGS AnyAdjTherapy AdjRadTherapy
+1             0    14.08            1     6   1             0             0
+2             1    10.50            0     2   3             0             0
+3             1     6.98            1     1   1             0             0
+4             1     4.40            0     2   3             0             0
+5             1    21.40            0     3   3             0             0
+6             0     5.10            0     1   3             0             0
+  Recurrence Censor TimeToRecurrence
+1          1      0             2.67
+2          1      0            47.63
+3          0      1            14.10
+4          0      1            59.47
+5          0      1             1.23
+6          0      1            74.70
 ~~~
-{: .error}
-
-
-
-~~~
-Error in head(blood): object 'blood' not found
-~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -78,9 +87,9 @@ class(blood)
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'blood' not found
+[1] "data.frame"
 ~~~
-{: .error}
+{: .output}
 
 
 ~~~
@@ -92,9 +101,13 @@ names(blood)
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'blood' not found
+ [1] "RBC.Age.Group"    "Median.RBC.Age"   "Age"              "AA"              
+ [5] "FamHx"            "PVol"             "TVol"             "T.Stage"         
+ [9] "bGS"              "BN+"              "OrganConfined"    "PreopPSA"        
+[13] "PreopTherapy"     "Units"            "sGS"              "AnyAdjTherapy"   
+[17] "AdjRadTherapy"    "Recurrence"       "Censor"           "TimeToRecurrence"
 ~~~
-{: .error}
+{: .output}
 
 ## Data Types
 
@@ -145,19 +158,6 @@ frequency.
 recurrence_freq <- blood %>%
   group_by(Recurrence) %>%
   summarize(count = n())
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in group_by(., Recurrence): object 'blood' not found
-~~~
-{: .error}
-
-
-
-~~~
 recurrence_freq
 ~~~
 {: .language-r}
@@ -165,9 +165,13 @@ recurrence_freq
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
+# A tibble: 2 × 2
+  Recurrence count
+       <dbl> <int>
+1          0   262
+2          1    54
 ~~~
-{: .error}
+{: .output}
 
 [This data dictionary](../files/Blood Storage Data Dictionary.pdf) describes 
 each variable in the dataset.
@@ -193,12 +197,7 @@ ggplot(data = blood)
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = blood): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 
 This creates a blank plot. In order to plot the data, we need to map one or more
 variables using the `aes` mapping function in `ggplot`. Here we map cancer 
@@ -211,12 +210,7 @@ ggplot(data = blood, mapping = aes(x = Recurrence))
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = blood, mapping = aes(x = Recurrence)): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
 
 To display the x-axis as categorical instead of decimal values, re-assign
 Recurrence as a factor variable.
@@ -226,13 +220,6 @@ Recurrence as a factor variable.
 blood$Recurrence <- as.factor(blood$Recurrence)
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error in is.factor(x): object 'blood' not found
-~~~
-{: .error}
 
 We don't see our data yet. `ggplot` needs to know what kind of plot to make. We
 provide a `geom` layer to tell `ggplot` that we want a bar plot showing the 
@@ -249,12 +236,7 @@ ggplot(data =  blood, mapping = aes(x = Recurrence)) + geom_bar()
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = blood, mapping = aes(x = Recurrence)): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
 
 Something to think about: we have highly unbalanced classes. This might be
 something to think about when you fit models and only look at blind performance
@@ -283,9 +265,11 @@ ggplot(blood, aes(x = Age)) + geom_histogram()
 
 
 ~~~
-Error in ggplot(blood, aes(x = Age)): object 'blood' not found
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ~~~
-{: .error}
+{: .output}
+
+<img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 
 Try a smaller number of bins to smooth out the histogram.
 
@@ -295,12 +279,7 @@ ggplot(blood, aes(x = Age)) + geom_histogram(bins = 10)
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(blood, aes(x = Age)): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
 
 ### Bivariate
 
@@ -325,9 +304,18 @@ ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 
 
 ~~~
-Error in ggplot(blood): object 'blood' not found
+Warning: Continuous x aesthetic -- did you forget aes(group=...)?
 ~~~
 {: .error}
+
+
+
+~~~
+Warning: Removed 6 rows containing missing values (stat_boxplot).
+~~~
+{: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
 
 To convert the numeric column (or any column) into a categorical **factor** we can use the `as.factor` function.
 
@@ -335,29 +323,11 @@ To convert the numeric column (or any column) into a categorical **factor** we c
 ~~~
 # box plot for each value of TVol as a factor
 blood$TVol <- as.factor(blood$TVol)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in is.factor(x): object 'blood' not found
-~~~
-{: .error}
-
-
-
-~~~
 ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(blood): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
 
 We can also use a violin plot, to better show the distribution of the dataset,
 instead of using a boxplot.
@@ -373,12 +343,7 @@ ggplot(blood) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(blood): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
 
 Jitter the points so that they are easier to distinguish from one another.
 
@@ -390,12 +355,7 @@ ggplot(blood) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(blood): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
 
 We can move around our data layers to save some typing,
 and have the geometry layer use the same data and mapping layer. If the mapping
@@ -410,12 +370,7 @@ ggplot(blood, aes(x = TVol, y = Age)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(blood, aes(x = TVol, y = Age)): object 'blood' not found
-~~~
-{: .error}
+<img src="../fig/rmd-15-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
 
 ## Other Aesthetic mappings
 
@@ -439,9 +394,11 @@ ggplot(blood) +
 
 
 ~~~
-Error in ggplot(blood): object 'blood' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="612" style="display: block; margin: auto;" />
 
 Again, we have a numeric variable that is really an ordinal categorical 
 variable, not a continuous variable. We can convert it to a factor with 
@@ -457,9 +414,11 @@ ggplot(blood) +
 
 
 ~~~
-Error in ggplot(blood): object 'blood' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="612" style="display: block; margin: auto;" />
 
 Now the surgical Gleason score appears as discrete colored categories.
 
@@ -486,9 +445,11 @@ ggplot(blood) +
 
 
 ~~~
-Error in ggplot(blood): object 'blood' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
 
 We can also create a grid of panels (facets) colored by family history of 
 disease (`FamHx`) and grouped by `RBC.Age.Group` and `Recurrence`. Zeroes 
@@ -507,9 +468,11 @@ ggplot(blood) +
 
 
 ~~~
-Error in ggplot(blood): object 'blood' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
 We can make this a bit easier to interpret by adding axis and legend labels.
 Since this involves a lot of typing, save the plot as an object named `g`.
 
@@ -526,13 +489,6 @@ g <- ggplot(blood) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(blood): object 'blood' not found
-~~~
-{: .error}
-
 ## Themes
 
 Themes customize the non-data parts of your plots and come in many different
@@ -548,9 +504,11 @@ g + theme_minimal()
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'g' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
 
 The `ggthemes` package extends themes from `ggplot`. Install the `ggthemes`
 package and load the library.
@@ -571,9 +529,11 @@ g + theme_wsj()
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'g' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
 
 Try Nate Silver's FiveThirtyEight style.
 
@@ -586,9 +546,11 @@ g + theme_fivethirtyeight()
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'g' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="612" style="display: block; margin: auto;" />
 
 This style looks like an Excel spreadsheet.
 
@@ -601,9 +563,11 @@ g + theme_excel()
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'g' not found
+Warning: Removed 11 rows containing missing values (geom_point).
 ~~~
 {: .error}
+
+<img src="../fig/rmd-15-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="612" style="display: block; margin: auto;" />
 
 
 

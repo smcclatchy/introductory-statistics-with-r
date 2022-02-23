@@ -51,14 +51,13 @@ description of the study follows.
 To get started, install the `medicaldata` package and load the library. 
 
 ```{r install-package, echo=FALSE, message=FALSE}
-install.packages("medicaldata")
 library(medicaldata)
 ```
 
 Now access the `blood` dataset within this package. 
 
 ```{r readbloodstorage, echo=FALSE, message=FALSE}
-blood <- medicaldata::blood
+blood <- medicaldata::blood_storage
 head(blood) # use head to look at the first 6 rows
 ```
 
