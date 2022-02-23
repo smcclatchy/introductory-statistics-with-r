@@ -169,17 +169,22 @@ Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
 ~~~
 {: .error}
 
-This data dictionary describes each variable in the dataset.
+[This data dictionary](../files/Blood Storage Data Dictionary.pdf) describes 
+each variable in the dataset.
 
 To visualize data we will use a grammar of graphics. We build up a visualization
-from component parts starting with the data. We can then layer other parts on
-top of this data.
+from component parts starting with the data. We can then layer on top of this 
+data until we have built a graphic that precisely communicates what we choose.
+`ggplot` implements a grammar of graphics to produce publication-quality
+graphics.
 
 ## Grammar of Graphics
 
 <img src="../fig/ggplot-grammar_layers.png" title="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." alt="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." style="display: block; margin: auto;" />
 
 ## Data + geometries
+
+The base layer for a graphic is the data.
 
 
 ~~~
@@ -195,9 +200,13 @@ Error in ggplot(data = blood): object 'blood' not found
 ~~~
 {: .error}
 
+This creates a blank plot. In order to plot the data, we need to map one or more
+variables using the `aes` mapping function in `ggplot`. Here we map cancer 
+recurrence (0 or 1) on the x axis. 
+
 
 ~~~
-# add a data later with an asthetic mapping
+# add a data layer with an aesthetic mapping
 ggplot(data = blood, mapping = aes(x = Recurrence))
 ~~~
 {: .language-r}
@@ -209,6 +218,28 @@ Error in ggplot(data = blood, mapping = aes(x = Recurrence)): object 'blood' not
 ~~~
 {: .error}
 
+To display the x-axis as categorical instead of decimal values, re-assign
+Recurrence as a factor variable.
+
+
+~~~
+blood$Recurrence <- as.factor(blood$Recurrence)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is.factor(x): object 'blood' not found
+~~~
+{: .error}
+
+We don't see our data yet. `ggplot` needs to know what kind of plot to make. We
+provide a `geom` layer to tell `ggplot` that we want a bar plot showing the 
+numbers in each category. Bar charts are good for displaying numbers represented
+in each category. They are *not* good for showing differences in means between
+groups. For more on this, see Nature Methods 
+[Kick the bar chart habit](https://www.nature.com/articles/nmeth.2837).
 
 
 ~~~
@@ -225,98 +256,23 @@ Error in ggplot(data = blood, mapping = aes(x = Recurrence)): object 'blood' not
 ~~~
 {: .error}
 
-If we have a pre-calculated set of values, we want to tell `geom_bar` to use the `"identity"` statistic.
-
-
-~~~
-recurrence_freq
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(expr, envir, enclos): object 'recurrence_freq' not found
-~~~
-{: .error}
-
-
-~~~
-ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, y = count)) +
-  geom_bar(stat = "identity")
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, : object 'recurrence_freq' not found
-~~~
-{: .error}
-
-Something to think about: we have highly unbalanced classes.
-This might be something to think about when you fit models and only look at blind performance metrics
-
-100 patients, 99 healthy, 1 sick. If my model classifies healthy *every time*.
-It's still 99% correct.
-
-### Layer values
-
-If a value does not exist in a particular layer,
-ggplot will try to use data from the previous layer
-
-
-~~~
-# everything in the base layer
-ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, y = count)) +
-  geom_bar(stat = "identity")
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in ggplot(data = recurrence_freq, mapping = aes(x = Recurrence, : object 'recurrence_freq' not found
-~~~
-{: .error}
-
-
-~~~
-# move astetic mapping to geom layer
-ggplot(data = recurrence_freq) +
-  geom_bar(mapping = aes(x = Recurrence, y = count), stat = "identity")
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in ggplot(data = recurrence_freq): object 'recurrence_freq' not found
-~~~
-{: .error}
-
-
-~~~
-# move data to geom layer
-ggplot() +
-  geom_bar(data = recurrence_freq, mapping = aes(x = Recurrence, y = count), stat = "identity")
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in fortify(data): object 'recurrence_freq' not found
-~~~
-{: .error}
-
-This means we can add more layers with different data sets if we want to.
+Something to think about: we have highly unbalanced classes. This might be
+something to think about when you fit models and only look at blind performance
+metrics. Imagine your data has 100 patients, 99 healthy and 1 sick. If the model
+classifies them as healthy *every time*, it's still 99% accurate. This is not
+good for the 1 person who is sick and needs treatment. 
 
 ## Geometries
+
+We'll explore some of the other `geoms` in `ggplot`. The kind of variable
+determines what kind of `geom` or plot type you should use.
 
 ### Univariate
 
 #### Continuous
+
+For a single continuous variable, use a histogram to show the distribution of 
+the data. Make a histogram of the age distribution.
 
 
 ~~~
@@ -330,6 +286,8 @@ ggplot(blood, aes(x = Age)) + geom_histogram()
 Error in ggplot(blood, aes(x = Age)): object 'blood' not found
 ~~~
 {: .error}
+
+Try a smaller number of bins to smooth out the histogram.
 
 
 ~~~
@@ -346,15 +304,16 @@ Error in ggplot(blood, aes(x = Age)): object 'blood' not found
 
 ### Bivariate
 
+Boxplots and scatterplots are good ways to visualize two different variables.
 The `TVol` column represents the Tumor volume as an ordinal variable
 
 - 1 = Low
 - 2 = Medium
 - 3 = Extensive
 
-However, the way it is encoded in the dataset is as a (discrete) numeric variable,
-even though it actually represents a categorical variable.
-To convert the numeric column (or any column) into a categorical **factor** we can use the `as.factor` function.
+However, the way it is encoded in the dataset is as a (discrete) numeric variable, even though it actually represents a categorical variable. If we 
+create a boxplot of tumor volume and age, the categories are not represented
+separately.
 
 
 ~~~
@@ -370,10 +329,26 @@ Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
 
+To convert the numeric column (or any column) into a categorical **factor** we can use the `as.factor` function.
+
 
 ~~~
-# please a box plot for each value of TVol as a factor
-ggplot(blood) + geom_boxplot(aes(x = as.factor(TVol), y = Age))
+# box plot for each value of TVol as a factor
+blood$TVol <- as.factor(blood$TVol)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is.factor(x): object 'blood' not found
+~~~
+{: .error}
+
+
+
+~~~
+ggplot(blood) + geom_boxplot(aes(x = TVol, y = Age))
 ~~~
 {: .language-r}
 
@@ -387,13 +362,14 @@ Error in ggplot(blood): object 'blood' not found
 We can also use a violin plot, to better show the distribution of the dataset,
 instead of using a boxplot.
 
-And we can also overlay a different geometry on top.
+And we can also overlay a different geometry on top. In this example, layer 
+the data points on top of the violin plots with `geom_point`.
 
 
 ~~~
 ggplot(blood) + 
-  geom_violin(aes(x = as.factor(TVol), y = Age)) +
-  geom_point(aes(x = as.factor(TVol), y = Age))
+  geom_violin(aes(x = TVol, y = Age)) +
+  geom_point(aes(x = TVol, y = Age))
 ~~~
 {: .language-r}
 
@@ -404,11 +380,13 @@ Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
 
+Jitter the points so that they are easier to distinguish from one another.
+
 
 ~~~
 ggplot(blood) +
-  geom_violin(aes(x = as.factor(TVol), y = Age)) +
-  geom_jitter(aes(x = as.factor(TVol), y = Age))
+  geom_violin(aes(x = TVol, y = Age)) +
+  geom_jitter(aes(x = TVol, y = Age))
 ~~~
 {: .language-r}
 
@@ -420,11 +398,13 @@ Error in ggplot(blood): object 'blood' not found
 {: .error}
 
 We can move around our data layers to save some typing,
-and have the geometry layer use the same data and mapping layer.
+and have the geometry layer use the same data and mapping layer. If the mapping
+function `aes` is located within the call to `ggplot`, every succeeding layer
+will inherit this mapping.
 
 
 ~~~
-ggplot(blood, aes(x = as.factor(TVol), y = Age)) +
+ggplot(blood, aes(x = TVol, y = Age)) +
   geom_violin() +
   geom_jitter()
 ~~~
@@ -433,7 +413,7 @@ ggplot(blood, aes(x = as.factor(TVol), y = Age)) +
 
 
 ~~~
-Error in ggplot(blood, aes(x = as.factor(TVol), y = Age)): object 'blood' not found
+Error in ggplot(blood, aes(x = TVol, y = Age)): object 'blood' not found
 ~~~
 {: .error}
 
@@ -463,7 +443,9 @@ Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
 
-Again, we have a numeric variable that is really an ordinal categorical variable
+Again, we have a numeric variable that is really an ordinal categorical 
+variable, not a continuous variable. We can convert it to a factor with 
+`as.factor`.
 
 
 ~~~
@@ -479,12 +461,18 @@ Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
 
+Now the surgical Gleason score appears as discrete colored categories.
 
 ## Facets
 
-Facets allow us to re-plot the same figure by separate groups.
-Think of this as the `group_by` version for plotting.
+Facets allow us to re-plot the same figure by separate groups. Think of this as
+the `group_by` version for plotting. Here separate panels display the red blood
+cell storage duration group.
 
+- `RBC.Age.Group`: RBC storage duration group
+  - 1 = less than or equal to 13 days (younger)
+  - 2 = 13-18 days (middle)
+  - 3 = greater than or equal to 18 days (older)
 
 
 ~~~
@@ -502,6 +490,11 @@ Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
 
+We can also create a grid of panels (facets) colored by family history of 
+disease (`FamHx`) and grouped by `RBC.Age.Group` and `Recurrence`. Zeroes 
+represent no family history or no recurrence. The categories 1, 2 and 3 for
+RBC storage duration group are as listed above (younger, middle, older).
+
 
 ~~~
 # use facet grid for 2 variables
@@ -517,14 +510,19 @@ ggplot(blood) +
 Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
-
-## Themes
+We can make this a bit easier to interpret by adding axis and legend labels.
+Since this involves a lot of typing, save the plot as an object named `g`.
 
 
 ~~~
+# use facet grid for 2 variables
 g <- ggplot(blood) +
   geom_point(aes(x = PVol, y = PreopPSA, color = as.factor(FamHx))) +
-  facet_grid(RBC.Age.Group ~ Recurrence)
+  facet_grid(RBC.Age.Group ~ Recurrence) +
+  labs(x = "Prostate volume (g)",
+       y = "Preoperative PSA (ng/mL)",
+       color = "Family history",
+       title = "Recurrence by RBC age group")
 ~~~
 {: .language-r}
 
@@ -535,19 +533,11 @@ Error in ggplot(blood): object 'blood' not found
 ~~~
 {: .error}
 
+## Themes
 
-
-~~~
-g
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(expr, envir, enclos): object 'g' not found
-~~~
-{: .error}
+Themes customize the non-data parts of your plots and come in many different
+styles. The minimal theme is clean and spare. Add it to the plot we
+saved.
 
 
 ~~~
@@ -562,7 +552,8 @@ Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
 
-Using ggthemes
+The `ggthemes` package extends themes from `ggplot`. Install the `ggthemes`
+package and load the library.
 
 
 ~~~
@@ -570,6 +561,7 @@ library(ggthemes)
 ~~~
 {: .language-r}
 
+Style the plot after the Wall Street Journal theme.
 
 ~~~
 g + theme_wsj()
@@ -582,6 +574,8 @@ g + theme_wsj()
 Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
+
+Try Nate Silver's FiveThirtyEight style.
 
 
 ~~~
@@ -596,6 +590,7 @@ Error in eval(expr, envir, enclos): object 'g' not found
 ~~~
 {: .error}
 
+This style looks like an Excel spreadsheet.
 
 
 ~~~
@@ -613,12 +608,11 @@ Error in eval(expr, envir, enclos): object 'g' not found
 
 
 > ## Exercise
-> 1. Load the 
-> [cytomegalovirus dataset](https://github.com/higgi13425/medicaldata/blob/master/data/cytomegalovirus.rda) 
-> by clicking the **Download** button and loading the data into RStudio. You can 
-> [read more about this data set](https://github.com/higgi13425/medicaldata/blob/master/description_docs/cytomegalovirus_desc.pdf)
-> containing measurements from 64 patients who underwent hematopoietic stem cell transplant.
-> 2. Bar chart of the `cmv` response variable
+> 1. Load the cytomegalovirus dataset from the `medicaldata` package by running
+> the code above. This dataset contains measurements from 64 patients who 
+> underwent hematopoietic stem cell transplant. [This data dictionary](../files/Cytomegalovirus Data Dictionary.pdf) describes 
+each variable in the dataset.
+> 2. Create a bar chart of the `cmv` response variable
 >
 > 
 > ~~~
@@ -653,7 +647,7 @@ Error in eval(expr, envir, enclos): object 'g' not found
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -661,7 +655,7 @@ Error in eval(expr, envir, enclos): object 'g' not found
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-36-2.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-32-2.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -670,7 +664,7 @@ Error in eval(expr, envir, enclos): object 'g' not found
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-36-3.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-32-3.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="612" style="display: block; margin: auto;" />
 > >
 > {: .solution}
 {: .challenge}
