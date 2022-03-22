@@ -96,8 +96,7 @@ animals %in% c("rat", "cat", "dog", "duck", "goat")
 # that are found in the character vector
 animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 ```
-
-> 
+ 
 > ## Exercise
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
