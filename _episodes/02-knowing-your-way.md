@@ -116,15 +116,13 @@ and across collaborators.
 > [Setup instructions]({{ page.root }}{% link setup.md %}) if you do not have this 
 > folder on your Desktop yet.  
 > 2. Click on the Files tab in the lower right panel.
-> 3. Click on New Folder and create a folder named `analysis`. Click on New Folder again and create a 
-> folder named `output` to hold the results of our analyses.
-> 4. Move into the `analysis` folder with Session &#8594; Set Working Directory &#8594; Choose Directory.
+> 3. Move into the `analysis` folder with Session &#8594; Set Working Directory &#8594; Choose Directory.
 > Select the `analysis` folder. 
-> 5. Create a new R script and save it to the `analysis` folder as the file `00-rstudio.R`.    
-> 6. On line 1 type: `3 + 3`   
-> 7. On line 3 type: `print("ds4biomed")`  
-> 8. Run these lines of code one line at a time (e.g., using `Ctrl+Enter`)  
-> 9. Run all the lines at once (e.g., clicking the `Source` button)  
+> 4. Create a new R script and save it to the `analysis` folder as the file `00-rstudio.R`.    
+> 5. On line 1 type: `3 + 3`   
+> 6. On line 3 type: `print("ds4biomed")`  
+> 7. Run these lines of code one line at a time (e.g., using `Ctrl+Enter`)  
+> 8. Run all the lines at once (e.g., clicking the `Source` button)  
 >
 > >
 > > ## Solution
