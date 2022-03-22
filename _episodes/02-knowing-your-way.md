@@ -118,7 +118,7 @@ and across collaborators.
 > 2. Click on the Files tab in the lower right panel.
 > 3. Move into the `analysis` folder with Session &#8594; Set Working Directory &#8594; Choose Directory.
 > Select the `analysis` folder. 
-> 4. Create a new R script and save it to the `analysis` folder as the file `00-rstudio.R`.    
+> 4. Create a new R script and save it to the `analysis` folder as the file `00-newscript.R`.    
 > 5. On line 1 type: `3 + 3`   
 > 6. On line 3 type: `print("ds4biomed")`  
 > 7. Run these lines of code one line at a time (e.g., using `Ctrl+Enter`)  
