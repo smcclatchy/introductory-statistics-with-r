@@ -237,5 +237,6 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 > > Here `"four"` comes after `"five"`, and therefore is greater than it.
 > > 
 > > 
-> {.solution}
-{.challenge}
+> {: .solution}
+{: .challenge}
+

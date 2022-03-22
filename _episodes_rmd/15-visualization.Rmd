@@ -24,6 +24,11 @@ library(tidyverse)
 
 ## Introduction {#vis-intro-intro}
 
+```{r, echo=FALSE, fig.cap="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen."}
+knitr::include_graphics("../fig/DinoSequential.gif")
+```
+
+
 (Example: Use side-by-side boxplots to compare two groups, then use two-
 sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
 course to verify conditions for hypothesis tests.  
@@ -404,7 +409,8 @@ each variable in the dataset.
 {: .challenge}
 
 ## Additional Resources
-
+- Publication Quality Graphics with R
+  - https://smcclatchy.github.io/r-pub-quality-graphics/
 - Ggplot2 reference
   - https://ggplot2.tidyverse.org/reference/index.html
 - R Graphics Cookbook

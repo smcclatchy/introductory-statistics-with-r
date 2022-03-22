@@ -22,6 +22,9 @@ keypoints:
 
 ## Introduction {#vis-intro-intro}
 
+<img src="../fig/DinoSequential.gif" title="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." alt="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." style="display: block; margin: auto;" />
+
+
 (Example: Use side-by-side boxplots to compare two groups, then use two-
 sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
 course to verify conditions for hypothesis tests.  
@@ -599,7 +602,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -607,7 +610,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-12-2.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-13-2.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -616,13 +619,14 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-12-3.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-13-3.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
 > >
 > {: .solution}
 {: .challenge}
 
 ## Additional Resources
-
+- Publication Quality Graphics with R
+  - https://smcclatchy.github.io/r-pub-quality-graphics/
 - Ggplot2 reference
   - https://ggplot2.tidyverse.org/reference/index.html
 - R Graphics Cookbook
