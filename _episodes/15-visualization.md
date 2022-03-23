@@ -22,7 +22,12 @@ keypoints:
 
 ## Introduction {#vis-intro-intro}
 
-<img src="../fig/DinoSequential.gif" title="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." alt="The idea behind the grammar of graphics is to decompose graphics into its constitudent layers: data, mapping, statistics, scales, geometries, facets, coordinates, and theme. by Thomas Lin Pedersen." style="display: block; margin: auto;" />
+Data visualization is critical to understanding the shape and other characteristics of your data. Unless you plot your data, how would you know that it forms a donut, or a star, or a datasaurus Rex? Summary statistics like means and standard deviations don't provide enough insight into your data. In the graphic below, notice that the means, standard deviations, and correlation of x and y variables are the same regardless of the shape of the data.
+
+```{r, echo=FALSE, fig.cap="Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice"
+"}
+knitr::include_graphics("../fig/DinoSequential.gif")
+```
 
 
 (Example: Use side-by-side boxplots to compare two groups, then use two-
@@ -602,7 +607,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -610,7 +615,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-13-2.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-12-2.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(data = cytomegalovirus, aes(as.factor(prior.transplant))) +  
@@ -619,7 +624,7 @@ each variable in the dataset.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-15-unnamed-chunk-13-3.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-15-unnamed-chunk-12-3.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 > >
 > {: .solution}
 {: .challenge}
