@@ -97,7 +97,7 @@ tumor_subset %>%
 > > ## Solution
 > >
 > > 1. All groups start with approximately the same number of animals on day 0. 
-> > Group 3 has equal numbers of observations (10) for both days. Groups 2 and 4  
+> > Group 3 has equal numbers of observations (10) for both days. Groups 2 and 4
 > > have 4 observations each for day 13, and group 1 has 5 observations for day 
 > > 13. 
 > > 2. When data are missing the question to ask is why. In this case  
@@ -289,10 +289,11 @@ tumor_subset %>%
 ```
 
 We can create simple histograms to visualize the distribution of tumor sizes on 
-days 0 and 13. Notice that the range of x-axis values is much for day 13, 
+days 0 and 13. Notice that the range of x-axis values is much greater for day 13, 
 illustrating the much greater standard deviation (spread) of values for day 13. 
-Later we will create much nicer plots with the ggplot package. For now, these
-serve to visualize data distribution.
+Later we will create much nicer plots with the ggplot package. For now, simple
+histograms with the `hist` function from base R serve to visualize data 
+distribution.
 
 ```{r, base-hist-day0}
 tumor_subset %>%

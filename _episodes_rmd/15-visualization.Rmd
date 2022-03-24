@@ -26,8 +26,7 @@ library(tidyverse)
 
 Data visualization is critical to understanding the shape and other characteristics of your data. Unless you plot your data, how would you know that it forms a donut, or a star, or a datasaurus Rex? Summary statistics like means and standard deviations don't provide enough insight into your data. In the graphic below, notice that the means, standard deviations, and correlation of x and y variables are the same regardless of the shape of the data.
 
-```{r, echo=FALSE, fig.cap="Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice"
-"}
+```{r, echo=FALSE, fig.cap="Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice"}
 knitr::include_graphics("../fig/DinoSequential.gif")
 ```
 
