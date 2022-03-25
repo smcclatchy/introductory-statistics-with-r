@@ -640,14 +640,10 @@ each variable in the dataset.
 {: .challenge}
 
 ## Additional Resources
-- Publication Quality Graphics with R
-  - https://smcclatchy.github.io/r-pub-quality-graphics/
-- Ggplot2 reference
-  - https://ggplot2.tidyverse.org/reference/index.html
-- R Graphics Cookbook
-  - 1st edition: http://www.cookbook-r.com/Graphs/
-  - 2nd edition: https://r-graphics.org/
-- Thomas Lin Pedersen ggplot workshop
-  - Slides: https://github.com/thomasp85/ggplot2_workshop
-  - Part 1: https://www.youtube.com/watch?v=h29g21z0a68
-  - Part 2: https://www.youtube.com/watch?v=0m4yywqNPVY
+[Publication Quality Graphics with R](https://smcclatchy.github.io/r-pub-quality-graphics/)
+[Ggplot2 reference](https://ggplot2.tidyverse.org/reference/index.html)
+[R Graphics Cookbook](https://r-graphics.org/)
+Thomas Lin Pedersen's ggplot workshop
+  - [Slides](https://github.com/thomasp85/ggplot2_workshop)
+  - [Part 1](https://www.youtube.com/watch?v=h29g21z0a68)
+  - [Part 2](https://www.youtube.com/watch?v=0m4yywqNPVY)

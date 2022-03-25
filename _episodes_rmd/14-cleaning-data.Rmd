@@ -377,10 +377,6 @@ knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw
 ```
 
 ## Additional Resources  {#tidy-resources}
-
-- Tidy data paper:
-https://vita.had.co.nz/papers/tidy-data.html
-- More code heavy R documentation on tidy data:
-https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html
-- r4ds Tidy Data Chapter:
-https://r4ds.had.co.nz/tidy-data.html
+[Tidy data paper](https://vita.had.co.nz/papers/tidy-data.html)
+[More code heavy R documentation on tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
+[r4ds Tidy Data Chapter](https://r4ds.had.co.nz/tidy-data.html)

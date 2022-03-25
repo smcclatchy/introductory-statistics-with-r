@@ -178,7 +178,7 @@ tumor
 
 
 ~~~
-# A tibble: 37 x 32
+# A tibble: 37 × 32
    Group Grp      ID   `0`   `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`
    <dbl> <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
  1     1 1.CTR   101  41.8  NA    NA    85   114    162.  178.  325    NA    NA 
@@ -191,10 +191,10 @@ tumor
  8     1 1.CTR   108  49.4  NA    NA    NA   123.   286.  485.  584.   NA    NA 
  9     2 2.D     201  49.1  NA    NA    65.6  88.9  135.  172.  177.   NA    NA 
 10     2 2.D     202  60.6  75.7  75.8  NA   159.    NA    NA   306.  397.  398.
-# … with 27 more rows, and 19 more variables: 10 <dbl>, 11 <dbl>, 12 <dbl>,
-#   13 <dbl>, 14 <dbl>, 15 <dbl>, 16 <dbl>, 17 <dbl>, 18 <dbl>, 19 <dbl>,
-#   20 <dbl>, 21 <dbl>, 22 <dbl>, 23 <dbl>, 24 <dbl>, 25 <dbl>, 26 <dbl>,
-#   27 <dbl>, 28 <dbl>
+# … with 27 more rows, and 19 more variables: `10` <dbl>, `11` <dbl>,
+#   `12` <dbl>, `13` <dbl>, `14` <dbl>, `15` <dbl>, `16` <dbl>, `17` <dbl>,
+#   `18` <dbl>, `19` <dbl>, `20` <dbl>, `21` <dbl>, `22` <dbl>, `23` <dbl>,
+#   `24` <dbl>, `25` <dbl>, `26` <dbl>, `27` <dbl>, `28` <dbl>
 ~~~
 {: .output}
 
@@ -222,7 +222,7 @@ tumor_tidy
 
 
 ~~~
-# A tibble: 1,073 x 5
+# A tibble: 1,073 × 5
    Group Grp      ID day    size
    <dbl> <chr> <dbl> <chr> <dbl>
  1     1 1.CTR   101 0      41.8
@@ -262,14 +262,15 @@ tumor_tidy %>%
 
 
 ~~~
-`summarise()` has grouped output by 'Group'. You can override using the `.groups` argument.
+`summarise()` has grouped output by 'Group'. You can override using the
+`.groups` argument.
 ~~~
 {: .output}
 
 
 
 ~~~
-# A tibble: 116 x 3
+# A tibble: 116 × 3
 # Groups:   Group [4]
    Group   day avg_size
    <dbl> <dbl>    <dbl>
@@ -337,7 +338,7 @@ tb
 
 
 ~~~
-# A tibble: 201 x 18
+# A tibble: 201 × 18
    country  year  m014 m1524 m2534 m3544 m4554 m5564   m65 mu     f014 f1524
    <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <lgl> <dbl> <dbl>
  1 AD       2000     0     0     1     0     0     0     0 NA       NA    NA
@@ -370,7 +371,7 @@ tb_long
 
 
 ~~~
-# A tibble: 3,216 x 4
+# A tibble: 3,216 × 4
    country  year name  value
    <chr>   <dbl> <chr> <dbl>
  1 AD       2000 m014      0
@@ -400,7 +401,7 @@ tb_tidy
 
 
 ~~~
-# A tibble: 3,216 x 5
+# A tibble: 3,216 × 5
    country  year sex   age_group value
    <chr>   <dbl> <chr> <chr>     <dbl>
  1 AD       2000 m     014           0
@@ -459,21 +460,22 @@ cms
 
 
 ~~~
-# A tibble: 3,456 x 17
-   state  state_fips variable   sex   age_group num_chronic `2007` `2008` `2009`
-   <chr>  <chr>      <chr>      <chr> <chr>     <chr>        <dbl>  <dbl>  <dbl>
- 1 Alaba… 01         Per Capit… males Less tha… 0 to 1       1594.  1640.  1680.
- 2 Alaba… 01         Per Capit… males Less tha… 2 to 3       6269.  6484.  6339.
- 3 Alaba… 01         Per Capit… males Less tha… 4 to 5      12902. 13400. 13713.
- 4 Alaba… 01         Per Capit… males Less tha… 6+          31169. 32837. 33190.
- 5 Alaba… 01         Per Capit… males Less tha… 0 to 1       1745.  1794.  1829.
- 6 Alaba… 01         Per Capit… males Less tha… 2 to 3       6752.  7035.  6816.
- 7 Alaba… 01         Per Capit… males Less tha… 4 to 5      13796. 14385. 14596.
- 8 Alaba… 01         Per Capit… males Less tha… 6+          32779. 34641. 34879.
- 9 Alaba… 01         ED Visits… males Less tha… 0 to 1        398.   410.   411.
-10 Alaba… 01         ED Visits… males Less tha… 2 to 3        865.   865.   852.
-# … with 3,446 more rows, and 8 more variables: 2010 <dbl>, 2011 <dbl>,
-#   2012 <dbl>, 2013 <dbl>, 2014 <dbl>, 2015 <dbl>, 2016 <dbl>, 2017 <dbl>
+# A tibble: 3,456 × 17
+   state   state_fips variable  sex   age_group num_chronic `2007` `2008` `2009`
+   <chr>   <chr>      <chr>     <chr> <chr>     <chr>        <dbl>  <dbl>  <dbl>
+ 1 Alabama 01         Per Capi… males Less tha… 0 to 1       1594.  1640.  1680.
+ 2 Alabama 01         Per Capi… males Less tha… 2 to 3       6269.  6484.  6339.
+ 3 Alabama 01         Per Capi… males Less tha… 4 to 5      12902. 13400. 13713.
+ 4 Alabama 01         Per Capi… males Less tha… 6+          31169. 32837. 33190.
+ 5 Alabama 01         Per Capi… males Less tha… 0 to 1       1745.  1794.  1829.
+ 6 Alabama 01         Per Capi… males Less tha… 2 to 3       6752.  7035.  6816.
+ 7 Alabama 01         Per Capi… males Less tha… 4 to 5      13796. 14385. 14596.
+ 8 Alabama 01         Per Capi… males Less tha… 6+          32779. 34641. 34879.
+ 9 Alabama 01         ED Visit… males Less tha… 0 to 1        398.   410.   411.
+10 Alabama 01         ED Visit… males Less tha… 2 to 3        865.   865.   852.
+# … with 3,446 more rows, and 8 more variables: `2010` <dbl>, `2011` <dbl>,
+#   `2012` <dbl>, `2013` <dbl>, `2014` <dbl>, `2015` <dbl>, `2016` <dbl>,
+#   `2017` <dbl>
 ~~~
 {: .output}
 
@@ -490,19 +492,19 @@ cms_long
 
 
 ~~~
-# A tibble: 38,016 x 8
-   state  state_fips variable         sex   age_group    num_chronic year  value
-   <chr>  <chr>      <chr>            <chr> <chr>        <chr>       <chr> <dbl>
- 1 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2007  1594.
- 2 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2008  1640.
- 3 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2009  1680.
- 4 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2010  1599.
- 5 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2011  1612.
- 6 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2012  1695.
- 7 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2013  1729.
- 8 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2014  1791.
- 9 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2015  1868.
-10 Alaba… 01         Per Capita Spen… males Less than 6… 0 to 1      2016  1736.
+# A tibble: 38,016 × 8
+   state   state_fips variable           sex   age_group num_chronic year  value
+   <chr>   <chr>      <chr>              <chr> <chr>     <chr>       <chr> <dbl>
+ 1 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2007  1594.
+ 2 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2008  1640.
+ 3 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2009  1680.
+ 4 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2010  1599.
+ 5 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2011  1612.
+ 6 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2012  1695.
+ 7 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2013  1729.
+ 8 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2014  1791.
+ 9 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2015  1868.
+10 Alabama 01         Per Capita Spendi… males Less tha… 0 to 1      2016  1736.
 # … with 38,006 more rows
 ~~~
 {: .output}
@@ -522,23 +524,23 @@ cms_tidy
 
 
 ~~~
-# A tibble: 9,504 x 10
-   state  state_fips sex   age_group     num_chronic year  `Per Capita Spending…
-   <chr>  <chr>      <chr> <chr>         <chr>       <chr>                 <dbl>
- 1 Alaba… 01         males Less than 65… 0 to 1      2007                  1594.
- 2 Alaba… 01         males Less than 65… 0 to 1      2008                  1640.
- 3 Alaba… 01         males Less than 65… 0 to 1      2009                  1680.
- 4 Alaba… 01         males Less than 65… 0 to 1      2010                  1599.
- 5 Alaba… 01         males Less than 65… 0 to 1      2011                  1612.
- 6 Alaba… 01         males Less than 65… 0 to 1      2012                  1695.
- 7 Alaba… 01         males Less than 65… 0 to 1      2013                  1729.
- 8 Alaba… 01         males Less than 65… 0 to 1      2014                  1791.
- 9 Alaba… 01         males Less than 65… 0 to 1      2015                  1868.
-10 Alaba… 01         males Less than 65… 0 to 1      2016                  1736.
+# A tibble: 9,504 × 10
+   state   state_fips sex   age_group         num_chronic year  `Per Capita Sp…`
+   <chr>   <chr>      <chr> <chr>             <chr>       <chr>            <dbl>
+ 1 Alabama 01         males Less than 65 Yea… 0 to 1      2007             1594.
+ 2 Alabama 01         males Less than 65 Yea… 0 to 1      2008             1640.
+ 3 Alabama 01         males Less than 65 Yea… 0 to 1      2009             1680.
+ 4 Alabama 01         males Less than 65 Yea… 0 to 1      2010             1599.
+ 5 Alabama 01         males Less than 65 Yea… 0 to 1      2011             1612.
+ 6 Alabama 01         males Less than 65 Yea… 0 to 1      2012             1695.
+ 7 Alabama 01         males Less than 65 Yea… 0 to 1      2013             1729.
+ 8 Alabama 01         males Less than 65 Yea… 0 to 1      2014             1791.
+ 9 Alabama 01         males Less than 65 Yea… 0 to 1      2015             1868.
+10 Alabama 01         males Less than 65 Yea… 0 to 1      2016             1736.
 # … with 9,494 more rows, and 3 more variables:
-#   Per Capita Spending-Standardized ($) <dbl>,
-#   ED Visits per 1,000 Beneficiaries <dbl>,
-#   Hospital Readmissions-Percentage (%) <dbl>
+#   `Per Capita Spending-Standardized ($)` <dbl>,
+#   `ED Visits per 1,000 Beneficiaries` <dbl>,
+#   `Hospital Readmissions-Percentage (%)` <dbl>
 ~~~
 {: .output}
 
@@ -558,10 +560,6 @@ But once it's there, you can easily create other data products from them, includ
 <img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_7.jpg" title="Illustrations from the [Openscapes](https://www.openscapes.org/) blog [*Tidy Data for reproducibility, efficiency, and collaboration*](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst" alt="Illustrations from the [Openscapes](https://www.openscapes.org/) blog [*Tidy Data for reproducibility, efficiency, and collaboration*](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst" style="display: block; margin: auto;" />
 
 ## Additional Resources  {#tidy-resources}
-
-- Tidy data paper:
-https://vita.had.co.nz/papers/tidy-data.html
-- More code heavy R documentation on tidy data:
-https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html
-- r4ds Tidy Data Chapter:
-https://r4ds.had.co.nz/tidy-data.html
+[Tidy data paper](https://vita.had.co.nz/papers/tidy-data.html)
+[More code heavy R documentation on tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
+[r4ds Tidy Data Chapter](https://r4ds.had.co.nz/tidy-data.html)
