@@ -26,6 +26,7 @@ Data visualization is critical to understanding the shape and other characterist
 
 <img src="../fig/DinoSequential.gif" title="Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice" alt="Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice" style="display: block; margin: auto;" />
 
+The animation above is from [Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing](https://www.autodesk.com/research/publications/same-stats-different-graphs) by Justin Matejka and George Fitzmaurice.
 
 (Example: Use side-by-side boxplots to compare two groups, then use two-
 sample t-tests on the same data)  Use histograms to investigate shape, and then later in the 
@@ -147,14 +148,26 @@ For each variable, you want to know what possible values it can take on.
 
 <img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/continuous_discrete.png" title="&quot;Continuous Discrete&quot; by Allison Horst." alt="&quot;Continuous Discrete&quot; by Allison Horst." style="display: block; margin: auto;" />
 
+Continuous variables can take an infinite number of values within a range. 
+Weight of a chick, for example, can range from 38.95 to 43.26 grams and can take 
+any of infinite number of decimal values within that range. Discrete variables 
+can only have a finite number of integer values.
+
 <img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/nominal_ordinal_binary.png" title="&quot;Nominal Ordinal Binary&quot; by Allison Horst." alt="&quot;Nominal Ordinal Binary&quot; by Allison Horst." style="display: block; margin: auto;" />
 
 The type of information a variable holds will dictate the summary statistics you 
 can make, the visualizations you can create, and the models you can fit.
+Categorical variables are of three types: nominal, ordinal or binary. Nominal
+variables are purely qualitative, with no order, rank or hierarchy of categories.
+Ordinal variables have order or rank to the variables and can be transformed to
+quantitative for use in modeling. For example, unhappy can be set to 0, O.K. to 
+1, and awesome! to 2. Binary variables take only 2 mutually exclusive values
+and can be represented as 0 and 1, for example.
 
-Ordinal and discrete variables should be converted into `factor` variables in R.
-A `factor` is R's way of naming a **categorical** variable.
-This is different from a **character string**, e.g., a person's name.
+Ordinal, binary, and discrete variables should be converted into `factor` 
+variables in R. A `factor` is R's way of naming a **categorical** variable.
+This is different from a **character string**, e.g., a person's name or the name
+of an animal e.g., turtle, snail, butterfly.
 
 The outcome of interest is the recurrence of cancer (no = 0 or yes = 1).
 

@@ -190,9 +190,14 @@ Vectors are one of the many **data structures** that R uses. Other important
 ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`),
 factors (`factor`) and arrays (`array`).
 
-<img src="../fig/dataStructuresNew.png" title="[Data structure. First Steps in R](https://web.archive.org/web/20200621022950/http://venus.ifca.unican.es/Rintro/dataStruct.html) by Maite Ceballos and Nicolás Cardiel. 2013." alt="[Data structure. First Steps in R](https://web.archive.org/web/20200621022950/http://venus.ifca.unican.es/Rintro/dataStruct.html) by Maite Ceballos and Nicolás Cardiel. 2013." style="display: block; margin: auto;" />
+<img src="../fig/dataStructuresNew.png" title="Data Structure: First Steps in R by Maite Ceballos and Nicolás Cardiel. 2013. https://web.archive.org/web/20200621022950/http://venus.ifca.unican.es/Rintro/dataStruct.html" alt="Data Structure: First Steps in R by Maite Ceballos and Nicolás Cardiel. 2013. https://web.archive.org/web/20200621022950/http://venus.ifca.unican.es/Rintro/dataStruct.html" style="display: block; margin: auto;" />
 
 Notice that vectors are one-dimensional containers for data all of the same type. All must be either character, numeric, logical or complex but no mixing of data types is permitted. A data frame is a two-dimensional data structure. Notice that each column of a data frame is a vector and that all elements in each column must be of the same data type. Lists, like vectors, are one-dimensional however they permit mixing of data types. Each row of a data frame is a list - a one-dimensional mix of different kinds of data.
+
+Here is a summary table of R data structures, their dimensions, and the kind of data they permit.
+
+<img src="../fig/r-data-structures-table.png" title="Advanced R: Data Structures by Hadley Wickham. http://adv-r.had.co.nz/Data-structures.html" alt="Advanced R: Data Structures by Hadley Wickham. http://adv-r.had.co.nz/Data-structures.html" style="display: block; margin: auto;" />
+
 > ## Exercise 1
 >
 >  We’ve seen that atomic vectors can be of type character,

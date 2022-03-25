@@ -8,7 +8,7 @@ groupMeans <- tumor_subset %>%
   )
 
 mean_error_plot <- ggplot(groupMeans, aes(x = Group, y = avg_size)) +
-  geom_point(color = "lightblue") +
+  geom_point(color = "blue") +
   geom_errorbar(aes(ymin=avg_size-std_dev, ymax=avg_size+std_dev),
                 size=.3, width=.2, color = "gray") +
   ylab("Mean tumor size") +
